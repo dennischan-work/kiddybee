@@ -186,6 +186,34 @@ details .body{padding:0 16px 16px;display:grid;gap:10px}
   .tl .dot{position:absolute;left:0;top:2px;margin:0}
 }
 @media (max-width:860px){.timeline.route-track{grid-template-columns:minmax(0,1fr)}}
+
+/* decision-ready timelines */
+.timeline-caution{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}
+.timeline-caution>div{padding:12px;border-radius:8px;background:var(--soft);font-size:13px}
+.timeline-caution b{display:block;margin-bottom:4px;color:var(--warn)}
+.milestone-track{list-style:none;margin:14px 0 0;padding:0;position:relative}
+.milestone-track:before{content:"";position:absolute;left:77px;top:18px;bottom:18px;width:2px;background:var(--line)}
+.milestone{display:grid;grid-template-columns:155px minmax(0,1fr) minmax(190px,250px);gap:14px;position:relative;padding:14px 0;border-top:1px solid var(--line)}
+.milestone:first-child{border-top:0}
+.milestone-date{position:relative;padding-left:24px}
+.milestone-date:before{content:"";position:absolute;left:0;top:6px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:3px solid var(--studio);z-index:1}
+.milestone.gate .milestone-date:before{background:var(--warn);border-color:var(--warn);border-radius:3px;transform:rotate(45deg)}
+.milestone-date strong,.milestone-date span,.milestone-date small{display:block}
+.milestone-date strong{font-size:13px}
+.milestone-date span{font-size:12px;color:var(--muted)}
+.milestone-date small{font-size:11px;color:var(--warn)}
+.milestone-content{font-size:13px}
+.milestone-content p+p{margin-top:6px}
+.milestone-proof{padding:9px 10px;border-radius:7px;background:var(--soft);font-size:12px}
+.milestone-proof b{display:block;color:var(--studio);margin-bottom:2px}
+.milestone-track .milestone:last-child .milestone-date:before{border-color:var(--good)}
+.timeline-route-note{margin-top:12px;padding:12px;border-left:3px solid var(--warn);background:var(--soft);border-radius:6px;font-size:13px}
+.timeline-subhead{margin:18px 0 0;padding-top:14px;border-top:1px solid var(--line)}
+.timeline-subhead h4{margin:0;font-size:15px}
+.timeline-subhead p{margin-top:4px}
+@media(max-width:860px){.timeline-caution{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:760px){.milestone-track:before{left:6px}.milestone{grid-template-columns:minmax(0,1fr);gap:6px;padding-left:28px}.milestone-date{padding-left:0}.milestone-date:before{left:-28px;top:5px}.milestone-proof{margin-top:2px}}
+
 /* flow */
 .flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 @media (max-width:820px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -491,30 +519,57 @@ html{scroll-behavior:smooth}
   <!-- 11 -->
   </div>
 <div class="proposal-group" id="route-plan"><div class="phase-head"><div class="eyebrow">提案 03 · 管理路線與合規</div><h2>時間表回答何時做；合規流程回答去哪裏辦</h2><p>工作室和註冊中心的步驟不同。先依路線查看時程，再按規管項目走相應查詢、申請和驗收程序。</p></div><section class="block" id="timeline">
-    <div class="sec-head"><div class="sec-no">03A</div><h2>兩條路線的倒數時間表</h2><p>以下按 2027 年 8 月目標倒排，是內部工作次序與檢查點，不是政府審批承諾。任何路線都要先確認實際課程、營運者、場地和學生人數安排；如必要回覆、工程或批准未完成，便順延開業。</p></div>
-    <div class="stack">
+    <div class="sec-head"><div class="sec-no">03A</div><h2>兩條路線的倒數時間表</h2><p>以 2027 年 8 月作目標，按「先核實、再承擔、後開課」倒排。以下日期是內部檢查點，不是政府服務承諾；未過關便調整開業日，不以趕日期取代合規。</p></div>
+    <div class="card timeline-caution" aria-label="時程與風險提示">
+      <div><b>法律關卡</b>教育局分類、場地用途及必要批准未有書面確認前，不把沉默當批准，不簽不可退出的租約或頂手協議。</div>
+      <div><b>工程關卡</b>註冊中心新址須按部門要求及核准圖則施工；未核實可否施工前，不開始工程或承諾完工日。</div>
+      <div><b>日期關卡</b>部門處理時間通常從文件齊全後計；補件、改圖、業主同意及工程時間都可能延長。日期一落後，就重排開業計劃。</div>
+    </div>
+    <p class="muted small">每關的「完成證據」應存入同一個資料夾。凡涉及合約、法律責任或部門分類，創辦人先請香港律師、認可人士或相關部門按個案覆核；本頁是規劃工具，不代替法律意見。</p>
+
+    <div class="stack" style="margin-top:14px">
       <div class="card">
         <h3>路線一：私人小班工作室</h3>
-        <p class="muted small">前提：創辦人親自授課，並先取得教育局對實際時間表及人數安排的書面回覆，確認毋須按學校註冊路線營運。工作室仍須核實商業登記、租約、公契、教學用途和保險等要求。</p>
-        <div class="timeline route-track" style="margin-top:14px">
-          <div class="tl"><div class="dot"></div><b>2026 年 11–12 月｜先驗證</b><p>盤點已有教材，整理 6–8 節試行單元；訪談家長、比較競爭中心；向教育局提交完整時間表作書面查詢；確認營運主體、資金來源及預備獨立營運戶口所需文件。</p></div>
-          <div class="tl gate"><div class="dot"></div><b>2027 年 1–2 月｜定場地</b><p>按教育局回覆確認可營運人數；比較沙田／馬鞍山商業場地，查租約及公契。未完成場地用途初查前，不簽無條件長租約。</p></div>
-          <div class="tl"><div class="dot"></div><b>2027 年 3–7 月｜試教與準備</b><p>整理教材並試教、收集家長回饋；辦理適用的商業登記、保險和收費條款；確認可排時段及開課前報讀人數。</p></div>
-          <div class="tl"><div class="dot"></div><b>2027 年 8 月起｜有條件開課</b><p>只有在教育局書面回覆、場地用途及營運安排均吻合時才開課；依確認的人數上限排班並每日留存出席紀錄。條件未齊便延後。</p></div>
-        </div>
+        <p class="muted small">前提：創辦人親自授課，並以教育局對實際課程、學生人數和場地安排的書面回覆確認營運方式。工作室不按學校註冊路線營運，不等於免除租約、公契、物業用途、樓宇安全、消防、商業登記或僱主責任。</p>
+        <ol class="milestone-track">
+          <li class="milestone gate"><div class="milestone-date"><strong>第 1 關｜定義課程</strong><span>2026 年 11–12 月</span><small>必須先做</small></div><div class="milestone-content"><p>盤點現有教材，列出授課年齡、課程內容、每班人數、每日班次、同時在場人數、家長陪同、試堂及補堂安排。把完整時間表和場地資料一併交教育局書面查詢。</p><p>同時訪談家長，核實可上課日子、時段及願付價格，避免只按理論容量估算招生。</p></div><div class="milestone-proof"><b>完成證據</b>課程與全日時間表、家長訪談摘要、教育局書面回覆；如未回覆，標記為未過關。</div></li>
+          <li class="milestone gate"><div class="milestone-date"><strong>第 2 關｜篩選場地</strong><span>2026 年 12 月–2027 年 1 月</span><small>簽約前紅旗</small></div><div class="milestone-content"><p>比較至少 3 個選址。逐一查租約及大廈公契是否容許擬議教學用途，並向業主取得書面同意；按物業情況核實規劃、地契、樓宇及消防要求。</p><p>有改間隔、消防或樓宇工程時，先請合資格專業人士評估可行性及費用。</p></div><div class="milestone-proof"><b>完成證據</b>業主／管理處書面回覆、租約與公契核對紀錄、場地檢查及工程報價。</div></li>
+          <li class="milestone"><div class="milestone-date"><strong>第 3 關｜有條件落實</strong><span>2027 年 1–2 月</span></div><div class="milestone-content"><p>只有在路線分類和場地初查沒有重大障礙後，才談租約。把教育局回覆、教學用途、必要批准、工程可行性及退出安排交律師檢視，爭取把未能達成條件時的退租／退款安排寫入協議。</p><p>決定獨資或有限公司；如成立有限公司，完成公司註冊及銀行、帳務安排。</p></div><div class="milestone-proof"><b>完成證據</b>律師審閱的租約／有條件協議、核准預算及預留營運現金。</div></li>
+          <li class="milestone"><div class="milestone-date"><strong>第 4 關｜準備營運</strong><span>2027 年 2–5 月</span></div><div class="milestone-content"><p>只做已確認可進行的裝修或配置；整理教材、家長條款、退款程序、收據及個人資料處理方式。按實際開業日期辦商業登記；如聘用任何員工，必須在上班前生效僱員補償保險，並排定強積金及稅務申報。</p></div><div class="milestone-proof"><b>完成證據</b>實際工程及保險文件、登記安排、收費與退款文件、員工法定事項清單。</div></li>
+          <li class="milestone gate"><div class="milestone-date"><strong>第 5 關｜開業前核對</strong><span>2027 年 6–7 月</span><small>內部停看點</small></div><div class="milestone-content"><p>用真實班表重算同時及每日人數，把試堂、補堂、家長陪同和其他課程一併計入。逐項核對教育局回覆、物業用途、租約條款、保險、場地安全及可用現金。</p><p>若教育局分類或場地用途仍未書面確認，暫停接受不可退款的課程費及作開課承諾，重新評估延後或改用合作場地。</p></div><div class="milestone-proof"><b>完成證據</b>簽署版開業檢查表、鎖定名額的預約表、每日出席紀錄流程。</div></li>
+          <li class="milestone"><div class="milestone-date"><strong>目標開課</strong><span>2027 年 8 月或之後</span></div><div class="milestone-content"><p>只有在教育局回覆、場地及營運安排全部一致，並完成適用登記、保險與安全檢查後開課。按書面確認的人數上限每日點算，保存出席及補堂紀錄。</p></div><div class="milestone-proof"><b>未過關怎辦</b>延後開課；不要用「先試營運」或改稱「工作室」避開未解決的分類問題。</div></li>
+        </ol>
+        <p class="timeline-route-note"><b>創辦人特別備注：</b>「任何時間少於 8 人、每日少於 20 人」只是本計劃採用的保守人數控制方式，並非教育局對課程、場地或實際人數計法的預先批准。請以教育局對你提交的實際方案之書面回覆為準。</p>
       </div>
+
       <div class="card">
         <h3>路線二：註冊中心</h3>
-        <p class="muted small">路線包含頂手現有中心或新址申請。簡報估頂手約 1–3 個月、新址申請約 4–9 個月；兩者都只是項目估算。學校註冊及其他場地批准未完成前，不可先收生開課。</p>
-        <div class="timeline route-track" style="margin-top:14px">
-          <div class="tl"><div class="dot"></div><b>2026 年 11–12 月｜選申請路徑</b><p>向教育局查詢完整課程及場地要求。頂手先核對註冊狀況、租約、按金、已收學費及退款責任、員工年資與應付款；新址先做用途、地契、消防及樓宇可行性初查。資助或貸款未正式批核前，不列入可用現金。</p></div>
-          <div class="tl gate"><div class="dot"></div><b>2027 年 1 月｜場地與專業初查</b><p>新址：請屋宇署名冊內的認可人士（AP）初查樓宇、用途、圖則及工程可行性。頂手：先取得業主及教育局對新營運者／校董／校監變更程序的書面確認，再談付款條件。</p></div>
-          <div class="tl"><div class="dot"></div><b>2027 年 2–5 月｜申請與施工</b><p>新址按部門程序提交規劃、地契、消防、樓宇及教育局文件；只按獲批圖則施工。頂手按教育局要求完成變更及場地交接。審批、補件或工程延誤均會推遲開業。</p></div>
-          <div class="tl gate"><div class="dot"></div><b>2027 年 6–8 月｜驗收後才開課</b><p>新址須完成工程、視察並取得臨時註冊證明書及所需學費批准；頂手須完成教育局確認的變更程序及其他適用批准。未取得所需文件便不開課，2027 年 8 月只作目標日期。</p></div>
-        </div>
-        <p class="muted small" style="margin-top:12px">「認可人士」（Authorized Person, AP）是按《建築物條例》列入屋宇署名冊的建築專業人士，通常具建築師、結構／土木工程師或測量師專業資格；不是泛指一般裝修顧問。按工程性質，可能還須註冊結構工程師。<a href="https://www.bd.gov.hk/tc/resources/registration-guides/index_building_professionals.html" rel="noopener">屋宇署：建築專業人士名冊與委任說明</a></p>
+        <p class="muted small">先選「新址申請」或「頂手現有中心」；兩者文件、交易條件和風險不同，不應共用同一個 1–3 個月或 4–9 個月承諾。</p>
+
+        <div class="timeline-subhead"><h4>方案 A｜新址申請</h4><p class="muted small">2027 年 8 月開業屬緊湊目標。研究估算約 4–9 個月只是整體規劃區間，不是官方保證；教育局在文件齊全並核對無誤後的處理承諾，只是整個流程的最後一段。</p></div>
+        <ol class="milestone-track">
+          <li class="milestone gate"><div class="milestone-date"><strong>第 1 關｜專業初查</strong><span>2026 年 11–12 月</span><small>即時開始</small></div><div class="milestone-content"><p>列明課程、課室數量、預計容額及資金上限。找屋宇署名冊內的認可人士（AP）初查候選物業；同時初查規劃用途、地契、消防、樓宇安全、衞生、租約、公契和可能工程。</p><p>認可人士是按《建築物條例》註冊並列入屋宇署名冊的建築專業人士，並非一般裝修顧問。</p></div><div class="milestone-proof"><b>完成證據</b>專業人士書面初步意見、部門查詢紀錄、工程及顧問費預算。</div></li>
+          <li class="milestone gate"><div class="milestone-date"><strong>第 2 關｜選址但不裸簽</strong><span>2026 年 12 月–2027 年 1 月</span><small>高風險關卡</small></div><div class="milestone-content"><p>優先選可滿足辦學要求、租期足夠並有條件退出的單位。教育局、業主及專業人士的必要書面確認未到手前，不簽無條件長租約、不付不可退頂手費、不預訂不可取消工程。</p></div><div class="milestone-proof"><b>完成證據</b>有條件租約／意向書、業主同意、認可人士報告、書面列明的先決條件。</div></li>
+          <li class="milestone"><div class="milestone-date"><strong>第 3 關｜分階段申請</strong><span>2027 年 1–3 月</span></div><div class="milestone-content"><p>依教育局現行指引和部門要求，準備規劃署、地政總署、消防處、屋宇署及教育局所需表格、圖則、租約、課程綱要、時間表、校董及學費資料。由認可人士或相關專業人士負責圖則及技術文件；每次提交前用清單逐項核對。</p><p>申請表及要求可能更新，直接由教育局下載最新版本，勿沿用舊表格。</p></div><div class="milestone-proof"><b>完成證據</b>各部門收件／回覆紀錄、完整遞交文件副本、補件責任人與期限表。</div></li>
+          <li class="milestone gate"><div class="milestone-date"><strong>第 4 關｜回覆、改圖及批核</strong><span>2027 年 2–5 月</span><small>關鍵路徑</small></div><div class="milestone-content"><p>按部門規定回覆意見、補文件及修訂圖則。這些工作可能多輪往返，亦可能改變可用面積、課室容額或工程成本。未獲所需同意及核准圖則前，不開始受管制的工程。</p></div><div class="milestone-proof"><b>完成證據</b>各部門所需批准／通知、可施工的核准圖則、更新後成本和進度表。</div></li>
+          <li class="milestone"><div class="milestone-date"><strong>第 5 關｜施工及驗收</strong><span>取得所需批准後；預留彈性</span></div><div class="milestone-content"><p>由合資格承辦商按核准圖則施工。完工後通知相關部門視察，按要求整改，再取得消防及樓宇安全證明；確認衞生署訂明的課室容額。工程或整改時間不能單靠申請工作天數推算。</p></div><div class="milestone-proof"><b>完成證據</b>完工紀錄、視察／整改紀錄、消防與樓宇安全證明、核定課室容額。</div></li>
+          <li class="milestone gate"><div class="milestone-date"><strong>第 6 關｜取得開課文件</strong><span>目標 2027 年 6–7 月</span><small>未齊不可開課</small></div><div class="milestone-content"><p>把安全證明、課程及費用等完整資料交教育局；完成臨時註冊及適用學費批准，安排員工、僱員補償保險、收據、家長單張和安全流程。</p><p>教育局指引列明，在收妥所需文件並核對無誤後，才會考慮於 10 個工作天內發出臨時註冊證明書；這不包括前面的跨部門申請、補件、工程及驗收。</p></div><div class="milestone-proof"><b>完成證據</b>臨時註冊證明書、適用學費批准、核准容額及開課前檢查表。</div></li>
+          <li class="milestone gate"><div class="milestone-date"><strong>開業決策</strong><span>2027 年 7 月檢視</span><small>內部停看點</small></div><div class="milestone-content"><p>若 7 月仍未取得全部開課所需文件，立即改期並通知已報讀家長；不要先收費上課，再補辦文件。按金、租金和員工成本要納入延後情境重新計算。</p></div><div class="milestone-proof"><b>原則</b>批准文件是開課前提；2027 年 8 月只是目標日期。</div></li>
+        </ol>
+        <p class="timeline-route-note">官方指引可供核對申請次序與最新表格：<a href="https://www.edb.gov.hk/attachment/tc/sch-admin/sch-registration/about-sch-registration/1a_cguide-non-purpose-built.pdf" rel="noopener">教育局《新辦學校註冊指引：非為學校用途而設計和建造的房產》</a>。部門指標時間不等於整個項目工期；如未能在 2027 年 3 月前完成場地初查並提交可處理的文件，應立即評估延後開業。</p>
+
+        <div class="timeline-subhead"><h4>方案 B｜頂手現有中心</h4><p class="muted small">不要把市場上「約 1–3 個月」的說法當作教育局保證。實際時間取決於交易條件、業主、場地及教育局要求的變更程序，先取得個案書面指示再排日期。</p></div>
+        <ol class="milestone-track">
+          <li class="milestone gate"><div class="milestone-date"><strong>第 1 關｜核實中心現況</strong><span>簽約或付訂前</span><small>先查證</small></div><div class="milestone-content"><p>向賣方索取註冊證明、核准課程及容額、教育局往來信件、消防及樓宇文件、租約、收費與退款紀錄、員工資料和帳目；與實際場地逐項對照。</p></div><div class="milestone-proof"><b>完成證據</b>文件清單、現場核對表、律師及會計師初步問題清單。</div></li>
+          <li class="milestone gate"><div class="milestone-date"><strong>第 2 關｜書面問清能否接手</strong><span>任何不可退付款前</span><small>法律關卡</small></div><div class="milestone-content"><p>把擬議新營運者、校董／校監、交易方式、地址及實際開課日期交教育局，書面查詢要辦的變更、批准和所需時間；同時取得業主對租約轉讓或重簽的書面同意。</p><p>註冊證明及營運安排不可假設會隨生意自動轉讓。</p></div><div class="milestone-proof"><b>完成證據</b>教育局書面指示、業主同意、租約及按金處理方案。</div></li>
+          <li class="milestone"><div class="milestone-date"><strong>第 3 關｜做交易盡職調查</strong><span>書面回覆後</span></div><div class="milestone-content"><p>請香港律師審閱買賣協議、租約、僱傭及教育局責任；請會計師核對學生已繳而未上課學費、欠款、營運數據及稅務。把退款、員工責任、資產清單、先決條件、訂金退還及未能交接時的退出方式寫入合約。</p></div><div class="milestone-proof"><b>完成證據</b>律師審閱協議、會計核對表、已談妥的退款／保留款條款。</div></li>
+          <li class="milestone"><div class="milestone-date"><strong>第 4 關｜完成批准及交接</strong><span>按教育局個案時間</span></div><div class="milestone-content"><p>按教育局書面指示完成校董、校監、營運者或其他所需變更；同步完成租約交接、員工安排、保險、收費與家長通知。任何條件未完成，不把預定交收日當作可開課日期。</p></div><div class="milestone-proof"><b>完成證據</b>教育局所需確認／批准、業主文件、交接資產和學生責任紀錄。</div></li>
+          <li class="milestone gate"><div class="milestone-date"><strong>開業決策</strong><span>以批准完成日倒排</span><small>不可搶先</small></div><div class="milestone-content"><p>只有在教育局與業主要求的變更完成、場地文件有效、學費及家長安排清楚後才按新營運安排開課。若賣方要求先付款、先營運再補批，先交律師覆核並暫停不可退付款。</p></div><div class="milestone-proof"><b>完成證據</b>完整交接清單、開課文件、保險和持續營運現金。</div></li>
+        </ol>
       </div>
     </div>
+    <p class="timeline-route-note"><b>共同決策規則：</b>每月底更新「已完成／待回覆／受阻」清單及剩餘現金。任何一項法律分類、場地用途、必要批准或資金缺口未解決，都要把開業日改為「待確認」，不能把未批資助、口頭承諾或未簽批文件列作已落實條件。</p>
+    <p class="muted small" style="margin-top:10px">註：時間表是項目管理估算，不是法律意見或審批時間保證。「認可人士」（Authorized Person, AP）是按《建築物條例》列入屋宇署名冊的建築專業人士，不是泛指一般裝修顧問；按工程性質，可能還須註冊結構工程師。<a href="https://www.bd.gov.hk/tc/resources/registration-guides/index_building_professionals.html" rel="noopener">屋宇署：建築專業人士名冊與委任說明</a></p>
   </section>
 
   <!-- 9 -->
