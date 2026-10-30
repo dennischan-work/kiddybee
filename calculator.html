@@ -987,7 +987,7 @@ img{max-width:100%}
     el('abAdminLoaded').textContent=fmt(adminCost);
     var teacherCosts=[1,2,3].map(function(n){var pay=val('abTeacherPay'+n),loaded=pay+mpf(pay);el('abTeacherLoaded'+n).textContent=fmt(loaded);return loaded});
     var teacherTotal=function(n){return teacherCosts.slice(0,n).reduce(function(sum,cost){return sum+cost},0)};
-    var base=rent+other+founderCost+consultantCost+partTime+adminCost+consultantCost*0;
+    var base=rent+other+founderCost+consultantCost+partTime+adminCost;
     var phase1=base+teacherCosts[0];
     var phase2=phase1+teacherCosts[1];
     var mixLocal=Math.min(100,val('abMixLocal'));
