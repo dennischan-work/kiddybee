@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>沙田英文中心試算台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: 左邊假設面板（寬螢幕時固定），右邊依「結論卡 → 現金曲線 → 打平與容量 → 定價敏感度 → 創辦人一週」由總到細 */
+:root{
+  --bg:#F5F7F4; --surface:#FFFFFF; --ink:#17232A; --muted:#5B6A70; --line:#DCE3E0; --soft:#EDF1EE;
+  --studio:#1D6A8E; --phased:#B9762A; --full:#7B8891;
+  --good:#2C7A57; --warn:#A8701B; --bad:#B1453A;
+  --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --f-disp:"Noto Serif TC","Noto Sans TC",serif;
+  --f-num:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11171A; --surface:#182126; --ink:#E5ECEE; --muted:#98A7AD; --line:#29353B; --soft:#1F2A30;
+  --studio:#62AED2; --phased:#E2A55E; --full:#9BA7AE; --good:#5DBA8C; --warn:#E0B060; --bad:#E27C6E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11171A; --surface:#182126; --ink:#E5ECEE; --muted:#98A7AD; --line:#29353B; --soft:#1F2A30;
+  --studio:#62AED2; --phased:#E2A55E; --full:#9BA7AE; --good:#5DBA8C; --warn:#E0B060; --bad:#E27C6E; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65;margin:0}
+.topnav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.topnav .in{max-width:1180px;margin:0 auto;padding:10px max(16px,env(safe-area-inset-left,0px));display:flex;gap:18px;align-items:center;font-size:14px;overflow-x:auto;white-space:nowrap}
+.topnav a{color:var(--muted);text-decoration:none}
+.topnav a.on{color:var(--ink);font-weight:500}
+.topnav .brand{color:var(--ink);font-weight:700;margin-right:auto}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+header{display:grid;gap:6px;margin-bottom:22px}
+.eyebrow{font-size:12px;letter-spacing:.08em;color:var(--muted)}
+h1{font-family:var(--f-disp);font-size:clamp(26px,4vw,36px);line-height:1.25;margin:0;text-wrap:balance}
+.lead{margin:0;max-width:66ch;color:var(--muted)}
+.layout{display:grid;grid-template-columns:330px minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:900px){.layout{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;gap:18px;position:sticky;top:60px;max-height:calc(100vh - 72px);overflow:auto}
+@media (max-width:900px){.panel{position:static;max-height:none}}
+.group{display:grid;gap:10px;padding-top:14px;border-top:1px solid var(--line)}
+.group:first-of-type{border-top:0;padding-top:0}
+.group-title{font-size:12px;letter-spacing:.06em;color:var(--muted)}
+.field{display:grid;gap:4px}
+.field label,.field .lab{display:flex;justify-content:space-between;gap:8px;font-size:13.5px}
+.field output,.num{font-family:var(--f-num);font-variant-numeric:tabular-nums;font-size:13px}
+input[type=range]{width:100%;accent-color:var(--studio)}
+input[type=number],select{width:100%;box-sizing:border-box;font:inherit;font-family:var(--f-num);font-size:13px;padding:5px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+select{font-family:var(--f-body)}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.three .field label,.two .field label{font-size:12px;color:var(--muted)}
+.switch{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13.5px}
+.switch input{width:44px;height:24px;appearance:none;background:var(--line);border-radius:12px;position:relative;cursor:pointer;flex:none;margin:0}
+.switch input::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--surface);transition:left .15s}
+.switch input:checked{background:var(--studio)}
+.switch input:checked::after{left:23px}
+.btns{display:flex;flex-wrap:wrap;gap:6px}
+button{font:inherit;font-size:12.5px;padding:5px 10px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+button:hover{border-color:var(--studio)}
+button.primary{background:var(--studio);color:#fff;border-color:var(--studio)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--studio);outline-offset:2px}
+.mixbar{display:flex;height:8px;border-radius:4px;overflow:hidden;background:var(--soft)}
+.mixbar span{display:block;height:100%}
+.hint{font-size:12.5px;color:var(--muted);margin:0}
+.alert{font-size:12.5px;padding:8px 10px;border-radius:6px;background:var(--soft);border-left:3px solid var(--warn);margin:0}
+.teachers{display:grid;gap:6px}
+.trow{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:8px;align-items:center;font-size:13px}
+.trow .tot{font-family:var(--f-num);font-size:12px;color:var(--muted);min-width:76px;text-align:right}
+.counts{display:grid;grid-template-columns:minmax(0,1fr) 64px;gap:6px 10px;align-items:center;font-size:13px}
+.counts select{padding:4px 6px}
+.counts .sub{grid-column:1/-1;font-size:12px;color:var(--muted);margin-top:-2px}
+main{display:grid;gap:22px;min-width:0}
+section.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:grid;gap:12px;min-width:0}
+section h2{font-size:18px;margin:0;text-wrap:balance}
+.read{margin:0;color:var(--muted);max-width:70ch}
+.routes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.routes{grid-template-columns:minmax(0,1fr)}}
+.route{border:1px solid var(--line);border-radius:8px;padding:14px;display:grid;gap:8px;align-content:start;border-top:4px solid var(--c)}
+.route h3{font-size:15px;margin:0;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.chip{font-size:11.5px;padding:2px 8px;border-radius:10px;white-space:nowrap;font-weight:500}
+.chip.ok{color:var(--good);background:color-mix(in srgb,var(--good) 14%,transparent)}
+.chip.mid{color:var(--warn);background:color-mix(in srgb,var(--warn) 16%,transparent)}
+.chip.no{color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,transparent)}
+.kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 10px;font-size:13px;margin:0}
+.kv dt{white-space:nowrap}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;font-family:var(--f-num);font-variant-numeric:tabular-nums;text-align:right}
+.big{font-family:var(--f-num);font-size:24px;line-height:1.1}
+.chart{width:100%;overflow-x:auto}
+.chart svg{display:block;width:100%;min-width:560px;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
+table.staff{border-collapse:collapse;width:100%;font-size:13px;min-width:520px}
+.staff th,.staff td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:right}
+.staff th:first-child,.staff td:first-child{text-align:left}
+.staff th{font-weight:500;color:var(--muted);font-size:12.5px}
+.staff td{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+.staff td:first-child{font-family:var(--f-body)}
+.staff tr.sum td{font-weight:500;border-bottom:0}
+.tablewrap{overflow-x:auto}
+.week{width:100%;overflow-x:auto}
+table.sched{border-collapse:separate;border-spacing:4px;width:100%;min-width:620px;font-size:12.5px}
+.sched th{font-weight:500;color:var(--muted);text-align:center;padding:2px}
+.sched th.t{text-align:right;font-family:var(--f-num);font-weight:400;width:56px}
+.sched td{height:38px;border-radius:6px;text-align:center;background:var(--soft);color:var(--muted)}
+.sched td.on{background:color-mix(in srgb,var(--studio) 22%,var(--surface));color:var(--ink)}
+.sched td.half{background:color-mix(in srgb,var(--studio) 10%,var(--surface));color:var(--ink);outline:1px dashed color-mix(in srgb,var(--studio) 50%,transparent)}
+.sched tfoot td{background:none;height:auto;font-family:var(--f-num)}
+.sched tfoot td.over{color:var(--bad);font-weight:500}
+.stats{display:flex;flex-wrap:wrap;gap:22px}
+.stat{display:grid;gap:2px}
+.stat span{font-size:12.5px;color:var(--muted)}
+.notes{font-size:13px;color:var(--muted);margin:0;padding-left:1.2em;display:grid;gap:4px}
+.notes a{color:var(--studio)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+:root{color-scheme:light}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<nav class="topnav" aria-label="網站導覽"><div class="in">
+  <a class="brand" href="./">沙田幼兒英語教育中心</a>
+  <a href="./">規劃總覽</a>
+  <a href="./#direction">可行方向</a>
+  <a class="on" href="./calculator.html" aria-current="page">試算台</a>
+</div></nav>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">沙田幼兒英語教育中心 · 開業規劃試算台</div>
+    <h1>沙田英文中心試算台</h1>
+    <p class="lead">左邊調整假設，右邊即時看到「私人小班工作室」和「註冊中心」在錢、人數、人手和創辦人工作量上的分別。可按「手冊預設」或「投資人口徑」一鍵切換。全部是規劃假設，不是報價或保證。</p>
+  </header>
+
+  <div class="layout">
+    <aside class="panel" aria-label="假設">
+      <div class="group">
+        <div class="group-title">預設組合</div>
+        <div class="btns">
+          <button type="button" id="presetHB">手冊預設</button>
+          <button type="button" id="presetINV">投資人口徑</button>
+        </div>
+        <p class="hint" id="presetHint">目前：手冊預設</p>
+      </div>
+
+      <div class="group">
+        <div class="group-title">創辦人</div>
+        <p class="hint">創辦人親自授課（已確認）。下面的薪酬是創辦人自己每月要拿的錢。</p>
+        <div class="field">
+          <label for="pay">創辦人每月薪酬 <output id="payO"></output></label>
+          <input type="range" id="pay" min="0" max="35000" step="1000" value="0">
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="group-title">聘用老師</div>
+        <p class="hint">逐位填月薪。各路線按下面設定的人數，由老師 A 開始順序計入。</p>
+        <div class="teachers">
+          <div class="trow"><label for="tA">老師 A</label><input type="number" id="tA" value="28500" step="500" min="0"><span class="tot" id="tAO"></span></div>
+          <div class="trow"><label for="tB">老師 B</label><input type="number" id="tB" value="28500" step="500" min="0"><span class="tot" id="tBO"></span></div>
+          <div class="trow"><label for="tC">老師 C</label><input type="number" id="tC" value="28500" step="500" min="0"><span class="tot" id="tCO"></span></div>
+        </div>
+        <label class="switch" for="mpf">計入僱主強積金（5%，每人每月上限 HK$1,500）<input type="checkbox" id="mpf" checked></label>
+        <p class="hint">右邊灰字是連強積金的每月成本。預設月薪 HK$28,500，連強積金約 HK$29,925，接近手冊「全職導師連僱主成本 HK$30,000」。</p>
+        <div class="counts">
+          <label for="nS">工作室聘用老師</label>
+          <select id="nS"><option>0</option><option>1</option></select>
+          <span class="sub">工作室只有一間課室，聘老師不會增加學位，只分擔創辦人的課。</span>
+          <label for="nP1">註冊中心 · 分階段：首階段</label>
+          <select id="nP1"><option>0</option><option>1</option><option>2</option><option>3</option></select>
+          <label for="nP2">註冊中心 · 分階段：擴編後</label>
+          <select id="nP2"><option>0</option><option>1</option><option>2</option><option>3</option></select>
+          <label for="nF">註冊中心 · 全編制</label>
+          <select id="nF"><option>0</option><option>1</option><option>2</option><option>3</option></select>
+          <span class="sub">註冊中心有兩間課室：創辦人加至少一位老師，兩間課室才可同時開班。</span>
+        </div>
+        <div class="field">
+          <label for="sup">中心兼職支援／行政／月 <output id="supO"></output></label>
+          <input type="range" id="sup" min="0" max="30000" step="1000" value="5000">
+        </div>
+        <p class="hint">只計入註冊中心。預設 HK$5,000 由手冊精簡試營運人手成本推算。</p>
+      </div>
+
+      <div class="group">
+        <div class="group-title">課程組合與收費</div>
+        <div class="btns">
+          <button type="button" data-mix="60,25">手冊假設 60／25／15</button>
+          <button type="button" data-mix="85,0">本地 85／面試 15</button>
+          <button type="button" data-mix="100,0">只開本地課</button>
+        </div>
+        <div class="field">
+          <label for="local">本地導師課程 <output id="localO"></output></label>
+          <input type="range" id="local" min="0" max="100" step="5" value="60">
+        </div>
+        <div class="field">
+          <label for="net">外籍導師（NET）課程 <output id="netO"></output></label>
+          <input type="range" id="net" min="0" max="100" step="5" value="25">
+        </div>
+        <div class="mixbar" aria-hidden="true"><span id="mb1"></span><span id="mb2"></span><span id="mb3"></span></div>
+        <p class="hint">面試班自動補足至 100%：<span class="num" id="intO"></span></p>
+        <div class="three">
+          <div class="field"><label for="pL">本地／45分</label><input type="number" id="pL" value="300" step="10" min="150"></div>
+          <div class="field"><label for="pN">NET／60分</label><input type="number" id="pN" value="415" step="5" min="200"></div>
+          <div class="field"><label for="pI">面試班</label><input type="number" id="pI" value="450" step="10" min="200"></div>
+        </div>
+        <div class="field">
+          <label for="weeks">每月計多少週</label>
+          <select id="weeks"><option value="4.33">4.33 週（手冊）</option><option value="4">4.0 週（投資人口徑，扣假期及停課）</option></select>
+        </div>
+        <p class="hint">加權每堂實收 <b class="num" id="wpO"></b>，每名學生每月貢獻 <b class="num" id="cpO"></b></p>
+        <p class="alert" id="netAlert" hidden>NET 課要由外籍導師教。如有開 NET 課，請確認「聘用老師」已計入外籍導師的月薪，否則收入會被高估。</p>
+      </div>
+
+      <div class="group">
+        <div class="group-title">課堂與招生</div>
+        <div class="field">
+          <label for="size">平均每班人數 <output id="sizeO"></output></label>
+          <input type="range" id="size" min="2" max="4" step="0.1" value="3">
+        </div>
+        <div class="field">
+          <label for="slots">每間課室每週可售班數 <output id="slotsO"></output></label>
+          <input type="range" id="slots" min="14" max="28" step="1" value="22">
+        </div>
+        <div class="field">
+          <label for="curve">學生增長曲線</label>
+          <select id="curve">
+            <option value="hb">手冊曲線（15 人起，每月約加 6 人）</option>
+            <option value="base">投資人基準（12 人起，第 12 月 54 人）</option>
+            <option value="slow">投資人審慎（8 人起，第 12 月 40 人）</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="speed">招生速度（所選曲線＝100%） <output id="speedO"></output></label>
+          <input type="range" id="speed" min="0.5" max="1.5" step="0.05" value="1">
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="group-title">其他成本</div>
+        <div class="field">
+          <label for="rent">租金及管理費／月 <output id="rentO"></output></label>
+          <input type="range" id="rent" min="12000" max="40000" step="1000" value="22000">
+        </div>
+        <div class="field">
+          <label for="other">推廣、水電軟件、會計雜項／月 <output id="otherO"></output></label>
+          <input type="range" id="other" min="8000" max="30000" step="1000" value="18000">
+        </div>
+        <div class="field">
+          <label for="var">每人每堂變動成本 <output id="varO"></output></label>
+          <input type="range" id="var" min="0" max="60" step="5" value="20">
+        </div>
+        <div class="field">
+          <label for="preS">工作室開業前投入 <output id="preSO"></output></label>
+          <input type="range" id="preS" min="160000" max="300000" step="10000" value="230000">
+        </div>
+        <div class="field">
+          <label for="preC">註冊中心開業前投入 <output id="preCO"></output></label>
+          <input type="range" id="preC" min="280000" max="680000" step="10000" value="350000">
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <section class="card" aria-labelledby="h-sum">
+        <h2 id="h-sum">三條路線一覽</h2>
+        <p class="read" id="sumRead"></p>
+        <div class="routes" id="routes"></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-staff">
+        <h2 id="h-staff">人手成本拆解</h2>
+        <p class="read">每條路線請了誰、每月要付多少。分階段中心顯示擴編後的人手；擴編前的人數見左邊設定。</p>
+        <div class="tablewrap"><table class="staff" id="staff"></table></div>
+        <p class="read" id="staffRead"></p>
+      </section>
+
+      <section class="card" aria-labelledby="h-cash">
+        <h2 id="h-cash">錢在哪個月最緊？</h2>
+        <p class="read">由開業前投入開始累計（第 0 個月），往後每月加上營運盈虧。曲線最低點就是最少要準備的錢；之後再加上儲備。</p>
+        <div class="legend" id="lg1"></div>
+        <div class="chart" id="cash"></div>
+        <p class="read" id="cashRead"></p>
+      </section>
+
+      <section class="card" aria-labelledby="h-cap">
+        <h2 id="h-cap">要多少學生才打平？課室裝得下嗎？</h2>
+        <p class="read">淺色長條是可容納的學生上限（可同時開班的課室 × 每週班數 × 平均每班人數），深色刻度是打平所需學生。刻度落在長條以外，代表就算坐滿也虧本。</p>
+        <div class="chart" id="cap"></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-price">
+        <h2 id="h-price">定價高一點，打平人數少多少？</h2>
+        <p class="read">橫軸是加權每堂實收。直線虛線是一間課室的學生上限；圓點是目前設定。</p>
+        <div class="legend" id="lg2"></div>
+        <div class="chart" id="price"></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-week">
+        <h2 id="h-week">創辦人的一週（工作室示例課表）</h2>
+        <p class="read">平日只有放學後兩節，週末是主力；虛線格是只適合半日制幼稚園孩子的時段，需求不穩。工作室每日合計須少於 20 人，週六最易超線。</p>
+        <div class="week"><table class="sched" id="sched"></table></div>
+        <div class="stats" id="wstats"></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-note">
+        <h2 id="h-note">怎樣讀這頁</h2>
+        <ul class="notes">
+          <li>所有數字未計稅、融資及回收開業投資；創辦人薪酬只在左邊設定後才計入。</li>
+          <li>每月固定成本＝租金 ＋ 推廣水電會計等 ＋ 創辦人薪酬 ＋ 聘用老師（連強積金）＋ 中心兼職支援。僱員補償保險等其他僱主開支，請計入「推廣、水電軟件、會計雜項」。</li>
+          <li>強積金按僱主 5% 計，每人每月上限 HK$1,500（有關入息上限 HK$30,000）。積金局正在檢討上下限，以積金局最新公布為準。</li>
+          <li>學生曲線：手冊曲線首月 15 人，之後每月約加 6 人；投資人兩條曲線按投資人方案的起點及第 12 個月人數以直線連接，屬近似。所有曲線都到課室上限便停。</li>
+          <li>註冊中心分階段：學生達 45 人（或首階段上限，取較小者）的下一個月起擴編，人手由「首階段」轉為「擴編後」。</li>
+          <li>註冊中心可同時開班的課室數＝創辦人加聘用老師的人數，最多兩間。只有創辦人一人時，第二間課室用不上。</li>
+          <li>建議資金＝曲線最低點＋三個月固定成本作儲備。</li>
+          <li>是否須向教育局註冊，以教育局對實際營運時間表的書面回覆為準。兩位老師同時各教 4 人，合計已達 8 人。</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var HB = {pay:0,tA:28500,tB:28500,tC:28500,mpf:true,nS:0,nP1:0,nP2:1,nF:1,sup:5000,local:60,net:25,pL:300,pN:415,pI:450,weeks:'4.33',size:3,slots:22,curve:'hb',speed:1,rent:22000,other:18000,'var':20,preS:230000,preC:350000};
+  var INV = {pay:20000,tA:28500,tB:28500,tC:28500,mpf:true,nS:0,nP1:0,nP2:1,nF:1,sup:5000,local:100,net:0,pL:300,pN:415,pI:450,weeks:'4',size:3,slots:18,curve:'base',speed:1,rent:18000,other:14000,'var':20,preS:250000,preC:350000};
+  var BASE = [15,21,27,33,39,45,52,58,64,70,76,82];
+  var H = 18;
+  var css = function(v){ return 'var(--'+v+')'; };
+  var money = function(x){ var s = Math.round(Math.abs(x)).toLocaleString('en-US'); return (x<0?'−':'')+'HK$'+s; };
+  var wan = function(x){ return (x<0?'−':'')+(Math.abs(x)/10000).toFixed(1)+' 萬'; };
+  var NUMS = ['pay','tA','tB','tC','sup','local','net','pL','pN','pI','size','slots','speed','rent','other','var','preS','preC'];
+  var INTS = ['nS','nP1','nP2','nF'];
+
+  function read(){
+    var s = {};
+    NUMS.forEach(function(k){ s[k] = parseFloat($(k).value) || 0; });
+    INTS.forEach(function(k){ s[k] = parseInt($(k).value,10) || 0; });
+    s.mpf = $('mpf').checked;
+    s.weeks = parseFloat($('weeks').value);
+    s.curve = $('curve').value;
+    if (s.local + s.net > 100) { s.net = 100 - s.local; $('net').value = s.net; }
+    s.int = 100 - s.local - s.net;
+    s.wp = (s.local*s.pL + s.net*s.pN + s.int*s.pI)/100;
+    s.contrib = (s.wp - s['var'])*s.weeks;
+    s.sal = [s.tA, s.tB, s.tC];
+    s.cost = s.sal.map(function(v){ return v + (s.mpf ? Math.min(v*0.05, 1500) : 0); });
+    return s;
+  }
+
+  function staffCost(s, n){ var t = 0; for (var i=0;i<n;i++) t += s.cost[i]; return t; }
+
+  function curveAt(s, m){
+    if (s.curve === 'base') return 12 + (m-1)*42/11;
+    if (s.curve === 'slow') return 8 + (m-1)*32/11;
+    return m <= 12 ? BASE[m-1] : BASE[11] + 6*(m-12);
+  }
+  function students(s, m, cap){ return Math.max(0, Math.min(cap, Math.round(curveAt(s,m)*s.speed))); }
+
+  function routes(s){
+    var cap1 = Math.round(s.slots*s.size);
+    var rooms = function(n){ return Math.min(2, 1+n); };
+    var core = s.rent + s.other + s.pay;
+    var R = [
+      {key:'studio', name:'私人小班工作室', note:'1 間課室，創辦人親授；毋須註冊須教育局書面確認', pre:s.preS,
+        lo:core + staffCost(s,s.nS), hi:core + staffCost(s,s.nS), capLo:cap1, capHi:cap1, nLo:s.nS, nHi:s.nS},
+      {key:'phased', name:'註冊中心 · 分階段', note:'2 間課室；45 人後擴編', pre:s.preC, phase:true,
+        lo:core + s.sup + staffCost(s,s.nP1), hi:core + s.sup + staffCost(s,s.nP2), capLo:rooms(s.nP1)*cap1, capHi:rooms(s.nP2)*cap1, nLo:s.nP1, nHi:s.nP2},
+      {key:'full', name:'註冊中心 · 全編制', note:'2 間課室；一開始請齊人手', pre:s.preC,
+        lo:core + s.sup + staffCost(s,s.nF), hi:core + s.sup + staffCost(s,s.nF), capLo:rooms(s.nF)*cap1, capHi:rooms(s.nF)*cap1, nLo:s.nF, nHi:s.nF}
+    ];
+    R.forEach(function(r){
+      r.steady = r.hi; r.cap = r.capHi;
+      var trigger = Math.min(45, r.capLo);
+      var cum = -r.pre, low = cum, lowM = 0, y1 = 0, firstPos = null, expanded = !r.phase;
+      r.series = [{m:0, v:cum, n:0}];
+      for (var m=1; m<=H; m++){
+        var cap = expanded ? r.capHi : r.capLo;
+        var n = students(s, m, cap);
+        var f = expanded ? r.hi : r.lo;
+        var pl = n*s.contrib - f;
+        if (r.phase && !expanded && n >= trigger) expanded = true;
+        cum += pl;
+        if (m <= 12) y1 += pl;
+        if (firstPos === null && pl > 0) firstPos = m;
+        if (cum < low){ low = cum; lowM = m; }
+        r.series.push({m:m, v:cum, n:n});
+      }
+      r.low = low; r.lowM = lowM; r.y1 = y1; r.firstPos = firstPos;
+      r.be = s.contrib > 0 ? Math.ceil(r.steady / s.contrib) : Infinity;
+      r.beLo = r.phase && s.contrib > 0 ? Math.ceil(r.lo / s.contrib) : null;
+      r.fund = -low + 3*r.steady;
+    });
+    return R;
+  }
+
+  function svg(tag, a, txt){
+    var e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (var k in a) e.setAttribute(k, a[k]);
+    if (txt != null) e.textContent = txt;
+    return e;
+  }
+  function niceStep(range, n){
+    if (range <= 0) return 1;
+    var raw = range/n, p = Math.pow(10, Math.floor(Math.log10(raw))), f = raw/p;
+    return (f<=1?1:f<=2?2:f<=5?5:10)*p;
+  }
+
+  function drawCash(R){
+    var W=760, Ht=320, L=66, Rr=118, T=16, B=38;
+    var all = []; R.forEach(function(r){ r.series.forEach(function(p){ all.push(p.v); }); });
+    var mn = Math.min.apply(null, all.concat([0])), mx = Math.max.apply(null, all.concat([0]));
+    var st = niceStep(mx - mn, 5); mn = Math.floor(mn/st)*st; mx = Math.ceil(mx/st)*st;
+    var x = function(m){ return L + m/H*(W-L-Rr); }, y = function(v){ return T + (mx - v)/(mx - mn)*(Ht-T-B); };
+    var g = svg('svg', {viewBox:'0 0 '+W+' '+Ht, role:'img', 'aria-label':'三條路線開業後 18 個月累計現金曲線'});
+    for (var v=mn; v<=mx+1; v+=st){
+      g.appendChild(svg('line', {x1:L, x2:W-Rr, y1:y(v), y2:y(v), style:'stroke:'+(Math.abs(v)<1?css('muted'):css('line'))+';stroke-width:'+(Math.abs(v)<1?1.2:1)}));
+      g.appendChild(svg('text', {x:L-8, y:y(v)+4, 'text-anchor':'end', 'font-size':11, style:'fill:'+css('muted')+';font-family:var(--f-num)'}, (v/10000).toFixed(0)+' 萬'));
+    }
+    for (var m=0; m<=H; m+=3){
+      g.appendChild(svg('text', {x:x(m), y:Ht-B+18, 'text-anchor':'middle', 'font-size':11, style:'fill:'+css('muted')+';font-family:var(--f-num)'}, m));
+    }
+    g.appendChild(svg('text', {x:(L+W-Rr)/2, y:Ht-4, 'text-anchor':'middle', 'font-size':11.5, style:'fill:'+css('muted')}, '開業後月份（0＝開業前投入）'));
+    var ends = [];
+    R.forEach(function(r){
+      var d = r.series.map(function(p,i){ return (i?'L':'M')+x(p.m).toFixed(1)+','+y(p.v).toFixed(1); }).join(' ');
+      g.appendChild(svg('path', {d:d, style:'fill:none;stroke:'+css(r.key)+';stroke-width:2.5'}));
+      var lp = r.series[r.lowM];
+      var c = svg('circle', {cx:x(lp.m), cy:y(lp.v), r:4.5, style:'fill:'+css('surface')+';stroke:'+css(r.key)+';stroke-width:2'});
+      c.appendChild(svg('title', {}, r.name+'最低點：第 '+lp.m+' 個月 '+money(lp.v)));
+      g.appendChild(c);
+      var last = r.series[H];
+      ends.push({y:y(last.v), r:r, v:last.v});
+    });
+    ends.sort(function(a,b){ return a.y-b.y; });
+    for (var i=1;i<ends.length;i++){ if (ends[i].y - ends[i-1].y < 30) ends[i].y = ends[i-1].y + 30; }
+    ends.forEach(function(e){
+      g.appendChild(svg('text', {x:W-Rr+8, y:e.y, 'font-size':11.5, style:'fill:'+css(e.r.key)+';font-weight:500'}, e.r.name.replace('註冊中心 · ','中心·')));
+      g.appendChild(svg('text', {x:W-Rr+8, y:e.y+14, 'font-size':11, style:'fill:'+css('muted')+';font-family:var(--f-num)'}, wan(e.v)));
+    });
+    var box = $('cash'); box.innerHTML=''; box.appendChild(g);
+  }
+
+  function drawCap(R){
+    var W=760, rowH=62, L=150, Rr=30, T=14, Ht=T+rowH*R.length+30;
+    var mx = 0; R.forEach(function(r){ mx = Math.max(mx, r.cap, isFinite(r.be)?r.be:0); }); mx = Math.max(10, Math.ceil(mx*1.12/10)*10);
+    var x = function(v){ return L + v/mx*(W-L-Rr); };
+    var g = svg('svg', {viewBox:'0 0 '+W+' '+Ht, role:'img', 'aria-label':'各路線打平學生數與學生上限比較'});
+    var st = niceStep(mx, 6);
+    for (var v=0; v<=mx; v+=st){
+      g.appendChild(svg('line', {x1:x(v), x2:x(v), y1:T, y2:Ht-26, style:'stroke:'+css('line')}));
+      g.appendChild(svg('text', {x:x(v), y:Ht-10, 'text-anchor':'middle', 'font-size':11, style:'fill:'+css('muted')+';font-family:var(--f-num)'}, v));
+    }
+    R.forEach(function(r,i){
+      var yc = T + i*rowH + rowH/2 + 4;
+      g.appendChild(svg('text', {x:L-12, y:yc+4, 'text-anchor':'end', 'font-size':12.5, style:'fill:'+css('ink')}, r.name));
+      var bar = svg('rect', {x:L, y:yc-11, width:Math.max(0,x(r.cap)-L), height:22, rx:4, style:'fill:'+css(r.key)+';fill-opacity:.2'});
+      bar.appendChild(svg('title', {}, r.name+'上限 '+r.cap+' 人'));
+      g.appendChild(bar);
+      g.appendChild(svg('text', {x:x(r.cap)-6, y:yc+4, 'text-anchor':'end', 'font-size':11, style:'fill:'+css('muted')+';font-family:var(--f-num)'}, '上限 '+r.cap));
+      if (isFinite(r.be)){
+        var bx = x(Math.min(r.be, mx));
+        g.appendChild(svg('line', {x1:bx, x2:bx, y1:yc-18, y2:yc+18, style:'stroke:'+css(r.key)+';stroke-width:3'}));
+        var lbl = '打平 '+r.be+' 人'+(r.beLo && r.beLo!==r.be?'（首階段 '+r.beLo+'）':'');
+        g.appendChild(svg('text', {x:Math.min(Math.max(bx, L+60), W-Rr-60), y:yc-22, 'text-anchor':'middle', 'font-size':11.5, style:'fill:'+css(r.key)+';font-weight:500'}, lbl));
+      }
+    });
+    var box = $('cap'); box.innerHTML=''; box.appendChild(g);
+  }
+
+  function drawPrice(R, s){
+    var W=760, Ht=300, L=56, Rr=24, T=16, B=40, x0=260, x1=480;
+    var pts = function(r, p){ var c=(p-s['var'])*s.weeks; return c>0 ? r.steady/c : null; };
+    var mx = 0; R.forEach(function(r){ var v=pts(r,x0); if (v) mx=Math.max(mx,v); });
+    mx = Math.max(20, Math.min(Math.ceil(mx/20)*20, 200));
+    var x = function(p){ return L + (p-x0)/(x1-x0)*(W-L-Rr); }, y = function(v){ return T + (mx - v)/mx*(Ht-T-B); };
+    var g = svg('svg', {viewBox:'0 0 '+W+' '+Ht, role:'img', 'aria-label':'加權每堂實收與打平學生數'});
+    var st = niceStep(mx, 5);
+    for (var v=0; v<=mx; v+=st){
+      g.appendChild(svg('line', {x1:L, x2:W-Rr, y1:y(v), y2:y(v), style:'stroke:'+css('line')}));
+      g.appendChild(svg('text', {x:L-8, y:y(v)+4, 'text-anchor':'end', 'font-size':11, style:'fill:'+css('muted')+';font-family:var(--f-num)'}, v));
+    }
+    for (var p=x0; p<=x1; p+=40){
+      g.appendChild(svg('text', {x:x(p), y:Ht-B+18, 'text-anchor':'middle', 'font-size':11, style:'fill:'+css('muted')+';font-family:var(--f-num)'}, '$'+p));
+    }
+    g.appendChild(svg('text', {x:(L+W-Rr)/2, y:Ht-4, 'text-anchor':'middle', 'font-size':11.5, style:'fill:'+css('muted')}, '加權每堂實收（港元）'));
+    var cap1 = R[0].cap;
+    if (cap1 <= mx){
+      g.appendChild(svg('line', {x1:L, x2:W-Rr, y1:y(cap1), y2:y(cap1), style:'stroke:'+css('muted')+';stroke-dasharray:5 4'}));
+      g.appendChild(svg('text', {x:W-Rr-4, y:y(cap1)-6, 'text-anchor':'end', 'font-size':11, style:'fill:'+css('muted')}, '一間課室上限 '+cap1+' 人'));
+    }
+    R.forEach(function(r){
+      var d='', first=true;
+      for (var p=x0; p<=x1; p+=5){ var v=pts(r,p); if (v==null || v>mx) { first=true; continue; } d += (first?'M':'L')+x(p).toFixed(1)+','+y(v).toFixed(1); first=false; }
+      g.appendChild(svg('path', {d:d, style:'fill:none;stroke:'+css(r.key)+';stroke-width:2.2'}));
+      var cv = pts(r, s.wp);
+      if (cv && cv<=mx && s.wp>=x0 && s.wp<=x1){
+        var c = svg('circle', {cx:x(s.wp), cy:y(cv), r:5, style:'fill:'+css(r.key)});
+        c.appendChild(svg('title', {}, r.name+'：每堂 $'+s.wp.toFixed(0)+' 時打平約 '+Math.ceil(cv)+' 人'));
+        g.appendChild(c);
+        g.appendChild(svg('text', {x:x(s.wp)+8, y:y(cv)-6, 'font-size':11, style:'fill:'+css(r.key)+';font-family:var(--f-num)'}, Math.ceil(cv)));
+      }
+    });
+    var box = $('price'); box.innerHTML=''; box.appendChild(g);
+  }
+
+  function drawStaff(R, s){
+    var names = ['老師 A','老師 B','老師 C'];
+    var h = '<thead><tr><th>項目</th>'+R.map(function(r){ return '<th style="color:'+css(r.key)+'">'+r.name.replace('註冊中心 · ','中心·')+'</th>'; }).join('')+'</tr></thead><tbody>';
+    for (var i=0;i<3;i++){
+      h += '<tr><td>'+names[i]+'（月薪 '+money(s.sal[i])+'）</td>'+R.map(function(r){ return '<td>'+(i < r.nHi ? money(s.cost[i]) : '—')+'</td>'; }).join('')+'</tr>';
+    }
+    h += '<tr><td>中心兼職支援／行政</td>'+R.map(function(r){ return '<td>'+(r.key==='studio'?'—':money(s.sup))+'</td>'; }).join('')+'</tr>';
+    h += '<tr><td>創辦人薪酬</td>'+R.map(function(){ return '<td>'+money(s.pay)+'</td>'; }).join('')+'</tr>';
+    h += '<tr class="sum"><td>人手合計／月</td>'+R.map(function(r){ var v = staffCost(s, r.nHi) + (r.key==='studio'?0:s.sup) + s.pay; return '<td>'+money(v)+'</td>'; }).join('')+'</tr>';
+    h += '<tr><td>可同時開班的課室</td>'+R.map(function(r){ return '<td>'+(r.key==='studio'?1:Math.min(2,1+r.nHi))+' 間</td>'; }).join('')+'</tr>';
+    h += '</tbody>';
+    $('staff').innerHTML = h;
+    var full = R[2], one = s.cost[0];
+    var msg = s.contrib > 0 ? '每多請一位老師（以老師 A 計），每月要多約 '+Math.ceil(one/s.contrib)+' 名學生才付得起他的人工。' : '';
+    if (full.nHi === 0) msg += '全編制中心目前只有創辦人一人授課，第二間課室用不上，學生上限與工作室相同。';
+    if (s.nS > 0) msg += '工作室請了老師，固定成本上升，但學位不變。';
+    $('staffRead').textContent = msg;
+  }
+
+  var SCHED = {
+    times:['09:30','10:30','10:45','12:00','14:00','15:15','16:30','17:45'],
+    days:['一','二','三','四','五','六','日'],
+    on:{ '16:30':[1,1,1,1,1,0,0], '17:45':[1,1,1,1,1,0,0], '09:30':[0,0,0,0,0,1,1], '10:45':[0,0,0,0,0,1,1], '12:00':[0,0,0,0,0,1,1], '14:00':[0,0,0,0,0,1,1], '15:15':[0,0,0,0,0,1,0], '10:30':[0,2,0,2,0,0,0] }
+  };
+  function drawWeek(s){
+    var size = s.size, t = $('sched'), h = '<thead><tr><th class="t"></th>';
+    SCHED.days.forEach(function(d){ h += '<th>星期'+d+'</th>'; });
+    h += '</tr></thead><tbody>';
+    var dayTot = [0,0,0,0,0,0,0], classes = 0;
+    SCHED.times.forEach(function(tm){
+      h += '<tr><th class="t">'+tm+'</th>';
+      SCHED.on[tm].forEach(function(v,i){
+        if (v){ dayTot[i] += size; classes++; h += '<td class="'+(v===2?'half':'on')+'">≈'+size.toFixed(1).replace('.0','')+' 人</td>'; }
+        else h += '<td></td>';
+      });
+      h += '</tr>';
+    });
+    h += '</tbody><tfoot><tr><th class="t">合計</th>';
+    dayTot.forEach(function(v){ var r = Math.round(v); h += '<td class="'+(r>=20?'over':'')+'">'+r+' 人'+(r>=20?' 超線':'')+'</td>'; });
+    h += '</tr></tfoot>';
+    t.innerHTML = h;
+    var mins = (s.local*45 + (100-s.local)*60)/100;
+    var hrs = classes*mins/60;
+    var sat = Math.round(dayTot[5]);
+    $('wstats').innerHTML =
+      '<div class="stat"><span>示例課表每週</span><b class="big">'+classes+' 堂</b></div>'+
+      '<div class="stat"><span>上課時數（按課程組合）</span><b class="big">'+hrs.toFixed(1)+' 小時</b></div>'+
+      '<div class="stat"><span>週六合計</span><b class="big" style="color:'+(sat>=20?css('bad'):css('ink'))+'">'+sat+' 人</b></div>'+
+      '<div class="stat"><span>創辦人授課</span><b class="big">'+(s.nS>0?'與老師分擔':'全部自己教')+'</b></div>'+
+      '<div class="stat"><span>另加招生、備課、家長溝通</span><b class="big">約 20 小時</b></div>';
+  }
+
+  function render(){
+    var s = read();
+    $('payO').textContent = money(s.pay);
+    ['tA','tB','tC'].forEach(function(k,i){ $(k+'O').textContent = money(s.cost[i]); });
+    $('supO').textContent = money(s.sup);
+    $('localO').textContent = s.local+'%'; $('netO').textContent = s.net+'%'; $('intO').textContent = s.int+'%';
+    $('mb1').style.cssText = 'width:'+s.local+'%;background:'+css('studio');
+    $('mb2').style.cssText = 'width:'+s.net+'%;background:'+css('phased');
+    $('mb3').style.cssText = 'width:'+s.int+'%;background:'+css('full');
+    $('wpO').textContent = 'HK$'+s.wp.toFixed(2); $('cpO').textContent = money(s.contrib);
+    $('sizeO').textContent = s.size.toFixed(1)+' 人'; $('slotsO').textContent = s.slots+' 班';
+    $('speedO').textContent = Math.round(s.speed*100)+'%';
+    $('rentO').textContent = money(s.rent); $('otherO').textContent = money(s.other); $('varO').textContent = money(s['var']);
+    $('preSO').textContent = wan(s.preS); $('preCO').textContent = wan(s.preC);
+    $('netAlert').hidden = !(s.net > 0);
+
+    var R = routes(s);
+    var html = '';
+    R.forEach(function(r){
+      var room = r.be <= r.cap;
+      var chip = !isFinite(r.be) ? '<span class="chip no">收費低於成本</span>' : room ? (r.be <= r.cap*0.6 ? '<span class="chip ok">容量充裕</span>' : '<span class="chip mid">要接近坐滿</span>') : '<span class="chip no">坐滿仍虧本</span>';
+      html += '<div class="route" style="--c:'+css(r.key)+'"><h3>'+r.name+chip+'</h3><p class="hint">'+r.note+'</p>'+
+        '<dl class="kv">'+
+        '<dt>聘用老師</dt><dd>'+(r.phase? r.nLo+' → '+r.nHi : r.nHi)+' 位</dd>'+
+        '<dt>每月固定成本</dt><dd>'+(r.phase? money(r.lo)+' → '+money(r.hi) : money(r.steady))+'</dd>'+
+        '<dt>打平學生</dt><dd>'+(isFinite(r.be)? (r.phase? r.beLo+' → '+r.be : r.be)+' 人' : '—')+'</dd>'+
+        '<dt>學生上限</dt><dd>'+(r.phase && r.capLo!==r.capHi ? r.capLo+' → '+r.capHi : r.cap)+' 人</dd>'+
+        '<dt>首年營運結果</dt><dd style="color:'+(r.y1>=0?css('good'):css('bad'))+'">'+money(r.y1)+'</dd>'+
+        '<dt>首個單月盈餘</dt><dd>'+(r.firstPos? '第 '+r.firstPos+' 個月':'18 個月內未有')+'</dd>'+
+        '<dt>現金最低點</dt><dd>'+money(r.low)+'（第 '+r.lowM+' 月）</dd>'+
+        '</dl><div><span class="hint">建議準備資金</span><div class="big">'+wan(r.fund)+'</div></div></div>';
+    });
+    $('routes').innerHTML = html;
+
+    var st = R[0], ph = R[1], cap1 = st.cap;
+    var t = '以目前設定，工作室打平要 '+st.be+' 人、上限 '+st.cap+' 人';
+    t += st.be > st.cap ? '，坐滿也未打平。' : (st.be > st.cap*0.85 ? '，差不多要坐滿才打平。' : '。');
+    t += '註冊中心分階段擴編後打平要 '+ph.be+' 人';
+    t += ph.be > cap1 ? '，一間課室裝不下，要用到第二間課室和至少一位老師，也就要先取得註冊。' : '，一間課室已裝得下。';
+    if (s.pay === 0) t += '創辦人薪酬目前設為 0，盈餘其實包括創辦人自己的工資。';
+    $('sumRead').textContent = t;
+    $('cashRead').textContent = '工作室最緊在第 '+st.lowM+' 個月，累計約 '+wan(st.low)+'；分階段中心最緊在第 '+ph.lowM+' 個月，累計約 '+wan(ph.low)+'。';
+    $('lg1').innerHTML = $('lg2').innerHTML = R.map(function(r){ return '<span><i style="background:'+css(r.key)+'"></i>'+r.name+'</span>'; }).join('');
+
+    drawStaff(R, s); drawCash(R); drawCap(R); drawPrice(R, s); drawWeek(s);
+  }
+
+  function apply(P, label){
+    for (var k in P){
+      var el = $(k); if (!el) continue;
+      if (el.type === 'checkbox') el.checked = P[k]; else el.value = P[k];
+    }
+    $('presetHint').textContent = '目前：'+label+'（之後任何調整都會即時重算）';
+    render();
+  }
+
+  document.querySelectorAll('input,select').forEach(function(el){
+    el.addEventListener('input', render); el.addEventListener('change', render);
+  });
+  document.querySelectorAll('[data-mix]').forEach(function(b){
+    b.addEventListener('click', function(){ var v=b.getAttribute('data-mix').split(','); $('local').value=v[0]; $('net').value=v[1]; render(); });
+  });
+  $('presetHB').addEventListener('click', function(){ apply(HB, '手冊預設'); });
+  $('presetINV').addEventListener('click', function(){ apply(INV, '投資人口徑'); });
+  var q = location.hash.replace('#','');
+  if (q === 'investor') apply(INV, '投資人口徑'); else apply(HB, '手冊預設');
+})();
+</script>
+</body>
+</html>

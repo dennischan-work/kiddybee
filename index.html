@@ -3,12 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>沙田英文中心試算台</title>
+<meta name="robots" content="noindex">
+<title>沙田幼兒英語中心規劃</title>
+<meta name="description" content="沙田幼兒英語教育中心開業規劃總覽：兩條開業路線、兩個財務口徑、按資金上限看可行方向、分段撥款、停損線、開業時間表及合規流程。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* Layout: 左邊假設面板（寬螢幕時固定），右邊依「結論卡 → 現金曲線 → 打平與容量 → 定價敏感度 → 創辦人一週」由總到細 */
 :root{
   --bg:#F5F7F4; --surface:#FFFFFF; --ink:#17232A; --muted:#5B6A70; --line:#DCE3E0; --soft:#EDF1EE;
   --studio:#1D6A8E; --phased:#B9762A; --full:#7B8891;
@@ -16,6 +17,7 @@
   --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   --f-disp:"Noto Serif TC","Noto Sans TC",serif;
   --f-num:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  color-scheme:light;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#11171A; --surface:#182126; --ink:#E5ECEE; --muted:#98A7AD; --line:#29353B; --soft:#1F2A30;
@@ -23,468 +25,709 @@
 :root[data-theme="dark"]{
   --bg:#11171A; --surface:#182126; --ink:#E5ECEE; --muted:#98A7AD; --line:#29353B; --soft:#1F2A30;
   --studio:#62AED2; --phased:#E2A55E; --full:#9BA7AE; --good:#5DBA8C; --warn:#E0B060; --bad:#E27C6E; color-scheme:dark}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65}
-.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
-header{display:grid;gap:6px;margin-bottom:22px}
-.eyebrow{font-size:12px;letter-spacing:.08em;color:var(--muted)}
-h1{font-family:var(--f-disp);font-size:clamp(26px,4vw,36px);line-height:1.25;margin:0;text-wrap:balance}
-.lead{margin:0;max-width:62ch;color:var(--muted)}
-.layout{display:grid;grid-template-columns:320px minmax(0,1fr);gap:24px;align-items:start}
-@media (max-width:900px){.layout{grid-template-columns:minmax(0,1fr)}}
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;gap:18px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);max-height:calc(100vh - 24px);overflow:auto}
-@media (max-width:900px){.panel{position:static;max-height:none}}
-.panel h2{font-size:15px;margin:0}
-.group{display:grid;gap:10px;padding-top:14px;border-top:1px solid var(--line)}
-.group:first-of-type{border-top:0;padding-top:0}
-.group-title{font-size:12px;letter-spacing:.06em;color:var(--muted)}
-.field{display:grid;gap:4px}
-.field label{display:flex;justify-content:space-between;gap:8px;font-size:13.5px}
-.field output,.num{font-family:var(--f-num);font-variant-numeric:tabular-nums;font-size:13px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15.5px;line-height:1.7}
+a{color:var(--studio)}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+.topnav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.topnav .in{max-width:1120px;margin:0 auto;padding:10px max(16px,env(safe-area-inset-left,0px));display:flex;gap:16px;align-items:center;font-size:14px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.topnav .in::-webkit-scrollbar{display:none}
+.topnav a{color:var(--muted);text-decoration:none}
+.topnav a:hover{color:var(--ink)}
+.topnav .brand{color:var(--ink);font-weight:700;margin-right:auto}
+.topnav .cta{color:var(--studio);font-weight:500}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-bottom:64px}
+.hero{padding:44px 0 28px;display:grid;gap:14px}
+.eyebrow{font-size:12.5px;letter-spacing:.08em;color:var(--muted)}
+h1{font-family:var(--f-disp);font-size:clamp(28px,5vw,44px);line-height:1.2;margin:0;text-wrap:balance}
+.lead{margin:0;max-width:62ch;color:var(--muted);font-size:16.5px}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:8px}
+@media (max-width:760px){.facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px}
+.fact b{display:block;font-family:var(--f-num);font-size:22px;line-height:1.2}
+.fact span{font-size:13px;color:var(--muted)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.btn{display:inline-block;padding:9px 16px;border-radius:8px;text-decoration:none;font-size:14.5px;border:1px solid var(--line);color:var(--ink);background:var(--surface)}
+.btn.primary{background:var(--studio);border-color:var(--studio);color:#fff}
+.disclaimer{font-size:13px;color:var(--muted);margin:0;padding:10px 12px;border-left:3px solid var(--warn);background:var(--soft);border-radius:6px;max-width:80ch}
+section.block{padding:34px 0 8px;scroll-margin-top:56px}
+.sec-head{display:grid;gap:6px;margin-bottom:18px}
+.sec-no{font-family:var(--f-num);font-size:12.5px;color:var(--muted);letter-spacing:.06em}
+h2{font-size:clamp(21px,3vw,26px);margin:0;line-height:1.35;text-wrap:balance}
+.sec-head p{margin:0;color:var(--muted);max-width:68ch}
+h3{font-size:16.5px;margin:0 0 6px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;min-width:0}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:820px){.grid3{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:680px){.grid2{grid-template-columns:minmax(0,1fr)}}
+.stack{display:grid;gap:14px}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+p{margin:0}
+.card p+p{margin-top:8px}
+ul.clean{margin:0;padding-left:1.15em;display:grid;gap:4px}
+.icon{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:color-mix(in srgb,var(--studio) 14%,transparent);color:var(--studio);margin-bottom:10px}
+.icon svg{width:22px;height:22px}
+.route{border-top:4px solid var(--c)}
+.tag{display:inline-block;font-size:12px;padding:2px 9px;border-radius:10px;font-weight:500;white-space:nowrap}
+.tag.ok{color:var(--good);background:color-mix(in srgb,var(--good) 14%,transparent)}
+.tag.mid{color:var(--warn);background:color-mix(in srgb,var(--warn) 16%,transparent)}
+.tag.no{color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,transparent)}
+.tag.info{color:var(--studio);background:color-mix(in srgb,var(--studio) 14%,transparent)}
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table.t{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+.t th,.t td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.t thead th{font-size:13px;color:var(--muted);font-weight:500;background:var(--soft)}
+.t td.n{font-family:var(--f-num);font-variant-numeric:tabular-nums;white-space:nowrap}
+.t tbody th{font-weight:500;white-space:nowrap}
+/* threshold dots */
+.th-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.th-row:last-child{border-bottom:0}
+.dots{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.dots i{width:12px;height:12px;border-radius:50%;background:var(--studio);display:block}
+.dots i.b{background:var(--phased)}
+.dots i.sep{width:8px;background:none}
+/* bars */
+.bars{display:grid;gap:12px}
+.bar-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px;align-items:center;font-size:14px}
+@media (max-width:560px){.bar-row{grid-template-columns:minmax(0,1fr)}}
+.bar-track{position:relative;height:30px;background:var(--soft);border-radius:6px}
+.bar-cap{position:absolute;top:0;bottom:0;left:0;border-radius:6px;background:color-mix(in srgb,var(--c) 20%,transparent)}
+.bar-be{position:absolute;top:-4px;bottom:-4px;width:3px;background:var(--c);border-radius:2px}
+.bar-lab{position:absolute;top:50%;transform:translateY(-50%);font-size:12.5px;font-family:var(--f-num);white-space:nowrap}
+.stackbar{display:flex;height:30px;border-radius:6px;overflow:hidden;background:var(--soft)}
+.stackbar span{display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-family:var(--f-num);white-space:nowrap;overflow:hidden}
+.key{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted)}
+.key i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+/* heat table */
+table.heat{border-collapse:separate;border-spacing:4px;font-size:14px}
+.heat th{font-weight:500;color:var(--muted);font-size:12.5px;padding:4px 8px;text-align:center}
+.heat td{width:96px;height:46px;text-align:center;border-radius:6px;font-family:var(--f-num);font-weight:500}
+.heat td.g{background:color-mix(in srgb,var(--good) 18%,var(--surface));color:var(--good)}
+.heat td.w{background:color-mix(in srgb,var(--warn) 20%,var(--surface));color:var(--warn)}
+.heat td.r{background:color-mix(in srgb,var(--bad) 18%,var(--surface));color:var(--bad)}
+.heat td.pick{outline:2px solid var(--ink)}
+@media (max-width:560px){table.heat{border-spacing:3px;font-size:12.5px}.heat td{width:auto;min-width:52px;height:40px}.heat th{padding:2px 4px;font-size:11.5px}}
+/* funding guide */
+.fund-wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:18px;align-items:start}
+@media (max-width:860px){.fund-wrap{grid-template-columns:minmax(0,1fr)}}
+.fund-amt{font-family:var(--f-num);font-size:34px;line-height:1.1}
 input[type=range]{width:100%;accent-color:var(--studio)}
-input[type=number]{width:100%;font:inherit;font-family:var(--f-num);font-size:13px;padding:5px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
-.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.three .field label{font-size:12px;color:var(--muted)}
-.switch{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px;font-weight:500}
-.switch input{width:44px;height:24px;appearance:none;background:var(--line);border-radius:12px;position:relative;cursor:pointer;flex:none}
-.switch input::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--surface);transition:left .15s}
-.switch input:checked{background:var(--studio)}
-.switch input:checked::after{left:23px}
-.btns{display:flex;flex-wrap:wrap;gap:6px}
-button{font:inherit;font-size:12.5px;padding:5px 10px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
-button:hover{border-color:var(--studio)}
-button:focus-visible,input:focus-visible{outline:2px solid var(--studio);outline-offset:2px}
-.mixbar{display:flex;height:8px;border-radius:4px;overflow:hidden;background:var(--soft)}
-.mixbar span{display:block;height:100%}
-.hint{font-size:12.5px;color:var(--muted);margin:0}
-.alert{font-size:12.5px;padding:8px 10px;border-radius:6px;background:var(--soft);border-left:3px solid var(--warn);margin:0}
-main{display:grid;gap:22px;min-width:0}
-section.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:grid;gap:12px;min-width:0}
-section h2{font-size:18px;margin:0;text-wrap:balance}
-.read{margin:0;color:var(--muted);max-width:68ch}
-.routes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-@media (max-width:640px){.routes{grid-template-columns:minmax(0,1fr)}}
-.route{border:1px solid var(--line);border-radius:8px;padding:14px;display:grid;gap:8px;align-content:start;border-top:4px solid var(--c)}
-.route h3{font-size:15px;margin:0;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.chip{font-size:11.5px;padding:2px 8px;border-radius:10px;white-space:nowrap;font-weight:500}
-.chip.ok{color:var(--good);background:color-mix(in srgb,var(--good) 14%,transparent)}
-.chip.mid{color:var(--warn);background:color-mix(in srgb,var(--warn) 16%,transparent)}
-.chip.no{color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,transparent)}
-.kv{display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:13px}
+.scale{position:relative;height:56px;margin-top:6px}
+.scale .track{position:absolute;left:0;right:0;top:18px;height:10px;border-radius:5px;display:flex;overflow:hidden}
+.scale .track span{display:block;height:100%}
+.scale .marker{position:absolute;top:8px;width:3px;height:30px;background:var(--ink);border-radius:2px;transform:translateX(-1px)}
+.scale .tick{position:absolute;top:34px;font-size:11px;font-family:var(--f-num);color:var(--muted);transform:translateX(-50%);white-space:nowrap}
+.tier{border-left:5px solid var(--c);display:grid;gap:12px}
+.tier h3{font-size:19px;margin:0}
+.tier .cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:560px){.tier .cols{grid-template-columns:minmax(0,1fr)}}
+.tier h4{font-size:13px;color:var(--muted);font-weight:500;margin:0 0 4px}
+.kv{display:grid;grid-template-columns:1fr auto;gap:3px 12px;font-size:14px;margin:0}
 .kv dt{color:var(--muted)}
-.kv dd{margin:0;font-family:var(--f-num);font-variant-numeric:tabular-nums;text-align:right}
-.big{font-family:var(--f-num);font-size:24px;line-height:1.1}
-.chart{width:100%;overflow-x:auto}
-.chart svg{display:block;width:100%;min-width:560px;height:auto}
-.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted)}
-.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
-.week{width:100%;overflow-x:auto}
-table.sched{border-collapse:separate;border-spacing:4px;width:100%;min-width:620px;font-size:12.5px}
-.sched th{font-weight:500;color:var(--muted);text-align:center;padding:2px}
-.sched th.t{text-align:right;font-family:var(--f-num);font-weight:400;width:56px}
-.sched td{height:38px;border-radius:6px;text-align:center;background:var(--soft);color:var(--muted)}
-.sched td.on{background:color-mix(in srgb,var(--studio) 22%,var(--surface));color:var(--ink)}
-.sched td.half{background:color-mix(in srgb,var(--studio) 10%,var(--surface));color:var(--ink);outline:1px dashed color-mix(in srgb,var(--studio) 50%,transparent)}
-.sched tfoot td{background:none;height:auto;font-family:var(--f-num)}
-.sched tfoot td.over{color:var(--bad);font-weight:500}
-.stats{display:flex;flex-wrap:wrap;gap:22px}
-.stat{display:grid;gap:2px}
-.stat span{font-size:12.5px;color:var(--muted)}
-.notes{font-size:13px;color:var(--muted);margin:0;padding-left:1.2em;display:grid;gap:4px}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
-</style>
-<style>
-:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-body{margin:0}
-img{max-width:100%}
-[hidden]{display:none!important}
+.kv dd{margin:0;font-family:var(--f-num);text-align:right}
+/* stepper */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;counter-reset:s}
+@media (max-width:860px){.steps{grid-template-columns:minmax(0,1fr)}}
+.step{position:relative;padding:16px;border:1px solid var(--line);background:var(--surface)}
+.step:first-child{border-radius:10px 0 0 10px}
+.step:last-child{border-radius:0 10px 10px 0}
+@media (max-width:860px){.step:first-child{border-radius:10px 10px 0 0}.step:last-child{border-radius:0 0 10px 10px}}
+.step+.step{border-left:0}
+@media (max-width:860px){.step+.step{border-left:1px solid var(--line);border-top:0}}
+.step .amt{font-family:var(--f-num);font-size:22px}
+.step .when{font-size:12.5px;color:var(--muted)}
+.step.keep{background:var(--soft)}
+details{border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+details+details{margin-top:8px}
+summary{cursor:pointer;padding:13px 16px;font-weight:500;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"＋";color:var(--muted);font-weight:400}
+details[open] summary::after{content:"－"}
+summary .s-meta{font-size:12.5px;color:var(--muted);font-weight:400;margin-left:auto;white-space:nowrap}
+details .body{padding:0 16px 16px;display:grid;gap:10px}
+.checks{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.checks li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:8px;font-size:14px}
+.checks li::before{content:"";width:14px;height:14px;border:1.5px solid var(--muted);border-radius:3px;margin-top:5px}
+/* timeline */
+.timeline{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;position:relative}
+.timeline::before{content:"";position:absolute;left:0;right:0;top:15px;height:2px;background:var(--line)}
+.tl{position:relative;padding:0 10px 0 0}
+.tl .dot{width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--studio);position:relative;margin:8px 0 10px}
+.tl.gate .dot{background:var(--warn);border-color:var(--warn);border-radius:3px;transform:rotate(45deg)}
+.tl b{display:block;font-size:13.5px}
+.tl p{font-size:13px;color:var(--muted)}
+@media (max-width:860px){
+  .timeline{grid-template-columns:minmax(0,1fr)}
+  .timeline::before{left:6px;right:auto;top:0;bottom:0;width:2px;height:auto}
+  .tl{padding:0 0 16px 30px}
+  .tl .dot{position:absolute;left:0;top:2px;margin:0}
+}
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:820px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.flow{grid-template-columns:minmax(0,1fr)}}
+.fl{background:var(--soft);border-radius:8px;padding:12px;font-size:13.5px;position:relative}
+.fl b{display:block;font-size:12px;color:var(--studio);font-family:var(--f-num)}
+.fl.end{background:color-mix(in srgb,var(--good) 16%,var(--surface))}
+/* lesson */
+.lesson{display:flex;height:54px;border-radius:8px;overflow:hidden;gap:2px}
+.lesson span{display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:12px;line-height:1.3;color:var(--ink);background:color-mix(in srgb,var(--studio) calc(var(--o) * 1%),var(--surface));text-align:center;padding:0 2px}
+.lesson span em{font-style:normal;font-family:var(--f-num);font-size:11px;color:var(--muted)}
+@media (max-width:620px){.lesson{flex-direction:column;height:auto}.lesson span{flex-direction:row;gap:8px;justify-content:space-between;padding:8px 10px;flex:none!important}}
+.funnel{display:grid;gap:6px}
+.funnel div{height:40px;border-radius:6px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;font-size:14px;color:#fff;background:var(--studio)}
+.funnel div:nth-child(2){background:color-mix(in srgb,var(--studio) 75%,var(--surface));color:var(--ink)}
+.funnel div:nth-child(3){background:color-mix(in srgb,var(--studio) 50%,var(--surface));color:var(--ink)}
+.risk{border-top:3px solid var(--c)}
+.risk .what{font-size:13px;color:var(--muted)}
+footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-size:13px;color:var(--muted);display:grid;gap:8px}
+footer ul{margin:0;padding-left:1.2em}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
 </style>
 </head>
 <body>
+<nav class="topnav" aria-label="網站導覽"><div class="in">
+  <a class="brand" href="./">沙田幼兒英語教育中心</a>
+  <a href="#routes">路線</a>
+  <a href="#money">錢</a>
+  <a href="#direction">可行方向</a>
+  <a href="#gates">撥款與關卡</a>
+  <a href="#timeline">時間表</a>
+  <a href="#rules">合規</a>
+  <a href="#steps">十四步</a>
+  <a class="cta" href="./calculator.html">試算台 →</a>
+</div></nav>
+
 <div class="wrap">
-  <header>
-    <div class="eyebrow">沙田幼兒英語教育中心 · 開業規劃手冊附件</div>
-    <h1>沙田英文中心試算台</h1>
-    <p class="lead">左邊調整假設，右邊即時看到「私人小班工作室」和「註冊中心」在錢、人數和創辦人工作量上的分別。預設數字取自規劃手冊，全部是規劃假設，不是報價或保證。</p>
+  <header class="hero">
+    <div class="eyebrow">開業規劃總覽 · 2026 年 10 月 30 日版本</div>
+    <h1>沙田幼兒英語教育中心：先驗證，再開業，按數據放款</h1>
+    <p class="lead">這頁把〈開業及營運完整手冊〉和〈投資人可執行方案（HK$100 萬）〉整理成一頁，給創辦人和出資人用同一組數字討論：開哪一種、要多少錢、多少學生才打平、甚麼時候要停。</p>
+    <div class="facts">
+      <div class="fact"><b>3–6 歲</b><span>服務對象，第一年不開 3 歲以下</span></div>
+      <div class="fact"><b>最多 4 人</b><span>每班人數上限</span></div>
+      <div class="fact"><b>2027 年 7 月</b><span>目標開業（6 月底至 7 月初）</span></div>
+      <div class="fact"><b>創辦人親授</b><span>已確認，資金上限待提供</span></div>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="#direction">按資金上限看可行方向</a>
+      <a class="btn" href="./calculator.html">打開試算台</a>
+    </div>
+    <p class="disclaimer">所有金額均為港元。學生人數、租金、收費、招聘及招生數字都是規劃假設，不是報價、批准條件或保證結果；本頁不構成財務或法律意見。</p>
   </header>
 
-  <div class="layout">
-    <aside class="panel" aria-label="假設">
-      <div class="group">
-        <label class="switch" for="teach">創辦人親自授課<input type="checkbox" id="teach" checked></label>
-        <p class="hint" id="teachHint"></p>
-        <div class="field">
-          <label for="pay">創辦人每月薪酬 <output id="payO"></output></label>
-          <input type="range" id="pay" min="0" max="30000" step="1000" value="0">
-        </div>
+  <!-- 1 -->
+  <section class="block" id="idea">
+    <div class="sec-head"><div class="sec-no">01</div><h2>中心要做甚麼</h2><p>先完成一套可以穩定教授的主力課程，了解家長是否願意報讀，再逐步擴充。初期不同時承諾太多課程。</p></div>
+    <div class="grid3">
+      <div class="card">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="7" cy="8" r="2.5"/><circle cx="17" cy="8" r="2.5"/><circle cx="7" cy="17" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg></div>
+        <h3>小班教學</h3><p class="muted">每班最多 4 名學生，讓老師有機會照顧每個孩子。</p>
       </div>
-
-      <div class="group">
-        <div class="group-title">課程組合與收費</div>
-        <div class="btns">
-          <button type="button" data-mix="60,25">手冊假設 60／25／15</button>
-          <button type="button" data-mix="85,0">創辦人一人教：本地 85／面試 15</button>
-        </div>
-        <div class="field">
-          <label for="local">本地導師課程 <output id="localO"></output></label>
-          <input type="range" id="local" min="0" max="100" step="5" value="60">
-        </div>
-        <div class="field">
-          <label for="net">外籍導師（NET）課程 <output id="netO"></output></label>
-          <input type="range" id="net" min="0" max="100" step="5" value="25">
-        </div>
-        <div class="mixbar" aria-hidden="true"><span id="mb1"></span><span id="mb2"></span><span id="mb3"></span></div>
-        <p class="hint">面試班自動補足至 100%：<span class="num" id="intO"></span></p>
-        <div class="three">
-          <div class="field"><label for="pL">本地／45分</label><input type="number" id="pL" value="300" step="10" min="150"></div>
-          <div class="field"><label for="pN">NET／60分</label><input type="number" id="pN" value="415" step="5" min="200"></div>
-          <div class="field"><label for="pI">面試班</label><input type="number" id="pI" value="450" step="10" min="200"></div>
-        </div>
-        <p class="hint">加權每堂實收 <b class="num" id="wpO"></b>，每名學生每月貢獻 <b class="num" id="cpO"></b></p>
-        <p class="alert" id="netAlert" hidden>工作室由創辦人一人授課。如創辦人不是外籍導師，NET 課程比例應設為 0，否則收入會被高估。可按上面「創辦人一人教」。</p>
+      <div class="card">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 5h7a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-7a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h7z"/></svg></div>
+        <h3>有系統的教材與課程</h3><p class="muted">以現有自製教材為基礎，先做一個 6–8 節試行單元，再按試教反應修正。</p>
       </div>
-
-      <div class="group">
-        <div class="group-title">課堂與招生</div>
-        <div class="field">
-          <label for="size">平均每班人數 <output id="sizeO"></output></label>
-          <input type="range" id="size" min="2" max="4" step="0.1" value="3">
-        </div>
-        <div class="field">
-          <label for="slots">每間課室每週可售班數 <output id="slotsO"></output></label>
-          <input type="range" id="slots" min="16" max="28" step="1" value="22">
-        </div>
-        <div class="field">
-          <label for="speed">招生速度（手冊曲線＝100%） <output id="speedO"></output></label>
-          <input type="range" id="speed" min="0.5" max="1.5" step="0.05" value="1">
-        </div>
+      <div class="card">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 18V9M10 18V5M16 18v-6M22 18H2"/></svg></div>
+        <h3>家長看得明白的進度回饋</h3><p class="muted">家長知道孩子參與了甚麼、下一步學甚麼。</p>
       </div>
+    </div>
+    <div class="card" style="margin-top:14px;border-left:4px solid var(--warn)">
+      <h3>最大的未解問題：差異化</h3>
+      <p class="muted">上面三項特色，石門已有中心公開列出 1:4、60 分鐘、HK$330 的故事班（手冊引述，2026 年 10 月查閱，未核實）。開業前必須用家長訪談測出「家長為甚麼會轉過來」，否則招生曲線沒有根據。</p>
+    </div>
+  </section>
 
-      <div class="group">
-        <div class="group-title">成本</div>
-        <div class="field">
-          <label for="rent">租金及管理費／月 <output id="rentO"></output></label>
-          <input type="range" id="rent" min="12000" max="40000" step="1000" value="22000">
-        </div>
-        <div class="field">
-          <label for="tc">全職導師連僱主成本／月 <output id="tcO"></output></label>
-          <input type="range" id="tc" min="20000" max="40000" step="1000" value="30000">
-        </div>
-        <div class="field">
-          <label for="var">每人每堂變動成本 <output id="varO"></output></label>
-          <input type="range" id="var" min="0" max="60" step="5" value="20">
-        </div>
-        <div class="field">
-          <label for="preS">工作室開業前投入 <output id="preSO"></output></label>
-          <input type="range" id="preS" min="160000" max="300000" step="10000" value="230000">
-        </div>
-        <div class="field">
-          <label for="preC">註冊中心開業前投入 <output id="preCO"></output></label>
-          <input type="range" id="preC" min="280000" max="680000" step="10000" value="350000">
-        </div>
-      </div>
-      <button type="button" id="reset">回到手冊預設</button>
-    </aside>
-
-    <main>
-      <section class="card" aria-labelledby="h-sum">
-        <h2 id="h-sum">三條路線一覽</h2>
-        <p class="read" id="sumRead"></p>
-        <div class="routes" id="routes"></div>
-      </section>
-
-      <section class="card" aria-labelledby="h-cash">
-        <h2 id="h-cash">錢在哪個月最緊？</h2>
-        <p class="read">由開業前投入開始累計（第 0 個月），往後每月加上營運盈虧。曲線最低點就是最少要準備的錢；之後再加上儲備。</p>
-        <div class="legend" id="lg1"></div>
-        <div class="chart" id="cash"></div>
-        <p class="read" id="cashRead"></p>
-      </section>
-
-      <section class="card" aria-labelledby="h-cap">
-        <h2 id="h-cap">要多少學生才打平？課室裝得下嗎？</h2>
-        <p class="read">淺色長條是可容納的學生上限（課室 × 每週班數 × 平均每班人數），深色刻度是打平所需學生。刻度落在長條以外，代表就算坐滿也虧本。</p>
-        <div class="chart" id="cap"></div>
-      </section>
-
-      <section class="card" aria-labelledby="h-price">
-        <h2 id="h-price">定價高一點，打平人數少多少？</h2>
-        <p class="read">橫軸是加權每堂實收。直線虛線是一間課室的學生上限；圓點是目前設定。</p>
-        <div class="legend" id="lg2"></div>
-        <div class="chart" id="price"></div>
-      </section>
-
-      <section class="card" aria-labelledby="h-week">
-        <h2 id="h-week">創辦人的一週（工作室示例課表）</h2>
-        <p class="read">平日只有放學後兩節，週末是主力；虛線格是只適合半日制幼稚園孩子的時段，需求不穩。工作室每日合計須少於 20 人，週六最易超線。</p>
-        <div class="week"><table class="sched" id="sched"></table></div>
-        <div class="stats" id="wstats"></div>
-      </section>
-
-      <section class="card" aria-labelledby="h-note">
-        <h2 id="h-note">怎樣讀這頁</h2>
-        <ul class="notes">
-          <li>所有數字未計稅、融資及回收開業投資；創辦人薪酬只在左邊設定後才計入。</li>
-          <li>學生曲線按手冊：首月 15 人，之後每月約加 6 人，到課室上限便停；「招生速度」按比例放大或縮小。</li>
-          <li>註冊中心分階段：學生達 45 人的下一個月起擴編，固定成本由分階段水平升至全編制水平。</li>
-          <li>開啟「創辦人親自授課」時，註冊中心兩個方案都扣除一名全職導師成本；工作室關掉此開關則加入一名全職導師成本。手冊第十步的中心表格未計創辦人授課，所以開啟後的中心數字會比手冊低。</li>
-          <li>建議資金＝曲線最低點＋三個月固定成本作儲備。</li>
-          <li>預設工作室上限為 66 人（22 班 × 3 人），與手冊示範曲線的 65 人有少許差異。</li>
+  <!-- 2 -->
+  <section class="block" id="routes">
+    <div class="sec-head"><div class="sec-no">02</div><h2>兩條開業路線</h2><p>兩條路線會改變場地、申請、資金和人手安排。先以真實課程、營運者、場地和時間表向教育局書面查詢，確認條件後再比較。</p></div>
+    <div class="grid2">
+      <div class="card route" style="--c:var(--studio)">
+        <span class="tag info">投資人方案建議先做</span>
+        <h3 style="margin-top:8px">路線一：私人小班工作室</h3>
+        <p class="muted">一間課室、創辦人親自授課，同時及每日人數控制在教育局門檻之下。若教育局書面確認不屬學校定義，一般毋須學校註冊。</p>
+        <ul class="clean small" style="margin-top:10px">
+          <li>準備時間：2–4 週（條件完備時的內部估算，非部門承諾）</li>
+          <li>場地：400–600 呎商業物業，核實租約、公契和用途</li>
+          <li>風險：創辦人病假或代課影響大</li>
         </ul>
-      </section>
-    </main>
-  </div>
+      </div>
+      <div class="card route" style="--c:var(--phased)">
+        <span class="tag mid">首年不建議</span>
+        <h3 style="margin-top:8px">路線二：註冊中心</h3>
+        <p class="muted">兩間課室、兩位或以上老師，約 80 名學生規劃。須按教育局確認的要求取得註冊或臨時註冊及其他批准，才可按批准條件營運。</p>
+        <ul class="clean small" style="margin-top:10px">
+          <li>準備時間：4–6 個月起，審批及工程可能更久</li>
+          <li>場地：600–900 呎，按個案核實規劃、地契、消防、屋宇及衞生</li>
+          <li>風險：工程與固定成本高，保本人數超過容量</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid2" style="margin-top:14px">
+      <div class="card">
+        <h3>教育局的「學校」門檻</h3>
+        <p class="muted small">任何時間同時向 8 人或以上，或任何一天向 20 人或以上提供教育，可能屬學校定義。家長陪同、跨堂、試堂及補堂如何計算，要連同完整時間表向教育局確認。</p>
+        <div class="th-row">
+          <div>一班 4 人<div class="dots"><i></i><i></i><i></i><i></i></div></div><span class="tag ok">同時 4 人</span>
+        </div>
+        <div class="th-row">
+          <div>兩位老師同時各教 4 人<div class="dots"><i></i><i></i><i></i><i></i><i class="sep"></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i></div></div><span class="tag no">同時 8 人</span>
+        </div>
+        <div class="th-row">
+          <div>週六 5 班，平均每班 3 人<div class="dots"><i></i><i></i><i></i><i class="sep"></i><i></i><i></i><i></i><i class="sep"></i><i></i><i></i><i></i><i class="sep"></i><i></i><i></i><i></i><i class="sep"></i><i></i><i></i><i></i></div></div><span class="tag mid">每日 15 人</span>
+        </div>
+        <div class="th-row">
+          <div>週六 5 班，每班坐滿 4 人<div class="dots"><i></i><i></i><i></i><i></i><i class="sep"></i><i></i><i></i><i></i><i></i><i class="sep"></i><i></i><i></i><i></i><i></i><i class="sep"></i><i></i><i></i><i></i><i></i><i class="sep"></i><i></i><i></i><i></i><i></i></div></div><span class="tag no">每日 20 人</span>
+        </div>
+        <p class="muted small" style="margin-top:8px">一個試營運構想是「同時不超過 7 人、每天不超過 19 人」，只是供查詢的方案，不能視為自動合法或自動獲豁免。</p>
+      </div>
+      <div class="card">
+        <h3>怎樣選：五條問題</h3>
+        <ol class="small" style="margin:0;padding-left:1.2em;display:grid;gap:6px">
+          <li>創辦人能否每週承擔約 21–23 堂課，再加備課、招生、行政和休息？</li>
+          <li>可動用資金是否少於 HK$70 萬？如是，優先研究工作室或合作場地。</li>
+          <li>2027 年 7 月是否必要期限？不假設任何路線必定趕及。</li>
+          <li>是否打算兩位老師同時各教 4 人？合計已達 8 人，要按完整方案向教育局確認。</li>
+          <li>能否接受在現有時段和人數條件下暫緩增長？若不能，提早研究註冊中心及擴張資金。</li>
+        </ol>
+        <p class="muted small" style="margin-top:10px">合規、現金和創辦人可持續工時是必要條件，不能只按答案數目投票選擇。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="block" id="money">
+    <div class="sec-head"><div class="sec-no">03</div><h2>錢：同一個工作室，兩個口徑</h2><p>手冊的工作室首年「營運盈餘 HK$308,872」未計創辦人薪酬。投資人方案改用較保守的四個假設重算，差距來自假設，不是計算錯誤。</p></div>
+    <div class="card tablewrap">
+      <table class="t">
+        <thead><tr><th>假設</th><th>手冊口徑</th><th>投資人口徑</th><th>為甚麼要改</th></tr></thead>
+        <tbody>
+          <tr><th>每堂實收</th><td>加權 HK$351.25（本地 60%、NET 25%、面試班 15%）</td><td>HK$300（只計本地導師課）</td><td class="muted">創辦人親授，NET 課要另聘外籍導師；7 月開業已錯過 2027/28 K1 面試期</td></tr>
+          <tr><th>每月堂數</th><td class="n">4.33 週</td><td class="n">4.0 週</td><td class="muted">扣除公眾假期、暑假停課、颱風及黑雨停課</td></tr>
+          <tr><th>創辦人薪酬</th><td>未計</td><td class="n">HK$20,000／月</td><td class="muted">不計薪酬，「盈餘」其實是創辦人的工資；金額待創辦人確認</td></tr>
+          <tr><th>可售容量</th><td>每週 21–23 班，約 63–69 人</td><td>每週 18 班 × 3 人 ≈ 54 人</td><td class="muted">3–6 歲兒童平日 19:00 後難以上課</td></tr>
+          <tr><th>每名學生月貢獻</th><td class="n">HK$1,434</td><td class="n">HK$1,120</td><td class="muted">（每堂實收 − 變動成本 HK$20）× 每月週數</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid2" style="margin-top:14px">
+      <div class="card">
+        <h3>打平要多少學生？課室裝得下嗎？</h3>
+        <p class="muted small" style="margin-bottom:14px">淺色是學生上限，深色刻度是打平人數。刻度越貼近長條末端，越要坐滿才不虧。</p>
+        <div class="bars" id="beBars"></div>
+        <p class="muted small" style="margin-top:12px">投資人口徑的工作室：每月固定成本 HK$52,000 ÷ HK$1,120 ＝ 46.4，進位為 47 人，距 54 人上限只有 7 人緩衝。</p>
+      </div>
+      <div class="card">
+        <h3>創辦人月薪和其他固定成本，怎樣推高打平人數</h3>
+        <p class="muted small" style="margin-bottom:10px">投資人口徑（每名學生月貢獻 HK$1,120），容量 54 人。粗框是投資人方案的設定。</p>
+        <div class="tablewrap">
+          <table class="heat">
+            <thead><tr><th>創辦人月薪 ＼ 其他固定成本</th><th>HK$27,000</th><th>HK$32,000</th><th>HK$40,000</th></tr></thead>
+            <tbody>
+              <tr><th>HK$15,000</th><td class="g">38 人</td><td class="g">42 人</td><td class="w">50 人</td></tr>
+              <tr><th>HK$20,000</th><td class="g">42 人</td><td class="w pick">47 人</td><td class="w">54 人</td></tr>
+              <tr><th>HK$25,000</th><td class="w">47 人</td><td class="w">51 人</td><td class="r">59 人</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="key" style="margin-top:8px"><span><i style="background:var(--good)"></i>留 8 人以上緩衝</span><span><i style="background:var(--warn)"></i>接近坐滿</span><span><i style="background:var(--bad)"></i>坐滿仍虧</span></div>
+        <p class="muted small" style="margin-top:8px">打平人數一律無條件進位，所以與投資人方案原表有 1 人差異。「其他固定成本」包括租金、推廣、水電軟件、會計及保險。</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3>穩定期回報：一門付得起創辦人薪酬的小生意</h3>
+      <p class="muted">投資人口徑下，54 人坐滿時每月收入扣成本約餘 <b class="num">HK$8,480</b>（已付創辦人 HK$20,000 月薪）。回本以年計。要改善回報，只能靠第二年加開 NET 或面試班提高單價，或達成升級條件後轉為註冊中心，兩項都未計入方案。</p>
+      <p class="muted">註冊中心以同一口徑重算，每月固定成本（含創辦人薪酬及強積金）約 HK$108,000–138,000，保本約 104 人，貼近兩間課室按每週 18 班、每班 3 人計的上限約 108 人，等於差不多要兩間課室都坐滿才打平；首年現金需求估計超過 HK$100 萬。</p>
+      <p style="margin-top:12px"><a class="btn" href="./calculator.html#investor">用試算台改月薪、租金和老師人工 →</a></p>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="block" id="direction">
+    <div class="sec-head"><div class="sec-no">04</div><h2>按資金上限，看可行方向</h2><p>創辦人親授已確認，資金上限仍待提供。拉動下面的金額，看看在這個預算下能做甚麼、不要做甚麼。分級由投資人方案的數字推算，不是文件原文。</p></div>
+    <div class="fund-wrap">
+      <div class="card">
+        <label for="fund" class="muted small">可動用資金上限（刻度單位：萬）</label>
+        <div class="fund-amt" id="fundO">HK$100 萬</div>
+        <input type="range" id="fund" min="10" max="150" step="5" value="100" aria-describedby="fundHelp">
+        <div class="scale" aria-hidden="true">
+          <div class="track" id="fundTrack"></div>
+          <div class="marker" id="fundMarker"></div>
+          <div id="fundTicks"></div>
+        </div>
+        <dl class="kv" style="margin-top:10px">
+          <dt>驗證期（第一段）</dt><dd>HK$50,000</dd>
+          <dt>開業前投入上限</dt><dd>HK$250,000</dd>
+          <dt>剩下可作營運儲備</dt><dd id="fundReserve"></dd>
+          <dt>方案建議營運儲備</dt><dd>HK$250,000</dd>
+        </dl>
+        <p class="muted small" id="fundHelp" style="margin-top:10px">分界點：30 萬＝驗證加開業前投入；49 萬＝基準情境首年現金需求；64 萬＝最大可預期虧損上限；100 萬＝投資人方案原設定。</p>
+      </div>
+      <div class="card tier" id="tier"></div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="block" id="gates">
+    <div class="sec-head"><div class="sec-no">05</div><h2>分段撥款：錢跟著證據走</h2><p>每一段只在上一個關卡的條件全部達成後才放款；未達成就延後，不用「差不多」放行。以下按 HK$100 萬方案。</p></div>
+    <div class="steps">
+      <div class="step"><div class="when">第一段 · 2026 年 11 月至 2027 年 2 月</div><div class="amt">HK$5 萬</div><p class="small">驗證：教材整理、家長訪談、教育局查詢、合作場地試教、場地專業初查</p><p class="small muted" style="margin-top:6px">條件：出資協議簽妥</p></div>
+      <div class="step"><div class="when">第二段 · 2027 年 3 月至 6 月</div><div class="amt">HK$25 萬</div><p class="small">開業：簽租約 HK$12 萬；裝修、設置及開業招生 HK$13 萬</p><p class="small muted" style="margin-top:6px">條件：關卡 A；開課前部分另須關卡 B</p></div>
+      <div class="step"><div class="when">第三段 · 開課後按月</div><div class="amt">HK$25 萬</div><p class="small">營運儲備：支付每月營運虧損</p><p class="small muted" style="margin-top:6px">條件：每月 5 日前交月報；每月上限＝上月實際虧損＋HK$5,000</p></div>
+      <div class="step keep"><div class="when">保留 · 不預設動用</div><div class="amt">HK$45 萬</div><p class="small">只用於升級評估</p><p class="small muted" style="margin-top:6px">條件：關卡 C。注意：停損時的解約及結業成本，仍可能要動用其中約 HK$5–9 萬</p></div>
+    </div>
+
+    <div style="margin-top:14px">
+      <details open>
+        <summary>關卡 A：可以簽租約 <span class="s-meta">2027 年 2 月底前檢查</span></summary>
+        <div class="body"><ul class="checks">
+          <li>教育局書面回覆與工作室實際時間表、營運者及人數安排一致</li>
+          <li>完成至少 20 位沙田目標家長訪談，可上課時段足以排出每週 18 班</li>
+          <li>合作場地試教（適用要求確認後）至少 12 名兒童完成試堂，其中至少 6 位家長書面表示願以 HK$300／堂報讀</li>
+          <li>一句話差異化經訪談驗證：至少半數受訪家長說得出會選這裏而不選現有中心的理由</li>
+          <li>候選單位經認可人士初查用途、公契及消防；租約草稿有提前解約或分租條款</li>
+          <li>創辦人書面確認月薪、每週工時上限及病假代課安排</li>
+        </ul></div>
+      </details>
+      <details>
+        <summary>關卡 B：可以開課 <span class="s-meta">開課前</span></summary>
+        <div class="body"><ul class="checks">
+          <li>手冊第 8.9 節開課前檢查清單全部完成並簽名</li>
+          <li>開課前已有至少 12 名學生確認報讀並排入固定時段</li>
+          <li>預約及出席紀錄可證明每個時段人數符合教育局回覆</li>
+        </ul></div>
+      </details>
+      <details>
+        <summary>關卡 C：可以評估升級為註冊中心 <span class="s-meta">開業後</span></summary>
+        <div class="body"><ul class="checks">
+          <li>連續 2 個月付費學生不少於 50 人</li>
+          <li>熱門時段輪候家長不少於 8 位</li>
+          <li>累計現金不低於方案基準情境</li>
+          <li>已取得工程報價及教育局對新類別與容額的路線確認</li>
+        </ul><p class="muted small">達成關卡 C 只代表可以開始評估，不代表動用保留資金；升級要另做一份含新固定成本的逐月現金流。</p></div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="block" id="cash">
+    <div class="sec-head"><div class="sec-no">06</div><h2>首年要準備多少現金：三個情境</h2><p>三個情境只差在招生速度。投資人口徑：單價 HK$300、每月 4.0 週、每名學生每週一堂。</p></div>
+    <div class="grid2">
+      <div class="card">
+        <h3>首年總現金需求</h3>
+        <div class="bars" id="needBars" style="margin-top:10px"></div>
+        <div class="key" style="margin-top:12px"><span><i style="background:var(--full)"></i>驗證期 5 萬</span><span><i style="background:var(--studio)"></i>開業前投入 25 萬</span><span><i style="background:var(--phased)"></i>開課後營運虧損</span></div>
+      </div>
+      <div class="card">
+        <h3>三條招生曲線</h3>
+        <dl class="kv" style="margin-top:6px">
+          <dt>審慎</dt><dd>8 人起，第 12 月 40 人</dd>
+          <dt>基準</dt><dd>12 人起，第 12 月 54 人坐滿</dd>
+          <dt>樂觀</dt><dd>沿用手冊曲線，封頂 54 人</dd>
+        </dl>
+        <p class="muted small" style="margin-top:10px">基準情境開課後累計營運虧損最深約 HK$18.6 萬（第 9 個月），第三段 HK$25 萬儲備足夠；審慎情境在第 8 個月觸及停損線。</p>
+        <p class="muted small" style="margin-top:6px">試算台的「學生增長曲線」可切換這三種，投資人兩條曲線以直線近似。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="block" id="stop">
+    <div class="sec-head"><div class="sec-no">07</div><h2>停損線與最大虧損</h2><p>停損條件事先寫進出資協議，觸發後雙方按條款處理，不臨時談判。觸發不代表即時結業，而是停止撥款，比較縮減時段、轉合作場地或結束。</p></div>
+    <div class="grid2">
+      <div class="stack">
+        <div class="card risk" style="--c:var(--warn)"><h3>預警</h3><p class="small">第 6 個月付費學生少於 25 人（基準 32 人、審慎 23 人）</p><p class="what">凍結新增支出；檢討時段、定價及招生渠道；1 個月內提交修正計劃</p></div>
+        <div class="card risk" style="--c:var(--bad)"><h3>停損</h3><p class="small">第 9 個月少於 35 人，或開課後累計營運虧損超過 HK$25 萬</p><p class="what">停止撥款；比較轉合作場地、縮減時段或結束</p></div>
+        <div class="card risk" style="--c:var(--full)"><h3>合規</h3><p class="small">部門要求改變營運方式，改動成本超過 HK$5 萬</p><p class="what">先停止受影響課堂，再按新方案重算</p></div>
+        <div class="card risk" style="--c:var(--full)"><h3>關鍵人物</h3><p class="small">創辦人連續 4 週以上無法授課，且沒有合資格代課</p><p class="what">暫停收新生；按條款處理已收學費</p></div>
+      </div>
+      <div class="card">
+        <h3>最大可預期虧損：約 HK$60–64 萬</h3>
+        <p class="muted small">按審慎情境在第 9 個月停損計算。</p>
+        <div class="stackbar" style="margin-top:14px" aria-label="最大虧損組成">
+          <span style="flex:5;background:var(--full)">5</span>
+          <span style="flex:21.4;background:var(--studio)">21.4</span>
+          <span style="flex:26.6;background:var(--phased)">26.6</span>
+          <span style="flex:5.4;background:var(--bad)">5.4</span>
+          <span style="flex:4;background:color-mix(in srgb,var(--bad) 55%,var(--surface));color:var(--ink)">2–6</span>
+        </div>
+        <div class="tablewrap" style="margin-top:12px">
+          <table class="t" style="min-width:0">
+            <tbody>
+              <tr><th>第一段驗證期</th><td class="n">HK$50,000</td></tr>
+              <tr><th>開業前投入（扣可退按金約 HK$36,000）</th><td class="n">約 HK$214,000</td></tr>
+              <tr><th>開課後 9 個月營運虧損</th><td class="n">約 HK$266,000</td></tr>
+              <tr><th>租約提前解約（假設 3 個月租）</th><td class="n">HK$54,000</td></tr>
+              <tr><th>結業、退款及雜項</th><td class="n">約 HK$20,000–60,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted small" style="margin-top:10px">這個數字高於「最多動用 HK$55 萬」，差額要由保留資金支付。租約若沒有提前解約條款，最大虧損會隨餘下租期上升，所以「解約條款」是關卡 A 的必要條件。已收但未上的課堂學費，要先按家長條款退款或完成，不可用來支付其他開支。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="block" id="timeline">
+    <div class="sec-head"><div class="sec-no">08</div><h2>開業時間表</h2><p>時間是計劃工具，不是批准時間保證。文件、場地或工程未準備好，相關步驟順延；未取得所需批准便延後開業。</p></div>
+    <div class="card">
+      <div class="timeline">
+        <div class="tl"><div class="dot"></div><b>2026 年 11 月</b><p>確認目標、資金、月薪及分工；簽出資協議；盤點教材，寫 6–8 節試行單元</p></div>
+        <div class="tl"><div class="dot"></div><b>2026 年 12 月</b><p>訪談 20 位沙田家長、比較 5 間競爭中心；向教育局書面查詢（附完整時間表）</p></div>
+        <div class="tl gate"><div class="dot"></div><b>2027 年 1 月</b><p>收到回覆後合作場地試教；看火炭及石門單位。手冊建議月底前選定優先路線</p></div>
+        <div class="tl gate"><div class="dot"></div><b>2027 年 2 月</b><p>認可人士初查首選單位；談提前解約條款；關卡 A 檢查，決定是否放第二段</p></div>
+        <div class="tl"><div class="dot"></div><b>2027 年 3–5 月</b><p>簽租約、簡單裝修；測試招生內容；完成家長條款及制度文件</p></div>
+        <div class="tl gate"><div class="dot"></div><b>2027 年 6 月</b><p>關卡 B：開課前檢查清單、接送及收費安排、至少 12 名學生確認報讀</p></div>
+        <div class="tl"><div class="dot"></div><b>2027 年 7 月起</b><p>按批准條件開課；每週看招生及排班，每月 5 日前交月報</p></div>
+      </div>
+      <p class="muted small" style="margin-top:12px">◆ 為關卡。若教育局回覆時間較長，1 月的試教順延，但家長訪談、競品比較和場地搜尋可並行。</p>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="block" id="rules">
+    <div class="sec-head"><div class="sec-no">09</div><h2>合規與申請</h2><p>商業登記、學校註冊、租約與樓宇消防是三件不同的事。取得其中一項，不代表其他要求自動完成。</p></div>
+    <div class="grid3">
+      <div class="card"><h3>商業登記</h3><p class="muted small">處理業務登記及稅務。稅務局明確說明，商業登記本身不是營業牌照。</p></div>
+      <div class="card"><h3>學校註冊或其他批准</h3><p class="muted small">處理特定教育活動及場地。非註冊學校的擁有人、教員或管理人一經定罪，可罰款 HK$250,000 及監禁 2 年。</p></div>
+      <div class="card"><h3>租約、屋宇及消防</h3><p class="muted small">處理場所能否按擬議方式使用。不要把租金便宜當成可辦學證明。</p></div>
+    </div>
+
+    <div style="margin-top:14px">
+      <details>
+        <summary>如須學校註冊：非專門建校處所的 8 步 <span class="s-meta">4–6 個月起，可能更久</span></summary>
+        <div class="body">
+          <div class="flow">
+            <div class="fl"><b>1 · 規劃署</b>表格 P：擬議用途是否符合規劃</div>
+            <div class="fl"><b>2 · 地政總署</b>表格 L：查地契，問清是否要修訂或短期豁免</div>
+            <div class="fl"><b>3 · 消防處</b>表格 A1：合資格人士按平面圖準備消防文件</div>
+            <div class="fl"><b>4 · 屋宇署</b>表格 A2：評估改建、結構、逃生及樓宇安全</div>
+            <div class="fl"><b>5 · 教育局</b>遞交表格 1、校董表格 6、部門回覆、圖則、租約、課程及時間表</div>
+            <div class="fl"><b>6 · 工程</b>只按獲批圖則施工，完工後通知消防處視察</div>
+            <div class="fl"><b>7 · 證明文件</b>交消防及樓宇證明、已批核圖則，核對衞生署課室容額</div>
+            <div class="fl end"><b>8 · 臨時註冊</b>證明書發出前不得開課；有效期一般一年</div>
+          </div>
+          <p class="muted small">次序按現行教育局指引整理，個別個案可能要求補件或改次序。簽租約前應聘認可人士做初步可行性評估。</p>
+        </div>
+      </details>
+      <details>
+        <summary>聘請第一位員工前要辦的事 <span class="s-meta">包括兼職</span></summary>
+        <div class="body"><ul class="checks">
+          <li>僱員補償保險：任何僱員開始工作前生效；未投保最高可罰款 HK$100,000 及監禁 2 年</li>
+          <li>強積金：選定受託人；一般適用僱員須在受僱首 60 日內登記；僱主供款 5%，每人每月上限 HK$1,500</li>
+          <li>稅務：新聘僱員如可能須繳薪俸稅，受僱後 3 個月內提交 IR56E</li>
+          <li>簽書面僱傭合約，核實工作資格及適用教員要求；建立出勤、假期及薪酬紀錄</li>
+        </ul></div>
+      </details>
+      <details>
+        <summary>若成為註冊學校：持續責任 <span class="s-meta">收費與展示</span></summary>
+        <div class="body"><ul class="checks">
+          <li>展示註冊證明書正本、所開課程及費用總額、每間課室最高容額</li>
+          <li>學費按月等額收取，不可要求一次過繳交全期課程費用（包括信用卡）</li>
+          <li>收據列明學校註冊名稱、學生、課程、月份及款額，蓋章並由校監簽署</li>
+          <li>報讀前派發課程資料單張，列明費用、上課時間地點、教員資料及退款政策</li>
+        </ul></div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="block" id="steps">
+    <div class="sec-head"><div class="sec-no">10</div><h2>十四步：每步做甚麼、何時過關</h2><p>每步列出預設建議、預估時間、預估花費及進入下一步的條件。打開看細節。</p></div>
+    <div id="stepList"></div>
+  </section>
+
+  <!-- 11 -->
+  <section class="block" id="course">
+    <div class="sec-head"><div class="sec-no">11</div><h2>課程與招生</h2><p>先試教一個主題，再看家長由查詢到報讀在哪一步流失。</p></div>
+    <div class="card">
+      <h3>一堂 60 分鐘課的示例：主題「水果」（3–4 歲初接觸英語）</h3>
+      <div class="lesson" style="margin-top:12px">
+        <span style="flex:5;--o:30">歡迎安頓<em>5 分</em></span>
+        <span style="flex:10;--o:18">複習<em>10 分</em></span>
+        <span style="flex:10;--o:30">主題引入<em>10 分</em></span>
+        <span style="flex:10;--o:18">故事<em>10 分</em></span>
+        <span style="flex:10;--o:30">遊戲<em>10 分</em></span>
+        <span style="flex:10;--o:18">動手活動<em>10 分</em></span>
+        <span style="flex:5;--o:30">總結交接<em>5 分</em></span>
+      </div>
+      <p class="muted small" style="margin-top:10px">「每堂發言 10 次」只作老師設計互動的內部參考，不作對家長的硬性承諾。記錄孩子以指認、動作、單字還是句子回應，與孩子自己比較進步。</p>
+    </div>
+    <div class="grid2" style="margin-top:14px">
+      <div class="card">
+        <h3>招生漏斗示例</h3>
+        <div class="funnel" style="margin-top:10px">
+          <div style="width:100%"><span>每月新增查詢</span><b class="num">40</b></div>
+          <div style="width:70%"><span>完成試堂 50%</span><b class="num">20</b></div>
+          <div style="width:45%"><span>報讀 50%</span><b class="num">10</b></div>
+        </div>
+        <p class="muted small" style="margin-top:10px">月初 60 人、月流失 5% 即走 3 人，淨增 7 人。轉化率只是起始假設，開業後每月用真實資料更新。</p>
+      </div>
+      <div class="card">
+        <h3>每月報告看甚麼</h3>
+        <ul class="clean small">
+          <li>付費學生數：第 6 個月少於 25 人預警</li>
+          <li>查詢 → 試堂 → 報讀：試堂至報讀率連續 2 個月低於 40% 要檢討</li>
+          <li>月流失率：高於 8% 要列出原因</li>
+          <li>時段使用率：已報讀學位 ÷（18 班 × 4 位）</li>
+          <li>可用現金及未履行課堂：已收未上課的學費不可當作可用現金</li>
+        </ul>
+        <p class="muted small" style="margin-top:8px">招生季節：2027/28 K1 註冊證申請為 2026 年 9–11 月，7 月開業已錯過該批面試期，面試班要對準下一輪。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 -->
+  <section class="block" id="todo">
+    <div class="sec-head"><div class="sec-no">12</div><h2>現在要確認的事</h2><p>以下任何一項有變，上面的數字都要重算。</p></div>
+    <div class="card tablewrap">
+      <table class="t">
+        <thead><tr><th>待確認</th><th>影響</th><th>誰確認</th></tr></thead>
+        <tbody>
+          <tr><th>可動用資金上限</th><td>決定走第 04 節哪一級方向</td><td>創辦人、出資人</td></tr>
+          <tr><th>創辦人最低月薪</th><td>每增減 HK$5,000，打平人數約增減 4–5 人</td><td>創辦人</td></tr>
+          <tr><th>教育局對工作室時間表的書面回覆</th><td>決定可售時段上限及能否以工作室形式營運</td><td>教育局</td></tr>
+          <tr><th>實際租金及管理費</th><td>每增加 HK$5,000，打平人數約增加 4–5 人</td><td>代理、業主</td></tr>
+          <tr><th>家長可上課時段</th><td>決定每週能否排出 18 班</td><td>家長訪談</td></tr>
+          <tr><th>現有家長網絡</th><td>決定首月是否真有 12 名學生</td><td>創辦人</td></tr>
+          <tr><th>現有教材樣本</th><td>主題、程度、頁數及使用權，決定試行單元何時完成</td><td>創辦人</td></tr>
+          <tr><th>創辦人能否教 NET 程度或面試班</th><td>若可以，加權單價上升，打平人數下降</td><td>創辦人、試教反應</td></tr>
+          <tr><th>開業期限與場地偏好</th><td>2027 年 7 月是目標還是必須；是否願意先用合作場地</td><td>創辦人</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3>第一個月完成後，應答得出這五條問題</h3>
+      <p class="muted">我們有甚麼教材？打算服務誰？家長是否有興趣？大概要投入多少？下一步應優先研究哪種場地？</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>資料整理自〈沙田幼兒英語教育中心 開業及營運完整手冊 整合加強版〉及〈沙田幼兒英文中心｜投資人可執行方案（HK$100 萬）〉，兩者均為 2026 年 10 月 30 日版本。第 04 節的分級及打平人數的進位為本頁推算。</p>
+    <p>官方資料：</p>
+    <ul>
+      <li><a href="https://www.edb.gov.hk/tc/sch-admin/sch-registration/about-sch-registration/index.html" rel="noopener">教育局：學校註冊</a></li>
+      <li><a href="https://www.edb.gov.hk/tc/sch-admin/sch-registration/about-sch-registration/info-application-sch-registration.html" rel="noopener">教育局：學校註冊申請資料</a></li>
+      <li><a href="https://www.ird.gov.hk/eng/tax/bre_gen.htm" rel="noopener">稅務局：商業登記</a></li>
+      <li><a href="https://www.labour.gov.hk/tc/faq/cap282a_whole.htm" rel="noopener">勞工處：《僱員補償條例》問答</a></li>
+      <li><a href="https://www.mpfa.org.hk/en/mpf-system/mandatory-contributions" rel="noopener">積金局：強制性供款</a></li>
+    </ul>
+    <p><a href="./calculator.html">打開試算台 →</a></p>
+  </footer>
 </div>
 
 <script>
 (function(){
   var $ = function(id){ return document.getElementById(id); };
-  var DEF = {teach:true,pay:0,local:60,net:25,pL:300,pN:415,pI:450,size:3,slots:22,speed:1,rent:22000,tc:30000,'var':20,preS:230000,preC:350000};
-  var BASE = [15,21,27,33,39,45,52,58,64,70,76,82];
-  var H = 18;
-  var css = function(v){ return 'var(--'+v+')'; };
-  var money = function(x){ var s = Math.round(Math.abs(x)).toLocaleString('en-US'); return (x<0?'−':'')+'HK$'+s; };
-  var wan = function(x){ return (x<0?'−':'')+(Math.abs(x)/10000).toFixed(1)+' 萬'; };
 
-  function read(){
-    var s = {};
-    s.teach = $('teach').checked;
-    ['pay','local','net','pL','pN','pI','size','slots','speed','rent','tc','var','preS','preC'].forEach(function(k){ s[k] = parseFloat($(k).value) || 0; });
-    if (s.local + s.net > 100) { s.net = 100 - s.local; $('net').value = s.net; }
-    s.int = 100 - s.local - s.net;
-    s.wp = (s.local*s.pL + s.net*s.pN + s.int*s.pI)/100;
-    s.contrib = (s.wp - s['var'])*4.33;
-    return s;
+  /* 打平與容量 */
+  var BE = [
+    {name:'工作室（手冊口徑）', sub:'未計創辦人薪酬', be:28, cap:66, capTxt:'63–69', c:'var(--studio)'},
+    {name:'工作室（投資人口徑）', sub:'含創辦人月薪 HK$20,000', be:47, cap:54, capTxt:'54', c:'var(--studio)'},
+    {name:'註冊中心分階段（手冊）', sub:'擴編後', be:74, cap:132, capTxt:'126–138', c:'var(--phased)'},
+    {name:'註冊中心（投資人口徑）', sub:'含創辦人薪酬及強積金', be:104, cap:108, capTxt:'約 108', c:'var(--phased)'}
+  ];
+  var mx = 140;
+  $('beBars').innerHTML = BE.map(function(r){
+    var cw = r.cap/mx*100, bw = r.be/mx*100;
+    return '<div class="bar-row" style="--c:'+r.c+'"><div>'+r.name+'<div class="muted small">'+r.sub+'</div>'+
+      '<div class="small num"><b style="color:'+r.c+'">打平 '+r.be+'</b> <span class="muted">／上限 '+r.capTxt+'</span></div></div>'+
+      '<div class="bar-track" role="img" aria-label="'+r.name+'：打平 '+r.be+' 人，上限 '+r.capTxt+' 人">'+
+      '<div class="bar-cap" style="width:'+cw+'%"></div>'+
+      '<div class="bar-be" style="left:calc('+bw+'% - 1px)"></div></div></div>';
+  }).join('');
+  /* 註冊中心（投資人口徑）上限：兩間課室 × 18 班 × 3 人 */
+
+  /* 首年現金需求 */
+  var NEED = [{n:'審慎',ops:30},{n:'基準',ops:19},{n:'樂觀',ops:11}];
+  $('needBars').innerHTML = NEED.map(function(r){
+    var tot = 5+25+r.ops;
+    return '<div class="bar-row"><div><b>'+r.n+'</b><div class="muted small num">約 HK$'+tot+' 萬</div></div>'+
+      '<div class="stackbar" style="width:'+(tot/60*100)+'%" role="img" aria-label="'+r.n+'情境首年總現金需求約 '+tot+' 萬">'+
+      '<span style="flex:5;background:var(--full)">5</span><span style="flex:25;background:var(--studio)">25</span><span style="flex:'+r.ops+';background:var(--phased)">'+r.ops+'</span></div></div>';
+  }).join('');
+
+  /* 可行方向 */
+  var TIERS = [
+    {min:0, max:30, c:'var(--bad)', tag:'<span class="tag no">先不要開業</span>', title:'只做驗證，不簽租約',
+      sum:'資金未夠同時支付驗證期及開業前投入。這個預算適合用來證明需求，不適合承擔租約。',
+      can:['整理教材，寫好 6–8 節試行單元','訪談 20 位家長、比較競爭中心','向教育局書面查詢','教育局確認後，在合作場地或時租課室試教'],
+      not:['簽長租約或裝修','聘用任何員工','對家長承諾開業日期'],
+      next:'完成第一段驗證，用試教及報讀意向爭取更多資金，或改為長期以合作場地營運'},
+    {min:30, max:49, c:'var(--warn)', tag:'<span class="tag mid">開得成，撐得不夠久</span>', title:'精簡工作室，但現金撐不過基準情境',
+      sum:'付得起驗證和開業前投入，但營運儲備少於基準情境的虧損低點（約 HK$18.6 萬），招生必須快過基準。',
+      can:['照精簡工作室規格籌備','把開業前投入壓低（例如更細單位、合作場地先行）','關卡 A 的家長意向門檻提高，例如開課前已有更多學生確認'],
+      not:['首年聘用老師','簽沒有提前解約條款的租約','開 NET 課或改建間隔'],
+      next:'按實際儲備重設停損線：停損金額要低於「資金 − 30 萬 − 解約及結業成本」'},
+    {min:49, max:64, c:'var(--studio)', tag:'<span class="tag info">基準可行</span>', title:'精簡工作室，夠撐基準情境',
+      sum:'足夠支付基準情境首年現金需求（約 HK$49 萬），但未完全覆蓋審慎情境（約 HK$60 萬）及最大可預期虧損（約 HK$60–64 萬）。',
+      can:['照投資人方案三段撥款','第三段儲備按月撥付','每月 5 日前交月報'],
+      not:['首年聘用全職老師','動用儲備做擴張','簽沒有提前解約條款的租約'],
+      next:'停損線照方案設定（第 9 個月少於 35 人，或累計營運虧損超過 HK$25 萬），並預留解約及結業成本'},
+    {min:64, max:100, c:'var(--good)', tag:'<span class="tag ok">完整方案</span>', title:'精簡工作室完整方案',
+      sum:'足夠支付三段撥款（HK$55 萬）及最壞情況下的解約、結業成本。未有足夠資金同時預留升級。',
+      can:['照投資人方案三段撥款','停損後仍有錢處理租約及退款','達成關卡 C 時開始做升級評估'],
+      not:['未過關卡 C 便升級註冊中心','首年開 NET 課或聘全職老師'],
+      next:'過關卡 A 後才放第二段'},
+    {min:100, max:999, c:'var(--good)', tag:'<span class="tag ok">完整方案＋保留</span>', title:'精簡工作室，另保留升級資金',
+      sum:'投資人方案原設定：最多動用 HK$55 萬，另保留 HK$45 萬。註冊中心首年現金需求估計超過 HK$100 萬，仍不建議一開始就做。',
+      can:['照投資人方案三段撥款','保留資金只在關卡 C 全部達成後評估使用','升級前另做含新固定成本的逐月現金流'],
+      not:['一開始就做註冊中心','把保留資金用作日常營運'],
+      next:'達成關卡 C：連續 2 個月 50 人以上、熱門時段輪候 8 位以上、取得工程報價及教育局路線確認'}
+  ];
+  var MAXV = 150, cuts = [30,49,64,100];
+  var colors = ['var(--bad)','var(--warn)','var(--studio)','var(--good)','color-mix(in srgb,var(--good) 60%,var(--surface))'];
+  var edges = [0].concat(cuts).concat([MAXV]);
+  $('fundTrack').innerHTML = edges.slice(0,-1).map(function(e,i){ return '<span style="flex:'+(edges[i+1]-e)+';background:'+colors[i]+'"></span>'; }).join('');
+  $('fundTicks').innerHTML = cuts.map(function(c){ return '<span class="tick" style="left:'+(c/MAXV*100)+'%">'+c+'</span>'; }).join('');
+
+  function li(a){ return a.map(function(x){ return '<li>'+x+'</li>'; }).join(''); }
+  function renderFund(){
+    var v = parseInt($('fund').value,10);
+    $('fundO').textContent = 'HK$'+v+' 萬';
+    $('fundMarker').style.left = (v/MAXV*100)+'%';
+    var res = v - 30;
+    $('fundReserve').textContent = res > 0 ? 'HK$'+(res*10000).toLocaleString('en-US') : 'HK$0（不足）';
+    var t = TIERS.filter(function(x){ return v >= x.min && v < x.max; })[0];
+    var el = $('tier');
+    el.style.setProperty('--c', t.c);
+    el.innerHTML = '<div>'+t.tag+'</div><h3>'+t.title+'</h3><p class="muted">'+t.sum+'</p>'+
+      '<div class="cols"><div><h4>可以做</h4><ul class="clean small">'+li(t.can)+'</ul></div><div><h4>不要做</h4><ul class="clean small">'+li(t.not)+'</ul></div></div>'+
+      '<div><h4>下一步</h4><p class="small">'+t.next+'</p></div>'+
+      '<p class="muted small">創辦人親授已計入。以上按投資人方案的精簡工作室規格（每月固定成本 HK$52,000、開業前投入上限 HK$25 萬）推算，實際以報價及教育局回覆重算。</p>';
   }
+  $('fund').addEventListener('input', renderFund);
+  renderFund();
 
-  function students(m, cap, speed){
-    var b = m <= 12 ? BASE[m-1] : BASE[11] + 6*(m-12);
-    return Math.min(cap, Math.round(b*speed));
-  }
-
-  function routes(s){
-    var cap1 = Math.round(s.slots*s.size), cap2 = cap1*2;
-    var save = s.teach ? s.tc : 0;
-    var R = [
-      {key:'studio', name:'私人小班工作室', note:'1 間課室，毋須註冊（須教育局書面確認）', cap:cap1, pre:s.preS,
-        fixed:function(){ return s.rent + 18000 + s.pay + (s.teach ? 0 : s.tc); }, steady:s.rent + 18000 + s.pay + (s.teach?0:s.tc)},
-      {key:'phased', name:'註冊中心 · 分階段', note:'2 間課室；45 人後擴編', cap:cap2, pre:s.preC, phase:true,
-        lo:s.rent + 53000 + s.pay - save, hi:s.rent + 83000 + s.pay - save},
-      {key:'full', name:'註冊中心 · 全編制', note:'2 間課室；一開始請齊人手', cap:cap2, pre:s.preC,
-        fixed:function(){ return s.rent + 83000 + s.pay - save; }, steady:s.rent + 83000 + s.pay - save}
-    ];
-    R.forEach(function(r){
-      if (r.phase){ r.steady = r.hi; }
-      var cum = -r.pre, low = cum, lowM = 0, y1 = 0, firstPos = null, expanded = false;
-      r.series = [{m:0, v:cum, n:0}];
-      for (var m=1; m<=H; m++){
-        var n = students(m, r.cap, s.speed);
-        var f = r.phase ? (expanded ? r.hi : r.lo) : r.fixed();
-        var pl = n*s.contrib - f;
-        if (r.phase && n >= 45) expanded = true;
-        cum += pl;
-        if (m <= 12) y1 += pl;
-        if (firstPos === null && pl > 0) firstPos = m;
-        if (cum < low){ low = cum; lowM = m; }
-        r.series.push({m:m, v:cum, n:n});
-      }
-      r.low = low; r.lowM = lowM; r.y1 = y1; r.firstPos = firstPos;
-      r.be = s.contrib > 0 ? Math.ceil(r.steady / s.contrib) : Infinity;
-      r.beLo = r.phase && s.contrib > 0 ? Math.ceil(r.lo / s.contrib) : null;
-      r.fund = -low + 3*r.steady;
-    });
-    return R;
-  }
-
-  function svg(tag, a, txt){
-    var e = document.createElementNS('http://www.w3.org/2000/svg', tag);
-    for (var k in a) e.setAttribute(k, a[k]);
-    if (txt != null) e.textContent = txt;
-    return e;
-  }
-  function niceStep(range, n){
-    var raw = range/n, p = Math.pow(10, Math.floor(Math.log10(raw))), f = raw/p;
-    return (f<=1?1:f<=2?2:f<=5?5:10)*p;
-  }
-
-  function drawCash(R){
-    var W=760, Ht=320, L=66, Rr=118, T=16, B=38;
-    var all = []; R.forEach(function(r){ r.series.forEach(function(p){ all.push(p.v); }); });
-    var mn = Math.min.apply(null, all.concat([0])), mx = Math.max.apply(null, all.concat([0]));
-    var st = niceStep(mx - mn, 5); mn = Math.floor(mn/st)*st; mx = Math.ceil(mx/st)*st;
-    var x = function(m){ return L + m/H*(W-L-Rr); }, y = function(v){ return T + (mx - v)/(mx - mn)*(Ht-T-B); };
-    var g = svg('svg', {viewBox:'0 0 '+W+' '+Ht, role:'img', 'aria-label':'三條路線開業後 18 個月累計現金曲線'});
-    for (var v=mn; v<=mx+1; v+=st){
-      g.appendChild(svg('line', {x1:L, x2:W-Rr, y1:y(v), y2:y(v), style:'stroke:'+(v===0?css('muted'):css('line'))+';stroke-width:'+(v===0?1.2:1)}));
-      g.appendChild(svg('text', {x:L-8, y:y(v)+4, 'text-anchor':'end', 'font-size':11, style:'fill:'+css('muted')+';font-family:var(--f-num)'}, (v/10000).toFixed(0)+' 萬'));
-    }
-    for (var m=0; m<=H; m+=3){
-      g.appendChild(svg('text', {x:x(m), y:Ht-B+18, 'text-anchor':'middle', 'font-size':11, style:'fill:'+css('muted')+';font-family:var(--f-num)'}, m));
-    }
-    g.appendChild(svg('text', {x:(L+W-Rr)/2, y:Ht-4, 'text-anchor':'middle', 'font-size':11.5, style:'fill:'+css('muted')}, '開業後月份（0＝開業前投入）'));
-    var ends = [];
-    R.forEach(function(r){
-      var d = r.series.map(function(p,i){ return (i?'L':'M')+x(p.m).toFixed(1)+','+y(p.v).toFixed(1); }).join(' ');
-      g.appendChild(svg('path', {d:d, style:'fill:none;stroke:'+css(r.key)+';stroke-width:2.5'}));
-      var lp = r.series[r.lowM];
-      var c = svg('circle', {cx:x(lp.m), cy:y(lp.v), r:4.5, style:'fill:'+css('surface')+';stroke:'+css(r.key)+';stroke-width:2'});
-      c.appendChild(svg('title', {}, r.name+'最低點：第 '+lp.m+' 個月 '+money(lp.v)));
-      g.appendChild(c);
-      var last = r.series[H];
-      ends.push({y:y(last.v), r:r, v:last.v});
-    });
-    ends.sort(function(a,b){ return a.y-b.y; });
-    for (var i=1;i<ends.length;i++){ if (ends[i].y - ends[i-1].y < 30) ends[i].y = ends[i-1].y + 30; }
-    ends.forEach(function(e){
-      g.appendChild(svg('text', {x:W-Rr+8, y:e.y, 'font-size':11.5, style:'fill:'+css(e.r.key)+';font-weight:500'}, e.r.name.replace('註冊中心 · ','中心·')));
-      g.appendChild(svg('text', {x:W-Rr+8, y:e.y+14, 'font-size':11, style:'fill:'+css('muted')+';font-family:var(--f-num)'}, wan(e.v)));
-    });
-    var box = $('cash'); box.innerHTML=''; box.appendChild(g);
-  }
-
-  function drawCap(R){
-    var W=760, rowH=62, L=150, Rr=30, T=10, Ht=T+rowH*R.length+30;
-    var mx = 0; R.forEach(function(r){ mx = Math.max(mx, r.cap, isFinite(r.be)?r.be:0); }); mx = Math.ceil(mx*1.12/10)*10;
-    var x = function(v){ return L + v/mx*(W-L-Rr); };
-    var g = svg('svg', {viewBox:'0 0 '+W+' '+Ht, role:'img', 'aria-label':'各路線打平學生數與學生上限比較'});
-    var st = niceStep(mx, 6);
-    for (var v=0; v<=mx; v+=st){
-      g.appendChild(svg('line', {x1:x(v), x2:x(v), y1:T, y2:Ht-26, style:'stroke:'+css('line')}));
-      g.appendChild(svg('text', {x:x(v), y:Ht-10, 'text-anchor':'middle', 'font-size':11, style:'fill:'+css('muted')+';font-family:var(--f-num)'}, v));
-    }
-    R.forEach(function(r,i){
-      var yc = T + i*rowH + rowH/2;
-      g.appendChild(svg('text', {x:L-12, y:yc+4, 'text-anchor':'end', 'font-size':12.5, style:'fill:'+css('ink')}, r.name));
-      var bar = svg('rect', {x:L, y:yc-11, width:Math.max(0,x(r.cap)-L), height:22, rx:4, style:'fill:'+css(r.key)+';fill-opacity:.2'});
-      bar.appendChild(svg('title', {}, r.name+'上限 '+r.cap+' 人'));
-      g.appendChild(bar);
-      g.appendChild(svg('text', {x:x(r.cap)-6, y:yc+4, 'text-anchor':'end', 'font-size':11, style:'fill:'+css('muted')+';font-family:var(--f-num)'}, '上限 '+r.cap));
-      if (isFinite(r.be)){
-        var bx = x(Math.min(r.be, mx));
-        g.appendChild(svg('line', {x1:bx, x2:bx, y1:yc-18, y2:yc+18, style:'stroke:'+css(r.key)+';stroke-width:3'}));
-        var lbl = '打平 '+r.be+' 人'+(r.beLo?'（首階段 '+r.beLo+'）':'');
-        g.appendChild(svg('text', {x:bx, y:yc-22, 'text-anchor':'middle', 'font-size':11.5, style:'fill:'+css(r.key)+';font-weight:500'}, lbl));
-      }
-    });
-    var box = $('cap'); box.innerHTML=''; box.appendChild(g);
-  }
-
-  function drawPrice(R, s){
-    var W=760, Ht=300, L=56, Rr=24, T=16, B=40, x0=260, x1=480;
-    var pts = function(r, p){ var c=(p-s['var'])*4.33; return c>0 ? r.steady/c : null; };
-    var mx = 0; R.forEach(function(r){ var v=pts(r,x0); if (v) mx=Math.max(mx,v); });
-    mx = Math.min(Math.ceil(mx/20)*20, 200);
-    var x = function(p){ return L + (p-x0)/(x1-x0)*(W-L-Rr); }, y = function(v){ return T + (mx - v)/mx*(Ht-T-B); };
-    var g = svg('svg', {viewBox:'0 0 '+W+' '+Ht, role:'img', 'aria-label':'加權每堂實收與打平學生數'});
-    var st = niceStep(mx, 5);
-    for (var v=0; v<=mx; v+=st){
-      g.appendChild(svg('line', {x1:L, x2:W-Rr, y1:y(v), y2:y(v), style:'stroke:'+css('line')}));
-      g.appendChild(svg('text', {x:L-8, y:y(v)+4, 'text-anchor':'end', 'font-size':11, style:'fill:'+css('muted')+';font-family:var(--f-num)'}, v));
-    }
-    for (var p=x0; p<=x1; p+=40){
-      g.appendChild(svg('text', {x:x(p), y:Ht-B+18, 'text-anchor':'middle', 'font-size':11, style:'fill:'+css('muted')+';font-family:var(--f-num)'}, '$'+p));
-    }
-    g.appendChild(svg('text', {x:(L+W-Rr)/2, y:Ht-4, 'text-anchor':'middle', 'font-size':11.5, style:'fill:'+css('muted')}, '加權每堂實收（港元）'));
-    var cap1 = R[0].cap;
-    if (cap1 <= mx){
-      g.appendChild(svg('line', {x1:L, x2:W-Rr, y1:y(cap1), y2:y(cap1), style:'stroke:'+css('muted')+';stroke-dasharray:5 4'}));
-      g.appendChild(svg('text', {x:W-Rr-4, y:y(cap1)-6, 'text-anchor':'end', 'font-size':11, style:'fill:'+css('muted')}, '一間課室上限 '+cap1+' 人'));
-    }
-    R.forEach(function(r){
-      var d='', first=true;
-      for (var p=x0; p<=x1; p+=5){ var v=pts(r,p); if (v==null || v>mx) { first=true; continue; } d += (first?'M':'L')+x(p).toFixed(1)+','+y(v).toFixed(1); first=false; }
-      g.appendChild(svg('path', {d:d, style:'fill:none;stroke:'+css(r.key)+';stroke-width:2.2'}));
-      var cv = pts(r, s.wp);
-      if (cv && cv<=mx && s.wp>=x0 && s.wp<=x1){
-        var c = svg('circle', {cx:x(s.wp), cy:y(cv), r:5, style:'fill:'+css(r.key)});
-        c.appendChild(svg('title', {}, r.name+'：每堂 $'+s.wp.toFixed(0)+' 時打平約 '+Math.ceil(cv)+' 人'));
-        g.appendChild(c);
-        g.appendChild(svg('text', {x:x(s.wp)+8, y:y(cv)-6, 'font-size':11, style:'fill:'+css(r.key)+';font-family:var(--f-num)'}, Math.ceil(cv)));
-      }
-    });
-    var box = $('price'); box.innerHTML=''; box.appendChild(g);
-  }
-
-  var SCHED = {
-    times:['09:30','10:30','10:45','12:00','14:00','15:15','16:30','17:45'],
-    days:['一','二','三','四','五','六','日'],
-    on:{ '16:30':[1,1,1,1,1,0,0], '17:45':[1,1,1,1,1,0,0], '09:30':[0,0,0,0,0,1,1], '10:45':[0,0,0,0,0,1,1], '12:00':[0,0,0,0,0,1,1], '14:00':[0,0,0,0,0,1,1], '15:15':[0,0,0,0,0,1,0], '10:30':[0,2,0,2,0,0,0] }
-  };
-  function drawWeek(s){
-    var size = s.size, t = $('sched'), h = '<thead><tr><th class="t"></th>';
-    SCHED.days.forEach(function(d){ h += '<th>星期'+d+'</th>'; });
-    h += '</tr></thead><tbody>';
-    var dayTot = [0,0,0,0,0,0,0], classes = 0;
-    SCHED.times.forEach(function(tm){
-      h += '<tr><th class="t">'+tm+'</th>';
-      SCHED.on[tm].forEach(function(v,i){
-        if (v){ dayTot[i] += size; classes++; h += '<td class="'+(v===2?'half':'on')+'">≈'+size.toFixed(1).replace('.0','')+' 人</td>'; }
-        else h += '<td></td>';
-      });
-      h += '</tr>';
-    });
-    h += '</tbody><tfoot><tr><th class="t">合計</th>';
-    dayTot.forEach(function(v){ var r = Math.round(v); h += '<td class="'+(r>=20?'over':'')+'">'+r+' 人'+(r>=20?' 超線':'')+'</td>'; });
-    h += '</tr></tfoot>';
-    t.innerHTML = h;
-    var mins = (s.local*45 + (100-s.local)*60)/100;
-    var hrs = classes*mins/60;
-    var sat = Math.round(dayTot[5]);
-    $('wstats').innerHTML =
-      '<div class="stat"><span>每週授課</span><b class="big">'+classes+' 堂</b></div>'+
-      '<div class="stat"><span>上課時數（按課程組合）</span><b class="big">'+hrs.toFixed(1)+' 小時</b></div>'+
-      '<div class="stat"><span>週六合計</span><b class="big" style="color:'+(sat>=20?css('bad'):css('ink'))+'">'+sat+' 人</b></div>'+
-      '<div class="stat"><span>另加招生、備課、家長溝通</span><b class="big">約 20 小時</b></div>';
-  }
-
-  function render(){
-    var s = read();
-    $('payO').textContent = money(s.pay);
-    $('localO').textContent = s.local+'%'; $('netO').textContent = s.net+'%'; $('intO').textContent = s.int+'%';
-    $('mb1').style.cssText = 'width:'+s.local+'%;background:'+css('studio');
-    $('mb2').style.cssText = 'width:'+s.net+'%;background:'+css('phased');
-    $('mb3').style.cssText = 'width:'+s.int+'%;background:'+css('full');
-    $('wpO').textContent = 'HK$'+s.wp.toFixed(2); $('cpO').textContent = money(s.contrib);
-    $('sizeO').textContent = s.size.toFixed(1)+' 人'; $('slotsO').textContent = s.slots+' 班';
-    $('speedO').textContent = Math.round(s.speed*100)+'%';
-    $('rentO').textContent = money(s.rent); $('tcO').textContent = money(s.tc); $('varO').textContent = money(s['var']);
-    $('preSO').textContent = wan(s.preS); $('preCO').textContent = wan(s.preC);
-    $('teachHint').textContent = s.teach ? '工作室不另請全職導師；註冊中心由創辦人頂替一名全職導師。' : '工作室要另請一名全職導師；註冊中心按手冊人手計算。';
-    $('netAlert').hidden = !(s.teach && s.net > 0);
-
-    var R = routes(s);
-    var html = '';
-    R.forEach(function(r){
-      var room = r.be <= r.cap;
-      var chip = !isFinite(r.be) ? '<span class="chip no">收費低於成本</span>' : room ? (r.be <= r.cap*0.6 ? '<span class="chip ok">容量充裕</span>' : '<span class="chip mid">要接近坐滿</span>') : '<span class="chip no">坐滿仍虧本</span>';
-      html += '<div class="route" style="--c:'+css(r.key)+'"><h3>'+r.name+chip+'</h3><p class="hint">'+r.note+'</p>'+
-        '<dl class="kv">'+
-        '<dt>每月固定成本</dt><dd>'+(r.phase? money(r.lo)+' → '+money(r.hi) : money(r.steady))+'</dd>'+
-        '<dt>打平學生</dt><dd>'+(isFinite(r.be)? (r.phase? r.beLo+' → '+r.be : r.be)+' 人' : '—')+'</dd>'+
-        '<dt>學生上限</dt><dd>'+r.cap+' 人</dd>'+
-        '<dt>首年營運結果</dt><dd style="color:'+(r.y1>=0?css('good'):css('bad'))+'">'+money(r.y1)+'</dd>'+
-        '<dt>首個單月盈餘</dt><dd>'+(r.firstPos? '第 '+r.firstPos+' 個月':'18 個月內未有')+'</dd>'+
-        '<dt>現金最低點</dt><dd>'+money(r.low)+'（第 '+r.lowM+' 月）</dd>'+
-        '</dl><div><span class="hint">建議準備資金</span><div class="big">'+wan(r.fund)+'</div></div></div>';
-    });
-    $('routes').innerHTML = html;
-
-    var st = R[0], ph = R[1];
-    $('sumRead').textContent = '以目前設定，工作室打平要 '+st.be+' 人、上限 '+st.cap+' 人；註冊中心分階段擴編後打平要 '+ph.be+' 人，一間課室裝不下，必須用到第二間課室，也就要先取得註冊。'+(s.teach?'創辦人親自授課令三條路線的固定成本都較低。':'');
-    $('cashRead').textContent = '工作室最緊在第 '+st.lowM+' 個月，累計約 '+wan(st.low)+'；分階段中心最緊在第 '+ph.lowM+' 個月，累計約 '+wan(ph.low)+'。';
-    $('lg1').innerHTML = $('lg2').innerHTML = R.map(function(r){ return '<span><i style="background:'+css(r.key)+'"></i>'+r.name+'</span>'; }).join('');
-
-    drawCash(R); drawCap(R); drawPrice(R, s); drawWeek(s);
-  }
-
-  document.querySelectorAll('input').forEach(function(el){ el.addEventListener('input', render); });
-  document.querySelectorAll('[data-mix]').forEach(function(b){
-    b.addEventListener('click', function(){ var v=b.getAttribute('data-mix').split(','); $('local').value=v[0]; $('net').value=v[1]; render(); });
-  });
-  $('reset').addEventListener('click', function(){
-    for (var k in DEF){ if (k==='teach') $('teach').checked = DEF.teach; else $(k).value = DEF[k]; }
-    render();
-  });
-  render();
+  /* 十四步 */
+  var STEPS = [
+    ['角色資金','確認資金、分工與薪酬','3–5 小時','$0；顧問另計','出資與承擔書面確認'],
+    ['整理教材','盤點教材和素材使用權','1–2 週兼職','$0–2,000；授權另計','清單完成，素材可使用'],
+    ['設計課程','先做一套 6–8 節','2–4 週','$1,000–5,000；場地另計','教案及教材可試行'],
+    ['研究需求','訪談 15–20 位家長，先看石門、火炭','2–4 週','$0–2,000','訪談及競品比較完成'],
+    ['合規查詢','向教育局提交真實營運方案','準備 1–2 日；回覆不定','自行查詢 $0','回覆與實際方案核對'],
+    ['定價收費','本地導師 HK$300／45 分鐘起測試','設計 1–2 週；測試 2–4 週','$0–3,000','條款、收費及適用批准確認'],
+    ['模式場地','並行比較合作場地、頂手、自租','4–8 週','$0–5,000；顧問工程另計','場地核查、報價及合同可行'],
+    ['申請登記','按教育局書面回覆走註冊或毋須註冊路線','註冊約 4–6 個月起；其他按個案','政府費按當期公布；工程及專業費另計','所需批准、登記及保險到位'],
+    ['招聘人手','工作室預設不聘全職，只在需要時請不與創辦人同時上課的兼職代課','招聘及培訓約 4–8 週','按實際薪酬及培訓預算','資格、保險及入職安排到位'],
+    ['財務','逐月現金流，每月更新','初版 1–2 週','自行製作 $0；會計另計','資金足以應付低谷及儲備'],
+    ['排班容量','先排每週 18–23 班作測試','1–2 日；每月更新','設置 $0–1,000','時段、師資及批准匹配'],
+    ['招生','先用訪談和社群，再小額測廣告','每週 4–8 小時','測試 $2,000–5,000／月','招生、試堂及收費條件確認'],
+    ['安全服務','開課前演練點名、接送及事故','1–2 週','$1,000–5,000；保險另計','文件、培訓及適用批准到位'],
+    ['追蹤','每週看招生，每月看現金','每週 1–2 小時及每月半日','工具 $0–1,000／月；會計另計','持續核對數據並調整']
+  ];
+  $('stepList').innerHTML = STEPS.map(function(s,i){
+    return '<details><summary><span><span class="num muted" style="margin-right:10px">'+String(i+1).padStart(2,'0')+'</span>'+s[0]+'</span><span class="s-meta">'+s[2]+'</span></summary>'+
+      '<div class="body"><dl class="kv"><dt>預設建議</dt><dd style="font-family:var(--f-body);text-align:right">'+s[1]+'</dd>'+
+      '<dt>預估花費</dt><dd>'+s[3]+'</dd><dt>過關條件</dt><dd style="font-family:var(--f-body);text-align:right">'+s[4]+'</dd></dl></div></details>';
+  }).join('');
 })();
 </script>
 </body>
