@@ -167,6 +167,10 @@ img{max-width:100%}
 #ab-compare .ab-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 #ab-compare .ab-fields label{display:grid;gap:4px;font-size:13px;color:var(--muted)}
 #ab-compare .ab-fields input{width:100%;box-sizing:border-box;font:inherit;font-family:var(--f-num);font-size:14px;padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+#ab-compare .ab-salary{display:grid;grid-template-columns:minmax(100px,1fr) minmax(110px,auto);gap:8px;align-items:center}
+#ab-compare .ab-salary span{font-size:12px;color:var(--muted)}
+#ab-compare .ab-salary b{display:block;font:500 13px var(--f-num);color:var(--ink)}
+#ab-compare .ab-fields select{width:100%;box-sizing:border-box;font:inherit;font-family:var(--f-num);font-size:14px;padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
 #ab-compare .ab-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 #ab-compare .ab-stat{background:var(--soft);border-radius:7px;padding:10px}
 #ab-compare .ab-stat span{display:block;color:var(--muted);font-size:12px}
@@ -242,10 +246,22 @@ img{max-width:100%}
         <label>租金及管理費／月<input id="abRent" type="number" min="0" step="1000" value="40000"></label>
         <label>推廣、水電軟件、會計雜項／月<input id="abOther" type="number" min="0" step="1000" value="18000"></label>
         <label>創辦人薪酬／月<input id="abFounder" type="number" min="0" step="1000" value="30000"></label>
-        <label>導師月薪（每位，未計強積金）<input id="abTeacherPay" type="number" min="0" step="500" value="28500"></label>
-        <label>行政人員月薪（未計強積金）<input id="abAdminPay" type="number" min="0" step="500" value="22000"></label>
-        <label>每月付薪行政人員人數<input id="abAdminN" type="number" min="0" step="1" value="1"></label>
-        <label>每位學生每週課堂實收（加權）<input id="abPrice" type="number" min="0" step="5" value="351.25"></label>
+        <label>導師月薪（每位，未計強積金）
+          <div class="ab-salary"><input id="abTeacherPay" type="number" min="0" step="500" value="28500"><span>每位連 MPF／月 <b id="abTeacherLoaded">HK$29,925</b></span></div>
+        </label>
+        <label>開業初期另聘導師人數（不含創辦人）<input id="abTeacherN1" type="number" min="0" max="4" step="1" value="1"></label>
+        <label>擴編後另聘導師總人數（不含創辦人）<input id="abTeacherN2" type="number" min="0" max="4" step="1" value="2"></label>
+        <label>行政人員月薪（每位，未計強積金）
+          <div class="ab-salary"><input id="abAdminPay" type="number" min="0" step="500" value="22000"><span>每位連 MPF／月 <b id="abAdminLoaded">HK$23,100</b></span></div>
+        </label>
+        <label>每月付薪行政人員人數<input id="abAdminN" type="number" min="0" max="4" step="1" value="1"></label>
+        <label>本地導師課學生比例（45 分鐘）<input id="abMixLocal" type="number" min="0" max="100" step="5" value="60"></label>
+        <label>NET 課學生比例（60 分鐘）<input id="abMixNet" type="number" min="0" max="100" step="5" value="25"></label>
+        <div class="ab-stat"><span>面試班比例（自動補足）</span><b id="abMixInterview">15%</b></div>
+        <label>本地導師課每堂實收<input id="abPriceLocal" type="number" min="0" step="5" value="300"></label>
+        <label>NET 課每堂實收<input id="abPriceNet" type="number" min="0" step="5" value="415"></label>
+        <label>面試班每堂實收<input id="abPriceInterview" type="number" min="0" step="5" value="450"></label>
+        <div class="ab-stat"><span>加權後每位學生每週課堂實收</span><b id="abWeightedPrice">HK$351.25</b></div>
         <label>每名學生每堂變動成本<input id="abVar" type="number" min="0" step="5" value="20"></label>
         <label>每月平均上課週數<input id="abWeeks" type="number" min="1" max="5" step="0.01" value="4.33"></label>
         <label>每間課室每週可開班數<input id="abClasses" type="number" min="1" step="1" value="22"></label>
@@ -254,7 +270,7 @@ img{max-width:100%}
         <label>平均每月新增學生<input id="abGrowth" type="number" min="0" step="1" value="6"></label>
         <label>擴編門檻（學生數）<input id="abTrigger" type="number" min="1" step="1" value="45"></label>
       </div>
-      <p class="hint">現行月成本模型包括創辦人、首階段 1 位導師、1 位行政人員；達擴編門檻後另加 1 位導師。僱主強積金按月薪 5%、每人每月最多 HK$1,500 試算。學生每週上一堂；容量按 2 間課室 × 每週班數 × 每班平均人數估算，須以核准容額及實際課表更新。</p>
+      <p class="hint">僱主強積金按月薪 5%、每人每月最多 HK$1,500 試算，旁邊會即時顯示每位員工連 MPF 成本。首階段及擴編後的導師人數可自行輸入，按人數估算可同時使用的課室（創辦人任教一間，中心最多按兩間課室計）。課程比例預設本地 60%、NET 25%、面試 15%；面試比例自動補足，按三種實收計算加權平均。每名學生按每週上一堂、4.33 週計月貢獻；實際容額以核准圖則及課表為準。</p>
     </article>
     <p class="ab-alert">⚠️ 頂手中心的舊註冊證明不可假設自動轉到新營運者名下。頂手價亦未包括自動承接所有學生預繳學費或債務；付款前須由律師、會計師核對租約、帳目、已收學費／退款、員工責任、欠款及設備，並取得教育局和業主書面確認。欠款欄的 0 只代表未輸入，不代表風險為零。</p>
     <section class="ab-card" style="--c:var(--studio)">
@@ -950,7 +966,7 @@ img{max-width:100%}
 
 <script>
 (function(){
-  var ids=['abASetup','abALease','abAFitout','abAPlans','abAFurniture','abALegal','abAMarketing','abAOtherCost','abAMonths','abBFee','abBLease','abBDiligence','abBRepair','abBLiability','abRent','abOther','abFounder','abTeacherPay','abAdminPay','abAdminN','abPrice','abVar','abWeeks','abClasses','abClassSize','abStartStudents','abGrowth','abTrigger'];
+  var ids=['abASetup','abALease','abAFitout','abAPlans','abAFurniture','abALegal','abAMarketing','abAOtherCost','abAMonths','abBFee','abBLease','abBDiligence','abBRepair','abBLiability','abRent','abOther','abFounder','abTeacherPay','abTeacherN1','abTeacherN2','abAdminPay','abAdminN','abMixLocal','abMixNet','abPriceLocal','abPriceNet','abPriceInterview','abVar','abWeeks','abClasses','abClassSize','abStartStudents','abGrowth','abTrigger'];
   function el(id){return document.getElementById(id)}
   function val(id){return Math.max(0,parseFloat(el(id).value)||0)}
   function fmt(n){return 'HK'+String.fromCharCode(36)+Math.round(Math.abs(n)).toLocaleString('en-US')}
@@ -958,14 +974,26 @@ img{max-width:100%}
   function calc(){
     var rent=val('abRent'), other=val('abOther'), founder=val('abFounder');
     var salary=val('abTeacherPay'), admin=val('abAdminPay'), adminN=val('abAdminN');
+    var teacherN1=Math.min(4,val('abTeacherN1')), teacherN2=Math.max(teacherN1,Math.min(4,val('abTeacherN2')));
+    el('abTeacherN2').value=teacherN2;
     var mpf=function(v){return Math.min(v*.05,1500)};
     var teacherCost=salary+mpf(salary), adminCost=admin+mpf(admin);
-    var base=rent+other+founder+teacherCost+adminN*adminCost;
-    var expanded=base+teacherCost;
-    var price=val('abPrice'), variable=val('abVar'), weeks=val('abWeeks');
+    el('abTeacherLoaded').textContent=fmt(teacherCost);
+    el('abAdminLoaded').textContent=fmt(adminCost);
+    var base=rent+other+founder+teacherCost*teacherN1+adminN*adminCost;
+    var expanded=rent+other+founder+teacherCost*teacherN2+adminN*adminCost;
+    var mixLocal=Math.min(100,val('abMixLocal'));
+    var mixNet=Math.min(100-mixLocal,val('abMixNet'));
+    el('abMixNet').value=mixNet;
+    var mixInterview=100-mixLocal-mixNet;
+    el('abMixInterview').textContent=mixInterview+'%';
+    var price=(mixLocal*val('abPriceLocal')+mixNet*val('abPriceNet')+mixInterview*val('abPriceInterview'))/100;
+    el('abWeightedPrice').textContent=fmt(price);
+    var variable=val('abVar'), weeks=val('abWeeks');
     var contribution=(price-variable)*weeks;
-    var rooms=2, classes=val('abClasses'), size=val('abClassSize');
-    var capacity=rooms*classes*size;
+    var roomsStart=Math.min(2,1+teacherN1), roomsExpanded=Math.min(2,1+teacherN2);
+    var classes=val('abClasses'), size=val('abClassSize');
+    var capacityStart=roomsStart*classes*size, capacity=roomsExpanded*classes*size;
     var start=val('abStartStudents'), growth=val('abGrowth'), trigger=val('abTrigger');
     var aSetup=['abALease','abAFitout','abAPlans','abAFurniture','abALegal','abAMarketing','abAOtherCost'].reduce(function(sum,id){return sum+val(id)},0);
     el('abASetup').value=aSetup;
@@ -979,7 +1007,7 @@ img{max-width:100%}
       var cash=-r.initial, low=cash, lowMonth=0, firstProfit=0, payback=0, expandedNow=false, rows=[];
       rows.push({month:0,students:0,fixed:0,net:-r.initial,cash:cash});
       for(var m=1;m<=18;m++){
-        var students=Math.min(capacity,Math.round(start+(m-1)*growth));
+        var students=Math.min(expandedNow?capacity:capacityStart,Math.round(start+(m-1)*growth));
         var cost=expandedNow?expanded:base;
         var net=students*contribution-cost;
         if(!expandedNow&&students>=trigger) expandedNow=true;
@@ -1002,12 +1030,12 @@ img{max-width:100%}
       '<div class="ab-stat"><span>組成</span><b style="font:13px var(--f-body)">'+routes[1].detail+'</b></div>';
     var bA=Math.ceil(base/contribution), bF=Math.ceil(expanded/contribution);
     el('abSharedResults').innerHTML=
-      '<div class="ab-stat"><span>每名學生每月貢獻</span><b>'+fmt(contribution)+'</b></div>'+
-      '<div class="ab-stat"><span>首階段每月固定支出</span><b>'+fmt(base)+'</b></div>'+
-      '<div class="ab-stat"><span>首階段打平學生數</span><b>'+bA+' 人</b></div>'+
-      '<div class="ab-stat"><span>擴編後每月固定支出</span><b>'+fmt(expanded)+'</b></div>'+
-      '<div class="ab-stat"><span>擴編後打平學生數</span><b>'+bF+' 人</b></div>'+
-      '<div class="ab-stat"><span>兩課室按課表容量</span><b>'+capacity+' 人</b></div>';
+      '<div class="ab-stat"><span>每位學生每月貢獻（加權）</span><b>'+fmt(contribution)+'</b></div>'+
+      '<div class="ab-stat"><span>首階段固定支出／打平</span><b>'+fmt(base)+'／'+bA+' 人</b></div>'+
+      '<div class="ab-stat"><span>擴編後固定支出／打平</span><b>'+fmt(expanded)+'／'+bF+' 人</b></div>'+
+      '<div class="ab-stat"><span>首階段導師人數／課室</span><b>'+teacherN1+' 人／'+roomsStart+' 間</b></div>'+
+      '<div class="ab-stat"><span>擴編後導師人數／課室</span><b>'+teacherN2+' 人／'+roomsExpanded+' 間</b></div>'+
+      '<div class="ab-stat"><span>擴編後課表估算容量</span><b>'+capacity+' 人</b></div>';
     el('abCashRead').textContent=routes.map(function(r){
       return r.name+'：現金最低 '+signed(r.low)+'（第 '+r.lowMonth+' 月）；'+(r.firstProfit?'第 '+r.firstProfit+' 月起單月營運有盈餘':'18 個月內未有單月盈餘')+'；'+(r.payback?'第 '+r.payback+' 月累計收回開業前投入':'18 個月內未歸本');
     }).join('　｜　');
