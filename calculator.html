@@ -241,30 +241,31 @@ img{max-width:100%}
         <h3>方案 A｜新址自行申請註冊</h3>
         <p class="hint">自行選址、查用途、做圖則及工程，再按程序申請。時間參考約 4–9 個月起，任何補件、工程或驗收延誤都會順延。</p>
         <div class="ab-fields">
-          <label>租約按金及首月租金<input id="abALease" type="number" min="0" step="5000" value="70000"></label>
-          <label>裝修、消防及機電工程<input id="abAFitout" type="number" min="0" step="5000" value="210000"></label>
-          <label>圖則及專業顧問<input id="abAPlans" type="number" min="0" step="2500" value="52500"></label>
+          <label>租約按金（月數 × 月租）<input id="abALease" type="number" min="0" step="1" value="3"></label>
+          <label>裝修、消防及機電工程<input id="abAFitout" type="number" min="0" step="5000" value="300000"></label>
+          <label>圖則及專業顧問<input id="abAPlans" type="number" min="0" step="2500" value="80000"></label>
           <label>家具、教材及 IT<input id="abAFurniture" type="number" min="0" step="5000" value="50000"></label>
           <label>公司、法律及保險<input id="abALegal" type="number" min="0" step="2500" value="25000"></label>
           <label>開業招生<input id="abAMarketing" type="number" min="0" step="2500" value="35000"></label>
           <label>其他預留（包括政府規費等）<input id="abAOtherCost" type="number" min="0" step="2500" value="37500"></label>
           <label>審批及工程期間租金月數<input id="abAMonths" type="number" min="0" step="1" value="6"></label>
-          <label>方案 A 開辦費小計<input id="abASetup" type="number" value="480000" readonly></label>
+          <label>方案 A 開辦費小計<input id="abASetup" type="number" value="602500" readonly></label>
         </div>
-        <p class="hint">分項依現有研究的開業前投入估算：總額約 HK$280,000–680,000，預設中位數 HK$480,000；審批期間租金另計，預設 6 個月（研究估算 4–9 個月，業界顧問估 4–12 個月）。各項仍是規劃預算，須取得至少 3 份工程／專業報價及確認免租期。</p>
+        <p class="hint">分項估算（以 800 呎、月租 HK$25,000 為例）：按金 3 個月是可退回的現金佔用；首月租已包括在審批期租金內，不重複計算。裝修連消防及機電預設 HK$300,000（約 HK$375／呎），參考辦公室裝修指南：基本翻新約 HK$300–500／呎、全面裝修約 HK$500–800／呎；學校註冊另須火警警報、自動火警偵測、緊急照明、出口指示及 FS251 證書，230 平方米以上要裝自動花灑。研究估同類 700–900 呎註冊中心連消防約 HK$520,000，所以 HK$300,000 屬「單位已有基本裝修」的情況。圖則及顧問預設 HK$80,000（手冊估 HK$25,000–80,000，研究估可達 HK$150,000）。審批期間租金另計，預設 6 個月（研究估算 4–9 個月，業界顧問估 4–12 個月）；能談到免租期便可調低。各項仍是規劃預算，須取得至少 3 份工程／專業報價及確認免租期。</p>
         <div class="ab-results" id="abAResults"></div>
       </article>
       <article class="ab-card" style="--c:var(--full)">
         <h3>方案 B｜頂手現有中心</h3>
         <p class="hint">評估既有場地和設備能否接用。時間參考約 1–3 個月，實際須看教育局程序、業主同意、合約及交接條件。</p>
         <div class="ab-fields">
-          <label>頂手價（放盤叫價中位參考）<input id="abBFee" type="number" min="0" step="5000" value="250000"></label>
+          <label>頂手價（放盤叫價參考）<input id="abBFee" type="number" min="0" step="5000" value="250000"></label>
           <label>按金及首月租金（月數）<input id="abBLease" type="number" min="0" step="1" value="3"></label>
           <label>律師／會計盡職審查預算<input id="abBDiligence" type="number" min="0" step="1000" value="30000"></label>
           <label>設備修補及交接預留<input id="abBRepair" type="number" min="0" step="5000" value="50000"></label>
-          <label>已核實由買方承擔的欠款／未履行課程<input id="abBLiability" type="number" min="0" step="5000" value="0"></label>
+          <label>承擔的預繳學費／未履行課程<input id="abBLiability" type="number" min="0" step="5000" value="20000"></label>
+          <label>接手時可核實的在讀學生<input id="abBStudents" type="number" min="0" step="1" value="12"></label>
         </div>
-        <p class="hint">頂手價 HK$250,000 是 HK$120,000–380,000 放盤叫價區間的中位參考，非成交數據；按金是現金需要，日後可能退回。</p>
+        <p class="hint">頂手價 HK$250,000 參考生意轉讓平台的教育中心放盤（2026 年查閱）：全港 66 個放盤叫價約 HK$68,000–938,000；標明「持牌」的約 HK$80,000–648,000，中位約 HK$288,000；大圍教育中心 HK$288,000、沙田補習社 HK$248,000。這些都是叫價，不是成交價，「持牌」亦未經核實。教育局指出，以前註冊過的校舍仍要按現行標準評估，可能要再做工程，所以修補預留不宜太少。頂手的好處是可能接手在讀學生；預設只計 12 人（與新址相同），要按可核實的名單及續報率調整，每名接手學生的預繳學費都要計入承擔。</p>
         <div class="ab-results" id="abBResults"></div>
       </article>
     </div>
@@ -999,7 +1000,7 @@ img{max-width:100%}
 
 <script>
 (function(){
-  var ids=['abASetup','abALease','abAFitout','abAPlans','abAFurniture','abALegal','abAMarketing','abAOtherCost','abAMonths','abBFee','abBLease','abBDiligence','abBRepair','abBLiability','abRent','abOther','abFounder','abMixLocal','abConsultantPay','abTeacherPay1','abTeacherPay2','abTeacherPay3','abPartTime','abAdminPay','abPriceLocal','abPriceInterview','abVar','abRooms','abClasses','abClassSize','abStartStudents','abGrowth','abTrigger','abChurn','abWeeks','abFund','abTutorRate','abFounderLessons'];
+  var ids=['abASetup','abALease','abAFitout','abAPlans','abAFurniture','abALegal','abAMarketing','abAOtherCost','abAMonths','abBFee','abBLease','abBDiligence','abBRepair','abBLiability','abRent','abOther','abFounder','abMixLocal','abConsultantPay','abTeacherPay1','abTeacherPay2','abTeacherPay3','abPartTime','abAdminPay','abPriceLocal','abPriceInterview','abVar','abRooms','abClasses','abClassSize','abStartStudents','abGrowth','abTrigger','abChurn','abWeeks','abFund','abTutorRate','abFounderLessons','abBStudents'];
   function el(id){return document.getElementById(id)}
   function val(id){return Math.max(0,parseFloat(el(id).value)||0)}
   function fmt(n){return 'HK'+String.fromCharCode(36)+Math.round(Math.abs(n)).toLocaleString('en-US')}
@@ -1029,25 +1030,25 @@ img{max-width:100%}
     var classes=val('abClasses'), size=val('abClassSize');
     var capacityStart=roomsStart*classes*size, capacityPhase1=roomsPhase1*classes*size, capacity=roomsPhase2*classes*size;
     var start=val('abStartStudents'), growth=val('abGrowth'), churn=Math.min(0.5,val('abChurn')/100), trigger=val('abTrigger'), trigger2=Math.ceil(trigger*1.65), noExpand=trigger<=0;
-    var aSetup=['abALease','abAFitout','abAPlans','abAFurniture','abALegal','abAMarketing','abAOtherCost'].reduce(function(sum,id){return sum+val(id)},0);
+    var aSetup=rent*val('abALease')+['abAFitout','abAPlans','abAFurniture','abALegal','abAMarketing','abAOtherCost'].reduce(function(sum,id){return sum+val(id)},0);
     el('abASetup').value=aSetup;
     var openingA=aSetup+rent*val('abAMonths');
     var openingB=val('abBFee')+rent*val('abBLease')+val('abBDiligence')+val('abBRepair')+val('abBLiability');
     var routes=[
-      {key:'A',name:'方案 A｜自行申請',initial:openingA, detail:fmt(val('abASetup'))+' 開辦費＋'+val('abAMonths')+' 個月審批租金'},
-      {key:'B',name:'方案 B｜頂手',initial:openingB, detail:'頂手 '+fmt(val('abBFee'))+'＋租約 '+fmt(rent*val('abBLease'))+'＋查核 '+fmt(val('abBDiligence'))+'＋修補 '+fmt(val('abBRepair'))+'＋已核實承擔 '+fmt(val('abBLiability'))}
+      {key:'A',name:'方案 A｜自行申請',initial:openingA,start:start, detail:fmt(val('abASetup'))+' 開辦費＋'+val('abAMonths')+' 個月審批租金'},
+      {key:'B',name:'方案 B｜頂手',initial:openingB,start:val('abBStudents'), detail:'頂手 '+fmt(val('abBFee'))+'＋租約 '+fmt(rent*val('abBLease'))+'＋查核 '+fmt(val('abBDiligence'))+'＋修補 '+fmt(val('abBRepair'))+'＋預繳學費承擔 '+fmt(val('abBLiability'))}
     ];
     var tutorRate=val('abTutorRate'), founderLessons=val('abFounderLessons');
     var costs=[base,phase1,phase2], caps=[capacityStart,capacityPhase1,capacity];
     function covered(phase){ return founderLessons + (consultant>0?22:0) + (phase>=1&&teacherCosts[0]>0?22:0) + (phase>=2&&teacherCosts[1]>0?22:0); }
     function tutorCost(students, phase){ var lessons=Math.ceil(students/Math.max(1,size)); return Math.max(0, lessons-covered(phase))*tutorRate*weeks; }
     function beFor(phase, extra){ for(var n=0;n<=caps[phase]+200;n++){ if(n*contribution-tutorCost(n,phase)>=costs[phase]+(extra||0)) return n; } return Infinity; }
-    function simulate(initial, g, extra){
-      extra=extra||0;
+    function simulate(initial, g, extra, st){
+      extra=extra||0; if(st==null) st=start;
       var cash=-initial, low=cash, lowMonth=0, firstProfit=0, payback=0, phase=0, e1=0, e2=0, rows=[], sf=0;
       rows.push({month:0,students:0,paidTeachers:0,fixed:0,revenue:0,net:-initial,cash:cash});
       for(var m=1;m<=24;m++){
-        sf = m===1 ? start : sf*(1-churn)+g;
+        sf = m===1 ? st : sf*(1-churn)+g;
         sf=Math.min(caps[phase],sf);
         var students=Math.round(sf);
         var cost=costs[phase]+extra+tutorCost(students,phase);
@@ -1064,7 +1065,7 @@ img{max-width:100%}
       return {rows:rows,low:low,lowMonth:lowMonth,firstProfit:firstProfit,payback:payback,e1:e1,e2:e2,endCost:rows[24].fixed};
     }
     routes.forEach(function(r){
-      var x=simulate(r.initial,growth);
+      var x=simulate(r.initial,growth,0,r.start);
       r.rows=x.rows;r.low=x.low;r.lowMonth=x.lowMonth;r.firstProfit=x.firstProfit;r.payback=x.payback;r.expansion1ReachedMonth=x.e1;r.expansion2ReachedMonth=x.e2;
       r.firstBreakEven=beFor(0); r.middleBreakEven=beFor(1); r.breakEven=beFor(2);
       r.yearNet=x.rows.slice(1,13).reduce(function(a,y){return a+y.net},0);
@@ -1076,13 +1077,13 @@ img{max-width:100%}
     var riskHtml=routes.map(function(r,i){
       var need=-r.low+reserve3(r);
       var gap=fund-need;
-      var slow=simulate(r.initial,growth*0.7);
-      var late=simulate(r.initial+delayExtra,growth);
+      var slow=simulate(r.initial,growth*0.7,0,r.start);
+      var late=simulate(r.initial+delayExtra,growth,0,r.start);
       var be=noExpand?r.firstBreakEven:r.breakEven; if(!isFinite(be)) be='—';
       var capNow=noExpand?capacityStart:capacity;
       var pct=capNow>0&&be!=='—'?Math.round(be/capNow*100):999;
       var row=function(k,v,c){return '<div class="risk-row"><span>'+k+'</span><b class="'+(c||'')+'">'+v+'</b></div>'};
-      var withPay=founder>0?null:simulate(r.initial,growth,paidFounder);
+      var withPay=founder>0?null:simulate(r.initial,growth,paidFounder,r.start);
       var needPay=withPay?(-withPay.low+3*withPay.rows[24].fixed):0;
       return '<div class="risk-col"><h4>'+r.name+'</h4><span class="hint">中心需要準備的現金（最低點＋3 個月開支作儲備）</span><div class="risk-big">'+fmt(need)+'</div>'+
         row('對比可動用資金 '+fmt(fund), gap>=0?'尚餘 '+fmt(gap):'缺口 '+fmt(-gap), gap>=0?'ok':'bad')+
@@ -1122,7 +1123,7 @@ img{max-width:100%}
     el('abCashRead').textContent=routes.map(function(r){
       return r.name+'：現金最低 '+signed(r.low)+'（第 '+r.lowMonth+' 月）；'+(r.firstProfit?'第 '+r.firstProfit+' 月起單月營運有盈餘':'24 個月內未有單月盈餘')+'；'+(r.payback?'第 '+r.payback+' 月累計收回開業前投入':'24 個月內未歸本');
     }).join('　｜　');
-    var table='<thead><tr><th>月份</th><th>學生</th><th>全職導師數（不含創辦人）</th><th>每月開支（含按堂導師費）</th><th>每月預估收入</th><th>方案 A 月末現金</th><th>方案 B 月末現金</th></tr></thead><tbody>';
+    var table='<thead><tr><th>月份</th><th>學生（方案 A）</th><th>全職導師數（不含創辦人）</th><th>每月開支（含按堂導師費）</th><th>每月預估收入</th><th>方案 A 月末現金</th><th>方案 B 月末現金</th></tr></thead><tbody>';
     for(var m=0;m<=24;m++){
       table+='<tr><td>'+(m===0?'開業前':m)+'</td><td>'+routes[0].rows[m].students+'</td><td>'+routes[0].rows[m].paidTeachers+'</td><td>'+fmt(routes[0].rows[m].fixed)+'</td><td>'+fmt(routes[0].rows[m].revenue)+'</td><td>'+signed(routes[0].rows[m].cash)+'</td><td>'+signed(routes[1].rows[m].cash)+'</td></tr>';
     }
