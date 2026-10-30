@@ -220,7 +220,7 @@ img{max-width:100%}
             <label for="nAdS">工作室行政人員</label><select id="nAdS"><option>0</option><option>1</option><option>2</option></select>
             <label for="nAdC">註冊中心行政人員</label><select id="nAdC"><option selected>0</option><option>1</option><option>2</option></select>
           </div>
-          <div class="trow"><label for="adm">行政人員月薪</label><input type="number" id="adm" value="17000" step="500" min="0"><span class="tot" id="admO"></span></div>
+          <div class="trow"><label for="adm">行政人員月薪</label><input type="number" id="adm" value="22000" step="500" min="0"><span class="tot" id="admO"></span></div>
           <div class="field"><label for="sup">註冊中心兼職支援／月 <output id="supO"></output></label><input type="range" id="sup" min="0" max="30000" step="1000" value="0"></div>
           <p class="hint">行政人員月薪 HK$17,000 是研究估算，未經核實。強積金供款按開關一併計入。</p>
         </details>
@@ -402,8 +402,8 @@ img{max-width:100%}
   }
   var SCHED = schedPreset('hb');
 
-  var HB = {nR:2,tD:0,adm:17000,nAdS:0,nAdC:0,pay:30000,tA:28500,tB:0,tC:0,mpf:true,nS:1,nP1:0,nP2:0,nF:0,sup:0,local:60,net:25,pL:300,pN:415,pI:450,weeks:'4.33',size:3,curve:'hb',speed:1,rent:40000,other:18000,'var':20,preS:230000,preC:0,_sched:'hb'};
-  var INV = {nR:1,tD:28500,adm:17000,nAdS:0,nAdC:0,pay:20000,tA:28500,tB:28500,tC:28500,mpf:true,nS:0,nP1:0,nP2:1,nF:1,sup:5000,local:100,net:0,pL:300,pN:415,pI:450,weeks:'4',size:3,curve:'base',speed:1,rent:18000,other:14000,'var':20,preS:250000,preC:350000,_sched:'inv'};
+  var HB = {nR:2,tD:0,adm:22000,nAdS:0,nAdC:0,pay:30000,tA:28500,tB:0,tC:0,mpf:true,nS:1,nP1:0,nP2:0,nF:0,sup:0,local:60,net:25,pL:300,pN:415,pI:450,weeks:'4.33',size:3,curve:'hb',speed:1,rent:40000,other:18000,'var':20,preS:230000,preC:0,_sched:'hb'};
+  var INV = {nR:1,tD:28500,adm:22000,nAdS:0,nAdC:0,pay:20000,tA:28500,tB:28500,tC:28500,mpf:true,nS:0,nP1:0,nP2:1,nF:1,sup:5000,local:100,net:0,pL:300,pN:415,pI:450,weeks:'4',size:3,curve:'base',speed:1,rent:18000,other:14000,'var':20,preS:250000,preC:350000,_sched:'inv'};
 
   var TIPS = {
     presetHB:'套用目前規劃起始值：加權收費 HK$351.25、每月 4.33 週、課表 22 班，並計入創辦人薪酬、兩間課室及一名導師。',
