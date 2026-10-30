@@ -252,7 +252,7 @@ img{max-width:100%}
         <label>創辦人薪酬／月（未計強積金）<div class="ab-salary"><input id="abFounder" type="number" min="0" step="1000" value="0"><span>每位連 MPF／月 <b id="abFounderLoaded">HK$0</b></span></div></label>
       </div></article>
       <article class="ab-card ab-input-card" style="--c:var(--phased)"><h3>人手及強積金</h3><div class="ab-fields">
-        <label>顧問薪酬／月（未計強積金）<div class="ab-salary"><input id="abConsultantPay" type="number" min="0" step="500" value="22000"><span>每位連 MPF／月 <b id="abConsultantLoaded">HK$23,100</b></span></div></label>
+        <label>首席導師薪酬／月（未計強積金）<div class="ab-salary"><input id="abConsultantPay" type="number" min="0" step="500" value="22000"><span>每位連 MPF／月 <b id="abConsultantLoaded">HK$23,100</b></span></div></label>
         <label>行政人員月薪（每位，未計強積金）<div class="ab-salary"><input id="abAdminPay" type="number" min="0" step="500" value="17000"><span>每位連 MPF／月 <b id="abAdminLoaded">HK$17,850</b></span></div></label>
         <label>Part-Time 人手月支出（已包括僱主強積金）<input id="abPartTime" type="number" min="0" step="500" value="0"></label>
         <label>導師 1 月薪（未計強積金）<div class="ab-salary"><input id="abTeacherPay1" type="number" min="0" step="500" value="0"><span>每位連 MPF／月 <b id="abTeacherLoaded1">HK$0</b></span></div></label>
@@ -277,10 +277,11 @@ img{max-width:100%}
         <label>擴編門檻（學生數）<input id="abTrigger" type="number" min="1" step="1" value="45"></label>
       </div><p class="hint">課室容量按可同時授課人數、課室數、每週班數及每班人數估算。</p></article>
     </div>
-    <p class="hint">僱主強積金按月薪 5%、每人每月最多 HK$1,500 試算；薪酬欄旁顯示連 MPF 成本。導師人數預設初期 1 人、擴編後 2 人；三個導師薪酬欄均預設 HK$0，請按實際薪酬填寫，留在 0 會低估成本。容量假設創辦人可教授一間課室，另聘導師最多三人。每名學生按每週上一堂、固定以 52 週 ÷ 12 個月換算月貢獻；此平均不扣除停課週，實際課程收入須按校曆估算。實際容額以核准圖則及課表為準。</p>
+    <p class="hint">僱主強積金按月薪 5%、每人每月最多 HK$1,500 試算；薪酬欄旁顯示連 MPF 成本。首階段包括首席導師及導師 1，達擴編門檻後加入導師 2、3；付薪導師由 2 人增至 4 人（不含創辦人）。三個導師薪酬欄預設 HK$0，請按實際薪酬填寫，留在 0 會低估成本。創辦人另假設可教授一間課室。每名學生按每週上一堂、固定以 52 週 ÷ 12 個月換算月貢獻；此平均不扣除停課週，實際課程收入須按校曆估算。實際容額以核准圖則及課表為準。</p>
     <section class="ab-card" style="--c:var(--studio)">
       <h3>每月支出、打平人數及資金壓力</h3>
       <div class="ab-results" id="abSharedResults"></div>
+      <p class="hint" id="abExpansionRead"></p>
       <div class="ab-chart" id="abCashChart" aria-label="方案 A 和方案 B 的累計現金圖"></div>
       <p class="hint" id="abCashRead"></p>
       <div class="tablewrap"><table class="ab-table" id="abMonthTable"></table></div>
@@ -996,7 +997,7 @@ img{max-width:100%}
     var variable=val('abVar'), weeks=52/12;
     var contribution=(price-variable)*weeks;
     var roomCount=Math.max(1,Math.round(val('abRooms')));
-    var roomsStart=Math.min(roomCount,2), roomsExpanded=Math.min(roomCount,4);
+    var roomsStart=Math.min(roomCount,3), roomsExpanded=Math.min(roomCount,5);
     var classes=val('abClasses'), size=val('abClassSize');
     var capacityStart=roomsStart*classes*size, capacity=roomsExpanded*classes*size;
     var start=val('abStartStudents'), growth=val('abGrowth'), trigger=val('abTrigger');
@@ -1009,21 +1010,21 @@ img{max-width:100%}
       {key:'B',name:'方案 B｜頂手',initial:openingB, detail:'頂手 '+fmt(val('abBFee'))+'＋租約 '+fmt(rent*val('abBLease'))+'＋查核 '+fmt(val('abBDiligence'))+'＋修補 '+fmt(val('abBRepair'))+'＋已核實承擔 '+fmt(val('abBLiability'))}
     ];
     routes.forEach(function(r){
-      var cash=-r.initial, low=cash, lowMonth=0, firstProfit=0, payback=0, expandedNow=false, rows=[];
+      var cash=-r.initial, low=cash, lowMonth=0, firstProfit=0, payback=0, expandedNow=false, expansionReachedMonth=0, rows=[];
       rows.push({month:0,students:0,fixed:0,revenue:0,net:-r.initial,cash:cash});
       for(var m=1;m<=24;m++){
         var students=Math.min(expandedNow?capacity:capacityStart,Math.round(start+(m-1)*growth));
         var cost=expandedNow?expanded:base;
         var revenue=students*price*weeks;
         var net=students*contribution-cost;
-        if(!expandedNow&&students>=trigger) expandedNow=true;
+        if(!expandedNow&&students>=trigger){expandedNow=true;expansionReachedMonth=m;}
         cash+=net;
         if(net>0&&!firstProfit)firstProfit=m;
         if(cash>=0&&!payback)payback=m;
         if(cash<low){low=cash;lowMonth=m}
         rows.push({month:m,students:students,fixed:cost,revenue:revenue,net:net,cash:cash});
       }
-      r.rows=rows;r.low=low;r.lowMonth=lowMonth;r.firstProfit=firstProfit;r.payback=payback;
+      r.rows=rows;r.low=low;r.lowMonth=lowMonth;r.firstProfit=firstProfit;r.payback=payback;r.expansionReachedMonth=expansionReachedMonth;r.expansionStartMonth=expansionReachedMonth?expansionReachedMonth+1:0;
       r.breakEven=Math.ceil(expanded/contribution);
       r.firstBreakEven=Math.ceil(base/contribution);
       r.yearNet=rows.slice(1,13).reduce(function(a,x){return a+x.net},0);
@@ -1040,6 +1041,10 @@ img{max-width:100%}
       '<div class="ab-stat"><span>首階段固定支出／打平</span><b>'+fmt(base)+'／'+bA+' 人</b></div>'+
       '<div class="ab-stat"><span>擴編後固定支出／打平</span><b>'+fmt(expanded)+'／'+bF+' 人</b></div>'+
       '<div class="ab-stat"><span>擴編後課表估算容量</span><b>'+capacity+' 人</b></div>';
+    var expansion=routes[0].expansionReachedMonth;
+    el('abExpansionRead').textContent=expansion
+      ? '擴編預估：第 '+expansion+' 月達到 '+trigger+' 名學生；第 '+(expansion+1)+' 月起，付薪導師由 2 人（首席導師＋導師 1）增至 4 人（再加入導師 2、3）。創辦人授課另計。'
+      : '擴編預估：24 個月內未達 '+trigger+' 名學生的門檻；首階段容量上限約 '+capacityStart+' 人。導師薪酬欄若維持 HK$0，相關人手薪酬成本會被低估。';
     el('abCashRead').textContent=routes.map(function(r){
       return r.name+'：現金最低 '+signed(r.low)+'（第 '+r.lowMonth+' 月）；'+(r.firstProfit?'第 '+r.firstProfit+' 月起單月營運有盈餘':'24 個月內未有單月盈餘')+'；'+(r.payback?'第 '+r.payback+' 月累計收回開業前投入':'24 個月內未歸本');
     }).join('　｜　');
