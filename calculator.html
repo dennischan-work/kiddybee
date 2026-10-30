@@ -209,10 +209,17 @@ img{max-width:100%}
         <h3>方案 A｜新址自行申請註冊</h3>
         <p class="hint">自行選址、查用途、做圖則及工程，再按程序申請。時間參考約 4–9 個月起，任何補件、工程或驗收延誤都會順延。</p>
         <div class="ab-fields">
-          <label>開辦、圖則、專業及工程費（估算）<input id="abASetup" type="number" min="0" step="5000" value="480000"></label>
+          <label>租約按金及首月租金<input id="abALease" type="number" min="0" step="5000" value="70000"></label>
+          <label>裝修、消防及機電工程<input id="abAFitout" type="number" min="0" step="5000" value="210000"></label>
+          <label>圖則及專業顧問<input id="abAPlans" type="number" min="0" step="2500" value="52500"></label>
+          <label>家具、教材及 IT<input id="abAFurniture" type="number" min="0" step="5000" value="50000"></label>
+          <label>公司、法律及保險<input id="abALegal" type="number" min="0" step="2500" value="25000"></label>
+          <label>開業招生<input id="abAMarketing" type="number" min="0" step="2500" value="35000"></label>
+          <label>其他預留（包括政府規費等）<input id="abAOtherCost" type="number" min="0" step="2500" value="37500"></label>
           <label>審批期間租金月數<input id="abAMonths" type="number" min="0" step="1" value="4"></label>
+          <label>方案 A 開辦費小計<input id="abASetup" type="number" value="480000" readonly></label>
         </div>
-        <p class="hint">預設開辦費 HK$480,000 是 HK$280,000–680,000 規劃區間的中位參考；審批期間租金另計。若有免租期，應下調租金月數。</p>
+        <p class="hint">分項依現有研究的開業前投入估算：總額約 HK$280,000–680,000，預設中位數 HK$480,000；審批期間租金另計。各項仍是規劃預算，須取得至少 3 份工程／專業報價及確認免租期。</p>
         <div class="ab-results" id="abAResults"></div>
       </article>
       <article class="ab-card" style="--c:var(--full)">
@@ -943,7 +950,7 @@ img{max-width:100%}
 
 <script>
 (function(){
-  var ids=['abASetup','abAMonths','abBFee','abBLease','abBDiligence','abBRepair','abBLiability','abRent','abOther','abFounder','abTeacherPay','abAdminPay','abAdminN','abPrice','abVar','abWeeks','abClasses','abClassSize','abStartStudents','abGrowth','abTrigger'];
+  var ids=['abASetup','abALease','abAFitout','abAPlans','abAFurniture','abALegal','abAMarketing','abAOtherCost','abAMonths','abBFee','abBLease','abBDiligence','abBRepair','abBLiability','abRent','abOther','abFounder','abTeacherPay','abAdminPay','abAdminN','abPrice','abVar','abWeeks','abClasses','abClassSize','abStartStudents','abGrowth','abTrigger'];
   function el(id){return document.getElementById(id)}
   function val(id){return Math.max(0,parseFloat(el(id).value)||0)}
   function fmt(n){return 'HK'+String.fromCharCode(36)+Math.round(Math.abs(n)).toLocaleString('en-US')}
@@ -960,11 +967,13 @@ img{max-width:100%}
     var rooms=2, classes=val('abClasses'), size=val('abClassSize');
     var capacity=rooms*classes*size;
     var start=val('abStartStudents'), growth=val('abGrowth'), trigger=val('abTrigger');
-    var openingA=val('abASetup')+rent*val('abAMonths');
+    var aSetup=['abALease','abAFitout','abAPlans','abAFurniture','abALegal','abAMarketing','abAOtherCost'].reduce(function(sum,id){return sum+val(id)},0);
+    el('abASetup').value=aSetup;
+    var openingA=aSetup+rent*val('abAMonths');
     var openingB=val('abBFee')+rent*val('abBLease')+val('abBDiligence')+val('abBRepair')+val('abBLiability');
     var routes=[
       {key:'A',name:'方案 A｜自行申請',initial:openingA, detail:fmt(val('abASetup'))+' 開辦費＋'+val('abAMonths')+' 個月審批租金'},
-      {key:'B',name:'方案 B｜頂手',initial:openingB, detail:fmt(val('abBFee'))+' 頂手價＋租約現金、查核、修補及已核實承擔'}
+      {key:'B',name:'方案 B｜頂手',initial:openingB, detail:'頂手 '+fmt(val('abBFee'))+'＋租約 '+fmt(rent*val('abBLease'))+'＋查核 '+fmt(val('abBDiligence'))+'＋修補 '+fmt(val('abBRepair'))+'＋已核實承擔 '+fmt(val('abBLiability'))}
     ];
     routes.forEach(function(r){
       var cash=-r.initial, low=cash, lowMonth=0, firstProfit=0, payback=0, expandedNow=false, rows=[];
