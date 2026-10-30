@@ -162,7 +162,7 @@ img{max-width:100%}
         <div class="group-title">預設組合</div>
         <div class="btns">
           <button type="button" id="presetHB">手冊預設</button>
-          <button type="button" id="presetINV">投資人口徑</button>
+          <button type="button" id="presetINV">審慎風險評估口徑</button>
         </div>
         <p class="hint" id="presetHint">目前：手冊預設</p>
       </div>
@@ -244,7 +244,7 @@ img{max-width:100%}
         </div>
         <div class="field">
           <label for="weeks">每月計多少週</label>
-          <select id="weeks"><option value="4.33">4.33 週（手冊）</option><option value="4">4.0 週（投資人口徑，扣假期及停課）</option></select>
+          <select id="weeks"><option value="4.33">4.33 週（手冊）</option><option value="4">4.0 週（審慎情境，預留假期及停課）</option></select>
         </div>
         <p class="hint">加權每堂實收 <b class="num" id="wpO"></b>，每名學生每月貢獻 <b class="num" id="cpO"></b></p>
         <p class="alert" id="netAlert" hidden>NET 課要由外籍導師教。如有開 NET 課，請確認「聘用老師」已計入外籍導師的月薪，否則收入會被高估。</p>
@@ -266,8 +266,8 @@ img{max-width:100%}
           <label for="curve">學生增長曲線</label>
           <select id="curve">
             <option value="hb">手冊曲線（15 人起，每月約加 6 人）</option>
-            <option value="base">投資人基準（12 人起，第 12 月 54 人）</option>
-            <option value="slow">投資人審慎（8 人起，第 12 月 40 人）</option>
+            <option value="base">審慎基準（12 人起，第 12 月 54 人）</option>
+            <option value="slow">招生偏慢（8 人起，第 12 月 40 人）</option>
           </select>
         </div>
         <div class="field">
@@ -313,7 +313,7 @@ img{max-width:100%}
         <p class="read">每點一次格子：空白 → 開班 → 需求不穩 → 空白。「需求不穩」是只適合半日制幼稚園孩子的平日日間時段。每格約 60 分鐘課加 15 分鐘交接。課表的班數就是「每間課室每週可售班數」，會即時改變上面三條路線的學生上限和打平人數。</p>
         <div class="btns">
           <button type="button" data-sched="hb">手冊課表（22 班）</button>
-          <button type="button" data-sched="inv">投資人課表（18 班）</button>
+          <button type="button" data-sched="inv">18 班測試課表</button>
           <button type="button" data-sched="wkd">只開週末</button>
           <button type="button" data-sched="clear">清空</button>
         </div>
@@ -366,7 +366,7 @@ img{max-width:100%}
           <li>學生上限按「每名學生每週上一堂」計算：註冊中心＝可用課室 × 課表班數 × 每班人數；工作室另受每個時段最多 7 人、每日最多 19 人限制（手冊的試營運構想，須教育局確認）。</li>
           <li>政府沒有規定私人工作室每班人數上限；教育局看的是全機構人數：任何時間同時向 8 人或以上、或任何一天向 20 人或以上提供教育，可能屬須註冊的學校。註冊學校的每間課室容額由部門按校舍審批。</li>
           <li>行政人員預設月薪 HK$17,000 取自市場研究的估算，未經核實。</li>
-          <li>學生曲線：手冊曲線首月 15 人，之後每月約加 6 人；投資人兩條曲線按投資人方案的起點及第 12 個月人數以直線連接，屬近似。所有曲線都到課室上限便停。</li>
+          <li>學生曲線：手冊曲線首月 15 人，之後每月約加 6 人；審慎基準及招生偏慢兩條曲線按投資人方案的起點及第 12 個月人數以直線連接，屬近似。所有曲線都到課室上限便停。</li>
           <li>註冊中心分階段：學生達 45 人（或首階段上限，取較小者）的下一個月起擴編，人手由「首階段」轉為「擴編後」。</li>
           <li>建議資金＝曲線最低點＋三個月固定成本作儲備。</li>
           <li>是否須向教育局註冊，以教育局對實際營運時間表的書面回覆為準。</li>
@@ -400,7 +400,7 @@ img{max-width:100%}
 
   var TIPS = {
     presetHB:'全部假設回到開業手冊的數字：加權收費 HK$351.25、每月 4.33 週、課表 22 班、未計創辦人薪酬。',
-    presetINV:'投資人方案的保守假設：只計本地課 HK$300、每月 4.0 週、課表 18 班、創辦人月薪 HK$20,000、租金 HK$18,000。',
+    presetINV:'審慎風險評估假設：只計本地課 HK$300、每月 4.0 週、課表 18 班、創辦人月薪 HK$20,000、租金 HK$18,000。',
     pay:'創辦人每月從中心拿的薪金。設 0 時，算出來的盈餘其實包括創辦人自己的工資。',
     tA:'老師 A 的月薪，未計強積金。任何路線請 1 位或以上老師時，都會計入老師 A。',
     tB:'老師 B 的月薪。路線請 2 位或以上老師時才計入。',
@@ -730,7 +730,7 @@ img{max-width:100%}
     else if (overFull) W.push(['warn','有日子如果每班坐滿 4 人，當日合計會達 20 人。工作室要用預約系統控制，並先按完整時間表向教育局確認人數計法。']);
     if (s.nR > 1+s.nS) W.push(['warn','開了 '+s.nR+' 間課室，但只有創辦人加 '+s.nS+' 位老師，同時只能用 '+act+' 間，其餘課室的租金白付。']);
     if (s.nR > 1) W.push(['warn','多間課室要更大單位，請同時調高「租金及管理費」；開業前投入亦會增加。']);
-    if (ss.late > 0) W.push(['warn','平日 19:00 後開了 '+ss.late+' 格。投資人方案認為 3–6 歲兒童平日 19:00 後難以上課，這些學位未必賣得出。']);
+    if (ss.late > 0) W.push(['warn','平日 19:00 後開了 '+ss.late+' 格。此風險評估情境假設 3–6 歲兒童平日 19:00 後難以上課，這些學位未必賣得出。']);
     if (ss.half > 0) W.push(['warn','有 '+ss.half+' 格是平日日間「需求不穩」時段，只適合半日制幼稚園孩子，學位可能長期坐不滿。']);
     if (ss.n > 23 && s.nS === 0) W.push(['warn','每週 '+ss.n+' 班，多過手冊估算創辦人可承擔的 21–23 堂，還未計備課、招生和行政。']);
     if (ss.maxRun >= 5) W.push(['warn','有一天連續上 '+ss.maxRun+' 班，中間只有 15 分鐘交接，要預留休息和代課安排。']);
@@ -864,8 +864,8 @@ img{max-width:100%}
     var nb = document.querySelector('#sched button[data-r="'+r+'"][data-d="'+d+'"]'); if (nb) nb.focus();
   });
   $('presetHB').addEventListener('click', function(){ apply(HB, '手冊預設'); });
-  $('presetINV').addEventListener('click', function(){ apply(INV, '投資人口徑'); });
-  if (location.hash.replace('#','') === 'investor') apply(INV, '投資人口徑'); else apply(HB, '手冊預設');
+  $('presetINV').addEventListener('click', function(){ apply(INV, '審慎風險評估口徑'); });
+  if (location.hash.replace('#','') === 'investor') apply(INV, '審慎風險評估口徑'); else apply(HB, '手冊預設');
 })();
 </script>
 </body>
