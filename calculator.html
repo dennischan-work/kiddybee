@@ -243,6 +243,7 @@ img{max-width:100%}
         <div class="ab-results" id="abBResults"></div>
       </article>
     </div>
+    <p class="ab-alert">⚠️ 頂手中心的舊註冊證明不可假設自動轉到新營運者名下。頂手價亦未包括自動承接所有學生預繳學費或債務；付款前須由律師、會計師核對租約、帳目、已收學費／退款、員工責任、欠款及設備，並取得教育局和業主書面確認。欠款欄的 0 只代表未輸入，不代表風險為零。</p>
     <div class="ab-input-sections">
       <article class="ab-card ab-input-card" style="--c:var(--studio)"><h3>每月營運開支</h3><div class="ab-fields">
         <label>租金及管理費／月<input id="abRent" type="number" min="0" step="1000" value="40000"></label>
@@ -276,7 +277,6 @@ img{max-width:100%}
       </div><p class="hint">課室容量按可同時授課人數、課室數、每週班數及每班人數估算。</p></article>
     </div>
     <p class="hint">僱主強積金按月薪 5%、每人每月最多 HK$1,500 試算；薪酬欄旁顯示每位員工含 MPF 成本。導師人數預設初期 1 人、擴編後 2 人；三個導師薪酬欄均預設 HK$0，請按實際薪酬填寫，留在 0 會低估成本。容量假設創辦人可教授一間課室，另聘導師最多三人。每名學生按每週上一堂、固定以 52 週 ÷ 12 個月換算月貢獻；此平均不扣除停課週，實際課程收入須按校曆估算。實際容額以核准圖則及課表為準。</p>
-    <p class="ab-alert">⚠️ 頂手中心的舊註冊證明不可假設自動轉到新營運者名下。頂手價亦未包括自動承接所有學生預繳學費或債務；付款前須由律師、會計師核對租約、帳目、已收學費／退款、員工責任、欠款及設備，並取得教育局和業主書面確認。欠款欄的 0 只代表未輸入，不代表風險為零。</p>
     <section class="ab-card" style="--c:var(--studio)">
       <h3>每月支出、打平人數及資金壓力</h3>
       <div class="ab-results" id="abSharedResults"></div>
@@ -1048,16 +1048,16 @@ img{max-width:100%}
     draw(routes);
   }
   function draw(R){
-    var W=760,H=300,L=64,Rm=24,T=18,B=36,all=[];
+    var W=760,H=320,L=64,Rm=24,T=18,B=56,all=[];
     R.forEach(function(r){r.rows.forEach(function(p){all.push(p.cash)})});
     var lo=Math.min(0,Math.min.apply(null,all)),hi=Math.max(0,Math.max.apply(null,all));
     if(lo===hi)hi=1;
     var x=function(m){return L+m/18*(W-L-Rm)},y=function(v){return T+(hi-v)/(hi-lo)*(H-T-B)};
     var svg='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="方案 A 與方案 B 的 18 個月累計現金比較">';
     for(var i=0;i<=4;i++){var v=lo+(hi-lo)*i/4;svg+='<line x1="'+L+'" x2="'+(W-Rm)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="var(--line)"/><text x="'+(L-7)+'" y="'+(y(v)+4)+'" text-anchor="end" fill="var(--muted)" font-size="11">'+(v/10000).toFixed(0)+'萬</text>'}
-    for(var m=0;m<=18;m+=3)svg+='<text x="'+x(m)+'" y="'+(H-8)+'" text-anchor="middle" fill="var(--muted)" font-size="11">'+m+'</text>';
+    for(var m=0;m<=18;m+=3)svg+='<text x="'+x(m)+'" y="'+(H-24)+'" text-anchor="middle" fill="var(--muted)" font-size="11">'+m+'</text>';
     R.forEach(function(r,i){var d=r.rows.map(function(p,j){return (j?'L':'M')+x(j).toFixed(1)+','+y(p.cash).toFixed(1)}).join(' ');svg+='<path d="'+d+'" fill="none" stroke="'+(i?'var(--full)':'var(--phased)')+'" stroke-width="3"/>'});
-    svg+='<line x1="'+L+'" x2="'+(W-Rm)+'" y1="'+y(0)+'" y2="'+y(0)+'" stroke="var(--muted)" stroke-dasharray="4 4"/><text x="'+((L+W-Rm)/2)+'" y="'+(H-1)+'" text-anchor="middle" fill="var(--muted)" font-size="11">開業後月份</text></svg>';
+    svg+='<line x1="'+L+'" x2="'+(W-Rm)+'" y1="'+y(0)+'" y2="'+y(0)+'" stroke="var(--muted)" stroke-dasharray="4 4"/><text x="'+((L+W-Rm)/2)+'" y="'+(H-3)+'" text-anchor="middle" fill="var(--muted)" font-size="11">開業後月份</text></svg>';
     el('abCashChart').innerHTML=svg;
   }
   try{
