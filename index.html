@@ -8,14 +8,14 @@
 <meta name="description" content="沙田幼兒英語教育中心開業規劃總覽：兩條開業路線、兩個財務口徑、按資金上限看可行方向、分段撥款、停損線、開業時間表及合規流程。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#F5F7F4; --surface:#FFFFFF; --ink:#17232A; --muted:#5B6A70; --line:#DCE3E0; --soft:#EDF1EE;
   --studio:#1D6A8E; --phased:#B9762A; --full:#7B8891;
   --good:#2C7A57; --warn:#A8701B; --bad:#B1453A;
   --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
-  --f-disp:"Noto Serif TC","Noto Sans TC",serif;
+  --f-disp:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   --f-num:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
   color-scheme:light;
 }
@@ -208,6 +208,40 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-si
 footer ul{margin:0;padding-left:1.2em}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 html{scroll-behavior:smooth}
+
+/* Same Chinese typeface throughout, with visual reading and route flows */
+.workflow-note{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:18px 16px;margin-top:8px}
+.workflow-note ol{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;list-style:none;margin:0;padding:0;position:relative}
+.workflow-note ol::before{content:"";position:absolute;left:8%;right:8%;top:17px;height:2px;background:var(--line)}
+.workflow-note li{position:relative;padding:0 9px;text-align:center}
+.workflow-note li>a{display:grid;justify-items:center;gap:5px;color:var(--ink);text-decoration:none}
+.workflow-note li>a:hover b{color:var(--studio)}
+.journey-no{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--studio);color:#fff;font:500 13px var(--f-num);border:4px solid var(--surface);z-index:1}
+.workflow-note li:nth-child(4) .journey-no{background:var(--warn)}.workflow-note li:nth-child(5) .journey-no{background:var(--good)}
+.workflow-note li b{font-size:14px}.workflow-note li span:last-child{font-size:12px;color:var(--muted)}
+.route-map{margin:14px 0;padding:18px}
+.route-map-start{max-width:720px;margin:0 auto 20px;padding:14px 18px;text-align:center;border:2px solid var(--studio);border-radius:10px;background:color-mix(in srgb,var(--studio) 7%,var(--surface));display:grid;gap:4px}
+.map-label{font-size:12px;font-weight:700;color:var(--studio)}.route-map-start strong{font-size:16px}
+.map-note,.map-foot{font-size:13px;color:var(--muted)}.map-foot{margin-top:14px;text-align:center}
+.map-branches{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.map-lane{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--surface)}
+.studio-lane{border-top:4px solid var(--studio)}.school-lane{border-top:4px solid var(--phased)}
+.map-lane-title{display:flex;align-items:center;gap:9px;margin-bottom:12px}.map-lane-title h3{margin:0}
+.map-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.map-node{position:relative;min-height:118px;padding:11px 8px 10px 34px;border-radius:8px;background:var(--soft);font-size:12.5px}
+.map-node:not(:last-child)::after{content:"›";position:absolute;right:-9px;top:43%;z-index:1;color:var(--studio);font-size:21px;font-weight:700}
+.map-node>b{position:absolute;left:8px;top:10px;display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--studio);color:white;font:500 11px var(--f-num)}
+.school-lane .map-node>b{background:var(--phased)}
+.map-node strong{display:block;font-size:13px;line-height:1.4;margin-bottom:5px}
+.map-node span{display:block;color:var(--muted);line-height:1.5}
+.map-node.end{background:color-mix(in srgb,var(--good) 12%,var(--surface))}.map-node.end>b{background:var(--good)}
+@media(max-width:860px){
+ .workflow-note ol{grid-template-columns:1fr}.workflow-note ol::before{left:17px;right:auto;top:18px;bottom:18px;width:2px;height:auto}
+ .workflow-note li{text-align:left;padding:7px 0}.workflow-note li>a{grid-template-columns:36px 1fr;justify-items:start;gap:0 10px}
+ .journey-no{grid-row:span 2}.workflow-note li span:last-child{grid-column:2}.map-branches{grid-template-columns:1fr}
+}
+@media(max-width:560px){.map-flow{grid-template-columns:1fr}.map-node{min-height:0;padding:11px 12px 11px 40px}.map-node:not(:last-child)::after{content:"⌄";right:auto;left:50%;top:auto;bottom:-16px}}
+
 </style>
 </head>
 <body>
@@ -240,13 +274,13 @@ html{scroll-behavior:smooth}
     </div>
     <p class="disclaimer">所有金額均為港元。學生人數、租金、收費、招聘及招生數字都是規劃假設，不是報價、批准條件或保證結果；本頁不構成財務或法律意見。</p>
   </header>
-  <div class="workflow-note" aria-label="閱讀次序"><ol>
-<li><b>1. 定方向</b>比較工作室與註冊中心，先查教育局分類。</li>
-<li><b>2. 驗證需求</b>整理教材、訪談家長、試教並測收費。</li>
-<li><b>3. 落實場地</b>核用途、租約、工程和註冊程序。</li>
-<li><b>4. 控制資金</b>按關卡撥款，逐月看現金並預設停損。</li>
-<li><b>5. 開業改善</b>先在批准範圍營運，再用數據調整。</li>
-</ol></div>
+  <nav class="workflow-note" aria-label="提案閱讀次序"><ol>
+<li><a href="#decision"><span class="journey-no">01</span><b>定方向</b><span>選路線、對資金</span></a></li>
+<li><a href="#steps"><span class="journey-no">02</span><b>驗證需求</b><span>教材、家長、試教</span></a></li>
+<li><a href="#timeline"><span class="journey-no">03</span><b>落實場地</b><span>時程、申請、用途</span></a></li>
+<li><a href="#finance"><span class="journey-no">04</span><b>控制風險</b><span>現金、關卡、停損</span></a></li>
+<li><a href="#course"><span class="journey-no">05</span><b>開業改善</b><span>招生、服務、追蹤</span></a></li>
+</ol></nav>
 
   <!-- 1 -->
   
@@ -419,8 +453,8 @@ html{scroll-behavior:smooth}
 
   <!-- 5 -->
   </div>
-<div class="proposal-group" id="execution"><div class="phase-head"><div class="eyebrow">提案 02 · 按關卡執行</div><h2>由資料整理到開課，每步都有完成條件</h2><p>這是全頁的主流程。按次序展開每一步；需要官方申請或核對時，直接使用該步的連結。部分工作可並行，但不應越過合規、場地及資金關卡。</p></div><section class="block" id="steps">
-    <div class="sec-head"><div class="sec-no">02</div><h2>執行清單：逐步評估、處理及過關</h2><p>每步列出預設建議、預估時間、預估花費及進入下一步的條件。打開看細節。</p></div>
+<div class="proposal-group" id="execution"><div class="phase-head"><div class="eyebrow">提案 02 · 按關卡執行</div><h2>由資料整理到開課，每步都有完成條件</h2><p>按次序展開每一步。每步列出做法、風險、時間、花費和過關條件；申請連結放在相關步驟。</p></div><section class="block" id="steps">
+    <div class="sec-head"><div class="sec-no">02</div><h2>執行清單：逐步評估、處理及過關</h2><p>打開步驟查看評估、做法、風險、完成條件及相關連結。</p></div>
     <div class="actions" style="margin-bottom:16px"><a class="btn" href="./library.html#research">查看市場研究 →</a><a class="btn" href="./library.html#handbook">查看完整開業手冊 →</a></div>
     <div id="stepList"></div>
   </section>
@@ -456,28 +490,34 @@ html{scroll-behavior:smooth}
 
   <!-- 9 -->
   <section class="block" id="rules">
-    <div class="sec-head"><div class="sec-no">03B</div><h2>申請與合規：兩條路線分開處理</h2><p>商業登記、學校註冊、租約與樓宇消防是三件不同的事。取得其中一項，不代表其他要求自動完成。</p></div>
+    <div class="sec-head"><div class="sec-no">03B</div><h2>申請與合規：兩條路線分開處理</h2><p>先看流程圖，再按所選路線展開清單。商業登記、學校註冊和場地核准是不同程序，須分別完成。</p></div>
     <div class="grid3">
       <div class="card"><h3>商業登記</h3><p class="muted small">處理業務登記及稅務。稅務局明確說明，商業登記本身不是營業牌照。</p></div>
       <div class="card"><h3>學校註冊或其他批准</h3><p class="muted small">處理特定教育活動及場地。非註冊學校的擁有人、教員或管理人一經定罪，可罰款 HK$250,000 及監禁 2 年。</p></div>
       <div class="card"><h3>租約、屋宇及消防</h3><p class="muted small">處理場所能否按擬議方式使用。不要把租金便宜當成可辦學證明。</p></div>
     </div>
 
-    <div class="card" style="margin-top:14px;border-left:4px solid var(--studio)">
-      <h3>兩條路線的合規與申請：流程不同，不能互相代替</h3>
-      <p class="muted small" style="margin-top:6px">「私人小班工作室」是營運規模的安排，不是一種獨立牌照或法定豁免身份。先按實際課程、人數、年齡、授課時間和場地查清分類，再走相應程序。</p>
-      <div class="tablewrap" style="margin-top:10px">
-        <table class="t">
-          <thead><tr><th>比較</th><th>路線一：私人小班工作室</th><th>路線二：註冊中心</th></tr></thead>
-          <tbody>
-            <tr><th>學校註冊</th><td>若整個營運安排低於「任何一天 20 人或以上」及「任何時間同時 8 人或以上」兩項門檻，按教育局的學校定義通常不屬學校，毋須學校註冊。先把完整安排交教育局書面查詢。</td><td>達到任一門檻便屬《教育條例》所指的學校，須辦學校註冊；取得臨時註冊證明書及適用的學費批准前，不開課收費。</td></tr>
-            <tr><th>第一個申請動作</th><td>不是遞交學校註冊表格：先製作一頁營運方案（課程、年齡、每日每節人數、全日時間表、試堂及補堂安排、家長是否陪同、場地），向教育局確認人數計算及是否屬學校。</td><td>先請認可人士初查場地；新址按教育局指引逐步處理規劃、地契、消防、樓宇安全、衞生及教育局註冊；頂手則先書面確認校董、校監、營運者及場地變更程序。</td></tr>
-            <tr><th>場所與租約</th><td>仍須取得業主同意，查清租約及大廈公契是否容許教學／商業用途，並核對規劃用途、樓宇及消防安全。低於學校人數門檻不等於住宅或任何商業單位都可使用。</td><td>除租約及用途核實外，須按學校註冊程序取得相關部門要求的證明、核准圖則及場地容額；不得先裝修再假設必定批出。</td></tr>
-            <tr><th>僱人</th><td>如聘員工（全職、兼職或短期），僱員補償保險須在員工開始工作前生效；符合資格的僱員須按期限安排強積金。</td><td>同樣適用；另須按註冊學校要求處理教員資料及其他校務責任。</td></tr>
-            <tr><th>開業前共同事項</th><td colspan="2">辦理商業登記（一般須在開業後一個月內申請並展示有效證書）；核實保險、收費及退款條款；保存營運方案、教育局書面回覆、租約、公契及每日出席紀錄。商業登記不是辦學牌照。</td></tr>
-          </tbody>
-        </table>
+    <div class="route-map card" aria-label="兩條路線流程圖">
+      <div class="route-map-start"><span class="map-label">共同第一步</span><strong>提交真實課程與完整時間表，向教育局書面查詢分類</strong><span class="map-note">列明年齡、每日及同時人數、家長陪同、試堂補堂和場地安排</span></div>
+      <div class="map-branches">
+        <article class="map-lane studio-lane"><div class="map-lane-title"><span class="tag info">路線一</span><h3>私人小班工作室</h3></div>
+          <div class="map-flow">
+            <div class="map-node"><b>1</b><strong>確認分類</strong><span>取得教育局書面回覆</span></div>
+            <div class="map-node"><b>2</b><strong>核實場地</strong><span>用途、租約、公契、樓宇及消防</span></div>
+            <div class="map-node"><b>3</b><strong>開業準備</strong><span>商業登記；如聘人，先辦僱主責任</span></div>
+            <div class="map-node end"><b>✓</b><strong>按回覆營運</strong><span>控制每日人數並保存紀錄</span></div>
+          </div>
+        </article>
+        <article class="map-lane school-lane"><div class="map-lane-title"><span class="tag mid">路線二</span><h3>註冊中心</h3></div>
+          <div class="map-flow">
+            <div class="map-node"><b>1</b><strong>選新址或頂手</strong><span>先查場地或交易風險</span></div>
+            <div class="map-node"><b>2</b><strong>申請及核准</strong><span>按最新指引向各部門及教育局提交文件</span></div>
+            <div class="map-node"><b>3</b><strong>施工及驗收</strong><span>只按核准圖則施工並完成視察</span></div>
+            <div class="map-node end"><b>✓</b><strong>取得開課文件</strong><span>臨時註冊及適用學費批准到位</span></div>
+          </div>
+        </article>
       </div>
+      <p class="map-foot">兩路線都要核實場地用途、租約及商業登記。工作室不是自動豁免；註冊中心須在所需文件齊備後才開課。下方列出執行細節。</p>
     </div>
 
     <div class="grid2" style="margin-top:14px">
