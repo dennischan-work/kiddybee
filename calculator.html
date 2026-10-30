@@ -244,14 +244,14 @@ img{max-width:100%}
           <label>租約按金（月數 × 月租）<input id="abALease" type="number" min="0" step="1" value="3"></label>
           <label>裝修、消防及機電工程<input id="abAFitout" type="number" min="0" step="5000" value="300000"></label>
           <label>圖則及專業顧問<input id="abAPlans" type="number" min="0" step="2500" value="80000"></label>
-          <label>家具、教材及 IT<input id="abAFurniture" type="number" min="0" step="5000" value="50000"></label>
+          <label>家具、教材及 IT<input id="abAFurniture" type="number" min="0" step="5000" value="80000"></label>
           <label>公司、法律及保險<input id="abALegal" type="number" min="0" step="2500" value="25000"></label>
           <label>開業招生<input id="abAMarketing" type="number" min="0" step="2500" value="35000"></label>
           <label>其他預留（包括政府規費等）<input id="abAOtherCost" type="number" min="0" step="2500" value="37500"></label>
-          <label>審批及工程期間租金月數<input id="abAMonths" type="number" min="0" step="1" value="6"></label>
-          <label>方案 A 開辦費小計<input id="abASetup" type="number" value="602500" readonly></label>
+          <label>審批及工程期間租金月數<input id="abAMonths" type="number" min="0" step="1" value="5"></label>
+          <label>方案 A 開辦費小計<input id="abASetup" type="number" value="632500" readonly></label>
         </div>
-        <p class="hint">分項估算（以 800 呎、月租 HK$25,000 為例）：按金 3 個月是可退回的現金佔用；首月租已包括在審批期租金內，不重複計算。裝修連消防及機電預設 HK$300,000（約 HK$375／呎），參考辦公室裝修指南：基本翻新約 HK$300–500／呎、全面裝修約 HK$500–800／呎；學校註冊另須火警警報、自動火警偵測、緊急照明、出口指示及 FS251 證書，230 平方米以上要裝自動花灑。研究估同類 700–900 呎註冊中心連消防約 HK$520,000，所以 HK$300,000 屬「單位已有基本裝修」的情況。圖則及顧問預設 HK$80,000（手冊估 HK$25,000–80,000，研究估可達 HK$150,000）。審批期間租金另計，預設 6 個月（研究估算 4–9 個月，業界顧問估 4–12 個月）；能談到免租期便可調低。各項仍是規劃預算，須取得至少 3 份工程／專業報價及確認免租期。</p>
+        <p class="hint">分項估算（以 800 呎、月租 HK$25,000 為例）：按金 3 個月是可退回的現金佔用；首月租已包括在審批期租金內，不重複計算。裝修連消防及機電預設 HK$300,000（約 HK$375／呎），參考辦公室裝修指南：基本翻新約 HK$300–500／呎、全面裝修約 HK$500–800／呎；學校註冊另須火警警報、自動火警偵測、緊急照明、出口指示及 FS251 證書，230 平方米以上要裝自動花灑。研究估同類 700–900 呎註冊中心連消防約 HK$520,000，所以 HK$300,000 屬「單位已有基本裝修」的情況。圖則及顧問預設 HK$80,000（手冊估 HK$25,000–80,000；創辦人計劃書估牌照顧問 HK$50,000–150,000，自行申請約 HK$10,000–20,000）。家具、教材及 IT 預設 HK$80,000（計劃書：傢俬器材 HK$60,000–120,000，另教材設計及印刷 HK$50,000–90,000）。審批期間租金預設 5 個月，跟創辦人計劃書的時間表：2027 年 1 月簽約、免租 2 個月、3 月起計租、8 月開業；研究估整個流程 4–9 個月，延誤便要加月數。各項仍是規劃預算，須取得至少 3 份工程／專業報價及確認免租期。</p>
         <div class="ab-results" id="abAResults"></div>
       </article>
       <article class="ab-card" style="--c:var(--full)">
@@ -287,14 +287,16 @@ img{max-width:100%}
         <label>導師 3 月薪（未計強積金；預留，不納入本次兩階段試算）<div class="ab-salary"><input id="abTeacherPay3" type="number" min="0" step="500" value="22000"><span>每位連 MPF／月 <b id="abTeacherLoaded3">HK$0</b></span></div></label>
       </div></article>
       <article class="ab-card ab-input-card" style="--c:var(--full)"><h3>課程組合及收費</h3><div class="ab-fields">
-        <label>固定學生比例（60 分鐘）<input id="abMixLocal" type="number" min="0" max="100" step="5" value="85"></label>
+        <label>一對一學生佔比（%）<input id="abOneShare" type="number" min="0" max="100" step="5" value="0"></label>
+        <label>一對一每堂收費（45 分鐘）<input id="abOnePrice" type="number" min="0" step="10" value="850"></label>
+        <label>小組：固定課程比例（60 分鐘）<input id="abMixLocal" type="number" min="0" max="100" step="5" value="85"></label>
         <div class="ab-stat"><span>面試班比例（60 分鐘；自動補足）</span><b id="abMixInterview">15%</b></div>
         <label>每名學生每堂變動成本<input id="abVar" type="number" min="0" step="5" value="20"></label>
         <label>每堂實收（60 分鐘小班）<input id="abPriceLocal" type="number" min="0" step="5" value="330"></label>
         <label>面試班每堂實收<input id="abPriceInterview" type="number" min="0" step="5" value="450"></label>
         <div class="ab-stat"><span>加權後每位學生每週課堂實收</span><b id="abWeightedPrice">HK$348.00</b></div>
         <label>每月平均上課週數<select id="abWeeks"><option value="4" selected>4.0 週（預留假期、颱風、黑雨停課）</option><option value="4.333333">4.33 週（52 ÷ 12，不扣停課）</option></select></label>
-      </div><p class="hint">所有課堂預設 60 分鐘；固定學生比例可自行調整，面試班比例自動補足至 100%。市場線索：沙田區同類 60 分鐘小班約 HK$250–330（例如 1:4 故事班 HK$330、最多 5 人 Phonics 約 HK$300），外籍導師品牌可達 HK$600，但要聘外籍導師。HK$400 以上的價格要先用試教及報讀數據證明家長願意付。</p></article>
+      </div><p class="hint">一對一佔比預設 0%：創辦人計劃書的保守情景是 10 名一對一＋8 名小組（約 55% 一對一），可自行輸入。一對一 HK$700–1,000／45 分鐘未有同類公開收費可比較，屬未驗證的高價；一對一每堂只有 1 名學生，佔用課室及導師時間較多。小組課預設 60 分鐘；固定課程比例可自行調整，面試班比例自動補足至 100%。市場線索：沙田區同類 60 分鐘小班約 HK$250–330（例如 1:4 故事班 HK$330、最多 5 人 Phonics 約 HK$300），外籍導師品牌可達 HK$600，但要聘外籍導師。HK$400 以上的價格要先用試教及報讀數據證明家長願意付。</p></article>
       <article class="ab-card ab-input-card" style="--c:var(--good)"><h3>收生、排堂及容量</h3><div class="ab-fields">
         <label>課室數量<input id="abRooms" type="number" min="1" max="20" step="1" value="2"></label>
         <label>每間課室每週可開班數<input id="abClasses" type="number" min="1" step="1" value="22"></label>
@@ -1000,7 +1002,7 @@ img{max-width:100%}
 
 <script>
 (function(){
-  var ids=['abASetup','abALease','abAFitout','abAPlans','abAFurniture','abALegal','abAMarketing','abAOtherCost','abAMonths','abBFee','abBLease','abBDiligence','abBRepair','abBLiability','abRent','abOther','abFounder','abMixLocal','abConsultantPay','abTeacherPay1','abTeacherPay2','abTeacherPay3','abPartTime','abAdminPay','abPriceLocal','abPriceInterview','abVar','abRooms','abClasses','abClassSize','abStartStudents','abGrowth','abTrigger','abChurn','abWeeks','abFund','abTutorRate','abFounderLessons','abBStudents'];
+  var ids=['abASetup','abALease','abAFitout','abAPlans','abAFurniture','abALegal','abAMarketing','abAOtherCost','abAMonths','abBFee','abBLease','abBDiligence','abBRepair','abBLiability','abRent','abOther','abFounder','abMixLocal','abConsultantPay','abTeacherPay1','abTeacherPay2','abTeacherPay3','abPartTime','abAdminPay','abPriceLocal','abPriceInterview','abVar','abRooms','abClasses','abClassSize','abStartStudents','abGrowth','abTrigger','abChurn','abWeeks','abFund','abTutorRate','abFounderLessons','abBStudents','abOneShare','abOnePrice'];
   function el(id){return document.getElementById(id)}
   function val(id){return Math.max(0,parseFloat(el(id).value)||0)}
   function fmt(n){return 'HK'+String.fromCharCode(36)+Math.round(Math.abs(n)).toLocaleString('en-US')}
@@ -1021,14 +1023,17 @@ img{max-width:100%}
     var mixLocal=Math.min(100,val('abMixLocal'));
     var mixInterview=100-mixLocal;
     el('abMixInterview').textContent=mixInterview+'%';
-    var price=(mixLocal*val('abPriceLocal')+mixInterview*val('abPriceInterview'))/100;
-    el('abWeightedPrice').textContent='HK'+String.fromCharCode(36)+price.toFixed(2);
+    var groupPrice=(mixLocal*val('abPriceLocal')+mixInterview*val('abPriceInterview'))/100;
+    var oneShare=Math.min(100,val('abOneShare'))/100;
+    var price=oneShare*val('abOnePrice')+(1-oneShare)*groupPrice;
+    el('abWeightedPrice').textContent='HK'+String.fromCharCode(36)+price.toFixed(2)+(oneShare>0?'（一對一 '+Math.round(oneShare*100)+'%）':'');
     var variable=val('abVar'), weeks=parseFloat(el('abWeeks').value)||4;
     var contribution=(price-variable)*weeks;
     var roomCount=Math.max(1,Math.round(val('abRooms')));
     var roomsStart=Math.min(roomCount,2), roomsPhase1=Math.min(roomCount,3), roomsPhase2=Math.min(roomCount,4);
     var classes=val('abClasses'), size=val('abClassSize');
-    var capacityStart=roomsStart*classes*size, capacityPhase1=roomsPhase1*classes*size, capacity=roomsPhase2*classes*size;
+    var lessonsPerStudent=oneShare+(1-oneShare)/Math.max(1,size), effSize=1/lessonsPerStudent;
+    var capacityStart=Math.floor(roomsStart*classes*effSize), capacityPhase1=Math.floor(roomsPhase1*classes*effSize), capacity=Math.floor(roomsPhase2*classes*effSize);
     var start=val('abStartStudents'), growth=val('abGrowth'), churn=Math.min(0.5,val('abChurn')/100), trigger=val('abTrigger'), trigger2=Math.ceil(trigger*1.65), noExpand=trigger<=0;
     var aSetup=rent*val('abALease')+['abAFitout','abAPlans','abAFurniture','abALegal','abAMarketing','abAOtherCost'].reduce(function(sum,id){return sum+val(id)},0);
     el('abASetup').value=aSetup;
@@ -1041,7 +1046,7 @@ img{max-width:100%}
     var tutorRate=val('abTutorRate'), founderLessons=val('abFounderLessons');
     var costs=[base,phase1,phase2], caps=[capacityStart,capacityPhase1,capacity];
     function covered(phase){ return founderLessons + (consultant>0?22:0) + (phase>=1&&teacherCosts[0]>0?22:0) + (phase>=2&&teacherCosts[1]>0?22:0); }
-    function tutorCost(students, phase){ var lessons=Math.ceil(students/Math.max(1,size)); return Math.max(0, lessons-covered(phase))*tutorRate*weeks; }
+    function tutorCost(students, phase){ var lessons=Math.ceil(students*lessonsPerStudent); return Math.max(0, lessons-covered(phase))*tutorRate*weeks; }
     function beFor(phase, extra){ for(var n=0;n<=caps[phase]+200;n++){ if(n*contribution-tutorCost(n,phase)>=costs[phase]+(extra||0)) return n; } return Infinity; }
     function simulate(initial, g, extra, st){
       extra=extra||0; if(st==null) st=start;
