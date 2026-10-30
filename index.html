@@ -49,7 +49,7 @@ h1{font-family:var(--f-disp);font-size:clamp(28px,5vw,44px);line-height:1.2;marg
 .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
 .btn{display:inline-block;padding:9px 16px;border-radius:8px;text-decoration:none;font-size:14.5px;border:1px solid var(--line);color:var(--ink);background:var(--surface)}
 .btn.primary{background:var(--studio);border-color:var(--studio);color:#fff}
-.disclaimer{font-size:13px;color:var(--muted);margin:0;padding:10px 12px;border-left:3px solid var(--warn);background:var(--soft);border-radius:6px}
+.disclaimer{font-size:13px;color:var(--bad);margin:0;padding:10px 12px;border-left:3px solid var(--bad);background:color-mix(in srgb,var(--bad) 7%,var(--surface));border-radius:6px}
 section.block{padding:34px 0 8px;scroll-margin-top:56px}
 .sec-head{display:grid;gap:6px;margin-bottom:18px}
 .sec-no{font-family:var(--f-num);font-size:12.5px;color:var(--muted);letter-spacing:.06em}
@@ -208,7 +208,7 @@ details .body{padding:0 16px 16px;display:grid;gap:10px}
 .milestone-proof b{display:block;color:var(--studio);margin-bottom:2px}
 .milestone-track .milestone:last-child .milestone-date:before{border-color:var(--good)}
 .timeline-route-note{margin-top:12px;padding:12px;border-left:3px solid var(--bad);background:color-mix(in srgb,var(--bad) 7%,var(--surface));border-radius:6px;font-size:13px;color:var(--bad)}
-.timeline-route-note::before{content:"⚠️ 注意事項";display:block;font-weight:700;margin-bottom:4px;color:var(--bad)}
+.warning-label{display:block;font-weight:700;margin-bottom:4px;color:var(--bad)}
 .route-option-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
 .route-option{padding:12px;border-radius:8px;border:1px solid var(--line);min-width:0}
 .route-option h4{font-size:15px;margin:0 0 6px}
@@ -319,7 +319,7 @@ html{scroll-behavior:smooth}
       <a class="btn primary" href="#direction">按資金上限看可行方向</a>
       <a class="btn" href="./calculator.html">打開試算台</a>
     </div>
-    <p class="disclaimer">所有金額均為港元。學生人數、租金、收費、招聘及招生數字都是規劃假設，不是報價、批准條件或保證結果；本頁不構成財務或法律意見。</p>
+    <p class="disclaimer"><b>⚠️ 重要備注：</b>所有金額均為港元。學生人數、租金、收費、招聘及招生數字都是規劃假設，不是報價、批准條件或保證結果；本頁不構成財務或法律意見。</p>
   </header>
   <nav class="workflow-note" aria-label="提案閱讀次序"><ol>
 <li><a href="#decision"><span class="journey-no">01</span><b>定方向</b><span>選路線、對資金</span></a></li>
@@ -556,7 +556,8 @@ html{scroll-behavior:smooth}
           <li class="milestone gate"><div class="milestone-date"><strong>第 5 關｜開業前核對</strong><span>2027 年 6–7 月</span><small>內部停看點</small></div><div class="milestone-content"><p>用真實班表重算同時及每日人數，把試堂、補堂、家長陪同和其他課程一併計入。逐項核對教育局回覆、物業用途、租約條款、保險、場地安全及可用現金。</p><p>若教育局分類或場地用途仍未書面確認，暫停接受不可退款的課程費及作開課承諾，重新評估延後或改用合作場地。</p></div><div class="milestone-proof"><b>完成證據</b>簽署版開業檢查表、鎖定名額的預約表、每日出席紀錄流程。</div></li>
           <li class="milestone"><div class="milestone-date"><strong>目標開課</strong><span>2027 年 8 月或之後</span></div><div class="milestone-content"><p>只有在教育局回覆、場地及營運安排全部一致，並完成適用登記、保險與安全檢查後開課。按書面確認的人數上限每日點算，保存出席及補堂紀錄。</p></div><div class="milestone-proof"><b>未過關怎辦</b>延後開課；不要用「先試營運」或改稱「工作室」避開未解決的分類問題。</div></li>
         </ol>
-        <p class="timeline-route-note"><b>創辦人特別備注：</b>「任何時間少於 8 人、每日少於 20 人」只是本計劃採用的保守人數控制方式，並非教育局對課程、場地或實際人數計法的預先批准。請以教育局對你提交的實際方案之書面回覆為準。</p>
+        </div>
+        <p class="timeline-route-note"><span class="warning-label">⚠️ 注意事項</span><b>創辦人特別備注：</b>「任何時間少於 8 人、每日少於 20 人」只是本計劃採用的保守人數控制方式，並非教育局對課程、場地或實際人數計法的預先批准。請以教育局對你提交的實際方案之書面回覆為準。</p>
 
         <div class="timeline-subroute timeline-subroute-studio-transfer" id="studio-takeover">
           <div class="timeline-subhead"><h4>方案 B｜頂手現有私人小班工作室</h4><p class="muted small">這是接手私人小班生意的做法，不是「接手牌照」。如原營運者已是註冊學校，或新安排達到學校定義，便不屬本分支，改按「路線二：註冊中心」處理。</p></div>
@@ -567,7 +568,7 @@ html{scroll-behavior:smooth}
             <li class="milestone gate"><div class="milestone-date"><strong>第 4 關｜把條件寫入協議</strong><span>交訂金或簽約前</span><small>付款保護</small></div><div class="milestone-content"><p>把教育局分類回覆、業主同意、租約安排、資產清單、已收學費責任、員工安排、資料交接和未能完成時的退款／退出方式寫入協議。盡量採用可退訂金或分階段付款；律師未審閱前，不付不可退頂手費。</p></div><div class="milestone-proof"><b>完成證據</b>雙方簽署並經律師審閱的有條件協議、付款及退出條款。</div></li>
             <li class="milestone"><div class="milestone-date"><strong>第 5 關｜交接後重新核對</strong><span>開課前</span></div><div class="milestone-content"><p>以新營運者的實際課程和班表重新向教育局確認分類；按新營運主體及業務結構處理商業登記資料、保險、家長通知、學生資料權限、收費與退款文件。不要照搬賣方的上限或口頭承諾。</p></div><div class="milestone-proof"><b>完成證據</b>教育局書面回覆、業主／租約文件、適用商業登記、保險及新班表。</div></li>
           </ol>
-          <p class="timeline-route-note"><b>不得混淆：</b>頂手可能縮短找客和配置時間，但沒有固定「幾星期可開業」保證。若查到賣方其實是註冊學校，原證明書或營運安排不可假設自動轉給新營運者；請依教育局個案指示改走註冊中心頂手流程。</p>
+          <p class="timeline-route-note"><span class="warning-label">⚠️ 注意事項</span><b>不得混淆：</b>頂手可能縮短找客和配置時間，但沒有固定「幾星期可開業」保證。若查到賣方其實是註冊學校，原證明書或營運安排不可假設自動轉給新營運者；請依教育局個案指示改走註冊中心頂手流程。</p>
           <p class="muted small" style="margin-top:8px">核對連結：<a href="https://www.edb.gov.hk/tc/sch-admin/sch-registration/about-sch-registration/index.html" rel="noopener">教育局：學校定義及註冊</a> · <a href="https://www.ird.gov.hk/chi/tax/bre_abr.htm" rel="noopener">稅務局：商業登記</a> · <a href="https://www.elegislation.gov.hk/hk/cap49" rel="noopener">香港法例第 49 章</a></p>
         </div>
       </div>
@@ -587,7 +588,7 @@ html{scroll-behavior:smooth}
           <li class="milestone gate"><div class="milestone-date"><strong>第 6 關｜取得開課文件</strong><span>目標 2027 年 6–7 月</span><small>未齊不可開課</small></div><div class="milestone-content"><p>把安全證明、課程及費用等完整資料交教育局；完成臨時註冊及適用學費批准，安排員工、僱員補償保險、收據、家長單張和安全流程。</p><p>教育局指引列明，在收妥所需文件並核對無誤後，才會考慮於 10 個工作天內發出臨時註冊證明書；這不包括前面的跨部門申請、補件、工程及驗收。</p></div><div class="milestone-proof"><b>完成證據</b>臨時註冊證明書、適用學費批准、核准容額及開課前檢查表。</div></li>
           <li class="milestone gate"><div class="milestone-date"><strong>開業決策</strong><span>2027 年 7 月檢視</span><small>內部停看點</small></div><div class="milestone-content"><p>若 7 月仍未取得全部開課所需文件，立即改期並通知已報讀家長；不要先收費上課，再補辦文件。按金、租金和員工成本要納入延後情境重新計算。</p></div><div class="milestone-proof"><b>原則</b>批准文件是開課前提；2027 年 8 月只是目標日期。</div></li>
         </ol>
-        <p class="timeline-route-note">官方指引可供核對申請次序與最新表格：<a href="https://www.edb.gov.hk/attachment/tc/sch-admin/sch-registration/about-sch-registration/1a_cguide-non-purpose-built.pdf" rel="noopener">教育局《新辦學校註冊指引：非為學校用途而設計和建造的房產》</a>。部門指標時間不等於整個項目工期；如未能在 2027 年 3 月前完成場地初查並提交可處理的文件，應立即評估延後開業。</p>
+        <p class="timeline-route-note"><span class="warning-label">⚠️ 注意事項</span>官方指引可供核對申請次序與最新表格：<a href="https://www.edb.gov.hk/attachment/tc/sch-admin/sch-registration/about-sch-registration/1a_cguide-non-purpose-built.pdf" rel="noopener">教育局《新辦學校註冊指引：非為學校用途而設計和建造的房產》</a>。部門指標時間不等於整個項目工期；如未能在 2027 年 3 月前完成場地初查並提交可處理的文件，應立即評估延後開業。</p>
 
         </div>
         <div class="timeline-subroute timeline-subroute-takeover">
@@ -602,7 +603,7 @@ html{scroll-behavior:smooth}
         </div>
       </div>
     </div>
-    <p class="timeline-route-note"><b>共同決策規則：</b>每月底更新「已完成／待回覆／受阻」清單及剩餘現金。任何一項法律分類、場地用途、必要批准或資金缺口未解決，都要把開業日改為「待確認」，不能把未批資助、口頭承諾或未簽批文件列作已落實條件。</p>
+    <p class="timeline-route-note"><span class="warning-label">⚠️ 注意事項</span><b>共同決策規則：</b>每月底更新「已完成／待回覆／受阻」清單及剩餘現金。任何一項法律分類、場地用途、必要批准或資金缺口未解決，都要把開業日改為「待確認」，不能把未批資助、口頭承諾或未簽批文件列作已落實條件。</p>
     <p class="muted small" style="margin-top:10px">註：時間表是項目管理估算，不是法律意見或審批時間保證。「認可人士」（Authorized Person, AP）是按《建築物條例》列入屋宇署名冊的建築專業人士，不是泛指一般裝修顧問；按工程性質，可能還須註冊結構工程師。<a href="https://www.bd.gov.hk/tc/resources/registration-guides/index_building_professionals.html" rel="noopener">屋宇署：建築專業人士名冊與委任說明</a></p>
   </section>
 
