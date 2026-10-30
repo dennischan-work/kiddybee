@@ -207,7 +207,16 @@ details .body{padding:0 16px 16px;display:grid;gap:10px}
 .milestone-proof{padding:9px 10px;border-radius:7px;background:var(--soft);font-size:12px}
 .milestone-proof b{display:block;color:var(--studio);margin-bottom:2px}
 .milestone-track .milestone:last-child .milestone-date:before{border-color:var(--good)}
-.timeline-route-note{margin-top:12px;padding:12px;border-left:3px solid var(--warn);background:var(--soft);border-radius:6px;font-size:13px}
+.timeline-route-note{margin-top:12px;padding:12px;border-left:3px solid var(--bad);background:color-mix(in srgb,var(--bad) 7%,var(--surface));border-radius:6px;font-size:13px;color:var(--bad)}
+.timeline-route-note::before{content:"⚠️ 注意事項";display:block;font-weight:700;margin-bottom:4px;color:var(--bad)}
+.route-option-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.route-option{padding:12px;border-radius:8px;border:1px solid var(--line);min-width:0}
+.route-option h4{font-size:15px;margin:0 0 6px}
+.route-option-a{background:color-mix(in srgb,var(--studio) 7%,var(--surface));border-color:color-mix(in srgb,var(--studio) 24%,var(--line))}
+.route-option-b{background:color-mix(in srgb,#66806B 8%,var(--surface));border-color:color-mix(in srgb,#66806B 28%,var(--line))}
+.route-caution,.caution-note{color:var(--bad);font-size:13px;margin-top:8px}
+.route-caution b,.caution-note b{color:var(--bad)}
+@media(max-width:620px){.route-option-grid{grid-template-columns:minmax(0,1fr)}}
 .timeline-subhead{margin:18px 0 0;padding-top:14px;border-top:1px solid var(--line)}
 .timeline-subhead h4{margin:0;font-size:15px}
 .timeline-subhead p{margin-top:4px}
@@ -351,23 +360,20 @@ html{scroll-behavior:smooth}
       <div class="card route" style="--c:var(--studio)">
         <span class="tag info">投資人方案建議先做</span>
         <h3 style="margin-top:8px">路線一：私人小班工作室</h3>
-        <p class="muted">一間課室、創辦人親自授課，並按教育局對實際課程及人數的書面回覆安排。可自行開設，也可考慮頂手現有私人小班工作室；頂手不代表承接了原經營者的合規資格。</p>
-        <ul class="clean small" style="margin-top:10px">
-          <li>自設時間：條件完備時約 2–4 週；頂手時間按查核、業主同意及交接條件另計</li>
-          <li>場地：優先比較沙田／馬鞍山附近、400–600 呎商業物業；摘要租金只作未核實線索</li>
-          <li>風險：頂手價可能不包括隱藏債務、未上課學費或租約責任；創辦人病假或代課亦影響營運</li>
-        </ul>
+        <p class="muted">創辦人親自授課，一間課室；先按教育局對實際課程、人數及場地的書面回覆安排。可自行開設，亦可頂手現有私人小班工作室。</p>
+        <div class="route-option-grid">
+          <div class="route-option route-option-a"><h4>方案 A｜自行開設</h4><p class="small">條件完備時，內部估算約 2–4 週。優先比較沙田／馬鞍山附近 400–600 呎商業物業；租金及用途須逐一核實。</p><p class="route-caution"><b>⚠️ 注意事項：</b>先取得教育局對實際安排的書面回覆，並確認租約、公契及物業用途；工作室名稱本身不代表毋須遵守相關規定。</p></div>
+          <div class="route-option route-option-b"><h4>方案 B｜頂手現有工作室</h4><p class="small">承接可能涉及生意、資產及租約交接；時間按盡職調查、業主同意及交接條件計，沒有固定保證。</p><p class="route-caution"><b>⚠️ 注意事項：</b>頂手不等於接手牌照或合規資格。核對未上課學費、退款、欠款、員工及租約責任；律師審閱前不付不可退頂手費。<a href="#studio-takeover">查看頂手關卡</a></p></div>
+        </div>
       </div>
       <div class="card route" style="--c:var(--phased)">
         <span class="tag mid">首年不建議</span>
         <h3 style="margin-top:8px">路線二：註冊中心</h3>
-        <p class="muted">兩間課室、兩位或以上老師，約 80 名學生規劃。須按教育局確認的要求取得註冊或臨時註冊及其他批准，才可按批准條件營運。</p>
-        <ul class="clean small" style="margin-top:10px">
-          <li>自行申請：新方案估 4–9 個月；本頁原列 4–6 個月只作較快情景。顧問、圖則及消防改動估 HK$50,000–150,000，待正式報價</li>
-          <li>場地：600–900 呎，按個案核實規劃、地契、消防、屋宇及衞生。摘要另列香港島商業大廈月租約 HK$30,000、900–1,500 呎；地區不同，不能直接當作沙田可比租盤</li>
-          <li>頂手線索：摘要估 1–3 個月、放盤叫價 HK$120,000–380,000（非成交價）；註冊證明不可假設可轉讓，付款前須取得教育局對新營運者及場地安排的書面確認</li>
-          <li>風險：工程與固定成本高，保本人數超過容量</li>
-        </ul>
+        <p class="muted">兩間課室、兩位或以上老師，約 80 名學生規劃。須按教育局確認的要求完成註冊或臨時註冊及其他批准，才可按批准條件營運。</p>
+        <div class="route-option-grid">
+          <div class="route-option route-option-a"><h4>方案 A｜新址申請</h4><p class="small">研究估算約 4–9 個月；顧問、圖則及消防改動暫估 HK$50,000–150,000，須以正式報價及部門要求更新。初步比較 600–900 呎場地。</p><p class="route-caution"><b>⚠️ 注意事項：</b>先核實規劃、地契、消防、屋宇及衞生要求；未取得所需開課文件前，不可開課。</p></div>
+          <div class="route-option route-option-b"><h4>方案 B｜頂手現有中心</h4><p class="small">市場摘要估 1–3 個月、放盤叫價 HK$120,000–380,000（非成交價）；實際時間及成本視乎交易和批准安排。</p><p class="route-caution"><b>⚠️ 注意事項：</b>註冊證明不可假設自動轉讓。付款前取得教育局對新營運者安排及業主同意的書面確認，並核對未履行學費和債務。</p></div>
+        </div>
       </div>
     </div>
 
@@ -540,6 +546,7 @@ html{scroll-behavior:smooth}
     <div class="stack" style="margin-top:14px">
       <div class="card timeline-path-studio">
         <h3>路線一：私人小班工作室</h3>
+        <div class="timeline-subroute timeline-subroute-new"><div class="timeline-subhead"><h4>方案 A｜自行開設</h4></div>
         <p class="muted small">前提：創辦人親自授課，並以教育局對實際課程、學生人數和場地安排的書面回覆確認營運方式。工作室不按學校註冊路線營運，不等於免除租約、公契、物業用途、樓宇安全、消防、商業登記或僱主責任。</p>
         <ol class="milestone-track">
           <li class="milestone gate"><div class="milestone-date"><strong>第 1 關｜定義課程</strong><span>2026 年 11–12 月</span><small>必須先做</small></div><div class="milestone-content"><p>盤點現有教材，列出授課年齡、課程內容、每班人數、每日班次、同時在場人數、家長陪同、試堂及補堂安排。把完整時間表和場地資料一併交教育局書面查詢。</p><p>同時訪談家長，核實可上課日子、時段及願付價格，避免只按理論容量估算招生。</p></div><div class="milestone-proof"><b>完成證據</b>課程與全日時間表、家長訪談摘要、教育局書面回覆；如未回覆，標記為未過關。</div></li>
@@ -551,8 +558,8 @@ html{scroll-behavior:smooth}
         </ol>
         <p class="timeline-route-note"><b>創辦人特別備注：</b>「任何時間少於 8 人、每日少於 20 人」只是本計劃採用的保守人數控制方式，並非教育局對課程、場地或實際人數計法的預先批准。請以教育局對你提交的實際方案之書面回覆為準。</p>
 
-        <div class="timeline-subroute timeline-subroute-studio-transfer">
-          <div class="timeline-subhead"><h4>路線一的另一種取得方式｜頂手現有私人小班工作室</h4><p class="muted small">這是接手私人小班生意的做法，不是「接手牌照」。如原營運者已是註冊學校，或新安排達到學校定義，便不屬本分支，改按「路線二：註冊中心」處理。</p></div>
+        <div class="timeline-subroute timeline-subroute-studio-transfer" id="studio-takeover">
+          <div class="timeline-subhead"><h4>方案 B｜頂手現有私人小班工作室</h4><p class="muted small">這是接手私人小班生意的做法，不是「接手牌照」。如原營運者已是註冊學校，或新安排達到學校定義，便不屬本分支，改按「路線二：註冊中心」處理。</p></div>
           <ol class="milestone-track">
             <li class="milestone gate"><div class="milestone-date"><strong>第 1 關｜先確認賣方屬哪一類</strong><span>任何付款前</span><small>先停看</small></div><div class="milestone-content"><p>核實賣方的商業登記主體、教育局往來信件、課程、全日班表、同時及每日學生人數、租約與實際使用情況。若有學校註冊證明或人數可能達門檻，直接轉入註冊中心的頂手程序。</p></div><div class="milestone-proof"><b>完成證據</b>賣方文件副本、場地及班表核對紀錄、教育局書面分類查詢。</div></li>
             <li class="milestone gate"><div class="milestone-date"><strong>第 2 關｜核實場地能否承接</strong><span>簽約前</span><small>不先裸簽</small></div><div class="milestone-content"><p>取得業主對租約轉讓或重簽及教學用途的書面同意；檢查租期、按金、欠租、還原責任、大廈公契及相關物業要求。若場地不能按新營運者的實際安排使用，停止交易評估。</p></div><div class="milestone-proof"><b>完成證據</b>業主書面同意、租約草稿、租金按金及退出責任清單。</div></li>
@@ -634,7 +641,7 @@ html{scroll-behavior:smooth}
     <div class="grid2" style="margin-top:14px">
       <div class="card route" style="--c:var(--studio)">
         <span class="tag info">路線一｜私人小班工作室</span>
-        <h3 style="margin-top:8px">預設規範與執行次序</h3>
+        <h3 style="margin-top:8px">方案 A｜自行開設：規範與執行次序</h3>
         <ol class="small" style="margin:0;padding-left:1.2em;display:grid;gap:7px">
           <li><b>把人數設計在門檻以下。</b>本計劃先以同一時間最多 7 名學生、每個營業日最多 19 名學生作保守排班線。按整個營運處所及全日計算，不是每班各自計；試堂、補堂及其他課程都放進同一張每日名單。這是內部控制線，不是教育局預先批准或安全港。</li>
           <li><b>先查教育局。</b>交上課程內容、年齡、全日時間表、每節及每日人數、兩堂間隔、家長陪同安排及場地資料，請教育局書面回覆：是否屬《教育條例》下的學校、學生人數如何計算、該方案可否按毋須學校註冊的方式營運。未收到回覆前，不要把「小班」或「工作室」當作免註冊理由。</li>
@@ -650,7 +657,7 @@ html{scroll-behavior:smooth}
       </div>
       <div class="card route" style="--c:var(--phased)">
         <span class="tag mid">路線二｜註冊中心</span>
-        <h3 style="margin-top:8px">預設申請流程與開課關卡</h3>
+        <h3 style="margin-top:8px">方案 A｜新址申請：流程與開課關卡</h3>
         <ol class="small" style="margin:0;padding-left:1.2em;display:grid;gap:7px">
           <li><b>先選新址或頂手。</b>新址在簽約前由認可人士初查；頂手須核對原註冊資料、租約、按金、已收學費／退款責任，並書面詢問教育局新營運者及校董／校監變更程序。未取得教育局及業主書面確認前，不付不可退頂手費。</li>
           <li><b>新址先做場地查核。</b>按教育局現行指引處理規劃署（表格 P）、地政總署（表格 L）、消防處（A1）、屋宇署（A2）等部門要求，再向教育局遞交學校註冊、校董、學費、課程、時間表、圖則及租約資料。逐案要求可能不同，先核對最新表格及附件。</li>
@@ -659,7 +666,7 @@ html{scroll-behavior:smooth}
           <li><b>開業後持續管理。</b>展示學校證明、課程及核准費用；按適用要求出收據、派發課程資料、維持核准容額及消防裝置檢查紀錄。聘員工時亦同樣先辦僱員補償保險及僱員法定安排。</li>
         </ol>
         <details style="margin-top:12px">
-          <summary>頂手付款前：逐項完成盡職調查 <span class="s-meta">未查清不交不可退訂金</span></summary>
+          <summary>方案 B｜頂手現有中心：付款前完成盡職調查 <span class="s-meta">未查清不交不可退訂金</span></summary>
           <div class="body">
             <ol class="small" style="margin:0;padding-left:1.2em;display:grid;gap:7px">
               <li><b>教育局及註冊狀況：</b>核對註冊證明書地址、有效狀態、核准課程及課室容額；要求賣方提供教育局來函、警告或待整改事項；書面確認新營運者、校董／校監變更的辦法與生效條件。註冊證明不能假設跟生意自動轉手。</li>
@@ -725,7 +732,7 @@ html{scroll-behavior:smooth}
       <div class="step"><div class="when">第一段 · 2026 年 11 月至 2027 年 2 月</div><div class="amt">HK$5 萬</div><p class="small">驗證：教材整理、家長訪談、教育局查詢、合作場地試教、場地專業初查</p><p class="small muted" style="margin-top:6px">條件：出資協議簽妥</p></div>
       <div class="step"><div class="when">第二段 · 2027 年 3 月至 6 月</div><div class="amt">HK$25 萬</div><p class="small">開業：簽租約 HK$12 萬；裝修、設置及開業招生 HK$13 萬</p><p class="small muted" style="margin-top:6px">條件：關卡 A；開課前部分另須關卡 B</p></div>
       <div class="step"><div class="when">第三段 · 開課後按月</div><div class="amt">HK$25 萬</div><p class="small">營運儲備：支付每月營運虧損</p><p class="small muted" style="margin-top:6px">條件：每月 5 日前交月報；每月上限＝上月實際虧損＋HK$5,000</p></div>
-      <div class="step keep"><div class="when">保留 · 不預設動用</div><div class="amt">HK$45 萬</div><p class="small">只用於升級評估</p><p class="small muted" style="margin-top:6px">條件：關卡 C。注意：停損時的解約及結業成本，仍可能要動用其中約 HK$5–9 萬</p></div>
+      <div class="step keep"><div class="when">保留 · 不預設動用</div><div class="amt">HK$45 萬</div><p class="small">只用於升級評估</p><p class="caution-note small" style="margin-top:6px"><b>⚠️ 注意事項：</b>停損時的解約及結業成本，仍可能要動用其中約 HK$5–9 萬。</p></div>
     </div>
 
     <div style="margin-top:14px">
