@@ -292,16 +292,16 @@ img{max-width:100%}
         <label>導師 3 月薪（未計強積金；預留，不納入本次兩階段試算）<div class="ab-salary"><input id="abTeacherPay3" type="number" min="0" step="500" value="22000"><span>每位連 MPF／月 <b id="abTeacherLoaded3">HK$0</b></span></div></label>
       </div></article>
       <article class="ab-card ab-input-card" style="--c:var(--full)"><h3>課程組合及收費</h3><div class="ab-fields">
-        <label>一對一學生佔比（%）<input id="abOneShare" type="number" min="0" max="100" step="5" value="55"></label>
+        <label>一對一學生佔比（%）<input id="abOneShare" type="number" min="0" max="100" step="5" value="30"></label>
+        <label>小組：固定課程比例（%，60 分鐘）<input id="abMixLocal" type="number" min="0" max="100" step="5" value="60"></label>
+        <div class="ab-stat"><span>面試班比例（60 分鐘；自動補足）</span><b id="abMixInterview">10%</b></div>
         <label>一對一每堂收費（45 分鐘；創辦人現行 HK$700–1,000）<input id="abOnePrice" type="number" min="0" step="10" value="850"></label>
-        <label>小組：固定課程比例（60 分鐘）<input id="abMixLocal" type="number" min="0" max="100" step="5" value="100"></label>
-        <div class="ab-stat"><span>面試班比例（60 分鐘；自動補足）</span><b id="abMixInterview">15%</b></div>
-        <label>每名學生每堂變動成本<input id="abVar" type="number" min="0" step="5" value="20"></label>
-        <label>小組每位每堂收費（60 分鐘）<input id="abPriceLocal" type="number" min="0" step="5" value="400"></label>
-        <label>面試班每堂實收<input id="abPriceInterview" type="number" min="0" step="5" value="450"></label>
+        <label>小組每位每堂收費（60 分鐘）<input id="abPriceLocal" type="number" min="0" step="5" value="450"></label>
+        <label>面試班每堂實收<input id="abPriceInterview" type="number" min="0" step="5" value="500"></label>
         <div class="ab-stat"><span>加權後每位學生每週課堂實收</span><b id="abWeightedPrice">—</b></div>
+        <label>每名學生每堂變動成本<input id="abVar" type="number" min="0" step="5" value="20"></label>
         <label>每月平均上課週數<select id="abWeeks"><option value="4" selected>4.0 週（預留假期、颱風、黑雨停課）</option><option value="4.333333">4.33 週（52 ÷ 12，不扣停課）</option></select></label>
-      </div><p class="hint">一對一佔比預設 55%，跟創辦人計劃書的保守情景（10 名一對一＋8 名小組）。一對一 HK$850 取創辦人現行收費 HK$700–1,000 的中間值，已有實際學生支持；但學生是否願意轉到中心、在中心是否付同樣價錢，仍要確認。一對一每堂只有 1 名學生，佔用課室及導師時間較多。小組每位每堂預設 HK$400：計劃書的 HK$500–600 屬高價一檔，沙田及全港同類小組約 HK$210–400（本地導師），HK$600 屬外籍導師品牌；HK$400 已在本地導師價的上限，可再試 HK$330。小組課預設 60 分鐘；固定課程比例可自行調整，面試班比例自動補足至 100%。市場線索：Hellokids HK$210、Letterland HK$270、Monkey Tree 約 HK$300、1:4 故事班 HK$330、brightkids HK$300–400、CPDA 約 HK$370–390；外籍導師品牌 Phonics Plus 約 HK$600。</p></article>
+      </div><p class="hint">三個比例以全部學生計，合共 100%：預設一對一 30%、小組固定課程 60%、面試班 10%（自動補足）。一對一 HK$850 取創辦人現行收費 HK$700–1,000 的中間值，已有實際學生支持；但學生是否願意轉到中心、在中心是否付同樣價錢，仍要確認。一對一每堂只有 1 名學生，佔用課室及導師時間較多。小組每位每堂預設 HK$450、面試班 HK$500：高於沙田及全港同類本地導師小組約 HK$210–400，接近外籍導師品牌的 HK$600，要以試教及報讀率確認家長願意付；可再試 HK$400 或 HK$330。面試班收入集中在面試季，10% 是全年平均。小組課預設 60 分鐘；固定課程比例可自行調整，面試班比例自動補足至 100%。市場線索：Hellokids HK$210、Letterland HK$270、Monkey Tree 約 HK$300、1:4 故事班 HK$330、brightkids HK$300–400、CPDA 約 HK$370–390；外籍導師品牌 Phonics Plus 約 HK$600。</p></article>
       <article class="ab-card ab-input-card" style="--c:var(--good)"><h3>收生、排堂及容量</h3><div class="ab-fields">
         <label>課室數量<input id="abRooms" type="number" min="1" max="20" step="1" value="2"></label>
         <label>每間課室每週可開班數<input id="abClasses" type="number" min="1" step="1" value="22"></label>
@@ -1025,13 +1025,13 @@ img{max-width:100%}
     var base=rent+other+founderCost+consultantCost+partTime+adminCost;
     var phase1=base+teacherCosts[0];
     var phase2=phase1+teacherCosts[1];
-    var mixLocal=Math.min(100,val('abMixLocal'));
-    var mixInterview=100-mixLocal;
-    el('abMixInterview').textContent=mixInterview+'%';
-    var groupPrice=(mixLocal*val('abPriceLocal')+mixInterview*val('abPriceInterview'))/100;
-    var oneShare=Math.min(100,val('abOneShare'))/100;
-    var price=oneShare*val('abOnePrice')+(1-oneShare)*groupPrice;
-    el('abWeightedPrice').textContent='HK'+String.fromCharCode(36)+price.toFixed(2)+(oneShare>0?'（一對一 '+Math.round(oneShare*100)+'%）':'');
+    var onePct=Math.min(100,val('abOneShare'));
+    var mixLocal=Math.min(100-onePct,val('abMixLocal'));
+    var mixInterview=Math.max(0,100-onePct-mixLocal);
+    el('abMixInterview').textContent=mixInterview+'%'+(onePct+val('abMixLocal')>100?'（一對一加固定課程已超過 100%，固定課程按 '+mixLocal+'% 計）':'');
+    var oneShare=onePct/100;
+    var price=(onePct*val('abOnePrice')+mixLocal*val('abPriceLocal')+mixInterview*val('abPriceInterview'))/100;
+    el('abWeightedPrice').textContent='HK'+String.fromCharCode(36)+price.toFixed(2);
     var variable=val('abVar'), weeks=parseFloat(el('abWeeks').value)||4;
     var contribution=(price-variable)*weeks;
     var roomCount=Math.max(1,Math.round(val('abRooms')));
