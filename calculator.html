@@ -285,7 +285,7 @@ img{max-width:100%}
       <p class="hint" id="abCashRead"></p>
       <div class="tablewrap"><table class="ab-table" id="abMonthTable"></table></div>
     </section>
-    <p class="hint">估算說明：A 的一次性成本＝開辦費＋審批期租金；B＝頂手價＋盡職審查＋交接修補＋租約按金／首月租金＋已核實承擔。現金曲線由「開業前一次性投入」開始，再計每月營運現金流；未計稅、融資、退款或按金日後收回。所有欄位都是可改的規劃值，不是報價、法律意見或批准保證。</p>
+    <p class="hint">估算說明：A 的一次性成本＝開辦費＋審批期租金；B＝頂手價＋盡職審查＋交接修補＋租約按金／首月租金＋已核實承擔。每月預估收入＝學生人數 × 加權後每週課堂實收 × 52 ÷ 12，未扣除每堂變動成本及固定成本。現金曲線由「開業前一次性投入」開始，再計每月營運現金流；未計稅、融資、退款或按金日後收回。所有欄位都是可改的規劃值，不是報價、法律意見或批准保證。</p>
   </section>
 
   <div class="layout">
@@ -1009,17 +1009,18 @@ img{max-width:100%}
     ];
     routes.forEach(function(r){
       var cash=-r.initial, low=cash, lowMonth=0, firstProfit=0, payback=0, expandedNow=false, rows=[];
-      rows.push({month:0,students:0,fixed:0,net:-r.initial,cash:cash});
+      rows.push({month:0,students:0,fixed:0,revenue:0,net:-r.initial,cash:cash});
       for(var m=1;m<=24;m++){
         var students=Math.min(expandedNow?capacity:capacityStart,Math.round(start+(m-1)*growth));
         var cost=expandedNow?expanded:base;
+        var revenue=students*price*weeks;
         var net=students*contribution-cost;
         if(!expandedNow&&students>=trigger) expandedNow=true;
         cash+=net;
         if(net>0&&!firstProfit)firstProfit=m;
         if(cash>=0&&!payback)payback=m;
         if(cash<low){low=cash;lowMonth=m}
-        rows.push({month:m,students:students,fixed:cost,net:net,cash:cash});
+        rows.push({month:m,students:students,fixed:cost,revenue:revenue,net:net,cash:cash});
       }
       r.rows=rows;r.low=low;r.lowMonth=lowMonth;r.firstProfit=firstProfit;r.payback=payback;
       r.breakEven=Math.ceil(expanded/contribution);
@@ -1041,9 +1042,9 @@ img{max-width:100%}
     el('abCashRead').textContent=routes.map(function(r){
       return r.name+'：現金最低 '+signed(r.low)+'（第 '+r.lowMonth+' 月）；'+(r.firstProfit?'第 '+r.firstProfit+' 月起單月營運有盈餘':'24 個月內未有單月盈餘')+'；'+(r.payback?'第 '+r.payback+' 月累計收回開業前投入':'24 個月內未歸本');
     }).join('　｜　');
-    var table='<thead><tr><th>月份</th><th>學生</th><th>每月固定成本</th><th>方案 A 月末現金</th><th>方案 B 月末現金</th></tr></thead><tbody>';
+    var table='<thead><tr><th>月份</th><th>學生</th><th>每月固定成本</th><th>每月預估收入</th><th>方案 A 月末現金</th><th>方案 B 月末現金</th></tr></thead><tbody>';
     for(var m=0;m<=24;m++){
-      table+='<tr><td>'+(m===0?'開業前':m)+'</td><td>'+routes[0].rows[m].students+'</td><td>'+fmt(routes[0].rows[m].fixed)+'</td><td>'+signed(routes[0].rows[m].cash)+'</td><td>'+signed(routes[1].rows[m].cash)+'</td></tr>';
+      table+='<tr><td>'+(m===0?'開業前':m)+'</td><td>'+routes[0].rows[m].students+'</td><td>'+fmt(routes[0].rows[m].fixed)+'</td><td>'+fmt(routes[0].rows[m].revenue)+'</td><td>'+signed(routes[0].rows[m].cash)+'</td><td>'+signed(routes[1].rows[m].cash)+'</td></tr>';
     }
     el('abMonthTable').innerHTML=table+'</tbody>';
     draw(routes);
