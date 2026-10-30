@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* Layout: 左邊假設面板（寬螢幕時固定），右邊依「結論卡 → 現金曲線 → 打平與容量 → 定價敏感度 → 創辦人一週」由總到細 */
+/* Layout: 左邊假設面板（寬螢幕時固定），右邊依「結論卡 → 創辦人一週課表 → 人手 → 現金曲線 → 打平與容量 → 定價敏感度」由總到細 */
 :root{
   --bg:#F5F7F4; --surface:#FFFFFF; --ink:#17232A; --muted:#5B6A70; --line:#DCE3E0; --soft:#EDF1EE;
   --studio:#1D6A8E; --phased:#B9762A; --full:#7B8891;
@@ -17,6 +17,7 @@
   --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   --f-disp:"Noto Serif TC","Noto Sans TC",serif;
   --f-num:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  color-scheme:light;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#11171A; --surface:#182126; --ink:#E5ECEE; --muted:#98A7AD; --line:#29353B; --soft:#1F2A30;
@@ -25,6 +26,7 @@
   --bg:#11171A; --surface:#182126; --ink:#E5ECEE; --muted:#98A7AD; --line:#29353B; --soft:#1F2A30;
   --studio:#62AED2; --phased:#E2A55E; --full:#9BA7AE; --good:#5DBA8C; --warn:#E0B060; --bad:#E27C6E; color-scheme:dark}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65;margin:0}
+a{color:var(--studio)}
 .topnav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
 .topnav .in{max-width:1180px;margin:0 auto;padding:10px max(16px,env(safe-area-inset-left,0px));display:flex;gap:18px;align-items:center;font-size:14px;overflow-x:auto;white-space:nowrap}
 .topnav a{color:var(--muted);text-decoration:none}
@@ -35,7 +37,7 @@ header{display:grid;gap:6px;margin-bottom:22px}
 .eyebrow{font-size:12px;letter-spacing:.08em;color:var(--muted)}
 h1{font-family:var(--f-disp);font-size:clamp(26px,4vw,36px);line-height:1.25;margin:0;text-wrap:balance}
 .lead{margin:0;max-width:66ch;color:var(--muted)}
-.layout{display:grid;grid-template-columns:330px minmax(0,1fr);gap:24px;align-items:start}
+.layout{display:grid;grid-template-columns:340px minmax(0,1fr);gap:24px;align-items:start}
 @media (max-width:900px){.layout{grid-template-columns:minmax(0,1fr)}}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;gap:18px;position:sticky;top:60px;max-height:calc(100vh - 72px);overflow:auto}
 @media (max-width:900px){.panel{position:static;max-height:none}}
@@ -43,14 +45,13 @@ h1{font-family:var(--f-disp);font-size:clamp(26px,4vw,36px);line-height:1.25;mar
 .group:first-of-type{border-top:0;padding-top:0}
 .group-title{font-size:12px;letter-spacing:.06em;color:var(--muted)}
 .field{display:grid;gap:4px}
-.field label,.field .lab{display:flex;justify-content:space-between;gap:8px;font-size:13.5px}
+.field label,.field .lab{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13.5px}
 .field output,.num{font-family:var(--f-num);font-variant-numeric:tabular-nums;font-size:13px}
 input[type=range]{width:100%;accent-color:var(--studio)}
 input[type=number],select{width:100%;box-sizing:border-box;font:inherit;font-family:var(--f-num);font-size:13px;padding:5px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
 select{font-family:var(--f-body)}
 .three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.three .field label,.two .field label{font-size:12px;color:var(--muted)}
+.three .field label{font-size:12px;color:var(--muted);justify-content:flex-start}
 .switch{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13.5px}
 .switch input{width:44px;height:24px;appearance:none;background:var(--line);border-radius:12px;position:relative;cursor:pointer;flex:none;margin:0}
 .switch input::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--surface);transition:left .15s}
@@ -59,22 +60,33 @@ select{font-family:var(--f-body)}
 .btns{display:flex;flex-wrap:wrap;gap:6px}
 button{font:inherit;font-size:12.5px;padding:5px 10px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
 button:hover{border-color:var(--studio)}
-button.primary{background:var(--studio);color:#fff;border-color:var(--studio)}
 button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--studio);outline-offset:2px}
+/* 說明圖示 */
+button.info{width:18px;height:18px;padding:0;border-radius:50%;font-size:11px;line-height:16px;font-family:var(--f-num);font-weight:500;color:var(--muted);background:var(--surface);flex:none;margin-left:5px;vertical-align:1px}
+button.info[aria-expanded="true"]{background:var(--studio);color:#fff;border-color:var(--studio)}
+.lt{display:inline-flex;align-items:center}
+.tip{font-size:12.5px;line-height:1.55;color:var(--ink);background:var(--soft);border-radius:6px;padding:7px 10px;margin:0}
 .mixbar{display:flex;height:8px;border-radius:4px;overflow:hidden;background:var(--soft)}
 .mixbar span{display:block;height:100%}
 .hint{font-size:12.5px;color:var(--muted);margin:0}
-.alert{font-size:12.5px;padding:8px 10px;border-radius:6px;background:var(--soft);border-left:3px solid var(--warn);margin:0}
+.alert{font-size:12.5px;line-height:1.6;padding:8px 10px;border-radius:6px;background:var(--soft);border-left:3px solid var(--warn);margin:0}
+.alert.bad{border-left-color:var(--bad)}
+.alert ul{margin:4px 0 0;padding-left:1.1em}
 .teachers{display:grid;gap:6px}
-.trow{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:8px;align-items:center;font-size:13px}
+.trow{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:8px;align-items:center;font-size:13px}
 .trow .tot{font-family:var(--f-num);font-size:12px;color:var(--muted);min-width:76px;text-align:right}
+.trow .tip{grid-column:1/-1}
 .counts{display:grid;grid-template-columns:minmax(0,1fr) 64px;gap:6px 10px;align-items:center;font-size:13px}
 .counts select{padding:4px 6px}
-.counts .sub{grid-column:1/-1;font-size:12px;color:var(--muted);margin-top:-2px}
+.counts .sub,.counts .tip{grid-column:1/-1}
+.counts .sub{font-size:12px;color:var(--muted);margin-top:-2px}
+.slotbox{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:12.5px;background:var(--soft);border-radius:6px;padding:8px 10px}
+.slotbox dt{color:var(--muted)}
+.slotbox dd{margin:0;text-align:right;font-family:var(--f-num)}
 main{display:grid;gap:22px;min-width:0}
 section.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:grid;gap:12px;min-width:0}
 section h2{font-size:18px;margin:0;text-wrap:balance}
-.read{margin:0;color:var(--muted);max-width:70ch}
+.read{margin:0;color:var(--muted);max-width:72ch}
 .routes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 @media (max-width:640px){.routes{grid-template-columns:minmax(0,1fr)}}
 .route{border:1px solid var(--line);border-radius:8px;padding:14px;display:grid;gap:8px;align-content:start;border-top:4px solid var(--c)}
@@ -84,8 +96,7 @@ section h2{font-size:18px;margin:0;text-wrap:balance}
 .chip.mid{color:var(--warn);background:color-mix(in srgb,var(--warn) 16%,transparent)}
 .chip.no{color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,transparent)}
 .kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 10px;font-size:13px;margin:0}
-.kv dt{white-space:nowrap}
-.kv dt{color:var(--muted)}
+.kv dt{color:var(--muted);white-space:nowrap}
 .kv dd{margin:0;font-family:var(--f-num);font-variant-numeric:tabular-nums;text-align:right}
 .big{font-family:var(--f-num);font-size:24px;line-height:1.1}
 .chart{width:100%;overflow-x:auto}
@@ -100,22 +111,32 @@ table.staff{border-collapse:collapse;width:100%;font-size:13px;min-width:520px}
 .staff td:first-child{font-family:var(--f-body)}
 .staff tr.sum td{font-weight:500;border-bottom:0}
 .tablewrap{overflow-x:auto}
+/* 課表 */
 .week{width:100%;overflow-x:auto}
-table.sched{border-collapse:separate;border-spacing:4px;width:100%;min-width:620px;font-size:12.5px}
+table.sched{border-collapse:separate;border-spacing:4px;width:100%;min-width:640px;font-size:12.5px}
 .sched th{font-weight:500;color:var(--muted);text-align:center;padding:2px}
 .sched th.t{text-align:right;font-family:var(--f-num);font-weight:400;width:56px}
-.sched td{height:38px;border-radius:6px;text-align:center;background:var(--soft);color:var(--muted)}
-.sched td.on{background:color-mix(in srgb,var(--studio) 22%,var(--surface));color:var(--ink)}
-.sched td.half{background:color-mix(in srgb,var(--studio) 10%,var(--surface));color:var(--ink);outline:1px dashed color-mix(in srgb,var(--studio) 50%,transparent)}
-.sched tfoot td{background:none;height:auto;font-family:var(--f-num)}
-.sched tfoot td.over{color:var(--bad);font-weight:500}
-.stats{display:flex;flex-wrap:wrap;gap:22px}
-.stat{display:grid;gap:2px}
-.stat span{font-size:12.5px;color:var(--muted)}
+.sched td{padding:0}
+.sched td button{width:100%;height:40px;border-radius:6px;border:1px dashed var(--line);background:transparent;color:var(--muted);font-size:12px;padding:0}
+.sched td button:hover{border-color:var(--studio);color:var(--studio)}
+.sched td button.on{background:color-mix(in srgb,var(--studio) 24%,var(--surface));color:var(--ink);border:1px solid transparent}
+.sched td button.half{background:color-mix(in srgb,var(--studio) 9%,var(--surface));color:var(--ink);border:1px dashed color-mix(in srgb,var(--studio) 60%,transparent)}
+.sched td button.late{background:color-mix(in srgb,var(--warn) 20%,var(--surface));color:var(--ink);border:1px solid transparent}
+.sched tfoot td{font-family:var(--f-num);text-align:center;font-size:11.5px;line-height:1.4;color:var(--muted);padding-top:4px}
+.sched tfoot td b{display:block;color:var(--ink);font-weight:500;font-size:12.5px}
+.sched tfoot td.over b,.sched tfoot td.over{color:var(--bad)}
+.sched tfoot td.near b{color:var(--warn)}
+.skey{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--muted);align-items:center}
+.skey i{display:inline-block;width:16px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.stat{display:grid;gap:2px;background:var(--soft);border-radius:8px;padding:10px 12px}
+.stat span{font-size:12px;color:var(--muted)}
+.stat b{font-family:var(--f-num);font-size:20px;line-height:1.2;font-weight:500}
+.stat em{font-style:normal;font-size:12px;color:var(--muted)}
+.warns{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.warns li{font-size:13px;padding:7px 10px;border-radius:6px;border-left:3px solid var(--c);background:color-mix(in srgb,var(--c) 8%,var(--surface))}
 .notes{font-size:13px;color:var(--muted);margin:0;padding-left:1.2em;display:grid;gap:4px}
-.notes a{color:var(--studio)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
-:root{color-scheme:light}
 img{max-width:100%}
 [hidden]{display:none!important}
 </style>
@@ -132,7 +153,7 @@ img{max-width:100%}
   <header>
     <div class="eyebrow">沙田幼兒英語教育中心 · 開業規劃試算台</div>
     <h1>沙田英文中心試算台</h1>
-    <p class="lead">左邊調整假設，右邊即時看到「私人小班工作室」和「註冊中心」在錢、人數、人手和創辦人工作量上的分別。可按「手冊預設」或「投資人口徑」一鍵切換。全部是規劃假設，不是報價或保證。</p>
+    <p class="lead">左邊調整假設，右邊即時看到「私人小班工作室」和「註冊中心」在錢、人數、人手和創辦人工作量上的分別。可點擊「創辦人的一週」課表加減時段，看課表怎樣改變打平人數。每個選項旁的 <b>i</b> 可看簡短說明。全部是規劃假設，不是報價或保證。</p>
   </header>
 
   <div class="layout">
@@ -148,7 +169,7 @@ img{max-width:100%}
 
       <div class="group">
         <div class="group-title">創辦人</div>
-        <p class="hint">創辦人親自授課（已確認）。下面的薪酬是創辦人自己每月要拿的錢。</p>
+        <p class="hint">創辦人親自授課（已確認）。</p>
         <div class="field">
           <label for="pay">創辦人每月薪酬 <output id="payO"></output></label>
           <input type="range" id="pay" min="0" max="35000" step="1000" value="0">
@@ -163,25 +184,28 @@ img{max-width:100%}
           <div class="trow"><label for="tB">老師 B</label><input type="number" id="tB" value="28500" step="500" min="0"><span class="tot" id="tBO"></span></div>
           <div class="trow"><label for="tC">老師 C</label><input type="number" id="tC" value="28500" step="500" min="0"><span class="tot" id="tCO"></span></div>
         </div>
-        <label class="switch" for="mpf">計入僱主強積金（5%，每人每月上限 HK$1,500）<input type="checkbox" id="mpf" checked></label>
-        <p class="hint">右邊灰字是連強積金的每月成本。預設月薪 HK$28,500，連強積金約 HK$29,925，接近手冊「全職導師連僱主成本 HK$30,000」。</p>
+        <label class="switch" for="mpf">計入僱主強積金<input type="checkbox" id="mpf" checked></label>
+        <div class="alert">
+          <b>兩點提醒</b>
+          <ul>
+            <li>老師預設月薪 HK$28,500 是依手冊「全職導師連僱主成本 HK$30,000」反推，不是市場行情，請換成實際打算開出的薪金。</li>
+            <li>強積金依現行規定計算（月入上限 HK$30,000，即每人每月最多 HK$1,500），但積金局正在檢討上下限，日後如有調整，試算台要跟著改（<a href="https://www.mpfa.org.hk/en/info-centre/press-releases/20260308" target="_blank" rel="noopener">積金局新聞稿</a>、<a href="https://www.mpfa.org.hk/en/mpf-system/mandatory-contributions" target="_blank" rel="noopener">積金局：強制性供款</a>）。</li>
+          </ul>
+        </div>
         <div class="counts">
           <label for="nS">工作室聘用老師</label>
           <select id="nS"><option>0</option><option>1</option></select>
-          <span class="sub">工作室只有一間課室，聘老師不會增加學位，只分擔創辦人的課。</span>
           <label for="nP1">註冊中心 · 分階段：首階段</label>
           <select id="nP1"><option>0</option><option>1</option><option>2</option><option>3</option></select>
           <label for="nP2">註冊中心 · 分階段：擴編後</label>
           <select id="nP2"><option>0</option><option>1</option><option>2</option><option>3</option></select>
           <label for="nF">註冊中心 · 全編制</label>
           <select id="nF"><option>0</option><option>1</option><option>2</option><option>3</option></select>
-          <span class="sub">註冊中心有兩間課室：創辦人加至少一位老師，兩間課室才可同時開班。</span>
         </div>
         <div class="field">
           <label for="sup">中心兼職支援／行政／月 <output id="supO"></output></label>
           <input type="range" id="sup" min="0" max="30000" step="1000" value="5000">
         </div>
-        <p class="hint">只計入註冊中心。預設 HK$5,000 由手冊精簡試營運人手成本推算。</p>
       </div>
 
       <div class="group">
@@ -218,11 +242,13 @@ img{max-width:100%}
         <div class="group-title">課堂與招生</div>
         <div class="field">
           <label for="size">平均每班人數 <output id="sizeO"></output></label>
-          <input type="range" id="size" min="2" max="4" step="0.1" value="3">
+          <input type="range" id="size" min="1.5" max="6" step="0.1" value="3">
         </div>
+        <div class="alert" id="sizeAlert" hidden></div>
         <div class="field">
-          <label for="slots">每間課室每週可售班數 <output id="slotsO"></output></label>
-          <input type="range" id="slots" min="14" max="28" step="1" value="22">
+          <div class="lab"><span class="lt" id="slotsL">每間課室每週可售班數</span><output id="slotsO"></output></div>
+          <dl class="slotbox" id="slotBox"></dl>
+          <p class="hint">由右邊「創辦人的一週」課表決定，點擊課表格子即可加減。<a href="#h-week">去改課表 →</a></p>
         </div>
         <div class="field">
           <label for="curve">學生增長曲線</label>
@@ -270,6 +296,25 @@ img{max-width:100%}
         <div class="routes" id="routes"></div>
       </section>
 
+      <section class="card" aria-labelledby="h-week" id="week-card">
+        <h2 id="h-week">創辦人的一週：點擊課表，試排工作室時段</h2>
+        <p class="read">每點一次格子：空白 → 開班 → 需求不穩 → 空白。「需求不穩」是只適合半日制幼稚園孩子的平日日間時段。每格約 60 分鐘課加 15 分鐘交接。課表的班數就是「每間課室每週可售班數」，會即時改變上面三條路線的學生上限和打平人數。</p>
+        <div class="btns">
+          <button type="button" data-sched="hb">手冊課表（22 班）</button>
+          <button type="button" data-sched="inv">投資人課表（18 班）</button>
+          <button type="button" data-sched="wkd">只開週末</button>
+          <button type="button" data-sched="clear">清空</button>
+        </div>
+        <div class="skey">
+          <span><i style="background:color-mix(in srgb,var(--studio) 24%,var(--surface))"></i>開班</span>
+          <span><i style="background:color-mix(in srgb,var(--studio) 9%,var(--surface));outline:1px dashed var(--studio)"></i>需求不穩</span>
+          <span><i style="background:color-mix(in srgb,var(--warn) 20%,var(--surface))"></i>平日 19:00 後（3–6 歲較難上課）</span>
+        </div>
+        <div class="week"><table class="sched" id="sched"></table></div>
+        <div class="stats" id="wstats"></div>
+        <ul class="warns" id="wwarn"></ul>
+      </section>
+
       <section class="card" aria-labelledby="h-staff">
         <h2 id="h-staff">人手成本拆解</h2>
         <p class="read">每條路線請了誰、每月要付多少。分階段中心顯示擴編後的人手；擴編前的人數見左邊設定。</p>
@@ -287,7 +332,7 @@ img{max-width:100%}
 
       <section class="card" aria-labelledby="h-cap">
         <h2 id="h-cap">要多少學生才打平？課室裝得下嗎？</h2>
-        <p class="read">淺色長條是可容納的學生上限（可同時開班的課室 × 每週班數 × 平均每班人數），深色刻度是打平所需學生。刻度落在長條以外，代表就算坐滿也虧本。</p>
+        <p class="read">淺色長條是學生上限（可同時開班的課室 × 課表班數 × 平均每班人數），深色刻度是打平所需學生。刻度落在長條以外，代表就算坐滿也虧本。</p>
         <div class="chart" id="cap"></div>
       </section>
 
@@ -298,24 +343,19 @@ img{max-width:100%}
         <div class="chart" id="price"></div>
       </section>
 
-      <section class="card" aria-labelledby="h-week">
-        <h2 id="h-week">創辦人的一週（工作室示例課表）</h2>
-        <p class="read">平日只有放學後兩節，週末是主力；虛線格是只適合半日制幼稚園孩子的時段，需求不穩。工作室每日合計須少於 20 人，週六最易超線。</p>
-        <div class="week"><table class="sched" id="sched"></table></div>
-        <div class="stats" id="wstats"></div>
-      </section>
-
       <section class="card" aria-labelledby="h-note">
         <h2 id="h-note">怎樣讀這頁</h2>
         <ul class="notes">
           <li>所有數字未計稅、融資及回收開業投資；創辦人薪酬只在左邊設定後才計入。</li>
           <li>每月固定成本＝租金 ＋ 推廣水電會計等 ＋ 創辦人薪酬 ＋ 聘用老師（連強積金）＋ 中心兼職支援。僱員補償保險等其他僱主開支，請計入「推廣、水電軟件、會計雜項」。</li>
-          <li>強積金按僱主 5% 計，每人每月上限 HK$1,500（有關入息上限 HK$30,000）。積金局正在檢討上下限，以積金局最新公布為準。</li>
+          <li>老師預設月薪 HK$28,500 是依手冊「全職導師連僱主成本 HK$30,000」反推，不是市場行情，請換成實際打算開出的薪金。</li>
+          <li>強積金依現行規定計算（月入上限 HK$30,000，即每人每月最多 HK$1,500），積金局正在檢討上下限，日後如有調整，試算台要跟著改。</li>
+          <li>每週可售班數＝可同時開班的課室 × 課表班數。工作室一間課室；註冊中心兩間課室，但要創辦人加至少一位老師才可同時開班。兩間課室同時各 4 人，合計已達 8 人。</li>
+          <li>學生上限按「每名學生每週上一堂」計算：課表班數 × 平均每班人數。</li>
           <li>學生曲線：手冊曲線首月 15 人，之後每月約加 6 人；投資人兩條曲線按投資人方案的起點及第 12 個月人數以直線連接，屬近似。所有曲線都到課室上限便停。</li>
           <li>註冊中心分階段：學生達 45 人（或首階段上限，取較小者）的下一個月起擴編，人手由「首階段」轉為「擴編後」。</li>
-          <li>註冊中心可同時開班的課室數＝創辦人加聘用老師的人數，最多兩間。只有創辦人一人時，第二間課室用不上。</li>
           <li>建議資金＝曲線最低點＋三個月固定成本作儲備。</li>
-          <li>是否須向教育局註冊，以教育局對實際營運時間表的書面回覆為準。兩位老師同時各教 4 人，合計已達 8 人。</li>
+          <li>是否須向教育局註冊，以教育局對實際營運時間表的書面回覆為準。</li>
         </ul>
       </section>
     </main>
@@ -325,15 +365,74 @@ img{max-width:100%}
 <script>
 (function(){
   var $ = function(id){ return document.getElementById(id); };
-  var HB = {pay:0,tA:28500,tB:28500,tC:28500,mpf:true,nS:0,nP1:0,nP2:1,nF:1,sup:5000,local:60,net:25,pL:300,pN:415,pI:450,weeks:'4.33',size:3,slots:22,curve:'hb',speed:1,rent:22000,other:18000,'var':20,preS:230000,preC:350000};
-  var INV = {pay:20000,tA:28500,tB:28500,tC:28500,mpf:true,nS:0,nP1:0,nP2:1,nF:1,sup:5000,local:100,net:0,pL:300,pN:415,pI:450,weeks:'4',size:3,slots:18,curve:'base',speed:1,rent:18000,other:14000,'var':20,preS:250000,preC:350000};
-  var BASE = [15,21,27,33,39,45,52,58,64,70,76,82];
+  var TIMES = ['09:30','10:45','12:00','14:00','15:15','16:30','17:45','19:00'];
+  var DAYS = ['一','二','三','四','五','六','日'];
+  var CAP_PER_CLASS = 4;
+
+  function blank(){ return TIMES.map(function(){ return [0,0,0,0,0,0,0]; }); }
+  function schedPreset(k){
+    var g = blank();
+    if (k === 'clear') return g;
+    if (k !== 'wkd') [5,6].forEach(function(r){ for (var d=0; d<5; d++) g[r][d] = 1; });
+    if (k === 'hb'){ g[1][1] = 2; g[1][3] = 2; [0,1,2,3,4].forEach(function(r){ g[r][5] = 1; g[r][6] = 1; }); }
+    if (k === 'inv'){ [0,1,2,3,4].forEach(function(r){ g[r][5] = 1; }); [0,1,2].forEach(function(r){ g[r][6] = 1; }); }
+    if (k === 'wkd'){ [0,1,2,3,4].forEach(function(r){ g[r][5] = 1; g[r][6] = 1; }); }
+    return g;
+  }
+  var SCHED = schedPreset('hb');
+
+  var HB = {pay:0,tA:28500,tB:28500,tC:28500,mpf:true,nS:0,nP1:0,nP2:1,nF:1,sup:5000,local:60,net:25,pL:300,pN:415,pI:450,weeks:'4.33',size:3,curve:'hb',speed:1,rent:22000,other:18000,'var':20,preS:230000,preC:350000,_sched:'hb'};
+  var INV = {pay:20000,tA:28500,tB:28500,tC:28500,mpf:true,nS:0,nP1:0,nP2:1,nF:1,sup:5000,local:100,net:0,pL:300,pN:415,pI:450,weeks:'4',size:3,curve:'base',speed:1,rent:18000,other:14000,'var':20,preS:250000,preC:350000,_sched:'inv'};
+
+  var TIPS = {
+    presetHB:'全部假設回到開業手冊的數字：加權收費 HK$351.25、每月 4.33 週、課表 22 班、未計創辦人薪酬。',
+    presetINV:'投資人方案的保守假設：只計本地課 HK$300、每月 4.0 週、課表 18 班、創辦人月薪 HK$20,000、租金 HK$18,000。',
+    pay:'創辦人每月從中心拿的薪金。設 0 時，算出來的盈餘其實包括創辦人自己的工資。',
+    tA:'老師 A 的月薪，未計強積金。任何路線請 1 位或以上老師時，都會計入老師 A。',
+    tB:'老師 B 的月薪。路線請 2 位或以上老師時才計入。',
+    tC:'老師 C 的月薪。路線請 3 位老師時才計入。',
+    mpf:'僱主為每位僱員供款月薪的 5%，月薪 HK$30,000 以上封頂每月 HK$1,500。',
+    nS:'工作室請幾位老師。工作室只有一間課室，請老師只會分擔創辦人的課，不會多收學生，但固定成本會上升。',
+    nP1:'分階段中心開業初期請幾位老師。0 位代表只有創辦人教，第二間課室用不上。',
+    nP2:'學生達 45 人後擴編，屆時一共請幾位老師。',
+    nF:'全編制中心由開業第一天起請幾位老師。',
+    sup:'只計入註冊中心：兼職前台、行政或支援人手的每月總成本。',
+    local:'由本地老師教的 45 分鐘課，佔學生的比例。',
+    net:'由外籍老師（NET）教的 60 分鐘課，佔學生的比例。開 NET 課要另聘外籍老師。',
+    pL:'本地導師課每堂收費（45 分鐘）。',
+    pN:'外籍導師課每堂收費（60 分鐘）。',
+    pI:'面試班每堂收費。面試班有季節性，7 月開業已錯過 2027/28 K1 面試期。',
+    weeks:'每月平均上幾週課。4.33 是全年平均；4.0 扣除公眾假期、暑假停課、颱風及黑雨。',
+    size:'每班平均實際有幾名學生。每班上限是 4 人，平均通常低於上限，因為有缺席、試堂未轉正和未坐滿的班。',
+    slotsL:'一間課室每週開幾班，由「創辦人的一週」課表決定。註冊中心有兩間課室，但要創辦人加至少一位老師才可同時開班。',
+    curve:'開業後每月付費學生的增長速度假設，到課室上限便停。',
+    speed:'把所選曲線放大或縮小。例如 80% 代表招生比曲線慢兩成。',
+    rent:'每月租金及管理費。',
+    other:'推廣、水電、軟件、會計、保險等每月固定開支。',
+    'var':'每名學生每堂的教材及消耗品成本。',
+    preS:'工作室開業前一次性投入：按金、簡單裝修、家具教具、公司及保險設置、開業招生。',
+    preC:'註冊中心開業前一次性投入，包括裝修工程、消防機電及專業顧問費。'
+  };
+
   var H = 18;
   var css = function(v){ return 'var(--'+v+')'; };
   var money = function(x){ var s = Math.round(Math.abs(x)).toLocaleString('en-US'); return (x<0?'−':'')+'HK$'+s; };
   var wan = function(x){ return (x<0?'−':'')+(Math.abs(x)/10000).toFixed(1)+' 萬'; };
-  var NUMS = ['pay','tA','tB','tC','sup','local','net','pL','pN','pI','size','slots','speed','rent','other','var','preS','preC'];
+  var NUMS = ['pay','tA','tB','tC','sup','local','net','pL','pN','pI','size','speed','rent','other','var','preS','preC'];
   var INTS = ['nS','nP1','nP2','nF'];
+
+  function schedStats(){
+    var n=0, half=0, late=0, day=[0,0,0,0,0,0,0], maxRun=0;
+    for (var d=0; d<7; d++){
+      var run=0;
+      for (var r=0; r<TIMES.length; r++){
+        var v = SCHED[r][d];
+        if (v){ n++; day[d]++; run++; if (v===2) half++; if (r===TIMES.length-1 && d<5) late++; maxRun = Math.max(maxRun, run); }
+        else run = 0;
+      }
+    }
+    return {n:n, half:half, late:late, day:day, maxRun:maxRun};
+  }
 
   function read(){
     var s = {};
@@ -348,33 +447,37 @@ img{max-width:100%}
     s.contrib = (s.wp - s['var'])*s.weeks;
     s.sal = [s.tA, s.tB, s.tC];
     s.cost = s.sal.map(function(v){ return v + (s.mpf ? Math.min(v*0.05, 1500) : 0); });
+    s.ss = schedStats();
+    s.slots = s.ss.n;
     return s;
   }
 
   function staffCost(s, n){ var t = 0; for (var i=0;i<n;i++) t += s.cost[i]; return t; }
+  function rooms(n){ return Math.min(2, 1+n); }
 
   function curveAt(s, m){
     if (s.curve === 'base') return 12 + (m-1)*42/11;
     if (s.curve === 'slow') return 8 + (m-1)*32/11;
+    var BASE = [15,21,27,33,39,45,52,58,64,70,76,82];
     return m <= 12 ? BASE[m-1] : BASE[11] + 6*(m-12);
   }
   function students(s, m, cap){ return Math.max(0, Math.min(cap, Math.round(curveAt(s,m)*s.speed))); }
 
   function routes(s){
     var cap1 = Math.round(s.slots*s.size);
-    var rooms = function(n){ return Math.min(2, 1+n); };
     var core = s.rent + s.other + s.pay;
     var R = [
       {key:'studio', name:'私人小班工作室', note:'1 間課室，創辦人親授；毋須註冊須教育局書面確認', pre:s.preS,
-        lo:core + staffCost(s,s.nS), hi:core + staffCost(s,s.nS), capLo:cap1, capHi:cap1, nLo:s.nS, nHi:s.nS},
+        lo:core + staffCost(s,s.nS), hi:core + staffCost(s,s.nS), rLo:1, rHi:1, nLo:s.nS, nHi:s.nS},
       {key:'phased', name:'註冊中心 · 分階段', note:'2 間課室；45 人後擴編', pre:s.preC, phase:true,
-        lo:core + s.sup + staffCost(s,s.nP1), hi:core + s.sup + staffCost(s,s.nP2), capLo:rooms(s.nP1)*cap1, capHi:rooms(s.nP2)*cap1, nLo:s.nP1, nHi:s.nP2},
+        lo:core + s.sup + staffCost(s,s.nP1), hi:core + s.sup + staffCost(s,s.nP2), rLo:rooms(s.nP1), rHi:rooms(s.nP2), nLo:s.nP1, nHi:s.nP2},
       {key:'full', name:'註冊中心 · 全編制', note:'2 間課室；一開始請齊人手', pre:s.preC,
-        lo:core + s.sup + staffCost(s,s.nF), hi:core + s.sup + staffCost(s,s.nF), capLo:rooms(s.nF)*cap1, capHi:rooms(s.nF)*cap1, nLo:s.nF, nHi:s.nF}
+        lo:core + s.sup + staffCost(s,s.nF), hi:core + s.sup + staffCost(s,s.nF), rLo:rooms(s.nF), rHi:rooms(s.nF), nLo:s.nF, nHi:s.nF}
     ];
     R.forEach(function(r){
+      r.capLo = r.rLo*cap1; r.capHi = r.rHi*cap1;
       r.steady = r.hi; r.cap = r.capHi;
-      var trigger = Math.min(45, r.capLo);
+      var trigger = Math.min(45, Math.max(1, r.capLo));
       var cum = -r.pre, low = cum, lowM = 0, y1 = 0, firstPos = null, expanded = !r.phase;
       r.series = [{m:0, v:cum, n:0}];
       for (var m=1; m<=H; m++){
@@ -460,7 +563,7 @@ img{max-width:100%}
       var bar = svg('rect', {x:L, y:yc-11, width:Math.max(0,x(r.cap)-L), height:22, rx:4, style:'fill:'+css(r.key)+';fill-opacity:.2'});
       bar.appendChild(svg('title', {}, r.name+'上限 '+r.cap+' 人'));
       g.appendChild(bar);
-      g.appendChild(svg('text', {x:x(r.cap)-6, y:yc+4, 'text-anchor':'end', 'font-size':11, style:'fill:'+css('muted')+';font-family:var(--f-num)'}, '上限 '+r.cap));
+      if (r.cap > 0) g.appendChild(svg('text', {x:x(r.cap)-6, y:yc+4, 'text-anchor':'end', 'font-size':11, style:'fill:'+css('muted')+';font-family:var(--f-num)'}, '上限 '+r.cap));
       if (isFinite(r.be)){
         var bx = x(Math.min(r.be, mx));
         g.appendChild(svg('line', {x1:bx, x2:bx, y1:yc-18, y2:yc+18, style:'stroke:'+css(r.key)+';stroke-width:3'}));
@@ -488,7 +591,7 @@ img{max-width:100%}
     }
     g.appendChild(svg('text', {x:(L+W-Rr)/2, y:Ht-4, 'text-anchor':'middle', 'font-size':11.5, style:'fill:'+css('muted')}, '加權每堂實收（港元）'));
     var cap1 = R[0].cap;
-    if (cap1 <= mx){
+    if (cap1 > 0 && cap1 <= mx){
       g.appendChild(svg('line', {x1:L, x2:W-Rr, y1:y(cap1), y2:y(cap1), style:'stroke:'+css('muted')+';stroke-dasharray:5 4'}));
       g.appendChild(svg('text', {x:W-Rr-4, y:y(cap1)-6, 'text-anchor':'end', 'font-size':11, style:'fill:'+css('muted')}, '一間課室上限 '+cap1+' 人'));
     }
@@ -516,47 +619,93 @@ img{max-width:100%}
     h += '<tr><td>中心兼職支援／行政</td>'+R.map(function(r){ return '<td>'+(r.key==='studio'?'—':money(s.sup))+'</td>'; }).join('')+'</tr>';
     h += '<tr><td>創辦人薪酬</td>'+R.map(function(){ return '<td>'+money(s.pay)+'</td>'; }).join('')+'</tr>';
     h += '<tr class="sum"><td>人手合計／月</td>'+R.map(function(r){ var v = staffCost(s, r.nHi) + (r.key==='studio'?0:s.sup) + s.pay; return '<td>'+money(v)+'</td>'; }).join('')+'</tr>';
-    h += '<tr><td>可同時開班的課室</td>'+R.map(function(r){ return '<td>'+(r.key==='studio'?1:Math.min(2,1+r.nHi))+' 間</td>'; }).join('')+'</tr>';
+    h += '<tr><td>可同時開班的課室</td>'+R.map(function(r){ return '<td>'+r.rHi+' 間</td>'; }).join('')+'</tr>';
+    h += '<tr><td>每週可售班數</td>'+R.map(function(r){ return '<td>'+(r.rHi*s.slots)+' 班</td>'; }).join('')+'</tr>';
     h += '</tbody>';
     $('staff').innerHTML = h;
-    var full = R[2], one = s.cost[0];
+    var one = s.cost[0];
     var msg = s.contrib > 0 ? '每多請一位老師（以老師 A 計），每月要多約 '+Math.ceil(one/s.contrib)+' 名學生才付得起他的人工。' : '';
-    if (full.nHi === 0) msg += '全編制中心目前只有創辦人一人授課，第二間課室用不上，學生上限與工作室相同。';
+    if (R[2].nHi === 0) msg += '全編制中心目前只有創辦人一人授課，第二間課室用不上，學生上限與工作室相同。';
     if (s.nS > 0) msg += '工作室請了老師，固定成本上升，但學位不變。';
     $('staffRead').textContent = msg;
   }
 
-  var SCHED = {
-    times:['09:30','10:30','10:45','12:00','14:00','15:15','16:30','17:45'],
-    days:['一','二','三','四','五','六','日'],
-    on:{ '16:30':[1,1,1,1,1,0,0], '17:45':[1,1,1,1,1,0,0], '09:30':[0,0,0,0,0,1,1], '10:45':[0,0,0,0,0,1,1], '12:00':[0,0,0,0,0,1,1], '14:00':[0,0,0,0,0,1,1], '15:15':[0,0,0,0,0,1,0], '10:30':[0,2,0,2,0,0,0] }
-  };
-  function drawWeek(s){
-    var size = s.size, t = $('sched'), h = '<thead><tr><th class="t"></th>';
-    SCHED.days.forEach(function(d){ h += '<th>星期'+d+'</th>'; });
+  function drawSlotBox(R, s){
+    $('slotsO').textContent = s.slots+' 班';
+    $('slotBox').innerHTML = R.map(function(r){
+      return '<dt>'+r.name.replace('註冊中心 · ','中心·')+'</dt><dd>'+r.rHi+' 間 × '+s.slots+' ＝ '+(r.rHi*s.slots)+' 班</dd>';
+    }).join('');
+  }
+
+  function drawWeek(s, R){
+    var ss = s.ss, size = s.size, capPer = Math.max(CAP_PER_CLASS, Math.ceil(size));
+    var h = '<thead><tr><th class="t"></th>';
+    DAYS.forEach(function(d){ h += '<th>星期'+d+'</th>'; });
     h += '</tr></thead><tbody>';
-    var dayTot = [0,0,0,0,0,0,0], classes = 0;
-    SCHED.times.forEach(function(tm){
+    TIMES.forEach(function(tm, r){
       h += '<tr><th class="t">'+tm+'</th>';
-      SCHED.on[tm].forEach(function(v,i){
-        if (v){ dayTot[i] += size; classes++; h += '<td class="'+(v===2?'half':'on')+'">≈'+size.toFixed(1).replace('.0','')+' 人</td>'; }
-        else h += '<td></td>';
-      });
+      for (var d=0; d<7; d++){
+        var v = SCHED[r][d], late = (r===TIMES.length-1 && d<5);
+        var cls = v===0 ? '' : v===2 ? 'half' : (late ? 'late' : 'on');
+        var txt = v===0 ? '＋' : v===2 ? '不穩' : '≈'+size.toFixed(1).replace('.0','')+' 人';
+        var lab = '星期'+DAYS[d]+' '+tm+'：'+(v===0?'空白':v===2?'需求不穩':'開班')+'，按一下切換';
+        h += '<td><button type="button" class="'+cls+'" data-r="'+r+'" data-d="'+d+'" aria-label="'+lab+'">'+txt+'</button></td>';
+      }
       h += '</tr>';
     });
-    h += '</tbody><tfoot><tr><th class="t">合計</th>';
-    dayTot.forEach(function(v){ var r = Math.round(v); h += '<td class="'+(r>=20?'over':'')+'">'+r+' 人'+(r>=20?' 超線':'')+'</td>'; });
+    h += '</tbody><tfoot><tr><th class="t">當日人數</th>';
+    var worstDay = -1, worstFull = 0, overAvg = false, overFull = false;
+    ss.day.forEach(function(c, d){
+      var avg = Math.round(c*size), full = c*capPer;
+      if (full > worstFull){ worstFull = full; worstDay = d; }
+      if (avg >= 20) overAvg = true;
+      if (full >= 20) overFull = true;
+      var cl = avg >= 20 ? 'over' : full >= 20 ? 'near' : '';
+      h += '<td class="'+cl+'"><b>平均 '+avg+'</b>坐滿 '+full+(c?'':'')+'</td>';
+    });
     h += '</tr></tfoot>';
-    t.innerHTML = h;
+    $('sched').innerHTML = h;
+
+    var st = R[0];
     var mins = (s.local*45 + (100-s.local)*60)/100;
-    var hrs = classes*mins/60;
-    var sat = Math.round(dayTot[5]);
+    var hrs = ss.n*mins/60;
+    var needAvg = ss.n > 0 && isFinite(st.be) ? st.be/ss.n : Infinity;
+    var needTxt = isFinite(needAvg) ? needAvg.toFixed(1)+' 人' : '—';
+    var needCol = !isFinite(needAvg) || needAvg > CAP_PER_CLASS ? css('bad') : needAvg > size ? css('warn') : css('good');
     $('wstats').innerHTML =
-      '<div class="stat"><span>示例課表每週</span><b class="big">'+classes+' 堂</b></div>'+
-      '<div class="stat"><span>上課時數（按課程組合）</span><b class="big">'+hrs.toFixed(1)+' 小時</b></div>'+
-      '<div class="stat"><span>週六合計</span><b class="big" style="color:'+(sat>=20?css('bad'):css('ink'))+'">'+sat+' 人</b></div>'+
-      '<div class="stat"><span>創辦人授課</span><b class="big">'+(s.nS>0?'與老師分擔':'全部自己教')+'</b></div>'+
-      '<div class="stat"><span>另加招生、備課、家長溝通</span><b class="big">約 20 小時</b></div>';
+      '<div class="stat"><span>每週開班</span><b>'+ss.n+' 班</b><em>其中需求不穩 '+ss.half+'、平日 19:00 後 '+ss.late+'</em></div>'+
+      '<div class="stat"><span>一間課室可收學生</span><b>'+Math.round(ss.n*size)+' 人</b><em>坐滿學位 '+(ss.n*capPer)+' 個</em></div>'+
+      '<div class="stat"><span>工作室要平均每班幾人才打平</span><b style="color:'+needCol+'">'+needTxt+'</b><em>打平 '+(isFinite(st.be)?st.be:'—')+' 人 ÷ '+ss.n+' 班</em></div>'+
+      '<div class="stat"><span>創辦人每週授課</span><b>'+(s.nS>0?'與老師分擔':hrs.toFixed(1)+' 小時')+'</b><em>另加招生、備課、家長溝通約 20 小時</em></div>'+
+      '<div class="stat"><span>最忙一天坐滿時</span><b style="color:'+(worstFull>=20?css('bad'):css('ink'))+'">'+(worstDay<0?'—':worstFull+' 人')+'</b><em>'+(worstDay<0?'未有開班':'星期'+DAYS[worstDay]+'；門檻每日 20 人')+'</em></div>';
+
+    var W = [];
+    if (ss.n === 0) W.push(['bad','課表沒有任何班，三條路線都沒有學位。']);
+    if (isFinite(needAvg) && needAvg > CAP_PER_CLASS) W.push(['bad','以這個課表，工作室每班坐滿 4 人仍未打平（要平均 '+needAvg.toFixed(1)+' 人）。要加開時段、提高收費或壓低成本。']);
+    else if (isFinite(needAvg) && needAvg > size) W.push(['warn','打平要平均每班 '+needAvg.toFixed(1)+' 人，高過目前假設的平均 '+size.toFixed(1)+' 人。']);
+    else if (isFinite(needAvg) && ss.n > 0) W.push(['good','打平只要平均每班 '+needAvg.toFixed(1)+' 人，低於目前假設的平均 '+size.toFixed(1)+' 人，有緩衝。']);
+    if (overAvg) W.push(['bad','有日子按平均人數已達每日 20 人，可能屬教育局「學校」定義，工作室路線要減班或先向教育局確認。']);
+    else if (overFull) W.push(['warn','有日子如果每班坐滿 4 人，當日合計會達 20 人。工作室要用預約系統控制，並先按完整時間表向教育局確認人數計法。']);
+    if (ss.late > 0) W.push(['warn','平日 19:00 後開了 '+ss.late+' 班。投資人方案認為 3–6 歲兒童平日 19:00 後難以上課，這些學位未必賣得出。']);
+    if (ss.half > 0) W.push(['warn','有 '+ss.half+' 班是平日日間「需求不穩」時段，只適合半日制幼稚園孩子，學位可能長期坐不滿。']);
+    if (ss.n > 23 && s.nS === 0) W.push(['warn','每週 '+ss.n+' 班，多過手冊估算創辦人可承擔的 21–23 堂，還未計備課、招生和行政。']);
+    if (ss.maxRun >= 5) W.push(['warn','有一天連續上 '+ss.maxRun+' 班，中間只有 15 分鐘交接，要預留休息和代課安排。']);
+    $('wwarn').innerHTML = W.map(function(w){ return '<li style="--c:'+css(w[0])+'">'+w[1]+'</li>'; }).join('');
+  }
+
+  function sizeAlert(s){
+    var el = $('sizeAlert');
+    if (s.size > CAP_PER_CLASS){
+      el.className = 'alert bad'; el.hidden = false;
+      el.innerHTML = '<b>平均每班 '+s.size.toFixed(1)+' 人，已超過每班上限 4 人。</b><ul>'+
+        '<li>每班最多 4 人是中心的核心賣點（小班），超過便不再是家長報讀時聽到的方案。</li>'+
+        '<li>工作室路線要控制人數：一班 8 人或以上已達「同時 8 人」門檻；每日 20 人門檻也會更快觸及。</li>'+
+        '<li>老師照顧不到每個孩子，課堂互動及家長回饋的承諾要重寫。</li>'+
+        '<li>收入會被高估。以上數字只作「如果放寬班額」的參考。</li></ul>';
+    } else if (s.size >= CAP_PER_CLASS - 0.05){
+      el.className = 'alert'; el.hidden = false;
+      el.innerHTML = '平均 4 人代表每一班都坐滿，沒有缺席、試堂或空位，現實中很難做到。手冊及投資人方案都以平均 3 人估算。';
+    } else el.hidden = true;
   }
 
   function render(){
@@ -569,11 +718,12 @@ img{max-width:100%}
     $('mb2').style.cssText = 'width:'+s.net+'%;background:'+css('phased');
     $('mb3').style.cssText = 'width:'+s.int+'%;background:'+css('full');
     $('wpO').textContent = 'HK$'+s.wp.toFixed(2); $('cpO').textContent = money(s.contrib);
-    $('sizeO').textContent = s.size.toFixed(1)+' 人'; $('slotsO').textContent = s.slots+' 班';
+    $('sizeO').textContent = s.size.toFixed(1)+' 人';
     $('speedO').textContent = Math.round(s.speed*100)+'%';
     $('rentO').textContent = money(s.rent); $('otherO').textContent = money(s.other); $('varO').textContent = money(s['var']);
     $('preSO').textContent = wan(s.preS); $('preCO').textContent = wan(s.preC);
     $('netAlert').hidden = !(s.net > 0);
+    sizeAlert(s);
 
     var R = routes(s);
     var html = '';
@@ -583,6 +733,7 @@ img{max-width:100%}
       html += '<div class="route" style="--c:'+css(r.key)+'"><h3>'+r.name+chip+'</h3><p class="hint">'+r.note+'</p>'+
         '<dl class="kv">'+
         '<dt>聘用老師</dt><dd>'+(r.phase? r.nLo+' → '+r.nHi : r.nHi)+' 位</dd>'+
+        '<dt>每週可售班數</dt><dd>'+(r.phase && r.rLo!==r.rHi ? (r.rLo*s.slots)+' → '+(r.rHi*s.slots) : r.rHi*s.slots)+' 班</dd>'+
         '<dt>每月固定成本</dt><dd>'+(r.phase? money(r.lo)+' → '+money(r.hi) : money(r.steady))+'</dd>'+
         '<dt>打平學生</dt><dd>'+(isFinite(r.be)? (r.phase? r.beLo+' → '+r.be : r.be)+' 人' : '—')+'</dd>'+
         '<dt>學生上限</dt><dd>'+(r.phase && r.capLo!==r.capHi ? r.capLo+' → '+r.capHi : r.cap)+' 人</dd>'+
@@ -594,20 +745,55 @@ img{max-width:100%}
     $('routes').innerHTML = html;
 
     var st = R[0], ph = R[1], cap1 = st.cap;
-    var t = '以目前設定，工作室打平要 '+st.be+' 人、上限 '+st.cap+' 人';
+    var t = '以目前課表每週 '+s.slots+' 班，工作室打平要 '+(isFinite(st.be)?st.be:'—')+' 人、上限 '+st.cap+' 人';
     t += st.be > st.cap ? '，坐滿也未打平。' : (st.be > st.cap*0.85 ? '，差不多要坐滿才打平。' : '。');
-    t += '註冊中心分階段擴編後打平要 '+ph.be+' 人';
+    t += '註冊中心分階段擴編後打平要 '+(isFinite(ph.be)?ph.be:'—')+' 人';
     t += ph.be > cap1 ? '，一間課室裝不下，要用到第二間課室和至少一位老師，也就要先取得註冊。' : '，一間課室已裝得下。';
     if (s.pay === 0) t += '創辦人薪酬目前設為 0，盈餘其實包括創辦人自己的工資。';
     $('sumRead').textContent = t;
     $('cashRead').textContent = '工作室最緊在第 '+st.lowM+' 個月，累計約 '+wan(st.low)+'；分階段中心最緊在第 '+ph.lowM+' 個月，累計約 '+wan(ph.low)+'。';
     $('lg1').innerHTML = $('lg2').innerHTML = R.map(function(r){ return '<span><i style="background:'+css(r.key)+'"></i>'+r.name+'</span>'; }).join('');
 
-    drawStaff(R, s); drawCash(R); drawCap(R); drawPrice(R, s); drawWeek(s);
+    drawSlotBox(R, s); drawWeek(s, R); drawStaff(R, s); drawCash(R); drawCap(R); drawPrice(R, s);
+  }
+
+  /* 說明圖示 */
+  function addTips(){
+    Object.keys(TIPS).forEach(function(id){
+      var anchor = document.querySelector('label[for="'+id+'"]') || $(id);
+      if (!anchor) return;
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'info'; b.textContent = 'i';
+      b.setAttribute('aria-expanded','false'); b.setAttribute('aria-label','說明');
+      var tip = document.createElement('p');
+      tip.className = 'tip'; tip.hidden = true; tip.id = 'tip-'+id; tip.textContent = TIPS[id];
+      b.setAttribute('aria-controls', tip.id);
+      b.addEventListener('click', function(e){
+        e.preventDefault(); e.stopPropagation();
+        var open = tip.hidden; tip.hidden = !open; b.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      if (anchor.tagName === 'BUTTON'){
+        anchor.insertAdjacentElement('afterend', b);
+        anchor.parentNode.parentNode.insertBefore(tip, anchor.parentNode.nextSibling);
+        return;
+      }
+      var first = anchor.firstChild;
+      var wrap = document.createElement('span'); wrap.className = 'lt';
+      if (first && first.nodeType === 3){ wrap.appendChild(document.createTextNode(first.textContent.trim())); anchor.replaceChild(wrap, first); }
+      else if (anchor.tagName === 'SPAN'){ wrap = anchor; }
+      else { anchor.insertBefore(wrap, anchor.firstChild); }
+      wrap.appendChild(b);
+      var host = anchor.closest('.trow') || anchor.closest('.field') || null;
+      if (anchor.closest('.counts')){ var sel = $(id); sel.insertAdjacentElement('afterend', tip); }
+      else if (anchor.closest('.trow')){ host.appendChild(tip); }
+      else if (host){ host.appendChild(tip); }
+      else { anchor.insertAdjacentElement('afterend', tip); }
+    });
   }
 
   function apply(P, label){
     for (var k in P){
+      if (k === '_sched'){ SCHED = schedPreset(P[k]); continue; }
       var el = $(k); if (!el) continue;
       if (el.type === 'checkbox') el.checked = P[k]; else el.value = P[k];
     }
@@ -615,16 +801,26 @@ img{max-width:100%}
     render();
   }
 
-  document.querySelectorAll('input,select').forEach(function(el){
+  addTips();
+  document.querySelectorAll('.panel input, .panel select').forEach(function(el){
     el.addEventListener('input', render); el.addEventListener('change', render);
   });
   document.querySelectorAll('[data-mix]').forEach(function(b){
     b.addEventListener('click', function(){ var v=b.getAttribute('data-mix').split(','); $('local').value=v[0]; $('net').value=v[1]; render(); });
   });
+  document.querySelectorAll('[data-sched]').forEach(function(b){
+    b.addEventListener('click', function(){ SCHED = schedPreset(b.getAttribute('data-sched')); render(); });
+  });
+  $('sched').addEventListener('click', function(e){
+    var b = e.target.closest('button[data-r]'); if (!b) return;
+    var r = +b.getAttribute('data-r'), d = +b.getAttribute('data-d');
+    SCHED[r][d] = (SCHED[r][d] + 1) % 3;
+    render();
+    var nb = document.querySelector('#sched button[data-r="'+r+'"][data-d="'+d+'"]'); if (nb) nb.focus();
+  });
   $('presetHB').addEventListener('click', function(){ apply(HB, '手冊預設'); });
   $('presetINV').addEventListener('click', function(){ apply(INV, '投資人口徑'); });
-  var q = location.hash.replace('#','');
-  if (q === 'investor') apply(INV, '投資人口徑'); else apply(HB, '手冊預設');
+  if (location.hash.replace('#','') === 'investor') apply(INV, '投資人口徑'); else apply(HB, '手冊預設');
 })();
 </script>
 </body>
