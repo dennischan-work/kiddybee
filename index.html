@@ -81,6 +81,26 @@ table.t{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
 .t thead th{font-size:13px;color:var(--muted);font-weight:500;background:var(--soft)}
 .t td.n{font-family:var(--f-num);font-variant-numeric:tabular-nums;white-space:nowrap}
 .t tbody th{font-weight:500;white-space:nowrap}
+
+.proposal-group{scroll-margin-top:66px;margin-top:24px}
+.phase-head{display:grid;gap:8px;padding:22px 20px;margin:24px 0 8px;border:1px solid var(--line);border-left:5px solid var(--studio);border-radius:10px;background:var(--surface)}
+.phase-head h2{font-family:var(--f-disp);font-size:clamp(22px,3.2vw,30px)}
+.phase-head p{color:var(--muted);max-width:76ch;margin:0}
+.phase-head .eyebrow{font-weight:700}
+.workflow-note{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:16px;margin-top:8px}
+.workflow-note ol{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;list-style:none;margin:0;padding:0;counter-reset:flow}
+.workflow-note li{border-left:2px solid var(--studio);padding-left:10px;font-size:13px}
+.workflow-note b{display:block;font-size:14px}
+@media(max-width:760px){.workflow-note ol{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:460px){.workflow-note ol{grid-template-columns:minmax(0,1fr)}}
+.step-phase{margin:18px 0 8px;padding:9px 12px;background:var(--soft);border-radius:7px;font-weight:700}
+.step-detail{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.step-detail>div{padding:11px;border-radius:8px;background:var(--soft);font-size:14px}
+.step-detail b{display:block;font-size:12.5px;color:var(--studio);margin-bottom:4px}
+.step-links{display:flex;gap:8px;flex-wrap:wrap}
+.step-links a{font-size:13px}
+@media(max-width:620px){.step-detail{grid-template-columns:1fr}}
+
 /* threshold dots */
 .th-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
 .th-row:last-child{border-bottom:0}
@@ -191,15 +211,14 @@ html{scroll-behavior:smooth}
 </style>
 </head>
 <body>
-<nav class="topnav" aria-label="網站導覽"><div class="in">
+<nav class="topnav" aria-label="提案導覽"><div class="in">
   <a class="brand" href="./">沙田幼兒英語教育中心</a>
-  <a href="#routes">路線</a>
-  <a href="#money">錢</a>
-  <a href="#direction">可行方向</a>
-  <a href="#gates">撥款與關卡</a>
-  <a href="#timeline">時間表</a>
-  <a href="#rules">合規</a>
-  <a href="#steps">十四步</a>
+  <a href="#decision">先選路線</a>
+  <a href="#steps">逐步執行</a>
+  <a href="#timeline">兩路線時程</a>
+  <a href="#rules">申請與合規</a>
+  <a href="#finance">財務與風險</a>
+  <a href="#course">開業營運</a>
   <a href="./library.html">完整資料</a>
   <a class="cta" href="./calculator.html">試算台 →</a>
 </div></nav>
@@ -221,10 +240,18 @@ html{scroll-behavior:smooth}
     </div>
     <p class="disclaimer">所有金額均為港元。學生人數、租金、收費、招聘及招生數字都是規劃假設，不是報價、批准條件或保證結果；本頁不構成財務或法律意見。</p>
   </header>
+  <div class="workflow-note" aria-label="閱讀次序"><ol>
+<li><b>1. 定方向</b>比較工作室與註冊中心，先查教育局分類。</li>
+<li><b>2. 驗證需求</b>整理教材、訪談家長、試教並測收費。</li>
+<li><b>3. 落實場地</b>核用途、租約、工程和註冊程序。</li>
+<li><b>4. 控制資金</b>按關卡撥款，逐月看現金並預設停損。</li>
+<li><b>5. 開業改善</b>先在批准範圍營運，再用數據調整。</li>
+</ol></div>
 
   <!-- 1 -->
-  <section class="block" id="idea">
-    <div class="sec-head"><div class="sec-no">01</div><h2>中心要做甚麼</h2><p>先完成一套可以穩定教授的主力課程，了解家長是否願意報讀，再逐步擴充。初期不同時承諾太多課程。</p></div>
+  
+<div class="proposal-group" id="decision"><div class="phase-head"><div class="eyebrow">提案 01 · 先作決定</div><h2>服務、路線與可用資金</h2><p>先確認中心做甚麼，再比較兩條路線的法規、人手、場地及財務。所有區間都需用書面回覆和真實報價更新。</p></div><section class="block" id="idea">
+    <div class="sec-head"><div class="sec-no">01A</div><h2>服務定位與教材基礎</h2><p>先完成一套可以穩定教授的主力課程，了解家長是否願意報讀，再逐步擴充。初期不同時承諾太多課程。</p></div>
     <div class="grid3">
       <div class="card">
         <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="7" cy="8" r="2.5"/><circle cx="17" cy="8" r="2.5"/><circle cx="7" cy="17" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg></div>
@@ -247,7 +274,7 @@ html{scroll-behavior:smooth}
 
   <!-- 2 -->
   <section class="block" id="routes">
-    <div class="sec-head"><div class="sec-no">02</div><h2>兩條開業路線</h2><p>兩條路線會改變場地、申請、資金和人手安排。先以真實課程、營運者、場地和時間表向教育局書面查詢，確認條件後再比較。</p></div>
+    <div class="sec-head"><div class="sec-no">01B</div><h2>第一個決定：選私人小班工作室，還是註冊中心</h2><p>兩條路線會改變場地、申請、資金和人手安排。先以真實課程、營運者、場地和時間表向教育局書面查詢，確認條件後再比較。</p></div>
     <div class="grid2">
       <div class="card route" style="--c:var(--studio)">
         <span class="tag info">投資人方案建議先做</span>
@@ -306,7 +333,7 @@ html{scroll-behavior:smooth}
 
   <!-- 3 -->
   <section class="block" id="money">
-    <div class="sec-head"><div class="sec-no">03</div><h2>錢：同一個工作室，兩個口徑</h2><p>手冊的工作室首年「營運盈餘 HK$308,872」未計創辦人薪酬。投資人方案改用較保守的四個假設重算，差距來自假設，不是計算錯誤。</p></div>
+    <div class="sec-head"><div class="sec-no">01C</div><h2>路線的財務代價與目前假設</h2><p>手冊的工作室首年「營運盈餘 HK$308,872」未計創辦人薪酬。投資人方案改用較保守的四個假設重算，差距來自假設，不是計算錯誤。</p></div>
     <div class="card tablewrap">
       <table class="t">
         <thead><tr><th>假設</th><th>手冊口徑</th><th>投資人口徑</th><th>為甚麼要改</th></tr></thead>
@@ -367,7 +394,7 @@ html{scroll-behavior:smooth}
 
   <!-- 4 -->
   <section class="block" id="direction">
-    <div class="sec-head"><div class="sec-no">04</div><h2>按資金上限，看可行方向</h2><p>創辦人親授已確認，資金上限仍待提供。拉動下面的金額，看看在這個預算下能做甚麼、不要做甚麼。分級由投資人方案的數字推算，不是文件原文。</p></div>
+    <div class="sec-head"><div class="sec-no">01D</div><h2>按資金上限選擇可承擔的方案</h2><p>創辦人親授已確認，資金上限仍待提供。拉動下面的金額，看看在這個預算下能做甚麼、不要做甚麼。分級由投資人方案的數字推算，不是文件原文。</p></div>
     <div class="fund-wrap">
       <div class="card">
         <label for="fund" class="muted small">可動用資金上限（刻度單位：萬）</label>
@@ -391,108 +418,17 @@ html{scroll-behavior:smooth}
   </section>
 
   <!-- 5 -->
-  <section class="block" id="gates">
-    <div class="sec-head"><div class="sec-no">05</div><h2>分段撥款：錢跟著證據走</h2><p>每一段只在上一個關卡的條件全部達成後才放款；未達成就延後，不用「差不多」放行。以下按 HK$100 萬方案。</p></div>
-    <div class="steps">
-      <div class="step"><div class="when">第一段 · 2026 年 11 月至 2027 年 2 月</div><div class="amt">HK$5 萬</div><p class="small">驗證：教材整理、家長訪談、教育局查詢、合作場地試教、場地專業初查</p><p class="small muted" style="margin-top:6px">條件：出資協議簽妥</p></div>
-      <div class="step"><div class="when">第二段 · 2027 年 3 月至 6 月</div><div class="amt">HK$25 萬</div><p class="small">開業：簽租約 HK$12 萬；裝修、設置及開業招生 HK$13 萬</p><p class="small muted" style="margin-top:6px">條件：關卡 A；開課前部分另須關卡 B</p></div>
-      <div class="step"><div class="when">第三段 · 開課後按月</div><div class="amt">HK$25 萬</div><p class="small">營運儲備：支付每月營運虧損</p><p class="small muted" style="margin-top:6px">條件：每月 5 日前交月報；每月上限＝上月實際虧損＋HK$5,000</p></div>
-      <div class="step keep"><div class="when">保留 · 不預設動用</div><div class="amt">HK$45 萬</div><p class="small">只用於升級評估</p><p class="small muted" style="margin-top:6px">條件：關卡 C。注意：停損時的解約及結業成本，仍可能要動用其中約 HK$5–9 萬</p></div>
-    </div>
-
-    <div style="margin-top:14px">
-      <details open>
-        <summary>關卡 A：可以簽租約 <span class="s-meta">2027 年 2 月底前檢查</span></summary>
-        <div class="body"><ul class="checks">
-          <li>教育局書面回覆與工作室實際時間表、營運者及人數安排一致</li>
-          <li>完成至少 20 位沙田目標家長訪談，可上課時段足以排出每週 18 班</li>
-          <li>合作場地試教（適用要求確認後）至少 12 名兒童完成試堂，其中至少 6 位家長書面表示願以 HK$300／堂報讀</li>
-          <li>一句話差異化經訪談驗證：至少半數受訪家長說得出會選這裏而不選現有中心的理由</li>
-          <li>候選單位經認可人士初查用途、公契及消防；租約草稿有提前解約或分租條款</li>
-          <li>創辦人書面確認月薪、每週工時上限及病假代課安排</li>
-        </ul></div>
-      </details>
-      <details>
-        <summary>關卡 B：可以開課 <span class="s-meta">開課前</span></summary>
-        <div class="body"><ul class="checks">
-          <li>手冊第 8.9 節開課前檢查清單全部完成並簽名</li>
-          <li>開課前已有至少 12 名學生確認報讀並排入固定時段</li>
-          <li>預約及出席紀錄可證明每個時段人數符合教育局回覆</li>
-        </ul></div>
-      </details>
-      <details>
-        <summary>關卡 C：可以評估升級為註冊中心 <span class="s-meta">開業後</span></summary>
-        <div class="body"><ul class="checks">
-          <li>連續 2 個月付費學生不少於 50 人</li>
-          <li>熱門時段輪候家長不少於 8 位</li>
-          <li>累計現金不低於方案基準情境</li>
-          <li>已取得工程報價及教育局對新類別與容額的路線確認</li>
-        </ul><p class="muted small">達成關卡 C 只代表可以開始評估，不代表動用保留資金；升級要另做一份含新固定成本的逐月現金流。</p></div>
-      </details>
-    </div>
+  </div>
+<div class="proposal-group" id="execution"><div class="phase-head"><div class="eyebrow">提案 02 · 按關卡執行</div><h2>由資料整理到開課，每步都有完成條件</h2><p>這是全頁的主流程。按次序展開每一步；需要官方申請或核對時，直接使用該步的連結。部分工作可並行，但不應越過合規、場地及資金關卡。</p></div><section class="block" id="steps">
+    <div class="sec-head"><div class="sec-no">02</div><h2>執行清單：逐步評估、處理及過關</h2><p>每步列出預設建議、預估時間、預估花費及進入下一步的條件。打開看細節。</p></div>
+    <div class="actions" style="margin-bottom:16px"><a class="btn" href="./library.html#research">查看市場研究 →</a><a class="btn" href="./library.html#handbook">查看完整開業手冊 →</a></div>
+    <div id="stepList"></div>
   </section>
 
-  <!-- 6 -->
-  <section class="block" id="cash">
-    <div class="sec-head"><div class="sec-no">06</div><h2>首年要準備多少現金：三個情境</h2><p>三個情境只差在招生速度。投資人口徑：單價 HK$300、每月 4.0 週、每名學生每週一堂。</p></div>
-    <div class="grid2">
-      <div class="card">
-        <h3>首年總現金需求</h3>
-        <div class="bars" id="needBars" style="margin-top:10px"></div>
-        <div class="key" style="margin-top:12px"><span><i style="background:var(--full)"></i>驗證期 5 萬</span><span><i style="background:var(--studio)"></i>開業前投入 25 萬</span><span><i style="background:var(--phased)"></i>開課後營運虧損</span></div>
-      </div>
-      <div class="card">
-        <h3>三條招生曲線</h3>
-        <dl class="kv" style="margin-top:6px">
-          <dt>審慎</dt><dd>8 人起，第 12 月 40 人</dd>
-          <dt>基準</dt><dd>12 人起，第 12 月 54 人坐滿</dd>
-          <dt>樂觀</dt><dd>沿用手冊曲線，封頂 54 人</dd>
-        </dl>
-        <p class="muted small" style="margin-top:10px">基準情境開課後累計營運虧損最深約 HK$18.6 萬（第 9 個月），第三段 HK$25 萬儲備足夠；審慎情境在第 8 個月觸及停損線。</p>
-        <p class="muted small" style="margin-top:6px">試算台的「學生增長曲線」可切換這三種，投資人兩條曲線以直線近似。</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7 -->
-  <section class="block" id="stop">
-    <div class="sec-head"><div class="sec-no">07</div><h2>停損線與最大虧損</h2><p>停損條件事先寫進出資協議，觸發後雙方按條款處理，不臨時談判。觸發不代表即時結業，而是停止撥款，比較縮減時段、轉合作場地或結束。</p></div>
-    <div class="grid2">
-      <div class="stack">
-        <div class="card risk" style="--c:var(--warn)"><h3>預警</h3><p class="small">第 6 個月付費學生少於 25 人（基準 32 人、審慎 23 人）</p><p class="what">凍結新增支出；檢討時段、定價及招生渠道；1 個月內提交修正計劃</p></div>
-        <div class="card risk" style="--c:var(--bad)"><h3>停損</h3><p class="small">第 9 個月少於 35 人，或開課後累計營運虧損超過 HK$25 萬</p><p class="what">停止撥款；比較轉合作場地、縮減時段或結束</p></div>
-        <div class="card risk" style="--c:var(--full)"><h3>合規</h3><p class="small">部門要求改變營運方式，改動成本超過 HK$5 萬</p><p class="what">先停止受影響課堂，再按新方案重算</p></div>
-        <div class="card risk" style="--c:var(--full)"><h3>關鍵人物</h3><p class="small">創辦人連續 4 週以上無法授課，且沒有合資格代課</p><p class="what">暫停收新生；按條款處理已收學費</p></div>
-      </div>
-      <div class="card">
-        <h3>最大可預期虧損：約 HK$60–64 萬</h3>
-        <p class="muted small">按審慎情境在第 9 個月停損計算。</p>
-        <div class="stackbar" style="margin-top:14px" aria-label="最大虧損組成">
-          <span style="flex:5;background:var(--full)">5</span>
-          <span style="flex:21.4;background:var(--studio)">21.4</span>
-          <span style="flex:26.6;background:var(--phased)">26.6</span>
-          <span style="flex:5.4;background:var(--bad)">5.4</span>
-          <span style="flex:4;background:color-mix(in srgb,var(--bad) 55%,var(--surface));color:var(--ink)">2–6</span>
-        </div>
-        <div class="tablewrap" style="margin-top:12px">
-          <table class="t" style="min-width:0">
-            <tbody>
-              <tr><th>第一段驗證期</th><td class="n">HK$50,000</td></tr>
-              <tr><th>開業前投入（扣可退按金約 HK$36,000）</th><td class="n">約 HK$214,000</td></tr>
-              <tr><th>開課後 9 個月營運虧損</th><td class="n">約 HK$266,000</td></tr>
-              <tr><th>租約提前解約（假設 3 個月租）</th><td class="n">HK$54,000</td></tr>
-              <tr><th>結業、退款及雜項</th><td class="n">約 HK$20,000–60,000</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="muted small" style="margin-top:10px">這個數字高於「最多動用 HK$55 萬」，差額要由保留資金支付。租約若沒有提前解約條款，最大虧損會隨餘下租期上升，所以「解約條款」是關卡 A 的必要條件。已收但未上的課堂學費，要先按家長條款退款或完成，不可用來支付其他開支。</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 8 -->
-  <section class="block" id="timeline">
-    <div class="sec-head"><div class="sec-no">08</div><h2>開業時間表：兩條路線並列評估</h2><p>以下按 2027 年 8 月目標倒排，是內部工作次序與檢查點，不是政府審批承諾。任何路線都要先確認實際課程、營運者、場地和學生人數安排；如必要回覆、工程或批准未完成，便順延開業。</p></div>
+  <!-- 11 -->
+  </div>
+<div class="proposal-group" id="route-plan"><div class="phase-head"><div class="eyebrow">提案 03 · 管理路線與合規</div><h2>時間表回答何時做；合規流程回答去哪裏辦</h2><p>工作室和註冊中心的步驟不同。先依路線查看時程，再按規管項目走相應查詢、申請和驗收程序。</p></div><section class="block" id="timeline">
+    <div class="sec-head"><div class="sec-no">03A</div><h2>兩條路線的倒數時間表</h2><p>以下按 2027 年 8 月目標倒排，是內部工作次序與檢查點，不是政府審批承諾。任何路線都要先確認實際課程、營運者、場地和學生人數安排；如必要回覆、工程或批准未完成，便順延開業。</p></div>
     <div class="stack">
       <div class="card">
         <h3>路線一：私人小班工作室</h3>
@@ -520,7 +456,7 @@ html{scroll-behavior:smooth}
 
   <!-- 9 -->
   <section class="block" id="rules">
-    <div class="sec-head"><div class="sec-no">09</div><h2>合規與申請</h2><p>商業登記、學校註冊、租約與樓宇消防是三件不同的事。取得其中一項，不代表其他要求自動完成。</p></div>
+    <div class="sec-head"><div class="sec-no">03B</div><h2>申請與合規：兩條路線分開處理</h2><p>商業登記、學校註冊、租約與樓宇消防是三件不同的事。取得其中一項，不代表其他要求自動完成。</p></div>
     <div class="grid3">
       <div class="card"><h3>商業登記</h3><p class="muted small">處理業務登記及稅務。稅務局明確說明，商業登記本身不是營業牌照。</p></div>
       <div class="card"><h3>學校註冊或其他批准</h3><p class="muted small">處理特定教育活動及場地。非註冊學校的擁有人、教員或管理人一經定罪，可罰款 HK$250,000 及監禁 2 年。</p></div>
@@ -629,15 +565,113 @@ html{scroll-behavior:smooth}
   </section>
 
   <!-- 10 -->
-  <section class="block" id="steps">
-    <div class="sec-head"><div class="sec-no">10</div><h2>十四步：每步做甚麼、何時過關</h2><p>每步列出預設建議、預估時間、預估花費及進入下一步的條件。打開看細節。</p></div>
-    <div class="actions" style="margin-bottom:16px"><a class="btn" href="./library.html#research">查看市場研究 →</a><a class="btn" href="./library.html#handbook">查看完整開業手冊 →</a></div>
-    <div id="stepList"></div>
+  </div>
+<div class="proposal-group" id="finance">
+  <div class="phase-head"><div class="eyebrow">提案 04 · 資金及風險控制</div><h2>每一筆投入都有用途、檢查點和退出線</h2><p>財務評估看現金何時最低、資金能否撐過保守情境，以及停做時是否仍有錢處理租約、員工與家長退款。</p></div>
+  <section class="block" id="gates">
+    <div class="sec-head"><div class="sec-no">04A</div><h2>資金按證據分段，不按日期自動撥款</h2><p>每一段只在上一個關卡的條件全部達成後才放款；未達成就延後，不用「差不多」放行。以下按 HK$100 萬方案。</p></div>
+    <div class="steps">
+      <div class="step"><div class="when">第一段 · 2026 年 11 月至 2027 年 2 月</div><div class="amt">HK$5 萬</div><p class="small">驗證：教材整理、家長訪談、教育局查詢、合作場地試教、場地專業初查</p><p class="small muted" style="margin-top:6px">條件：出資協議簽妥</p></div>
+      <div class="step"><div class="when">第二段 · 2027 年 3 月至 6 月</div><div class="amt">HK$25 萬</div><p class="small">開業：簽租約 HK$12 萬；裝修、設置及開業招生 HK$13 萬</p><p class="small muted" style="margin-top:6px">條件：關卡 A；開課前部分另須關卡 B</p></div>
+      <div class="step"><div class="when">第三段 · 開課後按月</div><div class="amt">HK$25 萬</div><p class="small">營運儲備：支付每月營運虧損</p><p class="small muted" style="margin-top:6px">條件：每月 5 日前交月報；每月上限＝上月實際虧損＋HK$5,000</p></div>
+      <div class="step keep"><div class="when">保留 · 不預設動用</div><div class="amt">HK$45 萬</div><p class="small">只用於升級評估</p><p class="small muted" style="margin-top:6px">條件：關卡 C。注意：停損時的解約及結業成本，仍可能要動用其中約 HK$5–9 萬</p></div>
+    </div>
+
+    <div style="margin-top:14px">
+      <details open>
+        <summary>關卡 A：可以簽租約 <span class="s-meta">2027 年 2 月底前檢查</span></summary>
+        <div class="body"><ul class="checks">
+          <li>教育局書面回覆與工作室實際時間表、營運者及人數安排一致</li>
+          <li>完成至少 20 位沙田目標家長訪談，可上課時段足以排出每週 18 班</li>
+          <li>合作場地試教（適用要求確認後）至少 12 名兒童完成試堂，其中至少 6 位家長書面表示願以 HK$300／堂報讀</li>
+          <li>一句話差異化經訪談驗證：至少半數受訪家長說得出會選這裏而不選現有中心的理由</li>
+          <li>候選單位經認可人士初查用途、公契及消防；租約草稿有提前解約或分租條款</li>
+          <li>創辦人書面確認月薪、每週工時上限及病假代課安排</li>
+        </ul></div>
+      </details>
+      <details>
+        <summary>關卡 B：可以開課 <span class="s-meta">開課前</span></summary>
+        <div class="body"><ul class="checks">
+          <li>手冊第 8.9 節開課前檢查清單全部完成並簽名</li>
+          <li>開課前已有至少 12 名學生確認報讀並排入固定時段</li>
+          <li>預約及出席紀錄可證明每個時段人數符合教育局回覆</li>
+        </ul></div>
+      </details>
+      <details>
+        <summary>關卡 C：可以評估升級為註冊中心 <span class="s-meta">開業後</span></summary>
+        <div class="body"><ul class="checks">
+          <li>連續 2 個月付費學生不少於 50 人</li>
+          <li>熱門時段輪候家長不少於 8 位</li>
+          <li>累計現金不低於方案基準情境</li>
+          <li>已取得工程報價及教育局對新類別與容額的路線確認</li>
+        </ul><p class="muted small">達成關卡 C 只代表可以開始評估，不代表動用保留資金；升級要另做一份含新固定成本的逐月現金流。</p></div>
+      </details>
+    </div>
   </section>
 
-  <!-- 11 -->
-  <section class="block" id="course">
-    <div class="sec-head"><div class="sec-no">11</div><h2>課程與招生</h2><p>先試教一個主題，再看家長由查詢到報讀在哪一步流失。</p></div>
+  <!-- 6 -->
+  <section class="block" id="cash">
+    <div class="sec-head"><div class="sec-no">04B</div><h2>首年現金需求：看招生快慢與資金低點</h2><p>三個情境只差在招生速度。投資人口徑：單價 HK$300、每月 4.0 週、每名學生每週一堂。</p></div>
+    <div class="grid2">
+      <div class="card">
+        <h3>首年總現金需求</h3>
+        <div class="bars" id="needBars" style="margin-top:10px"></div>
+        <div class="key" style="margin-top:12px"><span><i style="background:var(--full)"></i>驗證期 5 萬</span><span><i style="background:var(--studio)"></i>開業前投入 25 萬</span><span><i style="background:var(--phased)"></i>開課後營運虧損</span></div>
+      </div>
+      <div class="card">
+        <h3>三條招生曲線</h3>
+        <dl class="kv" style="margin-top:6px">
+          <dt>審慎</dt><dd>8 人起，第 12 月 40 人</dd>
+          <dt>基準</dt><dd>12 人起，第 12 月 54 人坐滿</dd>
+          <dt>樂觀</dt><dd>沿用手冊曲線，封頂 54 人</dd>
+        </dl>
+        <p class="muted small" style="margin-top:10px">基準情境開課後累計營運虧損最深約 HK$18.6 萬（第 9 個月），第三段 HK$25 萬儲備足夠；審慎情境在第 8 個月觸及停損線。</p>
+        <p class="muted small" style="margin-top:6px">試算台的「學生增長曲線」可切換這三種，投資人兩條曲線以直線近似。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="block" id="stop">
+    <div class="sec-head"><div class="sec-no">04C</div><h2>風險預警、停損及退出安排</h2><p>停損條件事先寫進出資協議，觸發後雙方按條款處理，不臨時談判。觸發不代表即時結業，而是停止撥款，比較縮減時段、轉合作場地或結束。</p></div>
+    <div class="grid2">
+      <div class="stack">
+        <div class="card risk" style="--c:var(--warn)"><h3>預警</h3><p class="small">第 6 個月付費學生少於 25 人（基準 32 人、審慎 23 人）</p><p class="what">凍結新增支出；檢討時段、定價及招生渠道；1 個月內提交修正計劃</p></div>
+        <div class="card risk" style="--c:var(--bad)"><h3>停損</h3><p class="small">第 9 個月少於 35 人，或開課後累計營運虧損超過 HK$25 萬</p><p class="what">停止撥款；比較轉合作場地、縮減時段或結束</p></div>
+        <div class="card risk" style="--c:var(--full)"><h3>合規</h3><p class="small">部門要求改變營運方式，改動成本超過 HK$5 萬</p><p class="what">先停止受影響課堂，再按新方案重算</p></div>
+        <div class="card risk" style="--c:var(--full)"><h3>關鍵人物</h3><p class="small">創辦人連續 4 週以上無法授課，且沒有合資格代課</p><p class="what">暫停收新生；按條款處理已收學費</p></div>
+      </div>
+      <div class="card">
+        <h3>最大可預期虧損：約 HK$60–64 萬</h3>
+        <p class="muted small">按審慎情境在第 9 個月停損計算。</p>
+        <div class="stackbar" style="margin-top:14px" aria-label="最大虧損組成">
+          <span style="flex:5;background:var(--full)">5</span>
+          <span style="flex:21.4;background:var(--studio)">21.4</span>
+          <span style="flex:26.6;background:var(--phased)">26.6</span>
+          <span style="flex:5.4;background:var(--bad)">5.4</span>
+          <span style="flex:4;background:color-mix(in srgb,var(--bad) 55%,var(--surface));color:var(--ink)">2–6</span>
+        </div>
+        <div class="tablewrap" style="margin-top:12px">
+          <table class="t" style="min-width:0">
+            <tbody>
+              <tr><th>第一段驗證期</th><td class="n">HK$50,000</td></tr>
+              <tr><th>開業前投入（扣可退按金約 HK$36,000）</th><td class="n">約 HK$214,000</td></tr>
+              <tr><th>開課後 9 個月營運虧損</th><td class="n">約 HK$266,000</td></tr>
+              <tr><th>租約提前解約（假設 3 個月租）</th><td class="n">HK$54,000</td></tr>
+              <tr><th>結業、退款及雜項</th><td class="n">約 HK$20,000–60,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted small" style="margin-top:10px">這個數字高於「最多動用 HK$55 萬」，差額要由保留資金支付。租約若沒有提前解約條款，最大虧損會隨餘下租期上升，所以「解約條款」是關卡 A 的必要條件。已收但未上的課堂學費，要先按家長條款退款或完成，不可用來支付其他開支。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  
+</div>
+<div class="proposal-group" id="operate"><div class="phase-head"><div class="eyebrow">提案 05 · 開業及持續改善</div><h2>把課程、招生和服務變成每月可檢視的數據</h2><p>開業不是終點。按學生需求、時段容量、現金和安全紀錄決定維持、調整或擴充。</p></div><section class="block" id="course">
+    <div class="sec-head"><div class="sec-no">05A</div><h2>開業後：課程交付、招生與家長回饋</h2><p>先試教一個主題，再看家長由查詢到報讀在哪一步流失。</p></div>
     <div class="card">
       <h3>一堂 60 分鐘課的示例：主題「水果」（3–4 歲初接觸英語）</h3>
       <div class="lesson" style="margin-top:12px">
@@ -677,7 +711,7 @@ html{scroll-behavior:smooth}
 
   <!-- 12 -->
   <section class="block" id="todo">
-    <div class="sec-head"><div class="sec-no">12</div><h2>現在要確認的事</h2><p>以下任何一項有變，上面的數字都要重算。</p></div>
+    <div class="sec-head"><div class="sec-no">05B</div><h2>創辦人現在要提供或確認的資料</h2><p>以下任何一項有變，上面的數字都要重算。</p></div>
     <div class="card tablewrap">
       <table class="t">
         <thead><tr><th>待確認</th><th>影響</th><th>誰確認</th></tr></thead>
@@ -698,7 +732,7 @@ html{scroll-behavior:smooth}
       <h3>第一個月完成後，應答得出這五條問題</h3>
       <p class="muted">我們有甚麼教材？打算服務誰？家長是否有興趣？大概要投入多少？下一步應優先研究哪種場地？</p>
     </div>
-  </section>
+  </section></div>
 
   <footer>
     <p>資料整理自〈沙田幼兒英語教育中心 開業及營運完整手冊 整合加強版〉、〈沙田幼兒英文中心｜投資人可執行方案（HK$100 萬）〉及用戶提供的拼音中心最低成本版簡報摘要（2026 年 10 月 30 日整理）。最低成本版租金、叫價、費用及收支均為摘要估算，未經實際報價或成交資料核實；本頁分級及打平人數為推算。</p>
@@ -797,27 +831,32 @@ html{scroll-behavior:smooth}
   $('fund').addEventListener('input', renderFund);
   renderFund();
 
-  /* 十四步 */
+  /* 逐步執行：每步提供評估、建議、操作、風險及來源 */
   var STEPS = [
-    ['角色資金','確認資金、分工與薪酬','3–5 小時','$0；顧問另計','出資與承擔書面確認'],
-    ['整理教材','盤點教材和素材使用權','1–2 週兼職','$0–2,000；授權另計','清單完成，素材可使用'],
-    ['設計課程','先做一套 6–8 節','2–4 週','$1,000–5,000；場地另計','教案及教材可試行'],
-    ['研究需求','訪談 15–20 位家長，先看石門、火炭','2–4 週','$0–2,000','訪談及競品比較完成'],
-    ['合規查詢','向教育局提交真實營運方案','準備 1–2 日；回覆不定','自行查詢 $0','回覆與實際方案核對'],
-    ['定價收費','本地導師 HK$300／45 分鐘起測試','設計 1–2 週；測試 2–4 週','$0–3,000','條款、收費及適用批准確認'],
-    ['模式場地','並行比較合作場地、頂手、自租','4–8 週','$0–5,000；顧問工程另計','場地核查、報價及合同可行'],
-    ['申請登記','按教育局書面回覆走註冊或毋須註冊路線','註冊約 4–6 個月起；其他按個案','政府費按當期公布；工程及專業費另計','所需批准、登記及保險到位'],
-    ['招聘人手','工作室預設不聘全職，只在需要時請不與創辦人同時上課的兼職代課','招聘及培訓約 4–8 週','按實際薪酬及培訓預算','資格、保險及入職安排到位'],
-    ['財務','逐月現金流，每月更新','初版 1–2 週','自行製作 $0；會計另計','資金足以應付低谷及儲備'],
-    ['排班容量','先排每週 18–23 班作測試','1–2 日；每月更新','設置 $0–1,000','時段、師資及批准匹配'],
-    ['招生','先用訪談和社群，再小額測廣告','每週 4–8 小時','測試 $2,000–5,000／月','招生、試堂及收費條件確認'],
-    ['安全服務','開課前演練點名、接送及事故','1–2 週','$1,000–5,000；保險另計','文件、培訓及適用批准到位'],
-    ['追蹤','每週看招生，每月看現金','每週 1–2 小時及每月半日','工具 $0–1,000／月；會計另計','持續核對數據並調整']
+    {phase:'第一階段｜先定義方向及驗證需求',name:'確認角色、時間及資金',time:'3–5 小時',cost:'自行整理 $0；專業諮詢另計',eval:'創辦人每週可投入多少時間？是否親自授課？可承擔的月薪與最高損失是多少？出資人何時、按甚麼條件提供資金？',plan:'先以創辦人親授的小班作基準；把資金分成驗證費、開業前投入、營運儲備和退出預留。不能承擔 21–23 堂課時，要重新評估工作室人手安排。',action:'書面列出營運角色、每週工時上限、創辦人薪酬、資金上限、出資時間與決策權；約定每月報告及停損條件。',risk:'只算租金和裝修、不計薪酬或退款退租成本，會高估可用資金；出資口頭承諾也不能當現金。',done:'創辦人及出資人確認角色、月薪、資金上限、撥款方式與退出原則。',links:'<a href="#money">看財務假設</a> <a href="#gates">看分段撥款關卡</a>'},
+    {phase:'第一階段｜先定義方向及驗證需求',name:'盤點已有教材與使用權',time:'1–2 週兼職',cost:'自行盤點 $0；修訂／授權另計',eval:'教材適用甚麼年齡和英語程度？每一單元有沒有目標、教學流程、練習和評估？圖片、音檔及字體是否有商用權？',plan:'已有相關教材，先做教材盤點，不從零重做。挑 6–8 節內容完整、最能代表課程特色的單元作試教。',action:'建立教材清單：名稱、年齡、程度、技能、頁數、教學時間、所需教具、完成度、修改事項、素材來源及商用許可；標出可直接教、需小修、不可商用。',risk:'教材完成不代表課程已可營運；未核實圖片、音檔或第三方品牌授權便印刷宣傳，可能要重做。',done:'教材清單與使用權有紀錄，已有 6–8 節可試行單元及待修訂清單。',links:'<a href="#course">看試教課堂示例</a>'},
+    {phase:'第一階段｜先定義方向及驗證需求',name:'把教材整理成可交付課程',time:'2–4 週',cost:'教具及試印約 $1,000–5,000；按報價',eval:'目標年齡、每班人數、堂長、每週頻率、學習目標和家長回饋方式是否清楚？教材能否在現有課室及師資下完成？',plan:'先做一條主力課程，不同時推出太多級別。以小班最多 4 人作教學設計假設，並把每堂目標寫成可觀察的兒童表現。',action:'為每節寫教案：學習目標、流程與分鐘分配、教師提問、孩子回應、教材、差異化支援、家長回饋及缺席補堂安排；由創辦人試教後修訂。',risk:'只按教材頁數規劃，可能低估幼兒轉場、情緒和家長交接所需時間；未確認合規前勿以收費試堂代替查詢。',done:'有一套可連續教 6–8 節的教案、教具清單、家長說明和課堂紀錄表。',links:'<a href="#course">看課堂流程及招生數據</a>'},
+    {phase:'第一階段｜先定義方向及驗證需求',name:'訪談家長並驗證需求',time:'2–4 週',cost:'訪談及簡單試教約 $0–2,000',eval:'目標家庭在哪區？可上課日子和時間是甚麼？家長目前為何選／不選現有中心？願意為哪個結果付費？',plan:'訪談 15–20 位目標家長；訪談先問行為和需要，不先推銷。整理競爭中心的公開價、課程、地點和時段，驗證差異化。',action:'記錄家庭區域、孩子年齡、現有課程、可上課時段、主要困難、可接受價格及下一步意向。合規查詢後才安排試教；用實際出席及願付價格取代口頭「有興趣」。',risk:'熟人支持和社交媒體按讚不等於付費需求；若熱門時段或週末日人數無法符合規管安排，招生曲線也不成立。',done:'完成訪談紀錄、競品比較、可排時段表和付費意向證據；確認差異化能被家長說清楚。',links:'<a href="#course">看招生漏斗</a> <a href="#routes">先核對人數門檻</a>'},
+    {phase:'第二階段｜先確認規管路線，再承擔場地成本',name:'向教育局確認營運分類與人數',time:'準備 1–2 日；回覆時間不定',cost:'自行查詢 $0；顧問另計',eval:'按課程、年齡、營運者、場地及全日時間表，是否屬《教育條例》下的學校？同時在場與每日學生如何計算？試堂、補堂、家長陪同怎處理？',plan:'把完整營運方案連時間表交教育局書面查詢。工作室先以同時 7 人、每日 19 人作內部保守線；這不是法定安全港或自動豁免。',action:'準備課程內容、每節及每日人數、不同班間隔、出席安排、家長是否陪同、地址／候選物業和擬議擴班方式；逐項提出書面問題。保存回覆，按回覆修訂班表。',risk:'只問「小班是否需要牌照」而沒有提供完整安排，答案可能不足以支持真實營運；達到任何一項法定門檻都不可先開課再補申請。',done:'書面回覆與實際課程、時間表、營運者及人數一致；不一致便補問或重做方案。',links:'<a target="_blank" rel="noopener" href="https://www.edb.gov.hk/tc/sch-admin/sch-registration/about-sch-registration/index.html">教育局：學校註冊與定義</a> <a href="#rules">看兩路線申請比較</a>'},
+    {phase:'第二階段｜先確認規管路線，再承擔場地成本',name:'定價、收費週期及退款條款',time:'設計 1–2 週；測試 2–4 週',cost:'自行試算 $0；收款工具及法律審閱另計',eval:'家長願付價格是否足以支付變動成本、租金、薪酬和招生？小組班是按堂還是按月？停課、補堂、退款、試堂怎計？',plan:'先用已訪談的本地導師課價格作測試基準；把課程長度、每月堂數和收費週期寫清楚。每位學生月貢獻要扣除教材、支付手續費等變動成本。',action:'計算「每堂實收－每堂變動成本」及每月貢獻；用保守、基準、樂觀三種收生情境試算。向家長展示完整價目與退款條款；若屬註冊學校，先確認學費批准及收費規定。',risk:'把小組價誤寫成每堂價、收入當成利潤、或先收長期學費，都會造成現金與退款風險。',done:'公開價目、收費週期、退款／補堂條款及單位經濟表已完成；註冊中心另確認適用學費批准。',links:'<a href="#money">看打平及成本口徑</a> <a href="#rules">看註冊學校收費要求</a>'},
+    {phase:'第二階段｜先確認規管路線，再承擔場地成本',name:'選營運模式及篩選場地',time:'4–8 週；可與財務試算並行',cost:'初步查詢約 $0–5,000；認可人士、律師及工程報價另計',eval:'合作場地、自租或頂手，哪一種符合資金、時程和控制權？租約、公契、用途、消防、樓宇及批准程序是否支持擬議用途？',plan:'資金有限先比較合作／時租場地；租舖前先做用途初查。頂手不代表註冊證明可轉移，必須查清新營運者及場地程序。',action:'每個單位用同一表比較租金、管理費、按金、免租期、租期、解約權、教學用途書面同意、消防／樓宇工程、課室容量、交通及日後擴充。頂手加查預收學費、退款、員工年資、欠款、設備及未批工程；把教育局及業主書面確認列作付款前條件。',risk:'先簽長約或先付不可退頂手費，可能因用途／註冊不符而同時損失租金、裝修和頂手款。',done:'至少比較 3 個選項；選址、工程、租約和規管路線有文件支持，且退出成本已計入。',links:'<a href="#timeline">看場地與申請時序</a> <a href="#rules">看申請流程與頂手盡職調查</a>'},
+    {phase:'第二階段｜先確認規管路線，再承擔場地成本',name:'完成公司、商業登記及適用申請',time:'工作室約 2–4 週；註冊路線約 4–9 個月起，按個案',cost:'政府費按當期公布；專業費及工程另計',eval:'教育局回覆要求走哪條路？選獨資還是有限公司？是否需要學校註冊、校董登記、學費批准、消防／樓宇證明？',plan:'先定營運主體和條件式租約，再按申請路線逐項辦理。註冊中心不得在取得所需臨時註冊及適用批核前收費開課。',action:'按需要成立公司、辦商業登記；註冊中心按教育局最新申請清單準備圖則、租約、課程、時間表及部門文件；按核准圖則施工並申請驗收。所有證書及往來書面存檔。',risk:'商業登記不是辦學批准；頂手舊證不能假設轉到新營運者；補件、工程或驗收延誤要順延開業。',done:'取得該路線所需登記、批准、保險及有效場地文件；把實際開課日設在所有必要條件完成之後。',links:'<a target="_blank" rel="noopener" href="https://www.edb.gov.hk/tc/sch-admin/sch-registration/about-sch-registration/info-application-sch-registration.html">教育局：學校註冊申請資料</a> <a target="_blank" rel="noopener" href="https://www.ird.gov.hk/eng/tax/bre_gen.htm">稅務局：商業登記</a> <a target="_blank" rel="noopener" href="https://www.cr.gov.hk/tc/faq/local-company/incorporation.htm">公司註冊處：成立公司</a> <a target="_blank" rel="noopener" href="https://www.bd.gov.hk/tc/resources/registration-guides/index_building_professionals.html">屋宇署：認可人士名冊</a>'},
+    {phase:'第三階段｜把現金、人手及容量準備到可開業',name:'招聘、聘用及培訓人手',time:'招聘及培訓約 4–8 週',cost:'按實際薪酬、保險及培訓預算',eval:'課程路線是否需要第二位老師？創辦人能否持續親授？需要代課時，是否會與創辦人同時授課而觸及人數門檻？',plan:'工作室預設由創辦人授課、不聘全職；只在需要時聘用不與創辦人同時開班的兼職代課。註冊中心先按招生及現金分階段招聘。',action:'核實資格及推薦人、試教評核、書面聘用條款、薪酬和培訓；員工上班前令僱員補償保險生效，再按法定期限辦強積金與僱員通知。符合兒童相關工作的職位，可在取得申請人同意後使用警方查核。',risk:'未投保便安排試教或代課、把兼職誤當毋須法定責任、或只靠單一創辦人而無病假方案，都會造成營運與安全中斷。',done:'人手表、代課方案、試教評核、保險及入職文件齊備；排班未超過教育局回覆及批准範圍。',links:'<a target="_blank" rel="noopener" href="https://www.labour.gov.hk/tc/faq/cap282a_whole.htm">勞工處：僱員補償</a> <a target="_blank" rel="noopener" href="https://www.mpfa.org.hk/tc/mpf-system/mandatory-contributions">積金局：強制性供款</a> <a target="_blank" rel="noopener" href="https://www.police.gov.hk/ppp_tc/11_useful_info/scrc.html">警務處：性罪行定罪紀錄查核</a>'},
+    {phase:'第三階段｜把現金、人手及容量準備到可開業',name:'建立逐月現金流與會計控制',time:'初版 1–2 週；每月更新',cost:'自行試算 $0；會計服務按報價',eval:'起始現金扣掉按金、工程、開業費後還剩多少？每月固定成本、學生貢獻、稅、薪金和退款責任是否列齊？最差情境何時見底？',plan:'逐月列 12 個月收生、收入、支出、按金、裝修、退款和貸款還款。至少比較審慎、基準和樂觀曲線；資助未批前不納入現金。',action:'設獨立營運戶口或清晰分帳；每月對帳、留存收據、核對未上課堂及應退款額。用試算台改租金、薪酬、單價和招生速度，重新找最低現金月。',risk:'全年盈餘掩蓋首年現金低谷；已收但未交付的學費不是自由現金。貸款需還本付息，不能當資助。',done:'有逐月現金流、最低現金點、退款及停業成本預留；現金低於停損線時有事先約定動作。',links:'<a href="./calculator.html#investor">開啟財務試算台</a> <a href="#cash">看三個收生情境</a> <a href="#stop">看停損線</a>'},
+    {phase:'第三階段｜把現金、人手及容量準備到可開業',name:'核對班表、容量和工作量',time:'1–2 日；每月更新',cost:'排班工具約 $0–1,000',eval:'家長實際可上時段能否填滿班表？場地批准容額、人手、每天學生數和同時在場人數是否一致？創辦人每週工時是否可持續？',plan:'先用每週 18–23 班作容量測試，不把理論最大容量當招生預測；試堂、補堂和不同課程一併計算。',action:'建立全日時間表，逐節標示老師、課室、名額、學生及交接時間；按教育局回覆／批准逐日加總；每週找出熱門時段與閒置時段，調整前先確認是否改變合規方案。',risk:'每班看似只有 4 人，兩間課室合計可能達同時門檻；工作室週末每日上限亦會限制招生曲線。',done:'班表符合書面回覆及批准；容量、已報讀人數、補堂和教職員安排能逐日核對。',links:'<a href="#routes">看學校人數門檻</a> <a href="#timeline">看開業時間節點</a>'},
+    {phase:'第四階段｜開業、服務、量度及調整',name:'招生和建立家長信任',time:'每週 4–8 小時；每週檢視',cost:'小額測試約 $2,000–5,000／月，按預算',eval:'每月有多少查詢、試堂出席、報讀和流失？家長是從哪裏來？真正促成報讀的原因是甚麼？招生承諾能否由教材和服務兌現？',plan:'先用家長轉介、社區合作和有用內容測試；先小額試廣告，達到預設轉化及成本條件才加碼。',action:'每位查詢記錄來源、孩子年齡、需要、可上時段、試堂日期、結果及跟進；每月計算查詢→試堂→報讀轉化率、獲客成本和流失原因。',risk:'用追蹤者、按讚或口頭意向代替付費收生；用過度承諾的成效宣傳而損害信任。',done:'有一條可追蹤招生漏斗、每週跟進名單及月報；所有宣傳和收費說法一致。',links:'<a href="#course">看招生漏斗示例</a> <a href="#gates">看放款證據</a>'},
+    {phase:'第四階段｜開業、服務、量度及調整',name:'建立兒童安全及家長服務流程',time:'1–2 週演練；持續執行',cost:'工具及物資約 $1,000–5,000；保險另計',eval:'誰負責點名、接送核實、過敏／緊急聯絡、事故記錄、家長交接及課堂照片同意？休息和疏散安排是否清楚？',plan:'開業前寫下兒童保護、接送、點名、事故、投訴、病假和退款程序；由所有教職員演練。只收集營運所需的兒童資料並限制存取。',action:'建立家長緊急聯絡及授權接送表、每日出席表、事故／投訴表、照片同意和個人資料保存規則；確認僱員補償及公眾責任保險承保實際兒童課堂。符合職位範圍時，徵求申請人同意後辦理警方查核。',risk:'查核不是招聘、監督或兒童保護程序的替代品；未有清楚接送與事故紀錄，會增加兒童安全和爭議風險。',done:'文件、責任人、緊急聯絡及事故演練完成；場地和保險符合實際營運安排。',links:'<a target="_blank" rel="noopener" href="https://www.police.gov.hk/ppp_tc/11_useful_info/scrc.html">警務處：查核適用範圍</a> <a href="#rules">看申請與場地規定</a>'},
+    {phase:'第四階段｜開業、服務、量度及調整',name:'每月檢視、觸發預警並決定擴縮',time:'每週 1–2 小時；每月半日',cost:'工具約 $0–1,000／月；會計另計',eval:'付費學生、月流失、時段使用率、現金低點、未履行課堂及家長投訴有沒有偏離計劃？是否到達擴編或停損條件？',plan:'每月固定日期做管理檢討，先看現金和合規，再看招生與教學；只有連續達標、有輪候需求和工程資金時才評估擴充。',action:'更新實際與預算差異；把問題寫成「指標—原因—負責人—期限」；未達預警便凍結新增承擔，達停損線即按協議停撥、處理家長及租約責任。',risk:'只追學生數不看未上課學費及可用現金；過早擴租、聘人會令固定成本先於需求上升。',done:'每月報告及行動紀錄保存；擴編或停損決定符合預先設定的關卡與協議。',links:'<a href="#stop">查看預警與退出線</a> <a href="#gates">查看擴張關卡</a>'}
   ];
+  var lastPhase='';
   $('stepList').innerHTML = STEPS.map(function(s,i){
-    return '<details><summary><span><span class="num muted" style="margin-right:10px">'+String(i+1).padStart(2,'0')+'</span>'+s[0]+'</span><span class="s-meta">'+s[2]+'</span></summary>'+
-      '<div class="body"><dl class="kv"><dt>預設建議</dt><dd style="font-family:var(--f-body);text-align:right">'+s[1]+'</dd>'+
-      '<dt>預估花費</dt><dd>'+s[3]+'</dd><dt>過關條件</dt><dd style="font-family:var(--f-body);text-align:right">'+s[4]+'</dd></dl></div></details>';
+    var phase = s.phase !== lastPhase ? '<div class="step-phase">'+(lastPhase=s.phase)+'</div>' : '';
+    return phase+'<details><summary><span><span class="num muted" style="margin-right:10px">'+String(i+1).padStart(2,'0')+'</span>'+s.name+'</span><span class="s-meta">'+s.time+'</span></summary>'+
+      '<div class="body"><div class="step-detail">'+
+      '<div><b>先評估</b>'+s.eval+'</div><div><b>預設方案</b>'+s.plan+'</div>'+
+      '<div><b>怎樣執行</b>'+s.action+'</div><div><b>風險與處理</b>'+s.risk+'</div></div>'+
+      '<dl class="kv"><dt>預估時間</dt><dd>'+s.time+'</dd><dt>預估花費</dt><dd>'+s.cost+'</dd><dt>完成才過關</dt><dd style="font-family:var(--f-body);text-align:right">'+s.done+'</dd></dl>'+
+      '<div class="step-links">'+s.links+'</div></div></details>';
   }).join('');
 })();
 </script>
