@@ -974,7 +974,7 @@ img{max-width:100%}
   function calc(){
     var rent=val('abRent'), other=val('abOther'), founder=val('abFounder');
     var salary=val('abTeacherPay'), admin=val('abAdminPay'), adminN=val('abAdminN');
-    var teacherN1=Math.min(4,val('abTeacherN1')), teacherN2=Math.max(teacherN1,Math.min(4,val('abTeacherN2')));
+    var teacherN1=Math.min(4,Math.round(val('abTeacherN1'))), teacherN2=Math.max(teacherN1,Math.min(4,Math.round(val('abTeacherN2'))));
     el('abTeacherN2').value=teacherN2;
     var mpf=function(v){return Math.min(v*.05,1500)};
     var teacherCost=salary+mpf(salary), adminCost=admin+mpf(admin);
@@ -988,7 +988,7 @@ img{max-width:100%}
     var mixInterview=100-mixLocal-mixNet;
     el('abMixInterview').textContent=mixInterview+'%';
     var price=(mixLocal*val('abPriceLocal')+mixNet*val('abPriceNet')+mixInterview*val('abPriceInterview'))/100;
-    el('abWeightedPrice').textContent=fmt(price);
+    el('abWeightedPrice').textContent='HK'+String.fromCharCode(36)+price.toFixed(2);
     var variable=val('abVar'), weeks=val('abWeeks');
     var contribution=(price-variable)*weeks;
     var roomsStart=Math.min(2,1+teacherN1), roomsExpanded=Math.min(2,1+teacherN2);
