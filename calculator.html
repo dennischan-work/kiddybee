@@ -260,13 +260,14 @@ img{max-width:100%}
         <label>Part-Time 人手月支出（已包括僱主強積金）<input id="abPartTime" type="number" min="0" step="500" value="0"></label>
       </div></article>
       <article class="ab-card ab-input-card" style="--c:var(--full)"><h3>課程組合及收費</h3><div class="ab-fields">
+        <div class="ab-stat"><span>固定學生比例（60 分鐘）</span><b>85%</b></div>
+        <div class="ab-stat"><span>面試班比例（60 分鐘；自動補足）</span><b id="abMixInterview">15%</b></div>
+        <label>每名學生每堂變動成本<input id="abVar" type="number" min="0" step="5" value="20"></label>
         <label>每堂實收<input id="abPriceLocal" type="number" min="0" step="5" value="400"></label>
         <label>面試班每堂實收<input id="abPriceInterview" type="number" min="0" step="5" value="450"></label>
-        <label>每名學生每堂變動成本<input id="abVar" type="number" min="0" step="5" value="20"></label>
-        <div class="ab-stat"><span>面試班比例（60 分鐘；自動補足）</span><b id="abMixInterview">15%</b></div>
         <div class="ab-stat"><span>加權後每位學生每週課堂實收</span><b id="abWeightedPrice">HK$407.50</b></div>
         <div class="ab-stat"><span>每月平均上課週數（固定）</span><b>4.33 週（52 ÷ 12）</b></div>
-      </div><p class="hint">所有課堂預設 60 分鐘。一般課程比例以 85% 作固定規劃假設；面試班比例自動補足至 100%。</p></article>
+      </div><p class="hint">所有課堂預設 60 分鐘；固定學生比例是規劃假設，面試班比例自動補足至 100%。</p></article>
       <article class="ab-card ab-input-card" style="--c:var(--good)"><h3>收生、排堂及容量</h3><div class="ab-fields">
         <label>課室數量<input id="abRooms" type="number" min="1" max="20" step="1" value="2"></label>
         <label>每間課室每週可開班數<input id="abClasses" type="number" min="1" step="1" value="22"></label>
