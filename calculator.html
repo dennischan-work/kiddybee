@@ -7,7 +7,7 @@
 <title>沙田英文中心試算台</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* 工作室優先：先看結論，再按需要展開進階比較 */
 :root{
@@ -15,7 +15,6 @@
   --studio:#1D6A8E; --phased:#B9762A; --full:#7B8891;
   --good:#2C7A57; --warn:#A8701B; --bad:#B1453A;
   --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
-  --f-disp:"Noto Serif TC","Noto Sans TC",serif;
   --f-num:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
   color-scheme:light;
 }
@@ -28,15 +27,15 @@
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65;margin:0}
 a{color:var(--studio)}
 .topnav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
-.topnav .in{max-width:1180px;margin:0 auto;padding:10px max(16px,env(safe-area-inset-left,0px));display:flex;gap:18px;align-items:center;font-size:14px;overflow-x:auto;white-space:nowrap}
+.topnav .in{max-width:1440px;margin:0 auto;padding:10px max(16px,env(safe-area-inset-left,0px));display:flex;gap:18px;align-items:center;font-size:14px;overflow-x:auto;white-space:nowrap}
 .topnav a{color:var(--muted);text-decoration:none}
 .topnav a.on{color:var(--ink);font-weight:500}
 .topnav .brand{color:var(--ink);font-weight:700;margin-right:auto}
-.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+.wrap{max-width:1440px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
 header{display:grid;gap:6px;margin-bottom:22px}
 .eyebrow{font-size:12px;letter-spacing:.08em;color:var(--muted)}
-h1{font-family:var(--f-disp);font-size:clamp(26px,4vw,36px);line-height:1.25;margin:0;text-wrap:balance}
-.lead{margin:0;max-width:66ch;color:var(--muted)}
+h1{font-family:var(--f-body);font-size:clamp(26px,4vw,36px);line-height:1.25;margin:0;text-wrap:balance}
+.lead{margin:0;max-width:none;color:var(--muted)}
 .layout{display:grid;grid-template-columns:340px minmax(0,1fr);gap:24px;align-items:start}
 @media (max-width:900px){.layout{grid-template-columns:minmax(0,1fr)}}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;gap:18px;position:sticky;top:60px;max-height:calc(100vh - 72px);overflow:auto}
@@ -86,7 +85,7 @@ button.info[aria-expanded="true"]{background:var(--studio);color:#fff;border-col
 main{display:grid;gap:22px;min-width:0}
 section.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:grid;gap:12px;min-width:0}
 section h2{font-size:18px;margin:0;text-wrap:balance}
-.read{margin:0;color:var(--muted);max-width:72ch}
+.read{margin:0;color:var(--muted);max-width:none}
 .routes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 @media (max-width:640px){.routes{grid-template-columns:minmax(0,1fr)}}
 .route{border:1px solid var(--line);border-radius:8px;padding:14px;display:grid;gap:8px;align-content:start;border-top:4px solid var(--c)}
@@ -135,6 +134,11 @@ table.sched{border-collapse:separate;border-spacing:4px;width:100%;min-width:640
 .stat em{font-style:normal;font-size:12px;color:var(--muted)}
 .warns{margin:0;padding:0;list-style:none;display:grid;gap:6px}
 .warns li{font-size:13px;padding:7px 10px;border-radius:6px;border-left:3px solid var(--c);background:color-mix(in srgb,var(--c) 8%,var(--surface))}
+.warns li.warn-bad,.warns li.warn-warn{color:var(--bad);border-left-color:var(--bad)}
+.warns li.warn-good{color:var(--good);border-left-color:var(--good)}
+.warns li.warn-bad::before,.warns li.warn-warn::before{content:"⚠️ "}
+.alert{color:var(--bad);border-left-color:var(--bad)}
+.alert::before{content:"⚠️ ";color:var(--bad)}
 .notes{font-size:13px;color:var(--muted);margin:0;padding-left:1.2em;display:grid;gap:4px}
 .primary-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px}
 .primary-results .stat{min-height:74px}
@@ -312,7 +316,7 @@ img{max-width:100%}
 
       <section class="card" aria-labelledby="h-week" id="week-card">
         <h2 id="h-week">創辦人的一週：輸入人數，試排工作室時段</h2>
-        <p class="read">每格輸入該時段每間課室預計到課人數；留空或輸入 0 即不開班。預設每格約 60 分鐘上課、15 分鐘交接。法規提示只作初步篩查，正式安排須以教育局對實際時間表的書面回覆為準。</p>
+        <p class="read">每格代表一節 60 分鐘課堂；輸入該時段每間課室預計到課人數，留空或輸入 0 即不開班。午間預留一小時。法規提示只作初步篩查，正式安排須以教育局對實際時間表的書面回覆為準。</p>
         <div class="btns">
           <button type="button" data-sched="hb">載入常規示例</button>
           <button type="button" data-sched="inv">載入較少班示例</button>
@@ -327,19 +331,19 @@ img{max-width:100%}
         <ul class="warns" id="wwarn"></ul>
       </section>
 
+      <section class="card" aria-labelledby="h-cash">
+        <h2 id="h-cash">錢在哪個月最緊？幾時單月有利潤、幾時累計歸本？</h2>
+        <p class="read">圖表從開業前的一次性投入開始累計每月營運現金流。最低點是現金最緊的時候；累計線回到零以上，代表已收回開業前投入。下方亦列出首次單月營運盈利的月份。</p>
+        <div class="cash-summary" id="cashSummary"></div><p class="read" id="cashRead"></p>
+        <div class="legend" id="lg1"></div><div class="chart" id="cash"></div>
+      </section>
+
       <details class="advanced"><summary>進階比較：註冊中心、人手拆解及財務圖表</summary>
       <section class="card" aria-labelledby="h-staff">
         <h2 id="h-staff">人手成本拆解</h2>
         <p class="read">每條路線請了誰、每月要付多少。分階段中心顯示擴編後的人手；擴編前的人數見左邊設定。</p>
         <div class="tablewrap"><table class="staff" id="staff"></table></div>
         <p class="read" id="staffRead"></p>
-      </section>
-
-      <section class="card" aria-labelledby="h-cash">
-        <h2 id="h-cash">錢在哪個月最緊？</h2>
-        <p class="read">由開業前投入開始累計（第 0 個月），往後每月加上營運盈虧。曲線最低點就是最少要準備的錢；之後再加上儲備。</p>
-        <div class="cash-summary" id="cashSummary"></div><p class="read" id="cashRead"></p>
-        <details><summary>展開現金走勢圖</summary><div class="legend" id="lg1"></div><div class="chart" id="cash"></div></details>
       </section>
 
       <section class="card" aria-labelledby="h-cap">
@@ -380,7 +384,7 @@ img{max-width:100%}
 <script>
 (function(){
   var $ = function(id){ return document.getElementById(id); };
-  var TIMES = ['09:30','10:45','12:00','14:00','15:15','16:30','17:45','19:00'];
+  var TIMES = ['09:00–10:00','10:00–11:00','11:00–12:00','12:00–13:00','14:00–15:00','15:00–16:00','16:00–17:00','17:00–18:00'];
   var DAYS = ['一','二','三','四','五','六','日'];
   var CAP_PER_CLASS = 4;
 
@@ -447,7 +451,7 @@ img{max-width:100%}
       var run=0;
       for (var r=0; r<TIMES.length; r++){
         var v = SCHED[r][d];
-        if (v){ n++; seats+=v; day[d]+=v; run++; if (r===TIMES.length-1 && d<5) late++; maxRun = Math.max(maxRun, run); }
+        if (v){ n++; seats+=v; day[d]+=v; run++; if (parseInt(TIMES[r],10)>=19 && d<5) late++; maxRun = Math.max(maxRun, run); }
         else run = 0;
       }
     }
@@ -514,7 +518,7 @@ img{max-width:100%}
       if (r.fixedCap != null){ r.capLo = r.capHi = r.fixedCap; } else { r.capLo = r.rLo*cap1; r.capHi = r.rHi*cap1; }
       r.steady = r.hi; r.cap = r.capHi;
       var trigger = Math.min(45, Math.max(1, r.capLo));
-      var cum = -r.pre, low = cum, lowM = 0, y1 = 0, firstPos = null, expanded = !r.phase;
+      var cum = -r.pre, low = cum, lowM = 0, y1 = 0, firstPos = null, paybackM = r.pre<=0?0:null, expanded = !r.phase;
       r.series = [{m:0, v:cum, n:0}];
       for (var m=1; m<=H; m++){
         var cap = expanded ? r.capHi : r.capLo;
@@ -523,12 +527,13 @@ img{max-width:100%}
         var pl = n*s.contrib - f;
         if (r.phase && !expanded && n >= trigger) expanded = true;
         cum += pl;
+        if (paybackM === null && cum >= 0) paybackM = m;
         if (m <= 12) y1 += pl;
         if (firstPos === null && pl > 0) firstPos = m;
         if (cum < low){ low = cum; lowM = m; }
         r.series.push({m:m, v:cum, n:n});
       }
-      r.low = low; r.lowM = lowM; r.y1 = y1; r.firstPos = firstPos;
+      r.low = low; r.lowM = lowM; r.y1 = y1; r.firstPos = firstPos; r.paybackM = paybackM;
       r.be = s.contrib > 0 ? Math.ceil(r.steady / s.contrib) : Infinity;
       r.beLo = r.phase && s.contrib > 0 ? Math.ceil(r.lo / s.contrib) : null;
       r.fund = -low + 3*r.steady;
@@ -683,7 +688,7 @@ img{max-width:100%}
     TIMES.forEach(function(tm,r){
       h+='<tr><th class="t">'+tm+'</th>';
       for(var d=0;d<7;d++){
-        var n=SCHED[r][d], late=(r===TIMES.length-1&&d<5);
+        var n=SCHED[r][d], late=(parseInt(tm,10)>=19&&d<5);
         var total=n*act; rawSeats+=total;
         if(total>peakSlot){peakSlot=total;peakIdx={r:r,d:d};}
         var val=n?String(n):'';
@@ -700,8 +705,7 @@ img{max-width:100%}
     h+='</tr></tfoot>';$('sched').innerHTML=h;
 
     var classes=act*ss.n;
-    var mins=(s.local*45+(100-s.local)*60)/100;
-    var hrs=ss.n*mins/60;
+    var hrs=ss.n;
     var perClass=classes&&isFinite(st.be)?st.be/classes:Infinity;
     var students12=students(s,12,st.cap);
     var roomSeats=act?Math.floor(st.cap/act):0;
@@ -725,7 +729,7 @@ img{max-width:100%}
       '<div class="stat"><span>第 1 個月／第 12 個月招生估算</span><b>'+students(s,1,st.cap)+'／'+students12+' 人</b><em>可在左側更改招生曲線</em></div>'+
       '<div class="stat"><span>按目標 '+s.target+' 人推算</span><b>'+roomsNeeded+' 間課室／'+teachersNeeded+' 位另聘導師</b><em>以每間課室目前課表容量 '+roomSeats+' 人計；創辦人授課一間</em></div>'+
       '<div class="stat"><span>最高同時人數／單日人數</span><b>'+peakSlot+'／'+maxDay+' 人</b><em>'+(peakIdx?'星期'+DAYS[peakIdx.d]+' '+TIMES[peakIdx.r]+' · ':'')+(maxDayIdx>=0?'星期'+DAYS[maxDayIdx]:'尚未排班')+'</em></div>';
-    $('wwarn').innerHTML=W.map(function(w){return '<li style="--c:'+css(w[0])+'">'+w[1]+'</li>';}).join('');
+    $('wwarn').innerHTML=W.map(function(w){return '<li class="warn-'+w[0]+'" style="--c:'+css(w[0])+'">'+w[1]+'</li>';}).join('');
   }
 
   function render(){
@@ -772,9 +776,9 @@ img{max-width:100%}
     t+=st.be>st.cap?'目前課表最多服務 '+st.cap+' 人，容量不足。':(st.be>st.cap*0.85?'目前容量 '+st.cap+' 人，接近滿額才打平。':'目前容量 '+st.cap+' 人，容量有餘。');
     if(s.pay===0)t+='創辦人薪酬設為 0；如要支薪，請在左側輸入，收支平衡人數會上升。';
     $('sumRead').textContent=t;
-    $('cashRead').textContent = '工作室：第 '+st.lowM+' 個月最低，月末累計 '+money(st.low)+'；分階段註冊中心：第 '+ph.lowM+' 個月最低，月末累計 '+money(ph.low)+'。負數代表按目前資金及招生假設，現金已不足。';
-    $('cashSummary').innerHTML = R.map(function(r){return '<div class="cash-point" style="--c:'+css(r.key)+'"><span>'+r.name+' · 最低現金（第 '+r.lowM+' 個月）</span><b>'+money(r.low)+'</b><em>已扣開業前投入；不等於建議備用資金</em></div>';}).join('');
-    $('studioResults').innerHTML = '<div class="stat"><span>開業前一次性投入</span><b>'+money(st.pre)+'</b><em>你的設定</em></div><div class="stat"><span>每月固定支出</span><b>'+money(st.steady)+'</b><em>租金、雜費、人手及創辦人薪酬</em></div><div class="stat"><span>收支平衡需要</span><b>'+(isFinite(st.be)?st.be+' 人':'無法打平')+'</b><em>每月收入剛好支付每月支出</em></div><div class="stat"><span>按課表可服務</span><b>'+st.cap+' 人</b><em>'+s.slots+' 班／週；每位學生每週一堂</em></div><div class="stat"><span>按目標 '+s.target+' 人推算課室／導師</span><b>'+roomsNeeded+' 間／'+teachersNeeded+' 位</b><em>每間課室週容量 '+roomSeats+' 人；創辦人教一間</em></div><div class="stat"><span>累計現金最低點（資金缺口）</span><b>'+money(st.low)+'</b><em>第 '+st.lowM+' 個月月末</em></div><div class="stat"><span>建議準備起始資金</span><b>'+money(st.fund)+'</b><em>最低現金缺口＋3 個月固定支出</em></div>';
+    $('cashRead').textContent = R.map(function(r){return r.name+'：第 '+r.lowM+' 個月現金最低 '+money(r.low)+'；'+(r.firstPos?'第 '+r.firstPos+' 個月起有單月營運盈利':'18 個月內未有單月營運盈利')+'；'+(r.paybackM===0?'開業投入為零':r.paybackM?'第 '+r.paybackM+' 個月累計歸本':'18 個月內未累計歸本');}).join('。 ');
+    $('cashSummary').innerHTML = R.map(function(r){return '<div class="cash-point" style="--c:'+css(r.key)+'"><span>'+r.name+' · 現金最低點（第 '+r.lowM+' 個月）</span><b>'+money(r.low)+'</b><em>'+(r.firstPos?'單月營運盈利：第 '+r.firstPos+' 個月起':'18 個月內未有單月營運盈利')+'</em><em>'+(r.paybackM===0?'開業投入為零':r.paybackM?'累計歸本：第 '+r.paybackM+' 個月':'18 個月內未累計歸本')+'</em></div>';}).join('');
+    $('studioResults').innerHTML = '<div class="stat"><span>開業前一次性投入</span><b>'+money(st.pre)+'</b><em>你的設定</em></div><div class="stat"><span>每月固定支出</span><b>'+money(st.steady)+'</b><em>租金、雜費、人手及創辦人薪酬</em></div><div class="stat"><span>收支平衡需要</span><b>'+(isFinite(st.be)?st.be+' 人':'無法打平')+'</b><em>每月收入剛好支付每月支出</em></div><div class="stat"><span>按課表可服務</span><b>'+st.cap+' 人</b><em>'+s.slots+' 班／週；每位學生每週一堂</em></div><div class="stat"><span>按目標 '+s.target+' 人推算課室／導師</span><b>'+roomsNeeded+' 間／'+teachersNeeded+' 位</b><em>每間課室週容量 '+roomSeats+' 人；創辦人教一間</em></div><div class="stat"><span>首次單月營運盈利</span><b>'+(st.firstPos?'第 '+st.firstPos+' 個月':'18 個月內未有')+'</b><em>收入高於當月營運支出，未計開業前投入</em></div><div class="stat"><span>累計收回開業投入</span><b>'+(st.paybackM===0?'開業時':st.paybackM?'第 '+st.paybackM+' 個月':'18 個月內未歸本')+'</b><em>累計營運現金流回到零以上</em></div><div class="stat"><span>累計現金最低點（資金缺口）</span><b>'+money(st.low)+'</b><em>第 '+st.lowM+' 個月月末</em></div><div class="stat"><span>建議準備起始資金</span><b>'+money(st.fund)+'</b><em>最低現金缺口＋3 個月固定支出</em></div>';
     $('studioCostRead').textContent = '每月支出估算：租金及管理費 '+money(s.rent)+' ＋ 推廣、水電、軟件、會計等 '+money(s.other)+' ＋ 創辦人薪酬 '+money(s.pay)+' ＋ '+s.nS+' 位老師 '+money(staffCost(s,s.nS))+' ＋ '+s.nAdS+' 位行政人員 '+money(adminCost(s,s.nAdS))+'。合計 '+money(st.steady)+'／月。';
     $('lg1').innerHTML = $('lg2').innerHTML = R.map(function(r){ return '<span><i style="background:'+css(r.key)+'"></i>'+r.name+'</span>'; }).join('');
 
