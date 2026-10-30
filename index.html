@@ -152,6 +152,7 @@ details .body{padding:0 16px 16px;display:grid;gap:10px}
 .checks li::before{content:"";width:14px;height:14px;border:1.5px solid var(--muted);border-radius:3px;margin-top:5px}
 /* timeline */
 .timeline{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;position:relative}
+.timeline.route-track{grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
 .timeline::before{content:"";position:absolute;left:0;right:0;top:15px;height:2px;background:var(--line)}
 .tl{position:relative;padding:0 10px 0 0}
 .tl .dot{width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--studio);position:relative;margin:8px 0 10px}
@@ -164,6 +165,7 @@ details .body{padding:0 16px 16px;display:grid;gap:10px}
   .tl{padding:0 0 16px 30px}
   .tl .dot{position:absolute;left:0;top:2px;margin:0}
 }
+@media (max-width:860px){.timeline.route-track{grid-template-columns:minmax(0,1fr)}}
 /* flow */
 .flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 @media (max-width:820px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -230,7 +232,7 @@ html{scroll-behavior:smooth}
       </div>
       <div class="card">
         <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 5h7a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-7a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h7z"/></svg></div>
-        <h3>有系統的教材與課程</h3><p class="muted">以現有自製教材為基礎，先完成一個 6–8 節試行單元。新方案摘要列出 9 本教材、設計約完成 50%；須盤點完成度、試教及印製時間，再排定剩餘工作。</p>
+        <h3>有系統的教材與課程</h3><p class="muted">已有相關教材。先盤點教材清單、適用年齡和程度、可直接使用及需要修訂的部分，再選出 6–8 節試行單元；目前規劃重點是整理及驗證教材，不是由零開始製作。</p>
       </div>
       <div class="card">
         <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 18V9M10 18V5M16 18v-6M22 18H2"/></svg></div>
@@ -480,18 +482,29 @@ html{scroll-behavior:smooth}
 
   <!-- 8 -->
   <section class="block" id="timeline">
-    <div class="sec-head"><div class="sec-no">08</div><h2>開業時間表</h2><p>時間是計劃工具，不是批准時間保證。文件、場地或工程未準備好，相關步驟順延；未取得所需批准便延後開業。</p></div>
-    <div class="card">
-      <div class="timeline">
-        <div class="tl"><div class="dot"></div><b>2026 年 11 月</b><p>確認目標、資金、月薪及分工；簽出資協議；盤點教材，寫 6–8 節試行單元</p></div>
-        <div class="tl"><div class="dot"></div><b>2026 年 12 月</b><p>訪談 20 位沙田家長、比較 5 間競爭中心；向教育局書面查詢（附完整時間表）</p></div>
-        <div class="tl gate"><div class="dot"></div><b>2027 年 1 月</b><p>收到回覆後合作場地試教；看火炭及石門單位。以 8 月開業倒排，爭取月底前完成場地查證及路線決定</p></div>
-        <div class="tl gate"><div class="dot"></div><b>2027 年 2 月</b><p>認可人士初查首選單位；談提前解約條款；關卡 A 檢查，決定是否放第二段</p></div>
-        <div class="tl"><div class="dot"></div><b>2027 年 3–5 月</b><p>簽租約、簡單裝修；測試招生內容；完成家長條款及制度文件</p></div>
-        <div class="tl gate"><div class="dot"></div><b>2027 年 6–7 月</b><p>關卡 B：完成開課前檢查、接送及收費安排，確認至少 12 名報讀；核對場地、教材及所需批准</p></div>
-        <div class="tl"><div class="dot"></div><b>2027 年 8 月起</b><p>按批准條件開課；每週看招生及排班，每月 5 日前交月報</p></div>
+    <div class="sec-head"><div class="sec-no">08</div><h2>開業時間表：兩條路線並列評估</h2><p>以下按 2027 年 8 月目標倒排，是內部工作次序與檢查點，不是政府審批承諾。任何路線都要先確認實際課程、營運者、場地和學生人數安排；如必要回覆、工程或批准未完成，便順延開業。</p></div>
+    <div class="stack">
+      <div class="card">
+        <h3>路線一：私人小班工作室</h3>
+        <p class="muted small">前提：創辦人親自授課，並先取得教育局對實際時間表及人數安排的書面回覆，確認毋須按學校註冊路線營運。工作室仍須核實商業登記、租約、公契、教學用途和保險等要求。</p>
+        <div class="timeline route-track" style="margin-top:14px">
+          <div class="tl"><div class="dot"></div><b>2026 年 11–12 月｜先驗證</b><p>盤點已有教材，整理 6–8 節試行單元；訪談家長、比較競爭中心；向教育局提交完整時間表作書面查詢。</p></div>
+          <div class="tl gate"><div class="dot"></div><b>2027 年 1–2 月｜定場地</b><p>按教育局回覆確認可營運人數；比較沙田／馬鞍山商業場地，查租約及公契。未完成場地用途初查前，不簽無條件長租約。</p></div>
+          <div class="tl"><div class="dot"></div><b>2027 年 3–7 月｜試教與準備</b><p>整理教材並試教、收集家長回饋；辦理適用的商業登記、保險和收費條款；確認可排時段及開課前報讀人數。</p></div>
+          <div class="tl"><div class="dot"></div><b>2027 年 8 月起｜有條件開課</b><p>只有在教育局書面回覆、場地用途及營運安排均吻合時才開課；依確認的人數上限排班並每日留存出席紀錄。條件未齊便延後。</p></div>
+        </div>
       </div>
-      <p class="muted small" style="margin-top:12px">◆ 為關卡。若教育局回覆時間較長，1 月的試教順延，但家長訪談、競品比較和場地搜尋可並行。</p>
+      <div class="card">
+        <h3>路線二：註冊中心</h3>
+        <p class="muted small">路線包含頂手現有中心或新址申請。簡報估頂手約 1–3 個月、新址申請約 4–9 個月；兩者都只是項目估算。學校註冊及其他場地批准未完成前，不可先收生開課。</p>
+        <div class="timeline route-track" style="margin-top:14px">
+          <div class="tl"><div class="dot"></div><b>2026 年 11–12 月｜選申請路徑</b><p>向教育局查詢完整課程及場地要求。頂手要先查註冊狀況、租約、按金、已收學費和欠款；新址先做用途、地契、消防及樓宇可行性初查。</p></div>
+          <div class="tl gate"><div class="dot"></div><b>2027 年 1 月｜場地與專業初查</b><p>新址：請屋宇署名冊內的認可人士（AP）初查樓宇、用途、圖則及工程可行性。頂手：先取得業主及教育局對新營運者／校董／校監變更程序的書面確認，再談付款條件。</p></div>
+          <div class="tl"><div class="dot"></div><b>2027 年 2–5 月｜申請與施工</b><p>新址按部門程序提交規劃、地契、消防、樓宇及教育局文件；只按獲批圖則施工。頂手按教育局要求完成變更及場地交接。審批、補件或工程延誤均會推遲開業。</p></div>
+          <div class="tl gate"><div class="dot"></div><b>2027 年 6–8 月｜驗收後才開課</b><p>新址須完成工程、視察並取得臨時註冊證明書及所需學費批准；頂手須完成教育局確認的變更程序及其他適用批准。未取得所需文件便不開課，2027 年 8 月只作目標日期。</p></div>
+        </div>
+        <p class="muted small" style="margin-top:12px">「認可人士」（Authorized Person, AP）是按《建築物條例》列入屋宇署名冊的建築專業人士，通常具建築師、結構／土木工程師或測量師專業資格；不是泛指一般裝修顧問。按工程性質，可能還須註冊結構工程師。<a href="https://www.bd.gov.hk/tc/resources/registration-guides/index_building_professionals.html" rel="noopener">屋宇署：建築專業人士名冊與委任說明</a></p>
+      </div>
     </div>
   </section>
 
@@ -604,7 +617,7 @@ html{scroll-behavior:smooth}
           <tr><th>現有家長網絡</th><td>決定首月是否真有 12 名學生</td><td>創辦人</td></tr>
           <tr><th>現有教材樣本</th><td>主題、程度、頁數及使用權，決定試行單元何時完成</td><td>創辦人</td></tr>
           <tr><th>創辦人能否教 NET 程度或面試班</th><td>若可以，加權單價上升，打平人數下降</td><td>創辦人、試教反應</td></tr>
-          <tr><th>開業期限與場地偏好</th><td>2027 年 7 月是目標還是必須；是否願意先用合作場地</td><td>創辦人</td></tr>
+          <tr><th>開業期限與場地偏好</th><td>2027 年 8 月是目標還是必須；是否願意先用合作場地</td><td>創辦人</td></tr>
         </tbody>
       </table>
     </div>
