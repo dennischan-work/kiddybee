@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>沙田英文中心試算台</title>
+<title>註冊中心開業方式試算台</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -946,9 +946,7 @@ img{max-width:100%}
   var ids=['abASetup','abAMonths','abBFee','abBLease','abBDiligence','abBRepair','abBLiability','abRent','abOther','abFounder','abTeacherPay','abAdminPay','abAdminN','abPrice','abVar','abWeeks','abClasses','abClassSize','abStartStudents','abGrowth','abTrigger'];
   function el(id){return document.getElementById(id)}
   function val(id){return Math.max(0,parseFloat(el(id).value)||0)}
-  function fmt(n){return 'HK
-</html>
-+Math.round(Math.abs(n)).toLocaleString('en-US')}
+  function fmt(n){return 'HK'+String.fromCharCode(36)+Math.round(Math.abs(n)).toLocaleString('en-US')}
   function signed(n){return (n<0?'−':'')+fmt(n)}
   function calc(){
     var rent=val('abRent'), other=val('abOther'), founder=val('abFounder');
