@@ -227,9 +227,9 @@ img{max-width:100%}
     <div class="risk-banner" role="note">
       <h3>⚠️ 高風險路線：先看要準備多少錢，再看幾時回本</h3>
       <ul>
-        <li>固定成本由第一個月起就是兩間課室、首席導師和行政人員的水平，學生未收夠也要照付。</li>
-        <li>新址申請的審批及工程期（約 4–9 個月或更久）要先付租金，期間沒有學費收入，創辦人亦沒有收入。</li>
-        <li>打平人數要約 100 人；3–6 歲學生每年有一批升小一離開，所以每月都要補回流失才可以增長。</li>
+        <li>租金、行政及開業投入由第一個月起就要付，學生未收夠也要照付；導師預設按堂支薪，學生少時人工也少。</li>
+        <li>新址申請的審批及工程期（約 4–9 個月或更久）要先付租金，期間沒有學費收入。創辦人的生活費預設<b>另計</b>，不算進中心現金；下面另列「創辦人每月支薪 HK$20,000」時要多準備多少。</li>
+        <li>3–6 歲學生每年有一批升小一離開，所以每月都要補回流失才可以增長。</li>
         <li>回本月份對招生速度和審批時間非常敏感：下面同時列出「招生慢三成」和「審批延遲 3 個月」的結果。</li>
       </ul>
       <div class="ab-fields" style="grid-template-columns:minmax(0,320px)"><label>可動用資金（創辦人及出資人實際可投入）<input id="abFund" type="number" min="0" step="50000" value="1000000"></label></div>
@@ -271,13 +271,15 @@ img{max-width:100%}
     <p class="ab-alert">⚠️ 頂手中心的舊註冊證明不可假設自動轉到新營運者名下。頂手價亦未包括自動承接所有學生預繳學費或債務；付款前須由律師、會計師核對租約、帳目、已收學費／退款、員工責任、欠款及設備，並取得教育局和業主書面確認。欠款欄的 0 只代表未輸入，不代表風險為零。</p>
     <div class="ab-input-sections">
       <article class="ab-card ab-input-card" style="--c:var(--studio)"><h3>每月營運開支</h3><div class="ab-fields">
-        <label>租金及管理費／月<input id="abRent" type="number" min="0" step="1000" value="40000"></label>
+        <label>租金及管理費／月<input id="abRent" type="number" min="0" step="1000" value="25000"></label>
         <label>推廣、水電軟件、會計雜項／月<input id="abOther" type="number" min="0" step="1000" value="18000"></label>
-        <label>創辦人薪酬／月（未計強積金）<div class="ab-salary"><input id="abFounder" type="number" min="0" step="1000" value="30000"><span>每位連 MPF／月 <b id="abFounderLoaded">HK$31,500</b></span></div></label>
+        <label>創辦人薪酬／月（預設 0＝生活費另計，見上方）<div class="ab-salary"><input id="abFounder" type="number" min="0" step="1000" value="0"><span>每位連 MPF／月 <b id="abFounderLoaded">HK$0</b></span></div></label>
       </div></article>
       <article class="ab-card ab-input-card" style="--c:var(--phased)"><h3>人手及強積金</h3><div class="ab-fields">
-        <label>首席導師薪酬／月（未計強積金）<div class="ab-salary"><input id="abConsultantPay" type="number" min="0" step="500" value="22000"><span>每位連 MPF／月 <b id="abConsultantLoaded">HK$23,100</b></span></div></label>
-        <label>行政人員月薪（每位，未計強積金）<div class="ab-salary"><input id="abAdminPay" type="number" min="0" step="500" value="17000"><span>每位連 MPF／月 <b id="abAdminLoaded">HK$17,850</b></span></div></label>
+        <label>全職首席導師月薪（0＝不聘，改用按堂導師）<div class="ab-salary"><input id="abConsultantPay" type="number" min="0" step="500" value="0"><span>每位連 MPF／月 <b id="abConsultantLoaded">HK$0</b></span></div></label>
+        <label>按堂導師費（每堂 60 分鐘）<input id="abTutorRate" type="number" min="0" step="10" value="200"></label>
+        <label>創辦人每週最多教幾堂<input id="abFounderLessons" type="number" min="0" step="1" value="22"></label>
+        <label>行政／前台月薪（兼職可填較低金額）<div class="ab-salary"><input id="abAdminPay" type="number" min="0" step="500" value="8000"><span>每位連 MPF／月 <b id="abAdminLoaded">HK$8,400</b></span></div></label>
         <label>Part-Time 人手月支出（已包括僱主強積金）<input id="abPartTime" type="number" min="0" step="500" value="0"></label>
         <label>導師 1 月薪（未計強積金）<div class="ab-salary"><input id="abTeacherPay1" type="number" min="0" step="500" value="22000"><span>每位連 MPF／月 <b id="abTeacherLoaded1">HK$0</b></span></div></label>
         <label>導師 2 月薪（未計強積金）<div class="ab-salary"><input id="abTeacherPay2" type="number" min="0" step="500" value="22000"><span>每位連 MPF／月 <b id="abTeacherLoaded2">HK$0</b></span></div></label>
@@ -302,7 +304,7 @@ img{max-width:100%}
         <label>擴編門檻（學生數；0＝不自動加人）<input id="abTrigger" type="number" min="0" step="1" value="0"></label><p class="hint">定義：每月預計在讀學生總數達到此門檻，下月起新增導師 1；達到門檻的 1.65 倍（學生人數向上取整），再下一月新增導師 2。預設 0：兩間課室已由創辦人和首席導師覆蓋，加聘導師要多過兩間課室才增加學位。流失率預設 4%：3–6 歲學生每年約有三分之一升小一離開，另加轉班及退出。</p>
       </div><p class="hint">課室容量按可同時授課人數、課室數、每週班數及每班人數估算。</p></article>
     </div>
-    <p class="hint">僱主強積金按月薪 5%、每人每月最多 HK$1,500 試算；薪酬欄旁顯示連 MPF 成本。首階段由首席導師授課；達門檻後加入導師 1，達 1.65 倍門檻後再加入導師 2，付薪導師由 1 人增至 2 人，再增至 3 人（均不包括創辦人）。導師 1、2 薪酬預設 HK$22,000（參考沙田／馬鞍山補習中心全職導師招聘底薪約 HK$17,000–22,000，外籍導師約 HK$25,000–30,000）；導師 3 為預留，未計入本次兩階段預測。創辦人另假設可教授一間課室。每名學生按每週上一堂計算月貢獻；預設每月 4.0 週，預留假期及停課。實際容額以核准圖則及課表為準。</p>
+    <p class="hint">僱主強積金按月薪 5%、每人每月最多 HK$1,500 試算；薪酬欄旁顯示連 MPF 成本。預設人手模式：學生少時由創辦人自己教（每週最多 22 堂），超出部分請兼職導師按堂支薪（預設每堂 HK$200；2026 年英文學習中心兼職導師招聘時薪約 HK$150–250）。這是小型教育中心常見做法，學生少時人工也少。如要聘全職首席導師，在上面填月薪，該導師每週可教 22 堂。另可設擴編門檻：達門檻後加入導師 1，達 1.65 倍門檻後再加入導師 2，付薪導師由 1 人增至 2 人，再增至 3 人（均不包括創辦人）。導師 1、2 薪酬預設 HK$22,000（參考沙田／馬鞍山補習中心全職導師招聘底薪約 HK$17,000–22,000，外籍導師約 HK$25,000–30,000）；導師 3 為預留，未計入本次兩階段預測。創辦人另假設可教授一間課室。每名學生按每週上一堂計算月貢獻；預設每月 4.0 週，預留假期及停課。實際容額以核准圖則及課表為準。</p>
     <section class="ab-card" style="--c:var(--studio)">
       <h3>每月支出、打平人數及資金壓力</h3>
       <div class="ab-results" id="abSharedResults"></div>
@@ -997,7 +999,7 @@ img{max-width:100%}
 
 <script>
 (function(){
-  var ids=['abASetup','abALease','abAFitout','abAPlans','abAFurniture','abALegal','abAMarketing','abAOtherCost','abAMonths','abBFee','abBLease','abBDiligence','abBRepair','abBLiability','abRent','abOther','abFounder','abMixLocal','abConsultantPay','abTeacherPay1','abTeacherPay2','abTeacherPay3','abPartTime','abAdminPay','abPriceLocal','abPriceInterview','abVar','abRooms','abClasses','abClassSize','abStartStudents','abGrowth','abTrigger','abChurn','abWeeks','abFund'];
+  var ids=['abASetup','abALease','abAFitout','abAPlans','abAFurniture','abALegal','abAMarketing','abAOtherCost','abAMonths','abBFee','abBLease','abBDiligence','abBRepair','abBLiability','abRent','abOther','abFounder','abMixLocal','abConsultantPay','abTeacherPay1','abTeacherPay2','abTeacherPay3','abPartTime','abAdminPay','abPriceLocal','abPriceInterview','abVar','abRooms','abClasses','abClassSize','abStartStudents','abGrowth','abTrigger','abChurn','abWeeks','abFund','abTutorRate','abFounderLessons'];
   function el(id){return document.getElementById(id)}
   function val(id){return Math.max(0,parseFloat(el(id).value)||0)}
   function fmt(n){return 'HK'+String.fromCharCode(36)+Math.round(Math.abs(n)).toLocaleString('en-US')}
@@ -1035,71 +1037,61 @@ img{max-width:100%}
       {key:'A',name:'方案 A｜自行申請',initial:openingA, detail:fmt(val('abASetup'))+' 開辦費＋'+val('abAMonths')+' 個月審批租金'},
       {key:'B',name:'方案 B｜頂手',initial:openingB, detail:'頂手 '+fmt(val('abBFee'))+'＋租約 '+fmt(rent*val('abBLease'))+'＋查核 '+fmt(val('abBDiligence'))+'＋修補 '+fmt(val('abBRepair'))+'＋已核實承擔 '+fmt(val('abBLiability'))}
     ];
-    function simulate(initial, g){
+    var tutorRate=val('abTutorRate'), founderLessons=val('abFounderLessons');
+    var costs=[base,phase1,phase2], caps=[capacityStart,capacityPhase1,capacity];
+    function covered(phase){ return founderLessons + (consultant>0?22:0) + (phase>=1&&teacherCosts[0]>0?22:0) + (phase>=2&&teacherCosts[1]>0?22:0); }
+    function tutorCost(students, phase){ var lessons=Math.ceil(students/Math.max(1,size)); return Math.max(0, lessons-covered(phase))*tutorRate*weeks; }
+    function beFor(phase, extra){ for(var n=0;n<=caps[phase]+200;n++){ if(n*contribution-tutorCost(n,phase)>=costs[phase]+(extra||0)) return n; } return Infinity; }
+    function simulate(initial, g, extra){
+      extra=extra||0;
       var cash=-initial, low=cash, lowMonth=0, firstProfit=0, payback=0, phase=0, e1=0, e2=0, rows=[], sf=0;
       rows.push({month:0,students:0,paidTeachers:0,fixed:0,revenue:0,net:-initial,cash:cash});
       for(var m=1;m<=24;m++){
-        var caps=[capacityStart,capacityPhase1,capacity], costs=[base,phase1,phase2];
         sf = m===1 ? start : sf*(1-churn)+g;
         sf=Math.min(caps[phase],sf);
         var students=Math.round(sf);
-        var cost=costs[phase];
+        var cost=costs[phase]+extra+tutorCost(students,phase);
         var revenue=students*price*weeks;
         var net=students*contribution-cost;
         cash+=net;
         if(net>0&&!firstProfit)firstProfit=m;
         if(cash>=0&&!payback)payback=m;
         if(cash<low){low=cash;lowMonth=m}
-        rows.push({month:m,students:students,paidTeachers:phase+1,fixed:cost,revenue:revenue,net:net,cash:cash});
+        rows.push({month:m,students:students,paidTeachers:(consultant>0?1:0)+(phase>=1?1:0)+(phase>=2?1:0),fixed:cost,revenue:revenue,net:net,cash:cash});
         if(!noExpand&&phase===0&&students>=trigger){e1=m;phase=1;}
         else if(!noExpand&&phase===1&&students>=trigger2){e2=m;phase=2;}
       }
       return {rows:rows,low:low,lowMonth:lowMonth,firstProfit:firstProfit,payback:payback,e1:e1,e2:e2,endCost:rows[24].fixed};
     }
     routes.forEach(function(r){
-      var cash=-r.initial, low=cash, lowMonth=0, firstProfit=0, payback=0, phase=0, expansion1ReachedMonth=0, expansion2ReachedMonth=0, rows=[], sfx=0;
-      rows.push({month:0,students:0,paidTeachers:0,fixed:0,revenue:0,net:-r.initial,cash:cash});
-      for(var m=1;m<=24;m++){
-        var caps=[capacityStart,capacityPhase1,capacity], costs=[base,phase1,phase2];
-        sfx = m===1 ? start : sfx*(1-churn)+growth;
-        sfx=Math.min(caps[phase],sfx);
-        var students=Math.round(sfx);
-        var cost=costs[phase];
-        var revenue=students*price*weeks;
-        var net=students*contribution-cost;
-        cash+=net;
-        if(net>0&&!firstProfit)firstProfit=m;
-        if(cash>=0&&!payback)payback=m;
-        if(cash<low){low=cash;lowMonth=m}
-        rows.push({month:m,students:students,paidTeachers:phase+1,fixed:cost,revenue:revenue,net:net,cash:cash});
-        if(!noExpand&&phase===0&&students>=trigger){expansion1ReachedMonth=m;phase=1;}
-        else if(!noExpand&&phase===1&&students>=trigger2){expansion2ReachedMonth=m;phase=2;}
-      }
-      r.rows=rows;r.low=low;r.lowMonth=lowMonth;r.firstProfit=firstProfit;r.payback=payback;r.expansion1ReachedMonth=expansion1ReachedMonth;r.expansion2ReachedMonth=expansion2ReachedMonth;
-      r.breakEven=Math.ceil(phase2/contribution);
-      r.firstBreakEven=Math.ceil(base/contribution);
-      r.middleBreakEven=Math.ceil(phase1/contribution);
-      r.yearNet=rows.slice(1,13).reduce(function(a,x){return a+x.net},0);
+      var x=simulate(r.initial,growth);
+      r.rows=x.rows;r.low=x.low;r.lowMonth=x.lowMonth;r.firstProfit=x.firstProfit;r.payback=x.payback;r.expansion1ReachedMonth=x.e1;r.expansion2ReachedMonth=x.e2;
+      r.firstBreakEven=beFor(0); r.middleBreakEven=beFor(1); r.breakEven=beFor(2);
+      r.yearNet=x.rows.slice(1,13).reduce(function(a,y){return a+y.net},0);
     });
     var fund=val('abFund');
     var reserve3=function(r){return 3*r.rows[24].fixed};
+    var paidFounder=20000+Math.min(20000*.05,1500);
     var delayExtra=rent*3;
     var riskHtml=routes.map(function(r,i){
       var need=-r.low+reserve3(r);
       var gap=fund-need;
       var slow=simulate(r.initial,growth*0.7);
       var late=simulate(r.initial+delayExtra,growth);
-      var be=noExpand?r.firstBreakEven:r.breakEven;
+      var be=noExpand?r.firstBreakEven:r.breakEven; if(!isFinite(be)) be='—';
       var capNow=noExpand?capacityStart:capacity;
-      var pct=capNow>0?Math.round(be/capNow*100):0;
+      var pct=capNow>0&&be!=='—'?Math.round(be/capNow*100):999;
       var row=function(k,v,c){return '<div class="risk-row"><span>'+k+'</span><b class="'+(c||'')+'">'+v+'</b></div>'};
-      return '<div class="risk-col"><h4>'+r.name+'</h4><span class="hint">需要準備的現金（最低點＋3 個月固定成本）</span><div class="risk-big">'+fmt(need)+'</div>'+
+      var withPay=founder>0?null:simulate(r.initial,growth,paidFounder);
+      var needPay=withPay?(-withPay.low+3*withPay.rows[24].fixed):0;
+      return '<div class="risk-col"><h4>'+r.name+'</h4><span class="hint">中心需要準備的現金（最低點＋3 個月開支作儲備）</span><div class="risk-big">'+fmt(need)+'</div>'+
         row('對比可動用資金 '+fmt(fund), gap>=0?'尚餘 '+fmt(gap):'缺口 '+fmt(-gap), gap>=0?'ok':'bad')+
         row('現金最低點', signed(r.low)+'（第 '+r.lowMonth+' 月）','bad')+
         row('打平學生／容量', be+'／'+capNow+' 人（'+pct+'%）', pct>85?'bad':'')+
         row('24 個月內收回開業投入', r.payback?'第 '+r.payback+' 月':'未能收回', r.payback?'':'bad')+
         row('招生慢三成：現金最低點', signed(slow.low)+(slow.payback?'；第 '+slow.payback+' 月歸本':'；24 個月未歸本'),'bad')+
         row('審批／交接延遲 3 個月：現金最低點', signed(late.low)+'（多付租金 '+fmt(delayExtra)+'）','bad')+
+        (withPay?row('若創辦人每月支薪 HK$20,000：需要準備', fmt(needPay)+(withPay.payback?'；第 '+withPay.payback+' 月歸本':'；24 個月未歸本'),'bad'):'')+
         '</div>';
     }).join('');
     el('abRisk').innerHTML=riskHtml;
@@ -1109,10 +1101,10 @@ img{max-width:100%}
     el('abBResults').innerHTML=
       '<div class="ab-stat"><span>估算開業前現金</span><b>'+fmt(openingB)+'</b></div>'+
       '<div class="ab-stat"><span>組成</span><b style="font:13px var(--f-body)">'+routes[1].detail+'</b></div>';
-    var bA=Math.ceil(base/contribution), b1=Math.ceil(phase1/contribution), b2=Math.ceil(phase2/contribution);
+    var bA=routes[0].firstBreakEven, b1=routes[0].middleBreakEven, b2=routes[0].breakEven;
     el('abSharedResults').innerHTML=
       '<div class="ab-stat"><span>每位學生每月貢獻（加權）</span><b>'+fmt(contribution)+'</b></div>'+
-      '<div class="ab-stat"><span>首階段（首席導師）支出／打平</span><b>'+fmt(base)+'／'+bA+' 人</b></div>'+
+      '<div class="ab-stat"><span>每月固定支出（未計按堂導師費）／打平</span><b>'+fmt(base)+'／'+bA+' 人</b></div>'+
       '<div class="ab-stat"><span>加導師 1 後支出／打平</span><b>'+fmt(phase1)+'／'+b1+' 人</b></div>'+
       '<div class="ab-stat"><span>再加導師 2 後支出／打平</span><b>'+fmt(phase2)+'／'+b2+' 人</b></div>'+
       '<div class="ab-stat"><span>'+(noExpand?'兩間課室課表估算容量':'第二階段課表估算容量')+'</span><b>'+(noExpand?capacityStart:capacity)+' 人</b></div>';
@@ -1130,7 +1122,7 @@ img{max-width:100%}
     el('abCashRead').textContent=routes.map(function(r){
       return r.name+'：現金最低 '+signed(r.low)+'（第 '+r.lowMonth+' 月）；'+(r.firstProfit?'第 '+r.firstProfit+' 月起單月營運有盈餘':'24 個月內未有單月盈餘')+'；'+(r.payback?'第 '+r.payback+' 月累計收回開業前投入':'24 個月內未歸本');
     }).join('　｜　');
-    var table='<thead><tr><th>月份</th><th>學生</th><th>付薪導師數（不含創辦人）</th><th>每月固定成本</th><th>每月預估收入</th><th>方案 A 月末現金</th><th>方案 B 月末現金</th></tr></thead><tbody>';
+    var table='<thead><tr><th>月份</th><th>學生</th><th>全職導師數（不含創辦人）</th><th>每月開支（含按堂導師費）</th><th>每月預估收入</th><th>方案 A 月末現金</th><th>方案 B 月末現金</th></tr></thead><tbody>';
     for(var m=0;m<=24;m++){
       table+='<tr><td>'+(m===0?'開業前':m)+'</td><td>'+routes[0].rows[m].students+'</td><td>'+routes[0].rows[m].paidTeachers+'</td><td>'+fmt(routes[0].rows[m].fixed)+'</td><td>'+fmt(routes[0].rows[m].revenue)+'</td><td>'+signed(routes[0].rows[m].cash)+'</td><td>'+signed(routes[1].rows[m].cash)+'</td></tr>';
     }
