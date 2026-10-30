@@ -166,6 +166,7 @@ summary::-webkit-details-marker{display:none}
 summary::after{content:"＋";color:var(--muted);font-weight:400}
 details[open] summary::after{content:"－"}
 summary .s-meta{font-size:12.5px;color:var(--muted);font-weight:400;margin-left:auto;white-space:nowrap}
+.evidence{margin-top:9px;border-color:var(--line);background:var(--soft)}.evidence>summary{padding:9px 10px;font-size:12.5px;color:var(--studio);line-height:1.45}.evidence>.body{padding:0 10px 11px;display:grid;gap:7px}.evidence .body p{margin:0;font-size:13px;line-height:1.65}.evidence .body .source{font-size:12px}.fact-evidence{align-self:start}.fact-evidence .evidence{background:transparent}blockquote.source{margin:2px 0;padding:8px 10px;border-left:3px solid var(--warn);background:var(--surface)}
 details .body{padding:0 16px 16px;display:grid;gap:10px}
 .checks{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 .checks li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:8px;font-size:14px}
@@ -311,7 +312,7 @@ html{scroll-behavior:smooth}
     <p class="lead">這頁把〈開業及營運完整手冊〉和〈投資人可執行方案（HK$100 萬）〉整理成一頁，給創辦人和出資人用同一組數字討論：開哪一種、要多少錢、多少學生才打平、甚麼時候要停。</p>
     <div class="facts">
       <div class="fact"><b>3–6 歲</b><span>服務對象，第一年不開 3 歲以下</span></div>
-      <div class="fact"><b>最多 4 人</b><span>每班人數上限</span></div>
+      <div class="fact fact-evidence"><b>最多 4 人</b><span>每班人數上限</span><details class="evidence"><summary>為甚麼設定 4 人？</summary><div class="body"><p><b>依據性質：</b>這是現有手冊的教學設計假設，不是教育局規定，也沒有資料證明 4 人是所有課程的唯一最佳班額。</p><p><b>原文依據：</b>開業手冊的中心構想寫：「小班教學：每班最多 4 名學生，讓老師有機會照顧每個孩子。」設計意圖是讓老師較容易觀察每名幼兒、安排輪流參與，並在課後向家長交代個別進度。</p><p><b>如何驗證：</b>先用現有教材完成 6–8 節試行單元，記錄不同班額下老師能否留意每名孩子、提供參與機會、照顧程度差異和安全轉場；再訪問家長是否重視這種安排及願意按相應價格報讀。試教結果與真實報讀數據未出來前，4 人仍屬待驗證設定，不應宣稱為成效保證。</p><p class="source"><a href="https://docs.google.com/document/d/1eWBmNZ87n9H-8CCNVj5Hfu8AhQWGlXgga9k-RisQoTU/edit">開業手冊原文 ↗</a> · <a href="./library.html#course">教材、課程與試教資料卡 ↗</a></p></div></details></div>
       <div class="fact"><b>2027 年 8 月</b><span>新方案目標開業；須按批准及場地進度調整</span></div>
       <div class="fact"><b>創辦人親授</b><span>已確認，資金上限待提供</span></div>
     </div>
@@ -394,6 +395,7 @@ html{scroll-behavior:smooth}
           <div>週六 5 班，每班坐滿 4 人<div class="dots"><i></i><i></i><i></i><i></i><i class="sep"></i><i></i><i></i><i></i><i></i><i class="sep"></i><i></i><i></i><i></i><i></i><i class="sep"></i><i></i><i></i><i></i><i></i><i class="sep"></i><i></i><i></i><i></i><i></i></div></div><span class="tag no">每日 20 人</span>
         </div>
         <p class="muted small" style="margin-top:8px">一個試營運構想是「同時不超過 7 人、每天不超過 19 人」，只是供查詢的方案，不能視為自動合法或自動獲豁免。</p>
+        <details class="evidence" style="margin-top:10px"><summary>為甚麼是 7 人／19 人？查看法例數字、計法和原文</summary><div class="body"><p><b>官方依據：</b>教育局引用《教育條例》第 3(1) 條說明，「學校」包括任何一天向 20 人或以上，或任何時間同時向 8 人或以上提供教育課程的機構。這是學校定義的起點；是否適用於具體課程、營運者及豁免情況，仍須按實際安排確認。</p><p><b>數字怎樣來：</b>7 比 8 少 1；19 比 20 少 1。這只是目前內部排班／查詢方案，在兩個數字上各留一名差額；它不是法定安全港、不是自動豁免，也不代表低於數字就必然毋須註冊。</p><p><b>為甚麼不能只照數字排班：</b>全日所有課堂、試堂、補堂及不同課室都要放進同一份真實時間表。五班若每天由不同學生滿班，每班 4 人，示例合計 20 人；兩班同時各 4 人，合計 8 人。家長在場是否計入、同一學生一天上多堂如何計、課程是否有特定豁免等，不能由本頁代替教育局判斷。</p><p><b>怎樣確認及執行：</b>把營運者、課程和年齡、完整周／日時間表、各班名單規則、同時使用課室、家長角色、試堂補堂及收款安排一併書面交教育局查詢。收到答覆後，按其口徑設定預約上限，保存每天到課紀錄；每次增加班數、課室、年齡或改場地前重查。</p><blockquote class="source">手冊原文：「一個試營運構想是『同時不超過 7 人、每天不超過 19 人』，只是供查詢的方案，不能視為自動合法或自動獲豁免。」<br>教育局原文要點：「於任何一天向 20 人或多於 20 人，或於任何時間同時向 8 人或多於 8 人提供教育課程。」</blockquote><p class="source"><a href="https://www.edb.gov.hk/tc/sch-admin/sch-registration/about-sch-registration/index.html">教育局：學校的定義及註冊資料 ↗</a> · <a href="https://www.edb.gov.hk/attachment/tc/sch-admin/sch-registration/about-sch-registration/1a_cguide-non-purpose-built_Ch%201_introduction.pdf">教育局：新辦學校註冊指引第一章 ↗</a> · <a href="https://docs.google.com/document/d/1eWBmNZ87n9H-8CCNVj5Hfu8AhQWGlXgga9k-RisQoTU/edit">開業手冊原文 ↗</a> · <a href="./library.html#compliance">首頁資料庫：合規判斷 ↗</a></p></div></details>
       </div>
       <div class="card">
         <h3>怎樣選：五條問題</h3>
