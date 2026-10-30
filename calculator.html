@@ -225,14 +225,15 @@ img{max-width:100%}
   <section id="ab-compare" aria-labelledby="ab-title">
     <h2 id="ab-title">路線二：註冊中心開業方式試算</h2>
     <div class="risk-banner" role="note">
-      <h3>⚠️ 高風險路線：先看要準備多少錢，再看幾時回本</h3>
+      <h3>註冊中心：要準備多少錢、幾時回本</h3>
+      <p class="hint" style="margin:0">風險比工作室高，主要因為開業前要先付裝修、顧問及審批期租金，這筆錢無論招生快慢都要付。</p>
       <ul>
-        <li>租金、行政及開業投入由第一個月起就要付，學生未收夠也要照付；導師預設按堂支薪，學生少時人工也少。</li>
-        <li>新址申請的審批及工程期（約 4–9 個月或更久）要先付租金，期間沒有學費收入。創辦人的生活費預設<b>另計</b>，不算進中心現金；下面另列「創辦人每月支薪 HK$20,000」時要多準備多少。</li>
-        <li>3–6 歲學生每年有一批升小一離開，所以每月都要補回流失才可以增長。</li>
-        <li>回本月份對招生速度和審批時間非常敏感：下面同時列出「招生慢三成」和「審批延遲 3 個月」的結果。</li>
+        <li><b>最少要準備</b>＝開業前一次性投入＋開業後累計虧損最深的金額。<b>穩妥預算</b>再加 3 個月租金、行政及雜費作儲備。</li>
+        <li>開業後，租金及行政每月固定；創辦人每週自己教最多 22 堂，超出部分請兼職導師按堂支薪，所以學生少時人工也少。</li>
+        <li>創辦人的生活費另計，不算進中心現金；下面另列創辦人每月支薪 HK$20,000 的結果。</li>
+        <li>預設按創辦人現行收費（一對一 HK$850，佔學生 55%；小組每位每堂 HK$400）、開業首月 12 名學生、每月新報讀 7 人、流失 4%。招生數字未有實際數據，最好先用創辦人現有學生人數替換。</li>
       </ul>
-      <div class="ab-fields" style="grid-template-columns:minmax(0,320px)"><label>可動用資金（創辦人及出資人實際可投入）<input id="abFund" type="number" min="0" step="50000" value="1000000"></label></div>
+      <div class="ab-fields" style="grid-template-columns:minmax(0,320px)"><label>可動用資金（未提供可留空）<input id="abFund" type="number" min="0" step="50000" value="" placeholder="例如 1000000"></label></div>
       <div class="risk-grid" id="abRisk"></div>
     </div>
     <p class="ab-intro">兩方案使用同一組課程收入、人手及招生假設；主要比較開業前資金與交易／審批風險。以下預設值來自現有規劃假設，頂手價是放盤叫價區間的中位參考，並非成交價。</p>
@@ -1080,28 +1081,31 @@ img{max-width:100%}
       r.yearNet=x.rows.slice(1,13).reduce(function(a,y){return a+y.net},0);
     });
     var fund=val('abFund');
-    var reserve3=function(r){return 3*r.rows[24].fixed};
+    var reserve3=function(){return 3*base};
     var paidFounder=20000+Math.min(20000*.05,1500);
     var delayExtra=rent*3;
+    var pbText=function(x){return x.payback?'第 '+x.payback+' 個月':'24 個月內未能'};
     var riskHtml=routes.map(function(r,i){
-      var need=-r.low+reserve3(r);
-      var gap=fund-need;
+      var minNeed=-r.low, opLoss=Math.max(0,minNeed-r.initial), safe=minNeed+reserve3();
       var slow=simulate(r.initial,growth*0.7,0,r.start);
       var late=simulate(r.initial+delayExtra,growth,0,r.start);
       var be=noExpand?r.firstBreakEven:r.breakEven; if(!isFinite(be)) be='—';
       var capNow=noExpand?capacityStart:capacity;
-      var pct=capNow>0&&be!=='—'?Math.round(be/capNow*100):999;
       var row=function(k,v,c){return '<div class="risk-row"><span>'+k+'</span><b class="'+(c||'')+'">'+v+'</b></div>'};
       var withPay=founder>0?null:simulate(r.initial,growth,paidFounder,r.start);
-      var needPay=withPay?(-withPay.low+3*withPay.rows[24].fixed):0;
-      return '<div class="risk-col"><h4>'+r.name+'</h4><span class="hint">中心需要準備的現金（最低點＋3 個月開支作儲備）</span><div class="risk-big">'+fmt(need)+'</div>'+
-        row('對比可動用資金 '+fmt(fund), gap>=0?'尚餘 '+fmt(gap):'缺口 '+fmt(-gap), gap>=0?'ok':'bad')+
-        row('現金最低點', signed(r.low)+'（第 '+r.lowMonth+' 月）','bad')+
-        row('打平學生／容量', be+'／'+capNow+' 人（'+pct+'%）', pct>85?'bad':'')+
-        row('24 個月內收回開業投入', r.payback?'第 '+r.payback+' 月':'未能收回', r.payback?'':'bad')+
-        row('招生慢三成：現金最低點', signed(slow.low)+(slow.payback?'；第 '+slow.payback+' 月歸本':'；24 個月未歸本'),'bad')+
-        row('審批／交接延遲 3 個月：現金最低點', signed(late.low)+'（多付租金 '+fmt(delayExtra)+'）','bad')+
-        (withPay?row('若創辦人每月支薪 HK$20,000：需要準備', fmt(needPay)+(withPay.payback?'；第 '+withPay.payback+' 月歸本':'；24 個月未歸本'),'bad'):'')+
+      var fundRow='';
+      if(fund>0){var gap=fund-safe; fundRow=row('對比可動用資金 '+fmt(fund), gap>=0?'足夠，尚餘 '+fmt(gap):'不足 '+fmt(-gap), gap>=0?'ok':'bad');}
+      return '<div class="risk-col"><h4>'+r.name+'</h4><span class="hint">最少要準備</span><div class="risk-big" style="color:var(--ink)">'+fmt(minNeed)+'</div>'+
+        row('　開業前一次性投入', fmt(r.initial))+
+        row('　開業後累計虧損最深', opLoss>0?fmt(opLoss)+'（第 '+r.lowMonth+' 個月見底）':'開業後未有累計虧損')+
+        row('另留 3 個月租金、行政及雜費', fmt(reserve3()))+
+        row('穩妥預算', '<span style="font-size:15px;color:var(--ink)">'+fmt(safe)+'</span>')+
+        fundRow+
+        row('收回開業投入', pbText(r), r.payback?'':'bad')+
+        row('打平學生／容量', be+'／'+capNow+' 人')+
+        row('招生慢三成', '最少要準備 '+fmt(-slow.low)+'；回本：'+pbText(slow), slow.payback?'':'bad')+
+        row('審批或交接延遲 3 個月', '最少要準備 '+fmt(-late.low)+'（多付租金 '+fmt(delayExtra)+'）')+
+        (withPay?row('創辦人每月支薪 HK$20,000', '最少要準備 '+fmt(-withPay.low)+'；回本：'+pbText(withPay), withPay.payback?'':'bad'):'')+
         '</div>';
     }).join('');
     el('abRisk').innerHTML=riskHtml;
