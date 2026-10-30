@@ -13,6 +13,7 @@
 :root{
   --bg:#F5F7F4; --surface:#FFFFFF; --ink:#17232A; --muted:#5B6A70; --line:#DCE3E0; --soft:#EDF1EE;
   --studio:#1D6A8E; --phased:#B9762A; --full:#7B8891;
+  --phase-1:#276B9A; --phase-2:#A45C16; --phase-3:#18745F; --phase-4:#7651A0;
   --good:#2C7A57; --warn:#A8701B; --bad:#B1453A;
   --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   --f-disp:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
@@ -21,7 +22,7 @@
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#11171A; --surface:#182126; --ink:#E5ECEE; --muted:#98A7AD; --line:#29353B; --soft:#1F2A30;
-  --studio:#62AED2; --phased:#E2A55E; --full:#9BA7AE; --good:#5DBA8C; --warn:#E0B060; --bad:#E27C6E; color-scheme:dark}}
+  --studio:#62AED2; --phased:#E2A55E; --full:#9BA7AE; --phase-1:#75BDE5; --phase-2:#F0AE69; --phase-3:#62C5A6; --phase-4:#C09BEA; --good:#5DBA8C; --warn:#E0B060; --bad:#E27C6E; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#11171A; --surface:#182126; --ink:#E5ECEE; --muted:#98A7AD; --line:#29353B; --soft:#1F2A30;
   --studio:#62AED2; --phased:#E2A55E; --full:#9BA7AE; --good:#5DBA8C; --warn:#E0B060; --bad:#E27C6E; color-scheme:dark}
@@ -93,7 +94,11 @@ table.t{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
 .workflow-note b{display:block;font-size:14px}
 @media(max-width:760px){.workflow-note ol{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:460px){.workflow-note ol{grid-template-columns:minmax(0,1fr)}}
-.step-phase{margin:18px 0 8px;padding:9px 12px;background:var(--soft);border-radius:7px;font-weight:700}
+.step-phase{--phase-color:var(--phase-1);display:flex;align-items:center;gap:10px;margin:20px 0 9px;padding:10px 13px;border:1px solid color-mix(in srgb,var(--phase-color) 28%,var(--line));border-left:5px solid var(--phase-color);border-radius:8px;background:color-mix(in srgb,var(--phase-color) 10%,var(--surface));color:var(--phase-color);font-weight:700}
+.step-phase::before{content:attr(data-phase);display:grid;place-items:center;flex:0 0 26px;height:26px;border-radius:50%;background:var(--phase-color);color:var(--surface);font-family:var(--f-num);font-size:12px}
+.step-phase.phase-2{--phase-color:var(--phase-2)}
+.step-phase.phase-3{--phase-color:var(--phase-3)}
+.step-phase.phase-4{--phase-color:var(--phase-4)}
 .step-detail{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .step-detail>div{padding:11px;border-radius:8px;background:var(--soft);font-size:14px}
 .step-detail b{display:block;font-size:12.5px;color:var(--studio);margin-bottom:4px}
@@ -1011,8 +1016,14 @@ html{scroll-behavior:smooth}
     {phase:'第四階段｜開業、服務、量度及調整',name:'每月檢視、觸發預警並決定擴縮',time:'每週 1–2 小時；每月半日',cost:'工具約 $0–1,000／月；會計另計',eval:'付費學生、月流失、時段使用率、現金低點、未履行課堂及家長投訴有沒有偏離計劃？是否到達擴編或停損條件？',plan:'每月固定日期做管理檢討，先看現金和合規，再看招生與教學；只有連續達標、有輪候需求和工程資金時才評估擴充。',action:'更新實際與預算差異；把問題寫成「指標—原因—負責人—期限」；未達預警便凍結新增承擔，達停損線即按協議停撥、處理家長及租約責任。',risk:'只追學生數不看未上課學費及可用現金；過早擴租、聘人會令固定成本先於需求上升。',done:'每月報告及行動紀錄保存；擴編或停損決定符合預先設定的關卡與協議。',links:'<a href="#stop">查看預警與退出線</a> <a href="#gates">查看擴張關卡</a>'}
   ];
   var lastPhase='';
+  var phaseNumber=0;
   $('stepList').innerHTML = STEPS.map(function(s,i){
-    var phase = s.phase !== lastPhase ? '<div class="step-phase">'+(lastPhase=s.phase)+'</div>' : '';
+    var phase = '';
+    if (s.phase !== lastPhase) {
+      phaseNumber += 1;
+      lastPhase = s.phase;
+      phase = '<div class="step-phase phase-'+phaseNumber+'" data-phase="0'+phaseNumber+'">'+s.phase+'</div>';
+    }
     return phase+'<details><summary><span><span class="num muted" style="margin-right:10px">'+String(i+1).padStart(2,'0')+'</span>'+s.name+'</span><span class="s-meta">'+s.time+'</span></summary>'+
       '<div class="body"><div class="step-detail">'+
       '<div><b>先評估</b>'+s.eval+'</div><div><b>預設方案</b>'+s.plan+'</div>'+
