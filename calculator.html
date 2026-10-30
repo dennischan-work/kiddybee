@@ -1055,7 +1055,7 @@ img{max-width:100%}
     var x=function(m){return L+m/24*(W-L-Rm)},y=function(v){return T+(hi-v)/(hi-lo)*(H-T-B)};
     var svg='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="方案 A 與方案 B 的 24 個月累計現金比較">';
     for(var i=0;i<=4;i++){var v=lo+(hi-lo)*i/4;svg+='<line x1="'+L+'" x2="'+(W-Rm)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="var(--line)"/><text x="'+(L-7)+'" y="'+(y(v)+4)+'" text-anchor="end" fill="var(--muted)" font-size="11">'+(v/10000).toFixed(0)+'萬</text>'}
-    for(var m=0;m<=24;m+=3)svg+='<text x="'+x(m)+'" y="'+(H-24)+'" text-anchor="middle" fill="var(--muted)" font-size="11">'+m+'</text>';
+    for(var m=0;m<=24;m+=4)svg+='<text x="'+x(m)+'" y="'+(H-24)+'" text-anchor="middle" fill="var(--muted)" font-size="11">'+m+'</text>';
     R.forEach(function(r,i){var d=r.rows.map(function(p,j){return (j?'L':'M')+x(j).toFixed(1)+','+y(p.cash).toFixed(1)}).join(' ');svg+='<path d="'+d+'" fill="none" stroke="'+(i?'var(--full)':'var(--phased)')+'" stroke-width="3"/>'});
     svg+='<line x1="'+L+'" x2="'+(W-Rm)+'" y1="'+y(0)+'" y2="'+y(0)+'" stroke="var(--muted)" stroke-dasharray="4 4"/><text x="'+((L+W-Rm)/2)+'" y="'+(H-3)+'" text-anchor="middle" fill="var(--muted)" font-size="11">開業後月份</text></svg>';
     el('abCashChart').innerHTML=svg;
