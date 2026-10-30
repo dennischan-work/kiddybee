@@ -190,49 +190,37 @@ img{max-width:100%}
       </div>
 
       <div class="group">
-        <div class="group-title">聘用老師</div>
-        <p class="hint">逐位填月薪。各路線按下面設定的人數，由老師 A 開始順序計入。</p>
-        <div class="teachers">
-          <div class="trow"><label for="tA">老師 A</label><input type="number" id="tA" value="28500" step="500" min="0"><span class="tot" id="tAO"></span></div>
-          <div class="trow"><label for="tB">老師 B</label><input type="number" id="tB" value="28500" step="500" min="0"><span class="tot" id="tBO"></span></div>
-          <div class="trow"><label for="tC">老師 C</label><input type="number" id="tC" value="28500" step="500" min="0"><span class="tot" id="tCO"></span></div>
-          <div class="trow"><label for="tD">老師 D</label><input type="number" id="tD" value="28500" step="500" min="0"><span class="tot" id="tDO"></span></div>
+        <div class="group-title">課室與人手（工作室）</div>
+        <p class="hint">創辦人親自授課；新增課室時，每間同時上課的課室都要有導師。</p>
+        <div class="counts">
+          <label for="nR">工作室課室數</label><select id="nR"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+          <label for="nS">另聘導師人數</label><select id="nS"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
         </div>
+        <div class="trow"><label for="tA">導師 A 月薪</label><input type="number" id="tA" value="28500" step="500" min="0"><span class="tot" id="tAO"></span></div>
         <label class="switch" for="mpf">計入僱主強積金<input type="checkbox" id="mpf" checked></label>
-        <div class="alert">
-          <b>兩點提醒</b>
-          <ul>
-            <li>老師預設月薪 HK$28,500 是依手冊「全職導師連僱主成本 HK$30,000」反推，不是市場行情，請換成實際打算開出的薪金。</li>
-            <li>強積金依現行規定計算（月入上限 HK$30,000，即每人每月最多 HK$1,500），但積金局正在檢討上下限，日後如有調整，試算台要跟著改（<a href="https://www.mpfa.org.hk/en/info-centre/press-releases/20260308" target="_blank" rel="noopener">積金局新聞稿</a>、<a href="https://www.mpfa.org.hk/en/mpf-system/mandatory-contributions" target="_blank" rel="noopener">積金局：強制性供款</a>）。</li>
-          </ul>
-        </div>
-        <div class="counts">
-          <label for="nR">工作室課室數</label>
-          <select id="nR"><option>1</option><option>2</option><option>3</option><option>4</option></select>
-          <label for="nS">工作室聘用老師</label>
-          <select id="nS"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
-          <label for="nP1">註冊中心 · 分階段：首階段</label>
-          <select id="nP1"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
-          <label for="nP2">註冊中心 · 分階段：擴編後</label>
-          <select id="nP2"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
-          <label for="nF">註冊中心 · 全編制</label>
-          <select id="nF"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
-        </div>
-        <div class="group-title" style="margin-top:6px">行政人員</div>
-        <div class="trow"><label for="adm">每位月薪</label><input type="number" id="adm" value="17000" step="500" min="0"><span class="tot" id="admO"></span></div>
-        <p class="hint">預設 HK$17,000 取自市場研究的估算，未經核實，請換成實際薪金。強積金開關同樣適用。</p>
-        <div class="counts">
-          <label for="nAdS">工作室行政人員</label>
-          <select id="nAdS"><option>0</option><option>1</option><option>2</option></select>
-          <label for="nAdC">註冊中心行政人員</label>
-          <select id="nAdC"><option>0</option><option>1</option><option>2</option></select>
-        </div>
-        <div class="field">
-          <label for="sup">中心其他兼職支援／月 <output id="supO"></output></label>
-          <input type="range" id="sup" min="0" max="30000" step="1000" value="5000">
-        </div>
+        <details><summary>行政人員及註冊中心人手設定（進階）</summary>
+          <p class="hint">只在打算聘請前台，或比較註冊中心時填寫。導師人數按 A、B、C、D 順序計入。</p>
+          <div class="teachers">
+            <div class="trow"><label for="tB">導師 B 月薪</label><input type="number" id="tB" value="28500" step="500" min="0"><span class="tot" id="tBO"></span></div>
+            <div class="trow"><label for="tC">導師 C 月薪</label><input type="number" id="tC" value="28500" step="500" min="0"><span class="tot" id="tCO"></span></div>
+            <div class="trow"><label for="tD">導師 D 月薪</label><input type="number" id="tD" value="28500" step="500" min="0"><span class="tot" id="tDO"></span></div>
+          </div>
+          <div class="alert"><b>薪酬及強積金假設</b><ul>
+            <li>導師預設月薪 HK$28,500 是按手冊「全職導師連僱主成本 HK$30,000」反推，並非市場行情，請換成實際薪酬。</li>
+            <li>強積金依模型設定計算；實際供款請按積金局最新指引及員工情況核實。</li>
+          </ul></div>
+          <div class="counts">
+            <label for="nP1">註冊中心分階段：首階段導師</label><select id="nP1"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
+            <label for="nP2">註冊中心分階段：擴編後導師</label><select id="nP2"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
+            <label for="nF">註冊中心全編制導師</label><select id="nF"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
+            <label for="nAdS">工作室行政人員</label><select id="nAdS"><option>0</option><option>1</option><option>2</option></select>
+            <label for="nAdC">註冊中心行政人員</label><select id="nAdC"><option>0</option><option>1</option><option>2</option></select>
+          </div>
+          <div class="trow"><label for="adm">行政人員月薪</label><input type="number" id="adm" value="17000" step="500" min="0"><span class="tot" id="admO"></span></div>
+          <div class="field"><label for="sup">註冊中心兼職支援／月 <output id="supO"></output></label><input type="range" id="sup" min="0" max="30000" step="1000" value="5000"></div>
+          <p class="hint">行政人員月薪 HK$17,000 是研究估算，未經核實。強積金供款按開關一併計入。</p>
+        </details>
       </div>
-
       <div class="group">
         <div class="group-title">課程及每名學生收費</div>
         <div class="btns">
@@ -269,7 +257,7 @@ img{max-width:100%}
         <div class="field">
           <div class="lab"><span class="lt" id="slotsL">每間課室每週可售班數</span><output id="slotsO"></output></div>
           <dl class="slotbox" id="slotBox"></dl>
-          <p class="hint">由右邊「創辦人的一週」課表決定，點擊課表格子即可加減。<a href="#h-week">去改課表 →</a></p>
+          <p class="hint">由下方「創辦人的一週」課表決定，可在每格直接輸入人數。<a href="#h-week">去改課表 →</a></p>
         </div>
         <div class="field">
           <label for="target">目標學生人數（作容量規劃）</label><input type="number" id="target" min="1" max="200" step="1" value="40">
