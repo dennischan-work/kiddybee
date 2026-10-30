@@ -323,7 +323,7 @@ img{max-width:100%}
       </section>
 
       <section class="card" aria-labelledby="h-week" id="week-card">
-        <h2 id="h-week">創辦人的一週：點擊課表，試排工作室時段</h2>
+        <h2 id="h-week">創辦人的一週：輸入人數，試排工作室時段</h2>
         <p class="read">每格輸入該時段每間課室預計到課人數；留空或輸入 0 即不開班。預設每格約 60 分鐘上課、15 分鐘交接。法規提示只作初步篩查，正式安排須以教育局對實際時間表的書面回覆為準。</p>
         <div class="btns">
           <button type="button" data-sched="hb">載入常規示例</button>
@@ -437,7 +437,6 @@ img{max-width:100%}
     pI:'面試班每堂收費。面試班有季節性，7 月開業已錯過 2027/28 K1 面試期。',
     weeks:'每月平均上幾週課。4.33 是全年平均；4.0 扣除公眾假期、暑假停課、颱風及黑雨。',
     slotsL:'在每格輸入該時段預計學生人數；每堂可自行設定。政府沒有規定工作室每班人數，但全機構同時達 8 人或每日達 20 人，可能屬須註冊的學校。',
-    slotsL:'一間課室每週開幾班，由「創辦人的一週」課表決定。註冊中心有兩間課室，但要創辦人加至少一位老師才可同時開班。',
     curve:'開業後每月付費學生的增長速度假設，到課室上限便停。',
     speed:'把所選曲線放大或縮小。例如 80% 代表招生比曲線慢兩成。',
     rent:'每月租金及管理費。',
@@ -741,21 +740,6 @@ img{max-width:100%}
     $('wwarn').innerHTML=W.map(function(w){return '<li style="--c:'+css(w[0])+'">'+w[1]+'</li>';}).join('');
   }
 
-  function sizeAlert(s){
-    var el = $('sizeAlert');
-    if (s.size > CAP_PER_CLASS){
-      el.className = 'alert bad'; el.hidden = false;
-      el.innerHTML = '<b>每班 '+s.size+' 人，已超過中心自訂的每班上限 4 人。</b><ul>'+
-        '<li>政府沒有規定工作室每班幾人；4 人上限是中心的核心賣點（小班），超過便不再是家長報讀時聽到的方案。</li>'+
-        '<li>政府看的是全機構人數：任何時間同時 8 人或以上、或任何一天 20 人或以上，可能屬須註冊的學校。班越大，越快觸及。</li>'+
-        '<li>老師照顧不到每個孩子，課堂互動及家長回饋的承諾要重寫。</li>'+
-        '<li>以上數字只作「如果放寬班額」的參考。</li></ul>';
-    } else if (s.size === CAP_PER_CLASS){
-      el.className = 'alert'; el.hidden = false;
-      el.innerHTML = '每班 4 人代表每一班都坐滿，沒有缺席、試堂或空位，現實中很難做到。手冊及審慎風險評估模型都以每班 3 人估算。';
-    } else el.hidden = true;
-  }
-
   function render(){
     var s = read();
     $('payO').textContent = money(s.pay);
@@ -792,6 +776,9 @@ img{max-width:100%}
     $('routes').innerHTML = html;
 
     var st = R[0], ph = R[1], cap1 = st.cap;
+    var roomSeats=s.active?Math.floor(st.cap/s.active):0;
+    var roomsNeeded=roomSeats>0?Math.max(1,Math.ceil(s.target/roomSeats)):0;
+    var teachersNeeded=Math.max(0,roomsNeeded-1);
     var t='工作室每月固定支出 '+money(st.steady)+'，每名學生每月貢獻 '+money(s.contrib)+'。';
     t+=isFinite(st.be)?'每月約有 '+st.be+' 名付費學生便可收支平衡。':'以目前收費及變動成本，每名學生沒有正貢獻，無法收支平衡。';
     t+=st.be>st.cap?'目前課表最多服務 '+st.cap+' 人，容量不足。':(st.be>st.cap*0.85?'目前容量 '+st.cap+' 人，接近滿額才打平。':'目前容量 '+st.cap+' 人，容量有餘。');
