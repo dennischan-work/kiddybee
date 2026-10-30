@@ -50,6 +50,19 @@ h1{font-family:var(--f-disp);font-size:clamp(28px,5vw,44px);line-height:1.2;marg
 .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
 .btn{display:inline-block;padding:9px 16px;border-radius:8px;text-decoration:none;font-size:14.5px;border:1px solid var(--line);color:var(--ink);background:var(--surface)}
 .btn.primary{background:var(--studio);border-color:var(--studio);color:#fff}
+.blind-group{display:grid;gap:10px;margin-bottom:18px}
+.blind-group>h3{font-size:15px;margin:0;color:var(--muted);letter-spacing:.04em}
+.blind-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.blind-list{grid-template-columns:minmax(0,1fr)}}
+.blind-list li{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--bad);border-radius:10px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.blind-list li.warn{border-left-color:var(--warn)}
+.blind-list li b.q{font-size:15.5px;line-height:1.45}
+.blind-list li p{font-size:13.5px;margin:0}
+.blind-list li .check{font-size:12.5px;color:var(--muted)}
+.blind-list li .check::before{content:"怎樣核實：";font-weight:500;color:var(--ink)}
+.founder-now{border:2px solid var(--warn);background:color-mix(in srgb,var(--warn) 8%,var(--surface));border-radius:10px;padding:16px 18px;display:grid;gap:8px;margin-bottom:18px}
+.founder-now h3{margin:0;font-size:17px}
+.founder-now ul{margin:0;padding-left:1.2em;display:grid;gap:4px;font-size:14px}
 .disclaimer{font-size:13px;color:var(--bad);margin:0;padding:10px 12px;border-left:3px solid var(--bad);background:color-mix(in srgb,var(--bad) 7%,var(--surface));border-radius:6px}
 section.block{padding:34px 0 8px;scroll-margin-top:56px}
 .sec-head{display:grid;gap:6px;margin-bottom:18px}
@@ -338,7 +351,55 @@ html{scroll-behavior:smooth}
   <section class="block" id="reality-check" style="padding-top:18px">
     <div class="sec-head">
       <div class="sec-no">開業前先停一停</div>
-      <h2>先通過這 8 個現實檢查</h2>
+      <h2>創辦人最容易忽略的盲點</h2>
+      <p>第一次開中心，最大的風險通常不是不夠努力，而是太早相信最理想的情況。以下每一項都要有證據，才可以放行下一筆不可退的開支。紅色是會直接令計劃失敗的盲點，橙色是會令計劃變慢或變貴的盲點。</p>
+    </div>
+
+    <div class="founder-now" id="founder-now">
+      <h3>創辦人現時的實際情況</h3>
+      <ul>
+        <li><b>沒有開設或經營教育中心的經驗</b>，目前亦未有 3 年以上的長遠規劃。</li>
+        <li><b>偏好路線二（註冊中心）</b>；但按試算台審慎預設，註冊中心需要準備的現金約 <b>HK$184–211 萬</b>（頂手／新址），高於 HK$100 萬資金情境。</li>
+        <li><b>手上的方案是「最低成本版」</b>：創辦人親自教一對一（HK$700–1,000／45 分鐘）及小組（每位 HK$500–600），估啟動資金 HK$38–53 萬、每月固定開支 HK$22,500–28,500（見 <a href="#money">01C</a>）。</li>
+        <li><b>籌備期沒有收入</b>：由 2026 年 11 月到 2027 年 8 月目標開業，約 9 個月；如走新址申請，審批及工程每延遲一個月，就多一個月沒有收入又要付租金。</li>
+        <li><b>資金上限仍未提供</b>，所以下面所有「可以做」的判斷，都要等資金數字確認後才成立。</li>
+      </ul>
+    </div>
+
+    <div class="blind-group">
+      <h3>一、生意本身</h3>
+      <ul class="blind-list">
+        <li><b class="q">差異化還沒有答案：家長為甚麼要轉過來？</b><p>小班、系統教材、進度回饋，石門已有中心公開提供 1:4、60 分鐘、HK$330 的課。說不出差別，招生曲線就沒有根據。</p><p class="check">訪談至少 20 位家長，半數以上說得出會選這裏的具體原因。</p></li>
+        <li><b class="q">要坐滿近九成才打平</b><p>精簡一人工作室要 47 人（上限 54 人）；兩間課室工作室要 98 人（上限 104 人）；註冊中心約 100 人（上限 132 人）。租金或創辦人月薪多 HK$5,000，就要多 4–5 名學生。</p><p class="check">用實際租金報價及創辦人最低月薪，在試算台重算一次。</p></li>
+        <li><b class="q">學生會「畢業」：流失是結構性的</b><p>3–6 歲的學生每年有一批升小一離開，不是教得不好才走。每年要重新招回約三分之一學生，招生要一直做，不是開業時做一次。</p><p class="check">招生預測要扣每月流失；註冊中心試算台預設每月流失 4%。</p></li>
+        <li><b class="q">市場在縮小</b><p>2025 年全港出生登記 31,714 宗，是歷年新低；2025 年中至 2026 年中的臨時數字約 29,700 人。之後幾年進入幼稚園年齡的孩子會更少，開業頭兩年的客源可能是之後最多的。</p><p class="check">以沙田區實際幼稚園收生及家長訪談估算，不用全港數字推算學生數。</p></li>
+        <li class="warn"><b class="q">面試班的對象年齡與規劃有衝突</b><p>K1 面試班的孩子多未滿 3 歲，與「第一年不開 3 歲以下」有衝突，亦可能涉及幼兒照顧的規定；只有小一面試班（K2–K3）在服務年齡內。面試班收入亦集中在面試季，不能當作全年平均收入。</p><p class="check">先決定面試班是 K1 還是小一；K1 要先向社署及教育局查詢。</p></li>
+        <li class="warn"><b class="q">最低成本版的高價未經驗證</b><p>一對一 HK$700–1,000／45 分鐘屬高價一檔（外籍導師品牌一對一約 HK$1,100）。小組「每位 HK$500–600」未說明是每堂還是每月；若是每月，收入會少很多。</p><p class="check">先問 10 位家長是否願意按這個價錢付款，並寫清楚小組的收費週期。</p></li>
+      </ul>
+    </div>
+
+    <div class="blind-group">
+      <h3>二、創辦人個人</h3>
+      <ul class="blind-list">
+        <li><b class="q">籌備期約 9 個月沒有收入，生活費從哪裏來？</b><p>HK$5 萬驗證預算不包括創辦人的生活費。生活費要另外準備，不能動用營運資金；開業後頭幾個月亦未必有足夠盈餘支付創辦人月薪。</p><p class="check">寫下每月最低生活費，乘以 12 個月，與營運資金分開存放。</p></li>
+        <li><b class="q">教得好，不等於經營得好</b><p>招生、回覆查詢、收款、處理投訴、帳目、聘人、應付部門，對沒有開過中心的人都是新工作，而且全部要同時做。</p><p class="check">開業前找一位有經營中心經驗的人，逐項看一次開業清單。</p></li>
+        <li class="warn"><b class="q">最忙的教學時段，正是家長查詢最多的時段</b><p>放學後和週末都在上課，誰回覆訊息、安排試堂？查詢遲覆，家長便會去別處。</p><p class="check">定好回覆時限（例如 2 小時內），寫明誰負責、用甚麼工具。</p></li>
+        <li class="warn"><b class="q">成立公司，不代表沒有個人責任</b><p>商業租約常要求董事個人擔保；停損時，租約餘期和退款責任可能要用個人資產支付。</p><p class="check">簽約前請律師看清個人擔保條款，並把最壞情況的金額寫下來。</p></li>
+        <li class="warn"><b class="q">沒有 3 年目標，今天的選擇便沒有依據</b><p>3 年後想要「一間工作室養活自己」，還是「擴成註冊中心」？答案會改變今天的選址、租約年期和投入金額。</p><p class="check">用一頁紙寫下第 1、2、3 年的目標學生數、收入和創辦人角色。</p></li>
+      </ul>
+    </div>
+
+    <div class="blind-group">
+      <h3>三、判斷方式</h3>
+      <ul class="blind-list">
+        <li><b class="q">「想做」不等於「做得到」</b><p>偏好註冊中心是合理的長遠方向，但按審慎預設，所需現金高於現有資金情境。未有資金來源前，偏好不能作為選擇路線的理由。</p><p class="check">先確認資金上限，再看 <a href="#direction">01D 按資金選方案</a>。</p></li>
+        <li><b class="q">試算台可以調到「看起來可行」</b><p>心急的時候，人會不斷調高收費、招生速度或班額，直到結果好看為止。這樣得出的數字不代表真的可行。</p><p class="check">決策一律看試算台的審慎預設；任何改動都要寫下依據（報價、訪談或報讀紀錄）。</p></li>
+        <li class="warn"><b class="q">自製教材的版權</b><p>教材中用到的網上圖片、歌曲、字型，商用前都要確認授權；開業後被投訴，要重做教材並可能要賠償。</p><p class="check">逐份教材標記素材來源和授權狀態。</p></li>
+      </ul>
+    </div>
+
+    <div class="sec-head" style="margin-top:8px">
+      <h2 style="font-size:20px">放行前的 8 個現實檢查</h2>
       <p>創業熱情可以開始一個計劃；只有可核實的需求、書面確認和足夠現金，才可以放行下一步。</p>
     </div>
     <div class="grid2">
@@ -354,7 +415,7 @@ html{scroll-behavior:smooth}
       </article>
       <article class="card" style="border-left:4px solid var(--bad)">
         <span class="tag no">⚠️ 現金與延誤</span><h3 style="margin-top:8px">招生慢三個月，現金還夠嗎？</h3>
-        <p class="small">試算台未輸入可動用起始資金，月末負數先視為資金缺口，不是銀行餘額；月收入是總收入，現金流另扣變動成本。另試算招生慢三個月、開業延遲及面試班淡季。</p>
+        <p class="small">註冊中心試算台已可輸入可動用資金，並同時列出「招生慢三成」及「審批延遲 3 個月」的現金最低點；工作室部分的月末負數是資金缺口，不是銀行餘額。面試班淡季要另外按月份估算。</p>
         <p class="small" style="margin-top:8px"><a href="#cash">查看現金低點和停損安排 →</a></p>
       </article>
       <article class="card" style="border-left:4px solid var(--bad)">
@@ -369,7 +430,7 @@ html{scroll-behavior:smooth}
       </article>
       <article class="card" style="border-left:4px solid var(--bad)">
         <span class="tag no">⚠️ 人手全成本</span><h3 style="margin-top:8px">人工預算有沒有包括僱主責任？</h3>
-        <p class="small">試算台導師 1、2 薪酬預設為 0；未填實際薪金會低估擴編成本。另核對假期、法定假日、病假、保險、招聘培訓、代課及適用教員要求。</p>
+        <p class="small">試算台導師薪酬預設按招聘市場估算（本地全職導師底薪約 HK$17,000–22,000），請換成實際薪金。另核對假期、法定假日、病假、保險、招聘培訓、代課及適用教員要求。</p>
         <p class="small" style="margin-top:8px"><a href="#rules">查看僱主及教員要求 →</a></p>
       </article>
       <article class="card" style="border-left:4px solid var(--bad)">
@@ -431,8 +492,9 @@ html{scroll-behavior:smooth}
         </div>
       </div>
       <div class="card route" style="--c:var(--phased)">
-        <span class="tag mid">首年不建議</span>
+        <span class="tag no">高風險 · 創辦人目前偏好</span>
         <h3 style="margin-top:8px">路線二：註冊中心</h3>
+        <p class="small" style="margin:6px 0 0;padding:8px 10px;border-radius:6px;background:color-mix(in srgb,var(--bad) 8%,var(--surface))"><b>按試算台審慎預設：</b>需要準備的現金約 HK$184 萬（頂手）至 HK$211 萬（新址），即現金最低點加 3 個月固定成本；24 個月內未能收回開業投入。<a href="./calculator.html#ab-compare">打開註冊中心試算 →</a></p>
         <p class="muted">兩間課室、兩位或以上老師，約 80 名學生規劃。須按教育局確認的要求完成註冊或臨時註冊及其他批准，才可按批准條件營運。</p>
         <div class="route-option-grid">
           <div class="route-option route-option-a"><h4>方案 A｜新址申請</h4><p class="small">研究估算約 4–9 個月；顧問、圖則及消防改動暫估 HK$50,000–150,000，須以正式報價及部門要求更新。初步比較 600–900 呎場地。</p><p class="route-caution"><b>⚠️ 注意事項：</b>先核實規劃、地契、消防、屋宇及衞生要求；未取得所需開課文件前，不可開課。</p></div>
@@ -464,7 +526,7 @@ html{scroll-behavior:smooth}
         <h3>怎樣選：五條問題</h3>
         <ol class="small" style="margin:0;padding-left:1.2em;display:grid;gap:6px">
           <li>創辦人能否每週承擔約 21–23 堂課，再加備課、招生、行政和休息？</li>
-          <li>可動用資金是否少於 HK$70 萬？如是，優先研究工作室或合作場地。</li>
+          <li>可動用資金是否少於註冊中心所需現金？手冊估 HK$70–90 萬，試算台審慎預設約 HK$184–211 萬（含 3 個月儲備）。如是，優先研究工作室或合作場地。</li>
           <li>2027 年 8 月是否必要期限？不假設任何路線必定趕及。</li>
           <li>是否打算兩位老師同時各教 4 人？合計已達 8 人，要按完整方案向教育局確認。</li>
           <li>能否接受在現有時段和人數條件下暫緩增長？若不能，提早研究註冊中心及擴張資金。</li>
@@ -481,7 +543,7 @@ html{scroll-behavior:smooth}
       <table class="t">
         <thead><tr><th>假設</th><th>手冊口徑</th><th>審慎風險評估口徑</th><th>為甚麼要改</th></tr></thead>
         <tbody>
-          <tr><th>每堂實收</th><td>加權 HK$351.25（本地 60%、NET 25%、面試班 15%）</td><td>HK$300（只計本地導師課）</td><td class="muted">創辦人親授，NET 課要另聘外籍導師；7 月開業已錯過 2027/28 K1 面試期</td></tr>
+          <tr><th>每堂實收</th><td>加權 HK$351.25（本地 60%、NET 25%、面試班 15%）</td><td>HK$300（只計本地導師課）</td><td class="muted">創辦人親授，NET 課要另聘外籍導師；面試班有季節性，K1 面試班對象多未滿 3 歲，與第一年服務年齡有衝突</td></tr>
           <tr><th>每月堂數</th><td class="n">4.33 週</td><td class="n">4.0 週</td><td class="muted">扣除公眾假期、暑假停課、颱風及黑雨停課</td></tr>
           <tr><th>創辦人薪酬</th><td>未計</td><td class="n">HK$20,000／月</td><td class="muted">不計薪酬，「盈餘」其實是創辦人的工資；金額待創辦人確認</td></tr>
           <tr><th>可售容量</th><td>每週 21–23 班，約 63–69 人</td><td>每週 18 班 × 3 人 ≈ 54 人</td><td class="muted">3–6 歲兒童平日 19:00 後難以上課</td></tr>
@@ -490,7 +552,31 @@ html{scroll-behavior:smooth}
         </tbody>
       </table>
     </div>
-    <p class="muted small" style="margin-top:8px">最低成本版另估啟動資金 HK$380,000–530,000、每月固定開支 HK$22,500–28,500；前提是創辦人親自教學、沒有額外宣傳預算，且場地已合規或毋須大額裝修。這套估算與審慎風險評估口徑每月 HK$52,000 不同，項目尚未逐項對齊，暫不併入本頁打平及現金流計算。簡報所稱「10 名一對一＋8 名小組，每月餘約 HK$30,000」亦待確認小組計費週期、堂數、班額及完整成本。</p>
+    <div class="card" style="margin-top:12px;border-left:4px solid var(--warn)">
+      <h3>最低成本版：創辦人現時的實際方案</h3>
+      <p class="muted small">啟動資金估 HK$380,000–530,000、每月固定開支 HK$22,500–28,500；前提是創辦人親自教學、沒有額外宣傳預算，且場地已合規或毋須大額裝修。簡報稱「10 名一對一＋8 名小組，每月餘約 HK$30,000」。按每週上一堂、每月 4.0 週粗算：</p>
+      <div class="tablewrap" style="margin-top:8px"><table class="t" style="min-width:0">
+        <tbody>
+          <tr><th>10 名一對一 × HK$700–1,000 × 4 週</th><td class="n">HK$28,000–40,000</td></tr>
+          <tr><th>8 名小組 × 每位 HK$500–600 × 4 週（假設按堂收費）</th><td class="n">HK$16,000–19,200</td></tr>
+          <tr><th>每月收入合計</th><td class="n">HK$44,000–59,200</td></tr>
+          <tr><th>扣固定開支及教材等變動成本後</th><td class="n">約 HK$14,000–35,000</td></tr>
+        </tbody>
+      </table></div>
+      <p class="small" style="margin-top:8px"><b>要留意：</b>「每月餘約 HK$30,000」要收費接近上限、開支接近下限才做得到；按低價計只餘約 HK$14,000。這筆錢就是創辦人的收入，未計強積金、病假和假期停課。若小組 HK$500–600 是每月收費，小組收入只有約 HK$4,000–4,800。一對一亦不符合「每班 4 人小班」的定位，兩者要選定主次。這套數字與下面的 HK$52,000 口徑項目未逐項對齊，暫不併入打平及現金流計算。</p>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <h3>工作室的三個版本，以試算台為準</h3>
+      <div class="tablewrap"><table class="t">
+        <thead><tr><th>版本</th><th>每月固定開支</th><th>打平學生／容量</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><th>最低成本版</th><td class="n">HK$22,500–28,500</td><td>一對一為主，見上表</td><td class="muted">創辦人現時方案；收費待驗證</td></tr>
+          <tr><th>精簡一人工作室</th><td class="n">HK$52,000</td><td class="n">47／54 人</td><td class="muted">一間課室、創辦人自己教、月薪 HK$20,000；試算台「精簡一人工作室」</td></tr>
+          <tr><th>目前規劃（兩間課室）</th><td class="n">HK$117,925</td><td class="n">98／104 人</td><td class="muted">創辦人加一位導師、租金 HK$40,000、創辦人月薪 HK$30,000；試算台預設</td></tr>
+        </tbody>
+      </table></div>
+      <p class="muted small" style="margin-top:8px">兩間課室版本要坐滿約 94% 才打平：聘一位導師、加一間課室，學位只多了約 50 個，固定開支卻多了一倍以上。工作室每日人數另受 19 人規劃線限制，多開課室不等於可以多收學生。<a href="./calculator.html">打開試算台調整 →</a></p>
+    </div>
     <details class="evidence" style="margin-top:10px"><summary>價格和每週 18 班從哪裏來？查看市場資料與待驗證假設</summary><div class="body"><p><b>HK$300／堂：</b>是審慎風險評估口徑用來試算的本地導師課價格，不代表已證明家長願意付，也不是最終價目。開業前要確認課堂分鐘數、每月實際堂數、教材／支付等變動成本和退款條款。</p><p><b>每週 18 班 × 每班 3 人：</b>是工作量及招生模型的基準情境，不是已確認的課室核准容額。家長可上時段、週末日人數控制、導師工時和教育局回覆都會改變可售容量。應用訪談時段表和實際預約資料重算。</p><p><b>競爭中心價格：</b>研究中的公開價只供比較線索；課程長度、師資、班額、網上／實體和收費週期不同，不可直接當成同類成交價。</p><p class="source"><a href="./library.html#market">查看市場價格與來源卡 ↗</a> · <a href="./library.html#finance">查看財務假設卡 ↗</a></p></div></details>
     <div class="card" style="margin-top:12px;border-left:4px solid var(--warn)">
       <h3>資助及融資：只把已批款項列入現金</h3>
@@ -938,7 +1024,7 @@ html{scroll-behavior:smooth}
           <li>時段使用率：已報讀學位 ÷（18 班 × 4 位）</li>
           <li>可用現金及未履行課堂：已收未上課的學費不可當作可用現金</li>
         </ul>
-        <p class="muted small" style="margin-top:8px">招生季節：2027/28 K1 註冊證申請為 2026 年 9–11 月，7 月開業已錯過該批面試期，面試班要對準下一輪。</p>
+        <p class="muted small" style="margin-top:8px">招生季節：2027 年 8 月開業後的首個面試季，面向 2028/29 學年；K1 對象主要是 2025 年出生、出生人數歷年最少的一批孩子，且多未滿 3 歲。小一面試班（K2–K3）才在第一年服務年齡內。</p>
       </div>
     </div>
   </section>
