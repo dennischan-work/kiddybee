@@ -263,14 +263,14 @@ img{max-width:100%}
         <label>面試班每堂實收<input id="abPriceInterview" type="number" min="0" step="5" value="450"></label>
         <div class="ab-stat"><span>加權後每位學生每週課堂實收</span><b id="abWeightedPrice">HK$351.25</b></div>
         <label>每名學生每堂變動成本<input id="abVar" type="number" min="0" step="5" value="20"></label>
-        <label>每月平均上課週數<input id="abWeeks" type="number" min="1" max="5" step="0.01" value="4.33"></label>
+        <div class="ab-stat"><span>每月平均上課週數（固定公式）</span><b>4.33 週（52 ÷ 12）</b></div>
         <label>每間課室每週可開班數<input id="abClasses" type="number" min="1" step="1" value="22"></label>
         <label>每班平均學生人數<input id="abClassSize" type="number" min="1" step="1" value="3"></label>
         <label>開業首月學生數<input id="abStartStudents" type="number" min="0" step="1" value="15"></label>
         <label>平均每月新增學生<input id="abGrowth" type="number" min="0" step="1" value="6"></label>
         <label>擴編門檻（學生數）<input id="abTrigger" type="number" min="1" step="1" value="45"></label>
       </div>
-      <p class="hint">僱主強積金按月薪 5%、每人每月最多 HK$1,500 試算，旁邊會即時顯示每位員工連 MPF 成本。首階段及擴編後的導師人數可自行輸入，按人數估算可同時使用的課室（創辦人任教一間，中心最多按兩間課室計）。課程比例預設本地 60%、NET 25%、面試 15%；面試比例自動補足，按三種實收計算加權平均。每名學生按每週上一堂、4.33 週計月貢獻；實際容額以核准圖則及課表為準。</p>
+      <p class="hint">僱主強積金按月薪 5%、每人每月最多 HK$1,500 試算，旁邊會即時顯示每位員工連 MPF 成本。首階段及擴編後的導師人數可自行輸入，按人數估算可同時使用的課室（創辦人任教一間，中心最多按兩間課室計）。課程比例預設本地 60%、NET 25%、面試 15%；面試比例自動補足，按三種實收計算加權平均。每名學生按每週上一堂、固定以 52 週 ÷ 12 個月換算月貢獻；此平均不扣除停課週，實際收生及課程收入須按校曆估算。實際容額以核准圖則及課表為準。</p>
     </article>
     <p class="ab-alert">⚠️ 頂手中心的舊註冊證明不可假設自動轉到新營運者名下。頂手價亦未包括自動承接所有學生預繳學費或債務；付款前須由律師、會計師核對租約、帳目、已收學費／退款、員工責任、欠款及設備，並取得教育局和業主書面確認。欠款欄的 0 只代表未輸入，不代表風險為零。</p>
     <section class="ab-card" style="--c:var(--studio)">
@@ -966,7 +966,7 @@ img{max-width:100%}
 
 <script>
 (function(){
-  var ids=['abASetup','abALease','abAFitout','abAPlans','abAFurniture','abALegal','abAMarketing','abAOtherCost','abAMonths','abBFee','abBLease','abBDiligence','abBRepair','abBLiability','abRent','abOther','abFounder','abTeacherPay','abTeacherN1','abTeacherN2','abAdminPay','abAdminN','abMixLocal','abMixNet','abPriceLocal','abPriceNet','abPriceInterview','abVar','abWeeks','abClasses','abClassSize','abStartStudents','abGrowth','abTrigger'];
+  var ids=['abASetup','abALease','abAFitout','abAPlans','abAFurniture','abALegal','abAMarketing','abAOtherCost','abAMonths','abBFee','abBLease','abBDiligence','abBRepair','abBLiability','abRent','abOther','abFounder','abTeacherPay','abTeacherN1','abTeacherN2','abAdminPay','abAdminN','abMixLocal','abMixNet','abPriceLocal','abPriceNet','abPriceInterview','abVar' ,'abClasses','abClassSize','abStartStudents','abGrowth','abTrigger'];
   function el(id){return document.getElementById(id)}
   function val(id){return Math.max(0,parseFloat(el(id).value)||0)}
   function fmt(n){return 'HK'+String.fromCharCode(36)+Math.round(Math.abs(n)).toLocaleString('en-US')}
@@ -989,7 +989,7 @@ img{max-width:100%}
     el('abMixInterview').textContent=mixInterview+'%';
     var price=(mixLocal*val('abPriceLocal')+mixNet*val('abPriceNet')+mixInterview*val('abPriceInterview'))/100;
     el('abWeightedPrice').textContent='HK'+String.fromCharCode(36)+price.toFixed(2);
-    var variable=val('abVar'), weeks=val('abWeeks');
+    var variable=val('abVar'), weeks=52/12;
     var contribution=(price-variable)*weeks;
     var roomsStart=Math.min(2,1+teacherN1), roomsExpanded=Math.min(2,1+teacherN2);
     var classes=val('abClasses'), size=val('abClassSize');
