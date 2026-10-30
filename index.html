@@ -211,6 +211,15 @@ details .body{padding:0 16px 16px;display:grid;gap:10px}
 .timeline-subhead{margin:18px 0 0;padding-top:14px;border-top:1px solid var(--line)}
 .timeline-subhead h4{margin:0;font-size:15px}
 .timeline-subhead p{margin-top:4px}
+
+.timeline-path-studio{border:1px solid color-mix(in srgb,var(--studio) 30%,var(--line));border-top:5px solid var(--studio);background:color-mix(in srgb,var(--studio) 7%,var(--surface))}
+.timeline-path-school{border:1px solid color-mix(in srgb,var(--phased) 32%,var(--line));border-top:5px solid var(--phased);background:color-mix(in srgb,var(--phased) 5%,var(--surface))}
+.timeline-subroute{padding:12px 14px 14px;margin-top:14px;border-radius:9px}
+.timeline-subroute-new{background:color-mix(in srgb,var(--phased) 7%,var(--surface));border:1px solid color-mix(in srgb,var(--phased) 24%,var(--line))}
+.timeline-subroute-takeover{background:color-mix(in srgb,#66806B 8%,var(--surface));border:1px solid color-mix(in srgb,#66806B 28%,var(--line))}
+.timeline-subroute .timeline-subhead{margin-top:0;padding-top:0;border-top:0}
+.timeline-subroute .milestone-track{margin-top:8px}
+
 @media(max-width:860px){.timeline-caution{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:760px){.milestone-track:before{left:6px}.milestone{grid-template-columns:minmax(0,1fr);gap:6px;padding-left:28px}.milestone-date{padding-left:0}.milestone-date:before{left:-28px;top:5px}.milestone-proof{margin-top:2px}}
 
@@ -528,7 +537,7 @@ html{scroll-behavior:smooth}
     <p class="muted small">每關的「完成證據」應存入同一個資料夾。凡涉及合約、法律責任或部門分類，創辦人先請香港律師、認可人士或相關部門按個案覆核；本頁是規劃工具，不代替法律意見。</p>
 
     <div class="stack" style="margin-top:14px">
-      <div class="card">
+      <div class="card timeline-path-studio">
         <h3>路線一：私人小班工作室</h3>
         <p class="muted small">前提：創辦人親自授課，並以教育局對實際課程、學生人數和場地安排的書面回覆確認營運方式。工作室不按學校註冊路線營運，不等於免除租約、公契、物業用途、樓宇安全、消防、商業登記或僱主責任。</p>
         <ol class="milestone-track">
@@ -542,10 +551,11 @@ html{scroll-behavior:smooth}
         <p class="timeline-route-note"><b>創辦人特別備注：</b>「任何時間少於 8 人、每日少於 20 人」只是本計劃採用的保守人數控制方式，並非教育局對課程、場地或實際人數計法的預先批准。請以教育局對你提交的實際方案之書面回覆為準。</p>
       </div>
 
-      <div class="card">
+      <div class="card timeline-path-school">
         <h3>路線二：註冊中心</h3>
         <p class="muted small">先選「新址申請」或「頂手現有中心」；兩者文件、交易條件和風險不同，不應共用同一個 1–3 個月或 4–9 個月承諾。</p>
 
+        <div class="timeline-subroute timeline-subroute-new">
         <div class="timeline-subhead"><h4>方案 A｜新址申請</h4><p class="muted small">2027 年 8 月開業屬緊湊目標。研究估算約 4–9 個月只是整體規劃區間，不是官方保證；教育局在文件齊全並核對無誤後的處理承諾，只是整個流程的最後一段。</p></div>
         <ol class="milestone-track">
           <li class="milestone gate"><div class="milestone-date"><strong>第 1 關｜專業初查</strong><span>2026 年 11–12 月</span><small>即時開始</small></div><div class="milestone-content"><p>列明課程、課室數量、預計容額及資金上限。找屋宇署名冊內的認可人士（AP）初查候選物業；同時初查規劃用途、地契、消防、樓宇安全、衞生、租約、公契和可能工程。</p><p>認可人士是按《建築物條例》註冊並列入屋宇署名冊的建築專業人士，並非一般裝修顧問。</p></div><div class="milestone-proof"><b>完成證據</b>專業人士書面初步意見、部門查詢紀錄、工程及顧問費預算。</div></li>
@@ -558,6 +568,8 @@ html{scroll-behavior:smooth}
         </ol>
         <p class="timeline-route-note">官方指引可供核對申請次序與最新表格：<a href="https://www.edb.gov.hk/attachment/tc/sch-admin/sch-registration/about-sch-registration/1a_cguide-non-purpose-built.pdf" rel="noopener">教育局《新辦學校註冊指引：非為學校用途而設計和建造的房產》</a>。部門指標時間不等於整個項目工期；如未能在 2027 年 3 月前完成場地初查並提交可處理的文件，應立即評估延後開業。</p>
 
+        </div>
+        <div class="timeline-subroute timeline-subroute-takeover">
         <div class="timeline-subhead"><h4>方案 B｜頂手現有中心</h4><p class="muted small">不要把市場上「約 1–3 個月」的說法當作教育局保證。實際時間取決於交易條件、業主、場地及教育局要求的變更程序，先取得個案書面指示再排日期。</p></div>
         <ol class="milestone-track">
           <li class="milestone gate"><div class="milestone-date"><strong>第 1 關｜核實中心現況</strong><span>簽約或付訂前</span><small>先查證</small></div><div class="milestone-content"><p>向賣方索取註冊證明、核准課程及容額、教育局往來信件、消防及樓宇文件、租約、收費與退款紀錄、員工資料和帳目；與實際場地逐項對照。</p></div><div class="milestone-proof"><b>完成證據</b>文件清單、現場核對表、律師及會計師初步問題清單。</div></li>
@@ -566,6 +578,7 @@ html{scroll-behavior:smooth}
           <li class="milestone"><div class="milestone-date"><strong>第 4 關｜完成批准及交接</strong><span>按教育局個案時間</span></div><div class="milestone-content"><p>按教育局書面指示完成校董、校監、營運者或其他所需變更；同步完成租約交接、員工安排、保險、收費與家長通知。任何條件未完成，不把預定交收日當作可開課日期。</p></div><div class="milestone-proof"><b>完成證據</b>教育局所需確認／批准、業主文件、交接資產和學生責任紀錄。</div></li>
           <li class="milestone gate"><div class="milestone-date"><strong>開業決策</strong><span>以批准完成日倒排</span><small>不可搶先</small></div><div class="milestone-content"><p>只有在教育局與業主要求的變更完成、場地文件有效、學費及家長安排清楚後才按新營運安排開課。若賣方要求先付款、先營運再補批，先交律師覆核並暫停不可退付款。</p></div><div class="milestone-proof"><b>完成證據</b>完整交接清單、開課文件、保險和持續營運現金。</div></li>
         </ol>
+        </div>
       </div>
     </div>
     <p class="timeline-route-note"><b>共同決策規則：</b>每月底更新「已完成／待回覆／受阻」清單及剩餘現金。任何一項法律分類、場地用途、必要批准或資金缺口未解決，都要把開業日改為「待確認」，不能把未批資助、口頭承諾或未簽批文件列作已落實條件。</p>
